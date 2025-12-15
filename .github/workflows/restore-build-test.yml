@@ -18,19 +18,19 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore "${{github.workspace}}/MaaldoCom.Services.sln"
 
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build "${{github.workspace}}/MaaldoCom.Services.sln"  --no-restore --configuration Release
       
       - name: Test
-        run: dotnet test --no-restore --logger:"junit;LogFilePath=results/test-results.xml"
+        run: dotnet test "${{github.workspace}}/MaaldoCom.Services.sln" --no-restore --logger:"junit;LogFilePath=${{ github.workspace }}/results/test-results.xml"
 
       - name: Create test summary
         uses: test-summary/action@v2.4
         with:
-          paths: results/*.xml
-          output: results/summary.md
+          paths: ${{ github.workspace }}/results/*.xml
+          output: ${{ github.workspace }}/results/summary.md
           show: "all"
         if: always()
 
@@ -38,5 +38,5 @@ jobs:
         run: |
           echo "TEST RESULTS:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
-          cat "results/summary.md" >> $GITHUB_STEP_SUMMARY
+          cat "${{ github.workspace }}/results/summary.md" >> $GITHUB_STEP_SUMMARY
         if: always()
