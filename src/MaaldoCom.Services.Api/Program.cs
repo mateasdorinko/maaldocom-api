@@ -11,7 +11,11 @@ app.UseFastEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();    
-    app.MapScalarApiReference();
+    app.MapScalarApiReference("/docs", options =>
+    {
+        options.WithTitle("maaldo.com API Reference");
+    });
 }
 
 app.Run();
+
