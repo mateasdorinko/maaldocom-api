@@ -24,14 +24,7 @@ jobs:
         run: dotnet build "${{github.workspace}}/MaaldoCom.Services.sln"  --no-restore --configuration Release
       
       - name: Test
-        run: |
-          mkdir -p "${{ github.workspace }}/results"
-          echo "Running tests per test project and writing results into results/"
-          find "${{ github.workspace }}/tests" -name "*.csproj" -print0 | while IFS= read -r -d '' proj; do
-            name=$(basename "$proj" .csproj)
-            echo "-> Testing $name"
-            dotnet test "$proj" --no-build --no-restore --logger:"junit;LogFilePath=${{ github.workspace }}/results/${name}.xml"
-          done
+        run: dotnet test "${{github.workspace}}/MaaldoCom.Services.sln" --no-restore --logger:"junit;LogFilePath=${{ github.workspace }}/results/test-results.xml"
 
       - name: Create test summary
         uses: test-summary/action@v2.4
