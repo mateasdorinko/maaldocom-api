@@ -24,13 +24,13 @@ jobs:
         run: dotnet build --no-restore --configuration Release
       
       - name: Test
-        run: dotnet test --no-restore --logger:"xunit;LogFilePath=${{ github.workspace }}/results/test-results.xml"
+        run: dotnet test --no-restore --logger:"xunit;LogFilePath=/results/test-results.xml"
 
       - name: Create test summary
         uses: test-summary/action@v2.4
         with:
-          paths: ${{ github.workspace }}/results/*.xml
-          output: ${{ github.workspace }}/results/summary.md
+          paths: /results/*.xml
+          output: /results/summary.md
           show: "all"
         if: always()
 
@@ -38,5 +38,5 @@ jobs:
         run: |
           echo "TEST RESULTS:" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
-          cat "${{ github.workspace }}/results/summary.md" >> $GITHUB_STEP_SUMMARY
+          cat "/results/summary.md" >> $GITHUB_STEP_SUMMARY
         if: always()
