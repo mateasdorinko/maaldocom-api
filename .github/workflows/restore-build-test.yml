@@ -24,12 +24,15 @@ jobs:
         run: dotnet build "${{github.workspace}}/MaaldoCom.Services.sln"  --no-restore --configuration Release
       
       - name: Test
-        run: dotnet test "${{github.workspace}}/MaaldoCom.Services.sln" --no-restore --logger:"junit;LogFilePath=${{ github.workspace }}/results/test-results.xml"
+        run: |
+          mkdir -p "${{ github.workspace }}/results"
+          echo "Running solution-level tests and writing separate results into results/"
+          dotnet test "${{github.workspace}}/MaaldoCom.Services.sln" --no-restore --configuration Release --logger:"trx" --results-directory "${{ github.workspace }}/results"
 
       - name: Create test summary
         uses: test-summary/action@v2.4
         with:
-          paths: ${{ github.workspace }}/results/*.xml
+          paths: ${{ github.workspace }}/results/*
           output: ${{ github.workspace }}/results/summary.md
           show: "all"
         if: always()
