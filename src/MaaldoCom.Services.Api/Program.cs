@@ -12,12 +12,8 @@ app.UseResponseCaching()
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();    
-    app.MapScalarApiReference("/docs", options =>
-    {
-        options.WithTitle("maaldo.com API Reference");
-    });
+    app.MapOpenApi();
+    app.MapScalarApiReference("/docs", options => { options.WithTitle("maaldo.com API Reference"); });
 }
 
 app.Run();
-
