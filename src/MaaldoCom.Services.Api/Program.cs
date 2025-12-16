@@ -3,10 +3,12 @@ using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddFastEndpoints()
+    .AddResponseCaching()
     .AddOpenApi();
 
 var app = builder.Build();
-app.UseFastEndpoints();
+app.UseResponseCaching()
+    .UseFastEndpoints();
 
 if (app.Environment.IsDevelopment())
 {
