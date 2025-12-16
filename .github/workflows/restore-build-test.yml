@@ -41,6 +41,12 @@ jobs:
           reporter: dotnet-trx
           fail-on-error: true
 
+      - name: Test Summary
+        uses: test-summary/action@v2
+        if: always()
+        with:
+          paths: '**/test-results.trx'
+
       - name: Upload test results
         uses: actions/upload-artifact@v4
         if: always()
