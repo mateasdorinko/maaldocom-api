@@ -14,13 +14,6 @@ public class GetMediaAlbumByIdentifierEndpoint : Endpoint<string, GetMediaAlbumB
     
     public override async Task HandleAsync(string req, CancellationToken ct)
     {
-        if (string.IsNullOrEmpty(req))
-        {
-            await Send.NotFoundAsync(ct);
-        }
-        else
-        {
-            await Send.OkAsync(new GetMediaAlbumByIdentifierResponse(), ct);
-        } 
+        await Send.OkAsync(new GetMediaAlbumByIdentifierResponse(), ct);
     }
 }
