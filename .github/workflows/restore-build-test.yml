@@ -30,7 +30,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       
       - name: Run tests
-        run: dotnet test --configuration Release --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test --configuration Release --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx" --logger "GitHubActions;summary.includePassedTests=true" --collect:"XPlat Code Coverage"
 
       - name: Publish test results
         uses: dorny/test-reporter@v1
@@ -40,12 +40,6 @@ jobs:
           path: '**/test-results.trx'
           reporter: dotnet-trx
           fail-on-error: true
-
-      - name: Test Summary
-        uses: test-summary/action@v2
-        if: always()
-        with:
-          paths: '**/test-results.trx'
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
