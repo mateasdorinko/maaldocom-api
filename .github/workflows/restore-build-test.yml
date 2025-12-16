@@ -32,17 +32,17 @@ jobs:
       - name: Run tests
         run: dotnet test --no-restore --logger:"junit;LogFilePath=${{ github.workspace }}/results/test-results.xml"
 
-          - name: Create test summary
-            uses: test-summary/action@v2.4
-            with:
-              paths: ${{ github.workspace }}/results/*.xml
-              output: ${{ github.workspace }}/results/summary.md
-              show: "all"
-            if: always()
+      - name: Create test summary
+        uses: test-summary/action@v2.4
+        with:
+          paths: ${{ github.workspace }}/results/*.xml
+          output: ${{ github.workspace }}/results/summary.md
+          show: "all"
+        if: always()
 
-          - name: Add Test Results To Job Summary
-            run: |
-              echo "TEST RESULTS:" >> $GITHUB_STEP_SUMMARY
-              echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
-              cat "${{ github.workspace }}/results/summary.md" >> $GITHUB_STEP_SUMMARY
-            if: always()
+      - name: Add Test Results To Job Summary
+        run: |
+          echo "TEST RESULTS:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
+          cat "${{ github.workspace }}/results/summary.md" >> $GITHUB_STEP_SUMMARY
+        if: always()
