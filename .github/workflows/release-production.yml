@@ -1,0 +1,4 @@
+name: Release to Production
+
+on:
+  workflow_dispatch:
