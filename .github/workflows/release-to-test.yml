@@ -1,0 +1,4 @@
+name: Release to Test
+
+on:
+  workflow_dispatch:
