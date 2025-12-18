@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  on-success:
+  build-package-publish:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     
