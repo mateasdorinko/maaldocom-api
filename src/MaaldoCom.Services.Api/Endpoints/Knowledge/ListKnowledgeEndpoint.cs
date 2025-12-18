@@ -1,6 +1,4 @@
-﻿using MaaldoCom.Services.Api.Contracts.Knowledge;
-
-namespace MaaldoCom.Services.Api.Endpoints.Knowledge;
+﻿namespace MaaldoCom.Services.Api.Endpoints.Knowledge;
 
 public class ListKnowledgeEndpoint : EndpointWithoutRequest<ListKnowledgeResponse>
 {

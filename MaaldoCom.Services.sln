@@ -24,8 +24,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit.Application", "t
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit.Infrastructrue", "tests\Tests.Unit.Infrastructrue\Tests.Unit.Infrastructrue.csproj", "{FB552D89-1D87-4A5A-95C3-A9CF927C931F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaaldoCom.Services.Api.Contracts", "src\MaaldoCom.Services.Api.Contracts\MaaldoCom.Services.Api.Contracts.csproj", "{EF3B2BCE-98EE-4F37-B3E2-550BF22AC9C6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,7 +40,6 @@ Global
 		{B2E1C682-C37D-455C-BD88-10845103DF9F} = {ED845241-31AD-451B-BDEC-7F0E36DA220A}
 		{38DC43E4-AD5B-4CA5-BA8F-09D50111FB5E} = {ED845241-31AD-451B-BDEC-7F0E36DA220A}
 		{FB552D89-1D87-4A5A-95C3-A9CF927C931F} = {ED845241-31AD-451B-BDEC-7F0E36DA220A}
-		{EF3B2BCE-98EE-4F37-B3E2-550BF22AC9C6} = {0300A482-63BB-4E0D-B393-C867D73E86F9}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F9624FC0-587C-4312-8D07-0C85514ABD89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -85,9 +82,5 @@ Global
 		{FB552D89-1D87-4A5A-95C3-A9CF927C931F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB552D89-1D87-4A5A-95C3-A9CF927C931F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB552D89-1D87-4A5A-95C3-A9CF927C931F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EF3B2BCE-98EE-4F37-B3E2-550BF22AC9C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EF3B2BCE-98EE-4F37-B3E2-550BF22AC9C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EF3B2BCE-98EE-4F37-B3E2-550BF22AC9C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EF3B2BCE-98EE-4F37-B3E2-550BF22AC9C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

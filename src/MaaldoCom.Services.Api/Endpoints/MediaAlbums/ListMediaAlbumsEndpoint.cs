@@ -1,6 +1,4 @@
-﻿using MaaldoCom.Services.Api.Contracts.MediaAlbums;
-
-namespace MaaldoCom.Services.Api.Endpoints.MediaAlbums;
+﻿namespace MaaldoCom.Services.Api.Endpoints.MediaAlbums;
 
 public class ListMediaAlbumsEndpoint : EndpointWithoutRequest<ListMediaAlbumsResponse>
 {

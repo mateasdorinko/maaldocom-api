@@ -8,7 +8,6 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj", "src/MaaldoCom.Services.Api/"]
-COPY ["src/MaaldoCom.Services.Api.Contracts/MaaldoCom.Services.Api.Contracts.csproj", "src/MaaldoCom.Services.Api.Contracts/"]
 COPY ["src/MaaldoCom.Services.Infrastructure/MaaldoCom.Services.Infrastructure.csproj", "src/MaaldoCom.Services.Infrastructure/"]
 COPY ["src/MaaldoCom.Services.Application/MaaldoCom.Services.Application.csproj", "src/MaaldoCom.Services.Application/"]
 COPY ["src/MaaldoCom.Services.Domain/MaaldoCom.Services.Domain.csproj", "src/MaaldoCom.Services.Domain/"]

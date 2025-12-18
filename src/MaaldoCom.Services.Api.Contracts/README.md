@@ -1,2 +1,0 @@
-# MaaldoCom.Services.Api.Contracts
-
