@@ -7,7 +7,9 @@ builder.Services
     .AddOpenApi();
 
 var app = builder.Build();
-app.UseResponseCaching()
+app.UseResponseCaching() 
+    .UseStaticFiles()
+    .UseDefaultExceptionHandler()
     .UseFastEndpoints();
 
 if (app.Environment.IsDevelopment())
