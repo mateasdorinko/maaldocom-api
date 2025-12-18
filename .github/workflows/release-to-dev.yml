@@ -1,7 +1,10 @@
 name: Release to Development
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["Build For Release, Package Docker Image, & Publish To Registry"]
+    types: [completed]
+    branches: [main]
 
 jobs:
   release-to-dev:
