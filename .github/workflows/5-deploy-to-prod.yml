@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  release-to-test:
+  deploy-to-test:
     permissions:
       contents: none
     runs-on: ubuntu-latest
