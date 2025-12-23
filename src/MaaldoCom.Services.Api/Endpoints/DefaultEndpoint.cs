@@ -25,7 +25,7 @@ public class DefaultEndpoint : EndpointWithoutRequest
                                          <h1>hello...</h1>
                                          <div class="container"> 
                                              <div class="bottom-center-div">
-                                                 v2025.12.23c
+                                                 v2025.12.23d
                                              </div>
                                          </div>
                                      </body>
