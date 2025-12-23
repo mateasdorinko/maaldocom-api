@@ -1,19 +1,35 @@
 name: Release to Development
 
+env:
+  AZURE_WEBAPP_NAME: app-maaldocomapi-dev-cus
+
 on:
   workflow_run:
     workflows: ["Build For Release, Package Docker Image, & Publish To Registry"]
     types: [completed]
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   release-to-dev:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    
+    permissions:
+      contents: none
     runs-on: ubuntu-latest
+    environment:
+      name: 'Dev'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Say hi
-        run: echo "hi..."
+      - name: Lowercase the repo name and username
+        run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 
-      
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_DEV_WEBAPP_PUBLISH_PROFILE }}
+          images: 'ghcr.io/${{ env.REPO }}:${{ github.sha }}'
