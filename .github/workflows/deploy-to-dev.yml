@@ -1,4 +1,4 @@
-name: Release to Development
+name: Deploy to Dev
 
 env:
   AZURE_WEBAPP_NAME: app-maaldocomapi-dev-cus
