@@ -1,6 +1,6 @@
-namespace MaaldoCom.Services.Domain;
+namespace MaaldoCom.Services.Domain.Extensions;
 
-public static class Extensions
+public static class SecurityExtensions
 {
     extension(ClaimsPrincipal user)
     {

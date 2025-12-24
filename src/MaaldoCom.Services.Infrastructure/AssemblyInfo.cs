@@ -1,6 +1,6 @@
 namespace MaaldoCom.Services.Infrastructure;
 
-public static class Extensions
+public class AssemblyInfo
 {
     
 }

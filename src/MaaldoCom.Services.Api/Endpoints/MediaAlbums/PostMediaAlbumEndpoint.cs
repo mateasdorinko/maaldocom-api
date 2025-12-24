@@ -1,4 +1,4 @@
-﻿using MaaldoCom.Services.Api.Endpoints.MediaAlbums.Models;
+﻿using MaaldoCom.Services.Api.Endpoints.MediaAlbums;
 
 namespace MaaldoCom.Services.Api.Endpoints.MediaAlbums;
 
