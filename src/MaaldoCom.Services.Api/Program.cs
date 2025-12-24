@@ -2,7 +2,10 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services
-    .AddFastEndpoints()
+    .AddFastEndpoints(options =>
+    {
+        options.Assemblies = [typeof(MaaldoCom.Services.Application.AssemblyInfo).Assembly];
+    })
     .AddResponseCaching()
     .AddOpenApi();
 

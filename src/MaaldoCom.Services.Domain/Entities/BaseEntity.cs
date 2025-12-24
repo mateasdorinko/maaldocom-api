@@ -3,5 +3,5 @@
 public abstract class BaseEntity
 {
     public int Id { get; set; }
-    //public Guid UniqueId { get; set; }
+    public Guid Guid { get; set; }
 }
