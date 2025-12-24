@@ -7,9 +7,9 @@ namespace MaaldoCom.Services.Api.Extensions;
 internal static class MappingExtensions
 {
     #region ToDto
-    private static TDto MapBaseDto<TDto, TViewModel>(this TDto dto, TViewModel model) 
+    private static TDto MapBaseDto<TDto, TModel>(this TDto dto, TModel model) 
         where TDto : BaseDto
-        where TViewModel : BaseModel
+        where TModel : BaseModel
     {
         dto.Guid = model.Guid;
         dto.Created = model.Created;
