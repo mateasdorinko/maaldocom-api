@@ -1,16 +1,18 @@
-﻿using MaaldoCom.Services.Api.Endpoints.MediaAlbums;
+﻿using MaaldoCom.Services.Api.Endpoints.MediaAlbums.Models;
 
 namespace MaaldoCom.Services.Api.Endpoints.MediaAlbums;
 
-public class PostMediaAlbumEndpoint : Endpoint<PostMediaAlbum>
+public class PostMediaAlbumEndpoint : Endpoint<PostMediaAlbumRequest, PostMediaAlbumResponse>
 {
     public override void Configure()
     {
         Post("/media-albums");
     }
 
-    public override async Task HandleAsync(PostMediaAlbum req, CancellationToken ct)
+    public override async Task HandleAsync(PostMediaAlbumRequest req, CancellationToken ct)
     {
-        await Send.CreatedAtAsync(string.Empty, cancellation: ct);
+        var response = new PostMediaAlbumResponse();
+        
+        await Send.CreatedAtAsync(string.Empty, response, cancellation: ct);
     }
 }
