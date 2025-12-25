@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddFastEndpoints(options =>
     {
-        options.Assemblies = [typeof(MaaldoCom.Services.Application.Interfaces.IMaaldoComDbContext).Assembly];
+        options.Assemblies = [MaaldoCom.Services.Application.AssemblyReference.Assembly];
     })
     .AddResponseCaching()
     .AddOpenApi();

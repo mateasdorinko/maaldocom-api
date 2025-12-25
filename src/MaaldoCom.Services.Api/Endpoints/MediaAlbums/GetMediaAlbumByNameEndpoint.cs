@@ -15,7 +15,7 @@ public class GetMediaAlbumByNameEndpoint : Endpoint<GetMediaAlbumByNameRequest, 
     
     public override async Task HandleAsync(GetMediaAlbumByNameRequest req, CancellationToken ct)
     {
-        var dtos = await new ListMediaAlbumsQuery().ExecuteAsync(ct);
+        var dtos = await new ListMediaAlbumsQueryCommand(User).ExecuteAsync(ct);
         var model = dtos.FirstOrDefault(x => x.UrlFriendlyName == req.Name)?.ToGetModel(true);
         
         if (model is null)
