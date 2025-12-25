@@ -9,8 +9,8 @@ public class Medium : BaseAuditableEntity
     public long SizeInBytes { get; set; }
     public string? FileExtension { get; set; }
     
-    public MediaAlbum MediaAlbum { get; set; }
-    public ICollection<Tag> Tags { get; set; }
+    public MediaAlbum MediaAlbum { get; set; } = null!;
+    public ICollection<Tag> Tags { get; set; } = null!;
 
     public override string? ToString() => FileName;
 }

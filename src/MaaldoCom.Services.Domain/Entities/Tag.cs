@@ -5,6 +5,6 @@ public class Tag : BaseEntity
 {
     public string? Name { get; set; }
     
-    public ICollection<MediaAlbum> MediaAlbums { get; set; }
-    public ICollection<Medium> Media { get; set; }
+    public ICollection<MediaAlbum> MediaAlbums { get; set; } = null!;
+    public ICollection<Medium> Media { get; set; } = null!;
 }
