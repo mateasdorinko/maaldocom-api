@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit.Domain", "tests\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit.Application", "tests\Tests.Unit.Application\Tests.Unit.Application.csproj", "{38DC43E4-AD5B-4CA5-BA8F-09D50111FB5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit.Infrastructrue", "tests\Tests.Unit.Infrastructrue\Tests.Unit.Infrastructrue.csproj", "{FB552D89-1D87-4A5A-95C3-A9CF927C931F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit.Infrastructure", "tests\Tests.Unit.Infrastructure\Tests.Unit.Infrastructure.csproj", "{FB552D89-1D87-4A5A-95C3-A9CF927C931F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
