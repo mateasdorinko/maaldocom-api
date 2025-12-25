@@ -4,9 +4,9 @@ using MaaldoCom.Services.Application.Dtos;
 
 namespace MaaldoCom.Services.Api.Extensions;
 
-internal static class MappingExtensions
+public static class MappingExtensions
 {
-    #region ToDto
+    // ToDto
     private static TDto MapBaseDto<TDto, TModel>(this TDto dto, TModel model) 
         where TDto : BaseDto
         where TModel : BaseModel
@@ -17,9 +17,8 @@ internal static class MappingExtensions
         
         return dto;
     }
-    #endregion
     
-    #region ToModel
+    // ToModel
     private static TModel MapBaseModel<TModel, TDto>(this TModel model, TDto dto)
         where TModel : BaseModel
         where TDto : BaseDto
@@ -36,6 +35,14 @@ internal static class MappingExtensions
         public IEnumerable<GetMediaAlbumResponse> ToGetModels(bool includeMedia = false)
         {
             return dtos.Select(x => x.ToGetModel(includeMedia)).ToList();
+        }
+
+        public ListMediaAlbumsResponse ToListModel()
+        {
+            return new ListMediaAlbumsResponse
+            {
+                MediaAlbums = dtos.Select(x => x.ToGetModel()).ToList()
+            };
         }
     }
     
@@ -70,5 +77,4 @@ internal static class MappingExtensions
             return model;
         }
     }
-    #endregion
 }
