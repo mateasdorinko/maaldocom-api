@@ -8,7 +8,7 @@ public class ExecuteAsync
     public async Task Given_ExecuteAsync_WhenInvoked_ThenAlwaysReturnsMediaAlbums()
     {
         // arrange
-        var query = new ListMediaAlbumsQuery();
+        var query = new ListMediaAlbumsQueryCommand();
         var handler = new ListMediaAlbumsQueryHandler();
 
         // act

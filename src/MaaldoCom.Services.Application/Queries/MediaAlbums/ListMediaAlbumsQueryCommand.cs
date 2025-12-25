@@ -1,12 +1,16 @@
+using System.Security.Claims;
 using MaaldoCom.Services.Application.Dtos;
+using MaaldoCom.Services.Application.Interfaces;
+using Microsoft.Extensions.Caching.Hybrid;
 
 namespace MaaldoCom.Services.Application.Queries.MediaAlbums;
 
-public class ListMediaAlbumsQuery : ICommand<IEnumerable<MediaAlbumDto>> { }
+public class ListMediaAlbumsQueryCommand(ClaimsPrincipal user) : BaseQueryCommand(user), ICommand<IEnumerable<MediaAlbumDto>> { }
 
-public class ListMediaAlbumsQueryHandler : ICommandHandler<ListMediaAlbumsQuery, IEnumerable<MediaAlbumDto>>
+public class ListMediaAlbumsQueryHandler(IMaaldoComDbContext maaldoComDbContext, HybridCache hybridCache)
+    : BaseQueryCommandHandler(maaldoComDbContext, hybridCache), ICommandHandler<ListMediaAlbumsQueryCommand, IEnumerable<MediaAlbumDto>>
 {
-    public async Task<IEnumerable<MediaAlbumDto>> ExecuteAsync(ListMediaAlbumsQuery query, CancellationToken cancellationToken)
+    public async Task<IEnumerable<MediaAlbumDto>> ExecuteAsync(ListMediaAlbumsQueryCommand queryCommand, CancellationToken cancellationToken)
     {
         var mediaAlbums = new List<MediaAlbumDto>
         {
