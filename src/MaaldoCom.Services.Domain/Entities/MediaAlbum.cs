@@ -6,12 +6,8 @@ public class MediaAlbum : BaseAuditableEntity
     public string? Name { get; set; }
     public string? UrlFriendlyName { get; set; }
     public string? Description { get; set; }
-    public IList<Medium> Media { get; set; }
-
-    public MediaAlbum()
-    {
-        Media = new List<Medium>();
-    }
+    public ICollection<Medium> Media { get; set; }
+    public ICollection<Tag> Tags { get; set; }
 
     public override string? ToString() => Name;
 }

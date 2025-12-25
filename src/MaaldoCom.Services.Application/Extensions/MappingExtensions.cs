@@ -3,15 +3,15 @@ using MaaldoCom.Services.Domain.Entities;
 
 namespace MaaldoCom.Services.Application.Extensions;
 
-internal static class MappingExtensions
+public static class MappingExtensions
 {   
-    #region ToEntity
+    // ToEntity
     private static TEntity MapBaseEntity<TEntity, TDto>(this TEntity entity, TDto dto)
         where TEntity : BaseAuditableEntity
         where TDto : BaseDto
     {
         entity.Id = dto.Id;
-        entity.Guid = dto.Guid;
+        entity.Uid = dto.Guid;
         entity.CreatedBy = dto.CreatedBy;
         entity.Created = dto.Created;
         entity.LastModifiedBy = dto.LastModifiedBy;
@@ -48,15 +48,14 @@ internal static class MappingExtensions
             return entity;
         }
     }
-    #endregion
     
-    #region ToDto
+    // ToDto
     private static TDto MapBaseDto<TDto, TEntity>(this TDto dto, TEntity entity) 
         where TDto : BaseDto
         where TEntity : BaseAuditableEntity
     {
         dto.Id = entity.Id;
-        dto.Guid = entity.Guid;
+        dto.Guid = entity.Uid;
         dto.CreatedBy = entity.CreatedBy;
         dto.Created = entity.Created;
         dto.LastModifiedBy = entity.LastModifiedBy;
@@ -93,5 +92,4 @@ internal static class MappingExtensions
             return dto;
         }
     }
-    #endregion
 }

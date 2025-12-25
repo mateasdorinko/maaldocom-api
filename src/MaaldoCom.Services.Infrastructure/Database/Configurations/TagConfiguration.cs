@@ -1,0 +1,18 @@
+using MaaldoCom.Services.Domain.Entities;
+using MaaldoCom.Services.Infrastructure.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace MaaldoCom.Services.Infrastructure.Database.Configurations;
+
+public class TagConfiguration : IEntityTypeConfiguration<Tag>
+{
+    public void Configure(EntityTypeBuilder<Tag> builder)
+    {
+        builder.ConfigureBaseEntity();
+        builder.Property(t => t.Name).HasMaxLength(30).IsRequired();
+
+        builder.HasMany(x => x.MediaAlbums).WithMany(x => x.Tags);
+        builder.HasMany(x => x.Media).WithMany(x => x.Tags);
+    }
+}
