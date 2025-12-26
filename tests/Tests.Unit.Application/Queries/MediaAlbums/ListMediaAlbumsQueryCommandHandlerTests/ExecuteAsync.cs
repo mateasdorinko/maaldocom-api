@@ -5,17 +5,17 @@ namespace Tests.Unit.Application.Queries.MediaAlbums.ListMediaAlbumsQueryCommand
 public class ExecuteAsync : BaseTest
 {
     [Fact]
-    public async Task Given_ExecuteAsync_WhenInvoked_ThenAlwaysReturnsMediaAlbums()
+    public async Task ExecuteAsync_StandardInvocation_NeverNullOrEmpty()
     {
         // arrange
         var query = new ListMediaAlbumsQueryCommand(MockingHelper.User.FakedObject);
         var handler = new ListMediaAlbumsQueryCommandHandler(MockingHelper.MaaldoComDbContext.FakedObject, MockingHelper.HybridCache.FakedObject);
 
         // act
-        var result = await handler.ExecuteAsync(query, CancellationToken.None);
+        var result = (await handler.ExecuteAsync(query, CancellationToken.None)).ToList();
 
         // assert
-        Assert.NotNull(result);
-        Assert.NotEmpty(result);
+        result.ShouldNotBeNull();
+        result.ShouldNotBeEmpty();
     }
 }
