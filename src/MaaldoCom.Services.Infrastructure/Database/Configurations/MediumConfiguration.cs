@@ -1,5 +1,4 @@
 using MaaldoCom.Services.Domain.Entities;
-using MaaldoCom.Services.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

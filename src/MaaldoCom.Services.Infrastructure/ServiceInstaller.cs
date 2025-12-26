@@ -14,7 +14,7 @@ public static class ServiceInstaller
     {
         services.AddDbContext<MaaldoComDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("maaldocom-db-connection-string-api-user"));
+            options.UseSqlServer(configuration["maaldocom-db-connection-string-api-user"]);
         });
         services.AddScoped<IMaaldoComDbContext>(provider => provider.GetRequiredService<MaaldoComDbContext>());
 

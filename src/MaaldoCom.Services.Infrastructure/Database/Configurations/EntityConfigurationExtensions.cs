@@ -2,7 +2,7 @@ using MaaldoCom.Services.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace MaaldoCom.Services.Infrastructure.Extensions;
+namespace MaaldoCom.Services.Infrastructure.Database.Configurations;
 
 public static class EntityConfigurationExtensions
 {
