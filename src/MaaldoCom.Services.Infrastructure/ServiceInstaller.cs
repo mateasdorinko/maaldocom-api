@@ -8,9 +8,9 @@ using ZiggyCreatures.Caching.Fusion.Serialization.SystemTextJson;
 
 namespace MaaldoCom.Services.Infrastructure;
 
-public class ServiceInstaller
+public static class ServiceInstaller
 {
-    public static void InstallInfrastructureServices(IServiceCollection services, IConfiguration configuration)
+    public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<MaaldoComDbContext>(options =>
         {
@@ -21,7 +21,6 @@ public class ServiceInstaller
         services.AddFusionCache()
             .WithDefaultEntryOptions(options => options.Duration = TimeSpan.FromMinutes(5))
             .WithSerializer(new FusionCacheSystemTextJsonSerializer())
-            .WithMemoryCache(TimeSpan.FromMinutes(5))
             .AsHybridCache();
     }
 }

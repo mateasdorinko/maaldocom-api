@@ -10,6 +10,9 @@ public class MediaAlbumConfiguration : IEntityTypeConfiguration<MediaAlbum>
     public void Configure(EntityTypeBuilder<MediaAlbum> builder)
     {
         builder.ConfigureBaseAuditableEntity();
+
+        builder.ToTable("MediaAlbums");
+        
         builder.Property(x => x.Name).HasMaxLength(50).IsRequired();
         builder.Property(x => x.UrlFriendlyName).HasMaxLength(50).IsRequired();
         builder.Property(x => x.Description).HasMaxLength(200);

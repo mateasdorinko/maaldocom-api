@@ -10,6 +10,9 @@ public class MediumConfiguration : IEntityTypeConfiguration<Medium>
     public void Configure(EntityTypeBuilder<Medium> builder)
     {
         builder.ConfigureBaseAuditableEntity();
+
+        builder.ToTable("Media");
+        
         builder.Property(x => x.FileName).HasMaxLength(40).IsRequired();
         builder.Property(x => x.Description).HasMaxLength(200);
         builder.Property(x => x.SizeInBytes).IsRequired();

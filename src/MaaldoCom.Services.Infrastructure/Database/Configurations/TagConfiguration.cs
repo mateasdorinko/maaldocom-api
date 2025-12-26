@@ -10,6 +10,9 @@ public class TagConfiguration : IEntityTypeConfiguration<Tag>
     public void Configure(EntityTypeBuilder<Tag> builder)
     {
         builder.ConfigureBaseEntity();
+
+        builder.ToTable("Tags");
+        
         builder.Property(t => t.Name).HasMaxLength(30).IsRequired();
 
         builder.HasMany(x => x.MediaAlbums).WithMany(x => x.Tags);

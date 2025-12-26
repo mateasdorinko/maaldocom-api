@@ -7,10 +7,19 @@ namespace MaaldoCom.Services.Application.Queries.MediaAlbums;
 
 public class ListMediaAlbumsQueryCommand(ClaimsPrincipal user) : BaseQueryCommand(user), ICommand<IEnumerable<MediaAlbumDto>> { }
 
-public class ListMediaAlbumsQueryHandler(IMaaldoComDbContext maaldoComDbContext, HybridCache hybridCache)
+public class ListMediaAlbumsQueryCommandHandler(IMaaldoComDbContext maaldoComDbContext, HybridCache hybridCache)
     : BaseQueryCommandHandler(maaldoComDbContext, hybridCache), ICommandHandler<ListMediaAlbumsQueryCommand, IEnumerable<MediaAlbumDto>>
 {
     public async Task<IEnumerable<MediaAlbumDto>> ExecuteAsync(ListMediaAlbumsQueryCommand queryCommand, CancellationToken cancellationToken)
+    {
+        var mediaAlbums = await HybridCache.GetOrCreateAsync<IEnumerable<MediaAlbumDto>>(
+            "media-albums",
+            async _ => await GetStaticMediaAlbums(), cancellationToken: cancellationToken);
+
+        return mediaAlbums;
+    }
+
+    private async Task<IEnumerable<MediaAlbumDto>> GetStaticMediaAlbums()
     {
         var mediaAlbums = new List<MediaAlbumDto>
         {

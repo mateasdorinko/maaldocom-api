@@ -1,3 +1,4 @@
+using MaaldoCom.Services.Infrastructure;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,8 @@ builder.Services
         options.Assemblies = [MaaldoCom.Services.Application.AssemblyReference.Assembly];
     })
     .AddResponseCaching()
-    .AddOpenApi();
+    .AddOpenApi()
+    .AddInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 app.UseResponseCaching() 
