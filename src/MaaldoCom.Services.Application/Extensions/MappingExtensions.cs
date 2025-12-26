@@ -36,11 +36,11 @@ public static class MappingExtensions
         }
     }
 
-    extension(MediumDto dto)
+    extension(MediaDto dto)
     {
-        public Medium ToEntity()
+        public Media ToEntity()
         {
-            var entity = new Medium().MapBaseEntity(dto);
+            var entity = new Media().MapBaseEntity(dto);
 
             entity.FileName = dto.FileName;
             entity.Description = dto.Description;
@@ -80,11 +80,11 @@ public static class MappingExtensions
         }
     }
 
-    extension(Medium entity)
+    extension(Media entity)
     {
-        public MediumDto ToDto()
+        public MediaDto ToDto()
         {
-            var dto = new MediumDto().MapBaseDto(entity);
+            var dto = new MediaDto().MapBaseDto(entity);
 
             dto.FileName = entity.FileName;
             dto.Description = entity.Description;

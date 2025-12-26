@@ -1,6 +1,6 @@
 ﻿namespace MaaldoCom.Services.Domain.Entities;
 
-public class Medium : BaseAuditableEntity
+public class Media : BaseAuditableEntity
 {
     public int MediaAlbumId { get; set; }
     public string? FileName { get; set; }

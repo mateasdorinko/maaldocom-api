@@ -9,6 +9,7 @@ public static class EntityConfigurationExtensions
     public static void ConfigureBaseEntity<TBaseEntity>(this EntityTypeBuilder<TBaseEntity> builder)
         where TBaseEntity : BaseEntity
     {
+        builder.Property(e => e.Id);
         builder.Property(e => e.Uid).HasDefaultValueSql("newsequentialid()");
     }
     
@@ -17,9 +18,9 @@ public static class EntityConfigurationExtensions
     {
         ConfigureBaseEntity(builder);
 
-        builder.Property(e => e.CreatedBy).HasMaxLength(50).IsRequired();
+        builder.Property(e => e.CreatedBy).HasColumnType("varchar(50)").IsRequired();
         builder.Property(e => e.Created).HasColumnType("datetime").IsRequired();
         builder.Property(e => e.LastModified).HasColumnType("datetime").IsRequired();
-        builder.Property(e => e.LastModifiedBy).HasMaxLength(50).IsRequired();
+        builder.Property(e => e.LastModifiedBy).HasColumnType("varchar(50)").IsRequired();
     }
 }
