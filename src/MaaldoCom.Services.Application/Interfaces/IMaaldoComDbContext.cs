@@ -7,7 +7,7 @@ namespace MaaldoCom.Services.Application.Interfaces;
 public interface IMaaldoComDbContext
 {
     DbSet<MediaAlbum> MediaAlbums { get; set; }
-    DbSet<Medium> Media { get; set; }
+    DbSet<Media> Media { get; set; }
     DbSet<Knowledge> Knowledge { get; set; }
     DbSet<Tag> Tags { get; set; }
     

@@ -9,7 +9,7 @@ namespace MaaldoCom.Services.Infrastructure.Database;
 public class MaaldoComDbContext(DbContextOptions<MaaldoComDbContext> options) : DbContext(options), IMaaldoComDbContext
 {
     public DbSet<MediaAlbum> MediaAlbums { get; set; }
-    public DbSet<Medium> Media { get; set; }
+    public DbSet<Media> Media { get; set; }
     public DbSet<Knowledge> Knowledge { get; set; }
     public DbSet<Tag> Tags { get; set; }
 

@@ -65,11 +65,11 @@ public static class MappingExtensions
         }
     }
 
-    extension(MediumDto dto)
+    extension(MediaDto dto)
     {
-        public GetMediumResponse ToGetModel()
+        public GetMediaResponse ToGetModel()
         {
-            var model = new GetMediumResponse().MapBaseModel(dto);
+            var model = new GetMediaResponse().MapBaseModel(dto);
 
             model.FileName = dto.FileName;
             model.Description = dto.Description;
