@@ -12,4 +12,7 @@ public interface IMaaldoComDbContext
     DbSet<Tag> Tags { get; set; }
     
     Task<int> SaveChangesAsync(ClaimsPrincipal user, CancellationToken cancellationToken = default, bool audit = true);
+
+    void DisableChangeTracking();
+    void EnableChangeTracking();
 }

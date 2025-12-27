@@ -1,8 +1,7 @@
-using MaaldoCom.Services.Api.Endpoints;
 using MaaldoCom.Services.Api.Endpoints.MediaAlbums.Models;
 using MaaldoCom.Services.Application.Dtos;
 
-namespace MaaldoCom.Services.Api.Extensions;
+namespace MaaldoCom.Services.Api.Endpoints;
 
 public static class MappingExtensions
 {

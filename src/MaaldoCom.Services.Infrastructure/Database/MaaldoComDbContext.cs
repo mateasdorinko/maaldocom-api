@@ -49,4 +49,7 @@ public class MaaldoComDbContext(DbContextOptions<MaaldoComDbContext> options) : 
 
         return await base.SaveChangesAsync(cancellationToken);
     }
+
+    public void DisableChangeTracking() => ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+    public void EnableChangeTracking() => ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
 }

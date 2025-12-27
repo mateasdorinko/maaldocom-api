@@ -23,6 +23,28 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build solution
+        run: dotnet build --no-restore --configuration Release
+        
+      - name: Create EF migration bundle
+        run: |
+          dotnet tool install --global dotnet-ef
+          dotnet ef migrations bundle --project MaaldoCom.Services.Infrastructure/MaaldoCom.Services.Infrastructure.csproj --output efbundle
+          
+#      - name: Run EF migrations
+#        run: ./efbundle --connection ${{ secrets.AZURE_DEV_MIGRATIONS_CONNECTION_STRING }} --verbose
+          
       - name: Lowercase the repo name and username
         run: echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
 

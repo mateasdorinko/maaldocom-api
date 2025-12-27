@@ -6,6 +6,7 @@ public class MediaAlbumDto : BaseDto
     public string? UrlFriendlyName { get; set; }
     public string? Description { get; set; }
     public IList<MediaDto> Media { get; set; } = new List<MediaDto>();
+    public IList<TagDto> Tags { get; set; } = new List<TagDto>();
 
     public override string? ToString() => Name;
 }

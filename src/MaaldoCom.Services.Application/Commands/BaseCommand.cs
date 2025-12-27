@@ -16,7 +16,7 @@ public abstract class BaseCommandHandler
     {
         MaaldoComDbContext = maaldoComDbContext;
 
-        //MaaldoComDbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
+        MaaldoComDbContext.DisableChangeTracking();
     }
 
     protected IMaaldoComDbContext MaaldoComDbContext { get; }

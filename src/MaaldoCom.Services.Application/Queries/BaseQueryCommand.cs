@@ -18,7 +18,7 @@ public abstract class BaseQueryCommandHandler
         MaaldoComDbContext = maaldoComDbContext;
         HybridCache = hybridCache;
 
-        //MaaldoComDbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+        MaaldoComDbContext.EnableChangeTracking();
     }
 
     protected IMaaldoComDbContext MaaldoComDbContext { get; }
