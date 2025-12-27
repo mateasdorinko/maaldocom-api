@@ -3,30 +3,18 @@ using MaaldoCom.Services.Application.Dtos;
 
 namespace MaaldoCom.Services.Api.Endpoints;
 
-public static class MappingExtensions
+public static partial class MappingExtensions
 {
-    // ToDto
-    private static TDto MapBaseDto<TDto, TModel>(this TDto dto, TModel model) 
-        where TDto : BaseDto
-        where TModel : BaseModel
+    extension<TModel>(TModel model) where TModel : BaseModel
     {
-        dto.Guid = model.Guid;
-        dto.Created = model.Created;
-        dto.Active = model.Active;
+        private TModel MapBaseModel<TDto>(TDto dto) where TDto : BaseDto
+        {
+            model.Guid = dto.Guid;
+            model.Created = dto.Created;
+            model.Active = dto.Active;
         
-        return dto;
-    }
-    
-    // ToModel
-    private static TModel MapBaseModel<TModel, TDto>(this TModel model, TDto dto)
-        where TModel : BaseModel
-        where TDto : BaseDto
-    {
-        model.Guid = dto.Guid;
-        model.Created = dto.Created;
-        model.Active = dto.Active;
-        
-        return model;
+            return model;
+        }
     }
     
     extension(IEnumerable<MediaAlbumDto> dtos)
