@@ -11,10 +11,10 @@ public class MediaConfiguration : IEntityTypeConfiguration<Media>
         builder.ConfigureBaseAuditableEntity();
         builder.ToTable("Media");
         
-        builder.Property(x => x.FileName).HasColumnType("varchar(50)").IsRequired();
-        builder.Property(x => x.Description).HasColumnType("varchar(200)"); 
+        builder.Property(x => x.FileName).IsUnicode(false).HasMaxLength(50).IsRequired();
+        builder.Property(x => x.Description).IsUnicode(false).HasMaxLength(200); 
         builder.Property(x => x.SizeInBytes).IsRequired();
-        builder.Property(x => x.FileExtension).HasColumnType("varchar(10)").IsRequired();
+        builder.Property(x => x.FileExtension).IsUnicode(false).HasMaxLength(20).IsRequired();
         
         builder.HasOne(x => x.MediaAlbum).WithMany(x => x.Media).HasForeignKey(x => x.MediaAlbumId).IsRequired();
         builder.HasMany(x => x.Tags).WithMany(x => x.Media);

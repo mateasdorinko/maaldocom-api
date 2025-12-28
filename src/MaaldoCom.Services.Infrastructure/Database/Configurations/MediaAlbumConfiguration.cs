@@ -11,9 +11,9 @@ public class MediaAlbumConfiguration : IEntityTypeConfiguration<MediaAlbum>
         builder.ConfigureBaseAuditableEntity();
         builder.ToTable("MediaAlbums");
         
-        builder.Property(x => x.Name).HasColumnType("varchar(50)").IsRequired();
-        builder.Property(x => x.UrlFriendlyName).HasColumnType("varchar(50)").IsRequired();
-        builder.Property(x => x.Description).HasColumnType("varchar(200)");
+        builder.Property(x => x.Name).IsUnicode(false).HasMaxLength(50).IsRequired();
+        builder.Property(x => x.UrlFriendlyName).IsUnicode(false).HasMaxLength(50).IsRequired();
+        builder.Property(x => x.Description).IsUnicode(false).HasMaxLength(200);
         
         builder.HasMany(x => x.Media).WithOne(x => x.MediaAlbum).HasForeignKey(x => x.MediaAlbumId);
         builder.HasMany(x => x.Tags).WithMany(x => x.MediaAlbums);

@@ -11,7 +11,7 @@ public class TagConfiguration : IEntityTypeConfiguration<Tag>
         builder.ConfigureBaseEntity();
         builder.ToTable("Tags");
         
-        builder.Property(t => t.Name).HasColumnType("varchar(20)").IsRequired();
+        builder.Property(t => t.Name).HasMaxLength(50).IsUnicode(false).IsRequired();
 
         builder.HasMany(x => x.MediaAlbums).WithMany(x => x.Tags); 
         builder.HasMany(x => x.Media).WithMany(x => x.Tags);
