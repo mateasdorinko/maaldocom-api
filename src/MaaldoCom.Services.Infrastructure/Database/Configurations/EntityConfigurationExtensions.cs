@@ -17,9 +17,9 @@ public static class EntityConfigurationExtensions
     {
         builder.ConfigureBaseEntity();
 
-        builder.Property(e => e.CreatedBy).HasColumnType("varchar(50)").IsRequired();
+        builder.Property(e => e.CreatedBy).IsUnicode(false).HasMaxLength(50).IsRequired();
         builder.Property(e => e.Created).HasColumnType("datetime").IsRequired();
         builder.Property(e => e.LastModified).HasColumnType("datetime").IsRequired();
-        builder.Property(e => e.LastModifiedBy).HasColumnType("varchar(50)").IsRequired();
+        builder.Property(e => e.LastModifiedBy).IsUnicode(false).HasMaxLength(50).IsRequired();
     }
 }
