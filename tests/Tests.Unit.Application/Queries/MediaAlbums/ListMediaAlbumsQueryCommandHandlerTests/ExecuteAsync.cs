@@ -9,7 +9,7 @@ namespace Tests.Unit.Application.Queries.MediaAlbums.ListMediaAlbumsQueryCommand
 public class ExecuteAsync
 {
     [Fact]
-    public async Task executeasync_should_always_return_a_list_with_values()
+    public async Task ExecuteAsync_StandardInvocation_AlwaysReturnsListWithValues()
     {
         // arrange
         var user = A.Fake<ClaimsPrincipal>();
