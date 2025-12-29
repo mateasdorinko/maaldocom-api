@@ -1,0 +1,74 @@
+using MaaldoCom.Services.Domain.Entities;
+
+namespace MaaldoCom.Services.Application.Dtos;
+
+public static partial class MapperExtensions
+{
+    extension<TDto>(TDto dto) where TDto : BaseDto
+    {
+        private TDto MapFromBaseEntity<TEntity>(TEntity entity) where TEntity : BaseEntity
+        {
+            dto.Id = entity.Id;
+        
+            return dto;
+        }
+
+        private TDto MapFromBaseAuditableEntity<TEntity>(TEntity entity) where TEntity : BaseAuditableEntity
+        {
+            dto.MapFromBaseEntity(entity);
+        
+            dto.CreatedBy = entity.CreatedBy;
+            dto.Created = entity.Created;
+            dto.LastModifiedBy = entity.LastModifiedBy;
+            dto.LastModified = entity.LastModified;
+            dto.Active = entity.Active;
+        
+            return dto;
+        }
+    }
+
+    public static MediaAlbumDto ToDto(this MediaAlbum entity)
+    {
+        var dto = new MediaAlbumDto().MapFromBaseAuditableEntity(entity);
+        
+        dto.Name = entity.Name;
+        dto.UrlFriendlyName = entity.UrlFriendlyName;
+        dto.Description = entity.Description;
+        dto.Tags = entity.Tags.Select(t => t.Tag.ToDto()).ToList();
+        
+        return dto;
+    }
+
+    public static MediaDto ToDto(this Media entity)
+    {
+        var dto = new MediaDto().MapFromBaseAuditableEntity(entity);
+        
+        dto.MediaAlbumId = entity.MediaAlbumId;
+        dto.FileName =  entity.FileName;
+        dto.Description = entity.Description;
+        dto.SizeInBytes = entity.SizeInBytes;
+        dto.FileExtension = entity.FileExtension;
+        dto.Tags = entity.Tags.Select(t => t.Tag.ToDto()).ToList();
+
+        return dto;
+    }
+
+    public static TagDto ToDto(this Tag entity)
+    {
+        var dto = new TagDto().MapFromBaseEntity(entity);
+        
+        dto.Name = entity.Name;
+
+        return dto;
+    }
+    
+    public static KnowledgeDto ToDto(this Knowledge entity)
+    {
+        var dto = new KnowledgeDto().MapFromBaseEntity(entity);
+        
+        dto.Title = entity.Title;
+        dto.Quote = entity.Quote;
+
+        return dto;
+    }
+}

@@ -8,8 +8,8 @@ public class MediaAlbumTagConfiguration : IEntityTypeConfiguration<MediaAlbumTag
 {
     public void Configure(EntityTypeBuilder<MediaAlbumTag> builder)
     {
-        builder.ConfigureBaseEntity();
         builder.ToTable("MediaAlbumTags");
+        builder.HasKey(x => new { x.MediaAlbumId, x.TagId });
 
         builder.HasOne(x => x.MediaAlbum)
             .WithMany(x => x.Tags)

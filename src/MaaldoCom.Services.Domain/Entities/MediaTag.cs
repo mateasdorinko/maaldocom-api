@@ -1,6 +1,6 @@
 namespace MaaldoCom.Services.Domain.Entities;
 
-public class MediaTag : BaseEntity
+public class MediaTag
 {
     public Guid MediaId { get; set; }
     public Guid TagId { get; set; } 
