@@ -11,7 +11,8 @@ public class KnowledgeConfiguration : IEntityTypeConfiguration<Knowledge>
         builder.ConfigureBaseEntity();
         builder.ToTable("Knowledge");
         
-        builder.Property(x => x.Title).IsUnicode(false).HasMaxLength(50).IsRequired();
-        builder.Property(x => x.Quote).IsUnicode(false).HasMaxLength(200).IsRequired();
+        builder.Property(x => x.Title).HasMaxLength(50).IsRequired();
+        builder.Property(x => x.Quote).HasMaxLength(200).IsRequired();
+        
     }
 }

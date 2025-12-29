@@ -52,4 +52,11 @@ public class MaaldoComDbContext(DbContextOptions<MaaldoComDbContext> options) : 
 
     public void DisableChangeTracking() => ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
     public void EnableChangeTracking() => ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(MaaldoComDbContext).Assembly);
+        
+        base.OnModelCreating(modelBuilder);
+    }
 }

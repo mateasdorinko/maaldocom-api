@@ -1,0 +1,22 @@
+using MaaldoCom.Services.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace MaaldoCom.Services.Infrastructure.Database.Configurations;
+
+public class MediaTagConfiguration : IEntityTypeConfiguration<MediaTag>
+{
+    public void Configure(EntityTypeBuilder<MediaTag> builder)
+    {
+        builder.ConfigureBaseEntity();
+        builder.ToTable("MediaTags");
+
+        builder.HasOne(x => x.Media)
+            .WithMany(x => x.Tags)
+            .HasForeignKey(x => x.MediaId);
+
+        builder.HasOne(x => x.Tag)
+            .WithMany(x => x.MediaTags)
+            .HasForeignKey(x => x.MediaId);
+    }
+}
