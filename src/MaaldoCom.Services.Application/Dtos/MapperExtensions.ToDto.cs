@@ -29,18 +29,23 @@ public static partial class MapperExtensions
 
     public static MediaAlbumDto ToDto(this MediaAlbum entity)
     {
+        ArgumentNullException.ThrowIfNull(entity);
+
         var dto = new MediaAlbumDto().MapFromBaseAuditableEntity(entity);
         
         dto.Name = entity.Name;
         dto.UrlFriendlyName = entity.UrlFriendlyName;
         dto.Description = entity.Description;
-        dto.Tags = entity.Tags.Select(t => t.Tag.ToDto()).ToList();
+        dto.Tags = entity.Tags?.Select(t => t.Tag.ToDto()).ToList()!;
+        dto.Media = entity.Media?.Select(m => m.ToDto()).ToList()!;
         
         return dto;
     }
 
     public static MediaDto ToDto(this Media entity)
     {
+        ArgumentNullException.ThrowIfNull(entity);
+        
         var dto = new MediaDto().MapFromBaseAuditableEntity(entity);
         
         dto.MediaAlbumId = entity.MediaAlbumId;
@@ -48,13 +53,15 @@ public static partial class MapperExtensions
         dto.Description = entity.Description;
         dto.SizeInBytes = entity.SizeInBytes;
         dto.FileExtension = entity.FileExtension;
-        dto.Tags = entity.Tags.Select(t => t.Tag.ToDto()).ToList();
+        dto.Tags = entity.Tags?.Select(t => t.Tag.ToDto()).ToList()!;
 
         return dto;
     }
 
     public static TagDto ToDto(this Tag entity)
     {
+        ArgumentNullException.ThrowIfNull(entity);
+
         var dto = new TagDto().MapFromBaseEntity(entity);
         
         dto.Name = entity.Name;
@@ -64,6 +71,8 @@ public static partial class MapperExtensions
     
     public static KnowledgeDto ToDto(this Knowledge entity)
     {
+        ArgumentNullException.ThrowIfNull(entity);
+
         var dto = new KnowledgeDto().MapFromBaseEntity(entity);
         
         dto.Title = entity.Title;
