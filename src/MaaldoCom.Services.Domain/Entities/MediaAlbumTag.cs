@@ -1,6 +1,6 @@
 namespace MaaldoCom.Services.Domain.Entities;
 
-public class MediaAlbumTag : BaseEntity
+public class MediaAlbumTag
 {
     public Guid MediaAlbumId { get; set; }
     public Guid TagId { get; set; } 
