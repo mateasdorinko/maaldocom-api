@@ -103,6 +103,10 @@ public class InitSeeder
                 { "birthdays" },
                 { "halloween" },
                 { "weddings" },
+                { "matt" },
+                { "heather" },
+                { "hunter" },
+                { "austin" }
             });
     }
 }
