@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaaldoCom.Services.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(MaaldoComDbContext))]
-    [Migration("20251229173218_Init")]
-    partial class Init
+    [Migration("20251230015254_InitSeed")]
+    partial class InitSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,12 +36,14 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
                     b.Property<string>("Quote")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnOrder(2);
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(1);
 
                     b.HasKey("Id");
 
@@ -72,17 +74,20 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
 
                     b.Property<string>("Description")
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnOrder(7);
 
                     b.Property<string>("FileExtension")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnOrder(9);
 
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(6);
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2")
@@ -97,7 +102,8 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<long>("SizeInBytes")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(8);
 
                     b.HasKey("Id");
 
@@ -130,7 +136,8 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
 
                     b.Property<string>("Description")
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnOrder(8);
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2")
@@ -144,14 +151,22 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(6);
 
                     b.Property<string>("UrlFriendlyName")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(7);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("UrlFriendlyName")
+                        .IsUnique();
 
                     b.ToTable("MediaAlbums", (string)null);
                 });
@@ -186,14 +201,22 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0)
+                        .HasDefaultValueSql("newsequentialid()");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnOrder(1);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tags");
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Tags", (string)null);
                 });
 
             modelBuilder.Entity("MaaldoCom.Services.Domain.Entities.Media", b =>

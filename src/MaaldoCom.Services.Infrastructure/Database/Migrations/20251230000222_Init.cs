@@ -47,8 +47,8 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
                 name: "Tags",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,11 +65,11 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Active = table.Column<bool>(type: "bit", nullable: false),
-                    MediaAlbumId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FileName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     SizeInBytes = table.Column<long>(type: "bigint", nullable: false),
-                    FileExtension = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                    FileExtension = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    MediaAlbumId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -134,6 +134,24 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
                 name: "IX_Media_MediaAlbumId",
                 table: "Media",
                 column: "MediaAlbumId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MediaAlbums_Name",
+                table: "MediaAlbums",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MediaAlbums_UrlFriendlyName",
+                table: "MediaAlbums",
+                column: "UrlFriendlyName",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tags_Name",
+                table: "Tags",
+                column: "Name",
+                unique: true);
         }
 
         /// <inheritdoc />

@@ -16,4 +16,15 @@
       <PackageReference Include="ZiggyCreatures.FusionCache.Serialization.SystemTextJson" Version="2.5.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Database\Migrations\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Database\Sql\Seeding\InsertKnowledge.sql" />
+      <EmbeddedResource Include="Database\Sql\Seeding\InsertKnowledge.sql" />
+      <None Remove="Database\Sql\Seeding\InsertTags.sql" />
+      <EmbeddedResource Include="Database\Sql\Seeding\InsertTags.sql" />
+    </ItemGroup>
+
 </Project>

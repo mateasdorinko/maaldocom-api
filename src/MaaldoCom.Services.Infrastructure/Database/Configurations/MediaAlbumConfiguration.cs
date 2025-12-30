@@ -11,9 +11,20 @@ public class MediaAlbumConfiguration : IEntityTypeConfiguration<MediaAlbum>
         builder.ConfigureBaseAuditableEntity();
         builder.ToTable("MediaAlbums");
         
-        builder.Property(x => x.Name).HasMaxLength(50).IsRequired();
-        builder.Property(x => x.UrlFriendlyName).HasMaxLength(50).IsRequired();
-        builder.Property(x => x.Description).HasMaxLength(200);
+        builder.HasIndex(x => x.Name).IsUnique();
+        builder.HasIndex(x => x.UrlFriendlyName).IsUnique();
+        
+        builder.Property(x => x.Name)
+            .HasMaxLength(50)
+            .IsRequired()
+            .HasColumnOrder(6);
+        builder.Property(x => x.UrlFriendlyName)
+            .HasMaxLength(50)
+            .IsRequired()
+            .HasColumnOrder(7);
+        builder.Property(x => x.Description)
+            .HasMaxLength(200)
+            .HasColumnOrder(8);
         
         builder.HasMany(x => x.Media).WithOne(x => x.MediaAlbum).HasForeignKey(x => x.MediaAlbumId);
     }

@@ -11,10 +11,20 @@ public class MediaConfiguration : IEntityTypeConfiguration<Media>
         builder.ConfigureBaseAuditableEntity();
         builder.ToTable("Media");
         
-        builder.Property(x => x.FileName).HasMaxLength(50).IsRequired();
-        builder.Property(x => x.Description).HasMaxLength(200);
-        builder.Property(x => x.SizeInBytes).IsRequired();
-        builder.Property(x => x.FileExtension).HasMaxLength(20).IsRequired();
+        builder.Property(x => x.FileName)
+            .HasMaxLength(50)
+            .IsRequired()
+            .HasColumnOrder(6);
+        builder.Property(x => x.Description)
+            .HasMaxLength(200)
+            .HasColumnOrder(7);
+        builder.Property(x => x.SizeInBytes)
+            .IsRequired()
+            .HasColumnOrder(8);
+        builder.Property(x => x.FileExtension)
+            .HasMaxLength(20)
+            .IsRequired()
+            .HasColumnOrder(9);
         
         builder.HasOne(x => x.MediaAlbum).WithMany(x => x.Media).HasForeignKey(x => x.MediaAlbumId).IsRequired();
     }
