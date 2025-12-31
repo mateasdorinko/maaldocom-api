@@ -2,9 +2,9 @@
 
 namespace MaaldoCom.Services.Infrastructure.Database.Seeding;
 
-public class InitSeeder
+public static class InitSeeder
 {
-    public static void Seed(MigrationBuilder migrationBuilder)
+    public static void Up(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.InsertData(
             table: "Knowledge",
@@ -109,4 +109,6 @@ public class InitSeeder
                 { "austin" }
             });
     }
+    
+    public static void Down(MigrationBuilder migrationBuilder) { }
 }

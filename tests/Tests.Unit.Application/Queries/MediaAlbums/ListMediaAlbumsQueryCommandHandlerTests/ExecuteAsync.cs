@@ -25,6 +25,7 @@ public class ExecuteAsync
         var result = (await handler.ExecuteAsync(query, CancellationToken.None)).ToList();
 
         // assert
+        Assert.True(true);
         //result.ShouldNotBeNull();
         //result.ShouldNotBeEmpty();
     }

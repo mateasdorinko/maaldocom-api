@@ -11,13 +11,13 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            InitSeeder.Seed(migrationBuilder);
+            InitSeeder.Up(migrationBuilder);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            InitSeeder.Down(migrationBuilder);
         }
     }
 }
