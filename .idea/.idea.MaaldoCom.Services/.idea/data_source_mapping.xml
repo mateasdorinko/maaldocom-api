@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/src/MaaldoCom.Services.Infrastructure/Database/Sql/InsertTestData.sql" value="fbbd9536-7dbf-4477-bfe8-1d2ec054cb4f" />
+  </component>
+</project>

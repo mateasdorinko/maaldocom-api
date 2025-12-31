@@ -5,15 +5,15 @@ using Microsoft.Extensions.Caching.Hybrid;
 
 namespace MaaldoCom.Services.Application.Queries;
 
-public abstract class BaseQueryCommand(ClaimsPrincipal user)
+public abstract class BaseQuery(ClaimsPrincipal user)
 {
     [JsonIgnore]
     public ClaimsPrincipal User { get; } = user;
 }
 
-public abstract class BaseQueryCommandHandler
+public abstract class BaseQueryHandler
 {
-    protected BaseQueryCommandHandler(IMaaldoComDbContext maaldoComDbContext, HybridCache hybridCache)
+    protected BaseQueryHandler(IMaaldoComDbContext maaldoComDbContext, HybridCache hybridCache)
     {
         MaaldoComDbContext = maaldoComDbContext;
         HybridCache = hybridCache;
@@ -21,6 +21,9 @@ public abstract class BaseQueryCommandHandler
         MaaldoComDbContext.EnableChangeTracking();
     }
 
+    [JsonIgnore]
     protected IMaaldoComDbContext MaaldoComDbContext { get; }
+    
+    [JsonIgnore]
     protected HybridCache HybridCache { get; }
 }

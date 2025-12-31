@@ -19,5 +19,6 @@ public abstract class BaseCommandHandler
         MaaldoComDbContext.DisableChangeTracking();
     }
 
+    [JsonIgnore]
     protected IMaaldoComDbContext MaaldoComDbContext { get; }
 }

@@ -4,7 +4,7 @@ using MaaldoCom.Services.Application.Interfaces;
 using MaaldoCom.Services.Application.Queries.MediaAlbums;
 using Microsoft.Extensions.Caching.Hybrid;
 
-namespace Tests.Unit.Application.Queries.MediaAlbums.ListMediaAlbumsQueryCommandHandlerTests;
+namespace Tests.Unit.Application.Queries.MediaAlbums.ListMediaAlbumsQueryHandlerTests;
 
 public class ExecuteAsync
 {
@@ -16,8 +16,8 @@ public class ExecuteAsync
         var db = A.Fake<IMaaldoComDbContext>();
         var cache = A.Fake<HybridCache>();
         
-        var query = new ListMediaAlbumsQueryCommand(user);
-        var handler = new ListMediaAlbumsQueryCommandHandler(db, cache);
+        var query = new ListMediaAlbumsQuery(user);
+        var handler = new ListMediaAlbumsQueryHandler(db, cache);
 
         //A.CallTo(() => cache.GetOrCreateAsync<IEnumerable<MediaAlbumDto>>("media-albums")).Returns(new ValueTask<IEnumerable<MediaAlbumDto>>());
 

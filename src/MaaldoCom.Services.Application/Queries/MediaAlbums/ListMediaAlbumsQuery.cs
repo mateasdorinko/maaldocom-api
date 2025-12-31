@@ -5,21 +5,21 @@ using Microsoft.Extensions.Caching.Hybrid;
 
 namespace MaaldoCom.Services.Application.Queries.MediaAlbums;
 
-public class ListMediaAlbumsQueryCommand(ClaimsPrincipal user) : BaseQueryCommand(user), ICommand<IEnumerable<MediaAlbumDto>> { }
+public class ListMediaAlbumsQuery(ClaimsPrincipal user) : BaseQuery(user), ICommand<IEnumerable<MediaAlbumDto>> { }
 
-public class ListMediaAlbumsQueryCommandHandler(IMaaldoComDbContext maaldoComDbContext, HybridCache hybridCache)
-    : BaseQueryCommandHandler(maaldoComDbContext, hybridCache), ICommandHandler<ListMediaAlbumsQueryCommand, IEnumerable<MediaAlbumDto>>
+public class ListMediaAlbumsQueryHandler(IMaaldoComDbContext maaldoComDbContext, HybridCache hybridCache)
+    : BaseQueryHandler(maaldoComDbContext, hybridCache), ICommandHandler<ListMediaAlbumsQuery, IEnumerable<MediaAlbumDto>>
 {
-    public async Task<IEnumerable<MediaAlbumDto>> ExecuteAsync(ListMediaAlbumsQueryCommand queryCommand, CancellationToken cancellationToken)
+    public async Task<IEnumerable<MediaAlbumDto>> ExecuteAsync(ListMediaAlbumsQuery query, CancellationToken cancellationToken)
     {
         var mediaAlbums = await HybridCache.GetOrCreateAsync<IEnumerable<MediaAlbumDto>>(
-            "media-albums",
+            "media-albums-list",
             async _ => await GetStaticMediaAlbums(), cancellationToken: cancellationToken);
 
         return mediaAlbums;
     }
 
-    private async Task<IEnumerable<MediaAlbumDto>> GetStaticMediaAlbums()
+    private static async Task<IEnumerable<MediaAlbumDto>> GetStaticMediaAlbums()
     {
         var mediaAlbums = new List<MediaAlbumDto>
         {

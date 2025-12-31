@@ -51,23 +51,6 @@ public static partial class MapperExtensions
         }
     }
 
-    extension(IEnumerable<MediaAlbumDto> dtos)
-    {
-        public IEnumerable<GetMediaAlbumResponse> ToModels()
-        {
-            ArgumentNullException.ThrowIfNull(dtos);
-
-            return dtos.Select(dto => dto.ToModel()).ToList();
-        }
-
-        public IEnumerable<GetMediaAlbumDetailResponse> ToDetailModels()
-        {
-            ArgumentNullException.ThrowIfNull(dtos);
-
-            return dtos.Select(dto => dto.ToDetailModel()).ToList();
-        }
-    }
-
     public static GetMediaResponse ToModel(this MediaDto dto)
     {
         ArgumentNullException.ThrowIfNull(dto);
