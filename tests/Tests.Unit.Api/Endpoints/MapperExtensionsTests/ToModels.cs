@@ -44,6 +44,19 @@ public class ToModels
         // act & assert
         Assert.Throws<ArgumentNullException>(() => dtos!.ToModels());
     }
+
+    [Fact]
+    public void ToModels_EmptyMediaAlbumDtos_ReturnsEmptyList()
+    {
+        // arrange
+        var dtos = new List<MediaAlbumDto>();
+        
+        // act
+        var models = dtos.ToModels().ToList();
+        
+        // assert
+        dtos.ShouldBeEmpty();
+    }
     
     [Fact]
     public void ToDetailModels_MappingMediaAlbumDtos_MapsAllPropertiesCorrectly()
@@ -87,4 +100,44 @@ public class ToModels
         // act & assert
         Assert.Throws<ArgumentNullException>(() => dtos!.ToDetailModels());
     }
+
+    [Fact]
+    public void ToDetailModels_EmptyMediaAlbumDtos_ReturnsEmptyList()
+    {
+        // arrange
+        var dtos = new List<MediaAlbumDto>();
+        
+        // act
+        var models = dtos.ToDetailModels().ToList();
+        
+        // assert
+        dtos.ShouldBeEmpty();
+    }
+    
+    [Fact(Skip = "not implemented")]
+    public void ToModels_MappingMediaDtos_MapsAllPropertiesCorrectly() { }
+
+    [Fact(Skip = "not implemented")]
+    public void ToModels_NullMediaDtos_ThrowsArgumentNullException() { }
+
+    [Fact(Skip = "not implemented")]
+    public void ToModels_EmptyMediaDtos_ReturnsEmptyList() { }
+    
+    [Fact(Skip = "not implemented")]
+    public void ToModels_MappingTagDtos_MapsAllPropertiesCorrectly() { }
+
+    [Fact(Skip = "not implemented")]
+    public void ToModels_NullTagDtos_ThrowsArgumentNullException() { }
+
+    [Fact(Skip = "not implemented")]
+    public void ToModels_EmptyTagDtos_ReturnsEmptyList() { }
+    
+    [Fact(Skip = "not implemented")]
+    public void ToModels_MappingKnowledgeDtos_MapsAllPropertiesCorrectly() { }
+
+    [Fact(Skip = "not implemented")]
+    public void ToModels_NullKnowledgeDtos_ThrowsArgumentNullException() { }
+
+    [Fact(Skip = "not implemented")]
+    public void ToModels_EmptyKnowledgeDtos_ReturnsEmptyList() { }
 }
