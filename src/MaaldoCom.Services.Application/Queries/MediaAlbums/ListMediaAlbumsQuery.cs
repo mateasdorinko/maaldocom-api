@@ -16,7 +16,9 @@ public class ListMediaAlbumsQueryHandler(IMaaldoComDbContext maaldoComDbContext,
             MediaAlbumListCacheKey,
             async _ => await GetMediaAlbumsFromDbAsync(cancellationToken), cancellationToken: cancellationToken);
 
-        return Result.Ok(mediaAlbums);
+        var activeMediaAlbums = mediaAlbums.Where(ma => ma.Active);
+
+        return Result.Ok(activeMediaAlbums);
     }
 
     private static async Task<IEnumerable<MediaAlbumDto>> GetMediaAlbumsFromDbAsync(CancellationToken cancellationToken)
