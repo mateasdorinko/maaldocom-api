@@ -37,7 +37,7 @@ public static partial class MapperExtensions
         dto.Name = entity.Name;
         dto.UrlFriendlyName = entity.UrlFriendlyName;
         dto.Description = entity.Description;
-        dto.Tags = entity.Tags?.Select(t => t.Tag.ToDto()).ToList()!;
+        dto.Tags = entity.MediaAlbumTags?.Select(t => t.Tag.ToDto()).ToList()!;
         dto.Media = entity.Media?.Select(m => m.ToDto()).ToList()!;
 
         return dto;
@@ -54,7 +54,7 @@ public static partial class MapperExtensions
         dto.Description = entity.Description;
         dto.SizeInBytes = entity.SizeInBytes;
         dto.FileExtension = entity.FileExtension;
-        dto.Tags = entity.Tags?.Select(t => t.Tag.ToDto()).ToList()!;
+        dto.Tags = entity.MediaTags?.Select(t => t.Tag.ToDto()).ToList()!;
 
         return dto;
     }

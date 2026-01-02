@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaaldoCom.Services.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(MaaldoComDbContext))]
-    [Migration("20251230153901_Init")]
-    partial class Init
+    [Migration("20260102011708_InitSeeding")]
+    partial class InitSeeding
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -181,6 +181,8 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
 
                     b.HasKey("MediaAlbumId", "TagId");
 
+                    b.HasIndex("TagId");
+
                     b.ToTable("MediaAlbumTags", (string)null);
                 });
 
@@ -193,6 +195,8 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("MediaId", "TagId");
+
+                    b.HasIndex("TagId");
 
                     b.ToTable("MediaTags", (string)null);
                 });
@@ -240,7 +244,7 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
 
                     b.HasOne("MaaldoCom.Services.Domain.Entities.Tag", "Tag")
                         .WithMany("MediaAlbumTags")
-                        .HasForeignKey("MediaAlbumId")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -259,7 +263,7 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
 
                     b.HasOne("MaaldoCom.Services.Domain.Entities.Tag", "Tag")
                         .WithMany("MediaTags")
-                        .HasForeignKey("MediaId")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

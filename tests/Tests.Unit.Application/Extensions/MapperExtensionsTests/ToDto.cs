@@ -17,7 +17,7 @@ public class ToDto
             LastModifiedBy = "tester",
             LastModified = DateTime.UtcNow,
             Active = true,
-            Tags = new List<MediaAlbumTag>
+            MediaAlbumTags = new List<MediaAlbumTag>
             {
                 new()
                 {
@@ -92,7 +92,7 @@ public class ToDto
             LastModifiedBy = "tester",
             LastModified = DateTime.UtcNow,
             Active = true,
-            Tags = new List<MediaTag>
+            MediaTags = new List<MediaTag>
             {
                 new()
                 {

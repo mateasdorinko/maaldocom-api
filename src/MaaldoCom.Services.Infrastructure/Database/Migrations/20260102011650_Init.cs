@@ -99,8 +99,8 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MediaAlbumTags_Tags_MediaAlbumId",
-                        column: x => x.MediaAlbumId,
+                        name: "FK_MediaAlbumTags_Tags_TagId",
+                        column: x => x.TagId,
                         principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -123,8 +123,8 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MediaTags_Tags_MediaId",
-                        column: x => x.MediaId,
+                        name: "FK_MediaTags_Tags_TagId",
+                        column: x => x.TagId,
                         principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -146,6 +146,16 @@ namespace MaaldoCom.Services.Infrastructure.Database.Migrations
                 table: "MediaAlbums",
                 column: "UrlFriendlyName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MediaAlbumTags_TagId",
+                table: "MediaAlbumTags",
+                column: "TagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MediaTags_TagId",
+                table: "MediaTags",
+                column: "TagId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tags_Name",

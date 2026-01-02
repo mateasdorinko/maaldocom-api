@@ -1,3 +1,4 @@
+using MaaldoCom.Services.Application.Dtos;
 using MaaldoCom.Services.Application.Interfaces;
 using Microsoft.Extensions.Caching.Hybrid;
 
@@ -25,7 +26,7 @@ public abstract class BaseQueryHandler
     [JsonIgnore]
     protected HybridCache HybridCache { get; }
     
-    protected const string MediaAlbumListCacheKey = "mediaalbum-list";
-    protected const string KnowledgeListCacheKey = "knowledge-list";
-    protected const string TagListCacheKey = "tag-list";
+    protected const string MediaAlbumListCacheKey = "mediaalbums";
+    protected const string KnowledgeListCacheKey = "knowledge";
+    protected const string TagListCacheKey = "tags";
 }

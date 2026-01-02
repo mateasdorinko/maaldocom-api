@@ -12,11 +12,11 @@ public class MediaTagConfiguration : IEntityTypeConfiguration<MediaTag>
         builder.HasKey(x => new { x.MediaId, x.TagId });
 
         builder.HasOne(x => x.Media)
-            .WithMany(x => x.Tags)
+            .WithMany(x => x.MediaTags)
             .HasForeignKey(x => x.MediaId);
 
         builder.HasOne(x => x.Tag)
             .WithMany(x => x.MediaTags)
-            .HasForeignKey(x => x.MediaId);
+            .HasForeignKey(x => x.TagId);
     }
 }

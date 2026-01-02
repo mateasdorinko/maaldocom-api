@@ -19,6 +19,7 @@ app.UseResponseCaching()
 
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.MapOpenApi();
     app.MapScalarApiReference("/docs",
         options =>

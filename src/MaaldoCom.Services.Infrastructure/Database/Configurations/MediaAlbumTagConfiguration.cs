@@ -12,11 +12,11 @@ public class MediaAlbumTagConfiguration : IEntityTypeConfiguration<MediaAlbumTag
         builder.HasKey(x => new { x.MediaAlbumId, x.TagId });
 
         builder.HasOne(x => x.MediaAlbum)
-            .WithMany(x => x.Tags)
+            .WithMany(x => x.MediaAlbumTags)
             .HasForeignKey(x => x.MediaAlbumId);
 
         builder.HasOne(x => x.Tag)
             .WithMany(x => x.MediaAlbumTags)
-            .HasForeignKey(x => x.MediaAlbumId);
+            .HasForeignKey(x => x.TagId);
     }
 }

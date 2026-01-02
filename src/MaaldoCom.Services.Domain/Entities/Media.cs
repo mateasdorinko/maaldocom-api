@@ -9,7 +9,7 @@ public class Media : BaseAuditableEntity
     public string? FileExtension { get; set; }
     
     public MediaAlbum MediaAlbum { get; set; } = null!;
-    public ICollection<MediaTag> Tags { get; set; } = null!;
+    public ICollection<MediaTag> MediaTags { get; set; } = null!;
 
     public override string? ToString() => FileName;
 }

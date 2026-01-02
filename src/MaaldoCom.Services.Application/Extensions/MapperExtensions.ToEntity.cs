@@ -43,10 +43,10 @@ public static partial class MapperExtensions
 
         if (dto.Tags.Any())
         {
-            entity.Tags = new List<MediaAlbumTag>();
+            entity.MediaAlbumTags = new List<MediaAlbumTag>();
             foreach (var tagDto in dto.Tags)
             {
-                entity.Tags.Add(new MediaAlbumTag { Tag = tagDto.ToEntity() });
+                entity.MediaAlbumTags.Add(new MediaAlbumTag { Tag = tagDto.ToEntity() });
             }
         }
 
@@ -76,10 +76,10 @@ public static partial class MapperExtensions
 
         if (dto.Tags.Any())
         {
-            entity.Tags = new List<MediaTag>();
+            entity.MediaTags = new List<MediaTag>();
             foreach (var tagDto in dto.Tags)
             {
-                entity.Tags.Add(new MediaTag { Tag = tagDto.ToEntity() });
+                entity.MediaTags.Add(new MediaTag { Tag = tagDto.ToEntity() });
             }
         }
 

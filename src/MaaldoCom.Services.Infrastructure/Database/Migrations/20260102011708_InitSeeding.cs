@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MaaldoCom.Services.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class InitSeed : Migration
+    public partial class InitSeeding : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -56,8 +56,8 @@ public class ToEntity
         entity.LastModifiedBy.ShouldBeEquivalentTo(dto.LastModifiedBy);
         entity.LastModified.ShouldBeEquivalentTo(dto.LastModified);
         entity.Active.ShouldBeEquivalentTo(dto.Active);
-        entity.Tags.Count.ShouldBe(1);
-        entity.Tags.First().Tag.Name.ShouldBeEquivalentTo("SampleTag");
+        entity.MediaAlbumTags.Count.ShouldBe(1);
+        entity.MediaAlbumTags.First().Tag.Name.ShouldBeEquivalentTo("SampleTag");
         entity.Media.Count.ShouldBe(1);
         entity.Media.First().FileName.ShouldBeEquivalentTo("sample.jpg");
     }
@@ -114,8 +114,8 @@ public class ToEntity
         entity.LastModifiedBy.ShouldBeEquivalentTo(dto.LastModifiedBy);
         entity.LastModified.ShouldBeEquivalentTo(dto.LastModified);
         entity.Active.ShouldBeEquivalentTo(dto.Active);
-        entity.Tags.Count.ShouldBe(1);
-        entity.Tags.First().Tag.Name.ShouldBeEquivalentTo("SampleTag");
+        entity.MediaTags.Count.ShouldBe(1);
+        entity.MediaTags.First().Tag.Name.ShouldBeEquivalentTo("SampleTag");
     }
 
     [Fact]
