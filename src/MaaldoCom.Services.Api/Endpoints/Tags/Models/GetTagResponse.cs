@@ -2,9 +2,12 @@
 
 public class GetTagResponse : BaseModel
 {
-    [JsonPropertyOrder(2)]
+    [JsonPropertyOrder(3)]
     public string? Name { get; set; }
     
     [JsonPropertyOrder(1)]
-    public override string? Href => $"{Constants.TagsRoute}/{Id}";
+    public override string? Href => UrlMaker.GetTagUrl(Id);
+
+    [JsonPropertyOrder(2)]
+    public string? AltHref => UrlMaker.GetTagUrl(Name!);
 }

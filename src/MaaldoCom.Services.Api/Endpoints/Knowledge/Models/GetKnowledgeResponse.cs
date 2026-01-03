@@ -9,5 +9,5 @@ public class GetKnowledgeResponse : BaseModel
     public string? Quote { get; set; }
     
     [JsonPropertyOrder(1)]
-    public override string? Href => $"{Constants.KnowledgeRoute}/{Id}";
+    public override string? Href => UrlMaker.GetKnowledgeUrl(Id);
 }

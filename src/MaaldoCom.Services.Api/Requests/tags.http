@@ -2,7 +2,7 @@
 GET {{HostAddress}}/tags
 
 ### Get Tag By Id
-GET {{HostAddress}}/tags/3a91433e-f36b-1410-8eea-004c9c71f7b7
+GET {{HostAddress}}/tags/b23e433e-f36b-1410-8919-00414d3e33ca
 
 ### Get Tag By Name
 GET {{HostAddress}}/tags/hotshots

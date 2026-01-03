@@ -17,5 +17,5 @@ public class GetMediaResponse : BaseModel
     [JsonIgnore]
     public Guid MediaAlbumId { get; set; }
     
-    public override string? Href => $"{Constants.MediaAlbumsRoute}/{MediaAlbumId}/media/{Id}";
+    public override string? Href => UrlMaker.GetMediaUrl(MediaAlbumId, Id);
 }

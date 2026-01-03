@@ -7,7 +7,7 @@ public class ListKnowledgeEndpoint : EndpointWithoutRequest<IEnumerable<GetKnowl
 {
     public override void Configure()
     {
-        Get($"{Constants.KnowledgeRoute}");
+        Get($"{UrlMaker.GetKnowledgeUrl()}");
         ResponseCache(60);
         AllowAnonymous();
     }

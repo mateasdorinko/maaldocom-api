@@ -114,9 +114,7 @@ public class CacheManager : ICacheManager
     {
         var entity = await MaaldoComDbContext.Tags
             .Include(t => t.MediaAlbumTags)
-            .ThenInclude(mat => mat.Tag)
             .Include(t => t.MediaTags)
-            .ThenInclude(mt => mt.Tag)
             .FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
 
         return entity!.ToDto();

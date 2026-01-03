@@ -1,12 +1,10 @@
-﻿using MaaldoCom.Services.Api.Endpoints.MediaAlbums.Models;
-
-namespace MaaldoCom.Services.Api.Endpoints.Tags.Models;
+﻿namespace MaaldoCom.Services.Api.Endpoints.Tags.Models;
 
 public class GetTagDetailResponse : GetTagResponse
 {
-    [JsonPropertyOrder(3)]
-    public IEnumerable<GetMediaAlbumResponse> TaggedMediaAlbums { get; set; } = new List<GetMediaAlbumResponse>();
-
     [JsonPropertyOrder(4)]
-    public IEnumerable<GetMediaResponse> TaggedMedia { get; set; } = new List<GetMediaResponse>();
+    public IEnumerable<GetMediaAlbumTagResponse> MediaAlbumTags { get; set; } = new  List<GetMediaAlbumTagResponse>();
+
+    [JsonPropertyOrder(5)]
+    public IEnumerable<GetMediaTagResponse> MediaTags { get; set; } = new  List<GetMediaTagResponse>();
 }

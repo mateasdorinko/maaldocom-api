@@ -7,7 +7,7 @@ public class GetMediaAlbumByIdEndpoint : Endpoint<GetMediaAlbumByIdRequest, GetM
 {
     public override void Configure()
     {
-        Get($"{Constants.MediaAlbumsRoute}/{{id:guid}}");
+        Get($"{UrlMaker.GetMediaAlbumsUrl()}/{{id:guid}}");
         ResponseCache(60);
         AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));

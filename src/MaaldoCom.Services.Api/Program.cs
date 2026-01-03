@@ -12,7 +12,9 @@ builder.Services
     .AddInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
-app.UseResponseCaching() 
+app.UseResponseCaching()
+    .UseHsts()
+    .UseHttpsRedirection()
     .UseStaticFiles()
     .UseDefaultExceptionHandler()
     .UseFastEndpoints();

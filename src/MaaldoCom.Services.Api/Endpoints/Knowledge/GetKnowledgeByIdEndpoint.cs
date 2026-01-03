@@ -7,7 +7,7 @@ public class GetKnowledgeByIdEndpoint : Endpoint<GetKnowledgeByIdRequest, GetKno
 {
     public override void Configure()
     {
-        Get($"{Constants.KnowledgeRoute}/{{id:guid}}");
+        Get($"{UrlMaker.GetKnowledgeUrl()}/{{id:guid}}");
         ResponseCache(60);
         AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));

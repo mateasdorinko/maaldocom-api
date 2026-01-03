@@ -15,8 +15,8 @@ public class GetMediaAlbumResponse : BaseModel
     public IEnumerable<string> Tags { get; set; } = new List<string>();
     
     [JsonPropertyOrder(1)]
-    public override string? Href => $"{Constants.MediaAlbumsRoute}/{Id}";
+    public override string? Href => UrlMaker.GetMediaAlbumUrl(Id);
 
     [JsonPropertyOrder(2)]
-    public string? AltHref => $"{Constants.MediaAlbumsRoute}/{UrlFriendlyName}";
+    public string? AltHref => UrlMaker.GetMediaAlbumUrl(UrlFriendlyName!);
 }

@@ -66,6 +66,8 @@ public static partial class MapperExtensions
         var dto = new TagDto().MapFromBaseEntity(entity);
 
         dto.Name = entity.Name;
+        dto.MediaAlbums = entity.MediaAlbumTags?.Select(mat => mat.MediaAlbum.ToDto()).ToList()!;
+        dto.Media = entity.MediaTags?.Select(mt => mt.Media.ToDto()).ToList()!;
 
         return dto;
     }

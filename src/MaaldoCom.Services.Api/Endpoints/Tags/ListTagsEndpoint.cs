@@ -7,7 +7,7 @@ public class ListTagsEndpoint : EndpointWithoutRequest<IEnumerable<GetTagRespons
 {
     public override void Configure()
     {
-        Get($"{Constants.TagsRoute}");
+        Get(UrlMaker.GetTagsUrl());
         ResponseCache(60);
         AllowAnonymous();
     }
