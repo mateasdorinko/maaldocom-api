@@ -27,7 +27,7 @@ public static partial class MapperExtensions
             return dto;
         }
     }
-    
+
     public static MediaAlbumDto ToDto(this MediaAlbum entity)
     {
         ArgumentNullException.ThrowIfNull(entity);
@@ -61,6 +61,7 @@ public static partial class MapperExtensions
 
     public static TagDto ToDto(this Tag entity)
     {
+        /*
         ArgumentNullException.ThrowIfNull(entity);
 
         var dto = new TagDto().MapFromBaseEntity(entity);
@@ -68,6 +69,26 @@ public static partial class MapperExtensions
         dto.Name = entity.Name;
         dto.MediaAlbums = entity.MediaAlbumTags?.Select(mat => mat.MediaAlbum.ToDto()).ToList()!;
         dto.Media = entity.MediaTags?.Select(mt => mt.Media.ToDto()).ToList()!;
+
+        return dto;
+*/
+        ArgumentNullException.ThrowIfNull(entity);
+
+        var dto = new TagDto().MapFromBaseEntity(entity);
+
+        dto.Name = entity.Name;
+        dto.MediaAlbums = entity.MediaAlbumTags?.Select(mat => new MediaAlbumDto
+        {
+            Id = mat.MediaAlbum.Id,
+            Name = mat.MediaAlbum.Name,
+            UrlFriendlyName = mat.MediaAlbum.UrlFriendlyName
+        }).ToList()!;
+        dto.Media = entity.MediaTags?.Select(mt => new MediaDto
+        {
+            Id = mt.Media.Id,
+            FileName = mt.Media.FileName,
+            MediaAlbumId = mt.Media.MediaAlbumId
+        }).ToList()!;
 
         return dto;
     }

@@ -113,9 +113,13 @@ public class CacheManager : ICacheManager
     private async Task<TagDto> GetTagDetailFromDbAsync(Guid id, CancellationToken cancellationToken)
     {
         var entity = await MaaldoComDbContext.Tags
+            .Where(t => t.Id == id)
             .Include(t => t.MediaAlbumTags)
+            .ThenInclude(mat => mat.MediaAlbum)
             .Include(t => t.MediaTags)
-            .FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
+            .ThenInclude(mt => mt.Media)
+            .ThenInclude(m => m.MediaAlbum)
+            .FirstOrDefaultAsync(cancellationToken);
 
         return entity!.ToDto();
     }
