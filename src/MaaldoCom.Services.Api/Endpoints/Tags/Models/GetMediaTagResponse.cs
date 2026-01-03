@@ -3,7 +3,7 @@ namespace MaaldoCom.Services.Api.Endpoints.Tags.Models;
 public class GetMediaTagResponse
 {
     [JsonPropertyOrder(1)]
-    public string? MediaALbumName { get; set; }
+    public string? MediaAlbumName { get; set; }
 
     [JsonPropertyOrder(2)]
     public string? Name { get; set; }

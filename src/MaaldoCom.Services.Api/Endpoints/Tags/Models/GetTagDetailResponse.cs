@@ -3,8 +3,8 @@
 public class GetTagDetailResponse : GetTagResponse
 {
     [JsonPropertyOrder(4)]
-    public IEnumerable<GetMediaAlbumTagResponse> MediaAlbumTags { get; set; } = new  List<GetMediaAlbumTagResponse>();
+    public IEnumerable<GetMediaAlbumTagResponse> MediaAlbums { get; set; } = new  List<GetMediaAlbumTagResponse>();
 
     [JsonPropertyOrder(5)]
-    public IEnumerable<GetMediaTagResponse> MediaTags { get; set; } = new  List<GetMediaTagResponse>();
+    public IEnumerable<GetMediaTagResponse> Media { get; set; } = new  List<GetMediaTagResponse>();
 }

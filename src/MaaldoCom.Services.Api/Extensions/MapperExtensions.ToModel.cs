@@ -68,15 +68,39 @@ public static partial class MapperExtensions
         return model;
     }
 
-    public static GetTagResponse ToModel(this TagDto dto)
+    extension(TagDto dto)
     {
-        ArgumentNullException.ThrowIfNull(dto);
+        public GetTagResponse ToModel()
+        {
+            ArgumentNullException.ThrowIfNull(dto);
 
-        var model = new GetTagResponse().MapToBaseModel(dto);
+            var model = new GetTagResponse().MapToBaseModel(dto);
 
-        model.Name = dto.Name;
+            model.Name = dto.Name;
 
-        return model;
+            return model;
+        }
+
+        public GetTagDetailResponse ToDetailModel()
+        {
+            ArgumentNullException.ThrowIfNull(dto);
+
+            var model = new GetTagDetailResponse().MapToBaseModel(dto);
+
+            model.Name = dto.Name;
+            model.MediaAlbums = dto.MediaAlbums.Select(ma => new GetMediaAlbumTagResponse
+            {
+                Name = ma.Name,
+                Href = UrlMaker.GetMediaAlbumUrl(ma.Id)
+            });
+            model.Media = dto.Media.Select(m => new GetMediaTagResponse
+            {
+                Name = m.FileName,
+                Href = UrlMaker.GetMediaUrl(m.MediaAlbumId, m.Id)
+            });
+
+            return model;
+        }
     }
 
     public static GetKnowledgeResponse ToModel(this KnowledgeDto dto)
