@@ -1,9 +1,9 @@
-﻿namespace Tests.Unit.Api.Endpoints.Tags.GetTagByIdEndpointTests;
+﻿namespace Tests.Unit.Application.Queries.Knowledge.ListKnowledgeQueryHandlerTests;
 
-public class HandleAsync
+public class ExecuteAsync
 {
     [Fact(Skip = "Not implemented yet")]
-    public async Task HandleAsync_x_y()
+    public async Task ExecuteAsync_x_y()
     {
         // arrange
 

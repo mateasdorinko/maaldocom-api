@@ -4,5 +4,5 @@ GET {{HostAddress}}/tags
 ### Get Tag By Id
 GET {{HostAddress}}/tags/3a91433e-f36b-1410-8eea-004c9c71f7b7
 
-### Get Knowledge By Id
-GET {{HostAddress}}/knowledge/fe90433e-f36b-1410-8eea-004c9c71f7b7
+### Get Tag By Name
+GET {{HostAddress}}/tags/hotshots
