@@ -1,0 +1,8 @@
+﻿### Get Knowledge
+GET {{HostAddress}}/knowledge
+
+### Get Random Knowledge
+GET {{HostAddress}}/knowledge/random
+
+### Get Knowledge By Id
+GET {{HostAddress}}/knowledge/fe90433e-f36b-1410-8eea-004c9c71f7b7

@@ -41,67 +41,67 @@ values ('test-runner',getutcdate(),1,
 
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image1.jpg','A test image1 file','.jpg', @testAlbum2,0);
+        'mediaalbum2-image1.jpg','A test image1 file','.jpg', @testAlbum2,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image2.jpg','A test image2 file','.jpg', @testAlbum2,0);
+        'mediaalbum2-image2.jpg','A test image2 file','.jpg', @testAlbum2,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image3.jpg','A test image3 file','.jpg', @testAlbum2,0);
+        'mediaalbum2-image3.jpg','A test image3 file','.jpg', @testAlbum2,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image4.jpg','A test image4 file','.jpg', @testAlbum2,0);
+        'mediaalbum2-image4.jpg','A test image4 file','.jpg', @testAlbum2,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image5.jpg','A test image5 file','.jpg', @testAlbum2,0);
+        'mediaalbum2-image5.jpg','A test image5 file','.jpg', @testAlbum2,0);
 
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image1.jpg','A test image1 file','.jpg', @testAlbum3,0);
+        'mediaalbum3-image1.jpg','A test image1 file','.jpg', @testAlbum3,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image2.jpg','A test image2 file','.jpg', @testAlbum3,0);
+        'mediaalbum3-image2.jpg','A test image2 file','.jpg', @testAlbum3,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image3.jpg','A test image3 file','.jpg', @testAlbum3,0);
+        'mediaalbum3-image3.jpg','A test image3 file','.jpg', @testAlbum3,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image4.jpg','A test image4 file','.jpg', @testAlbum3,0);
+        'mediaalbum3-image4.jpg','A test image4 file','.jpg', @testAlbum3,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image5.jpg','A test image5 file','.jpg', @testAlbum3,0);
+        'mediaalbum3-image5.jpg','A test image5 file','.jpg', @testAlbum3,0);
 
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image1.jpg','A test image1 file','.jpg', @testAlbum4,0);
+        'mediaalbum4-image1.jpg','A test image1 file','.jpg', @testAlbum4,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image2.jpg','A test image2 file','.jpg', @testAlbum4,0);
+        'mediaalbum4-image2.jpg','A test image2 file','.jpg', @testAlbum4,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image3.jpg','A test image3 file','.jpg', @testAlbum4,0);
+        'mediaalbum4-image3.jpg','A test image3 file','.jpg', @testAlbum4,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image4.jpg','A test image4 file','.jpg', @testAlbum4,0);
+        'mediaalbum4-image4.jpg','A test image4 file','.jpg', @testAlbum4,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image5.jpg','A test image5 file','.jpg', @testAlbum4,0);
+        'mediaalbum4-image5.jpg','A test image5 file','.jpg', @testAlbum4,0);
 
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image1.jpg','A test image1 file','.jpg', @testAlbum5,0);
+        'mediaalbum5-image1.jpg','A test image1 file','.jpg', @testAlbum5,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image2.jpg','A test image2 file','.jpg', @testAlbum5,0);
+        'mediaalbum5-image2.jpg','A test image2 file','.jpg', @testAlbum5,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image3.jpg','A test image3 file','.jpg', @testAlbum5,0);
+        'mediaalbum5-image3.jpg','A test image3 file','.jpg', @testAlbum5,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image4.jpg','A test image4 file','.jpg', @testAlbum5,0);
+        'mediaalbum5-image4.jpg','A test image4 file','.jpg', @testAlbum5,0);
 insert into Media (CreatedBy, Created, Active, FileName, Description, FileExtension, MediaAlbumId, SizeInBytes)
 values ('test-runner',getutcdate(),1,
-        'mediaalbum1-image5.jpg','A test image5 file','.jpg', @testAlbum5,0);
+        'mediaalbum5-image5.jpg','A test image5 file','.jpg', @testAlbum5,0);
 
 insert into MediaAlbumTags (MediaAlbumId, TagId)
 values (@testAlbum1, (select id from Tags where Name = 'vacations'));
@@ -113,7 +113,7 @@ values (@testAlbum1, (select id from Tags where Name = 'hotshots'));
 insert into MediaAlbumTags (MediaAlbumId, TagId)
 values (@testAlbum2, (select id from Tags where Name = 'family'));
 insert into MediaAlbumTags (MediaAlbumId, TagId)
-values (@testAlbum2, (select id from Tags where Name = 'family'));
+values (@testAlbum2, (select id from Tags where Name = 'halloween'));
 
 insert into MediaAlbumTags (MediaAlbumId, TagId)
 values (@testAlbum3, (select id from Tags where Name = 'vacations'));

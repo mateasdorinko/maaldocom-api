@@ -1,0 +1,8 @@
+﻿### Get Media Albums
+GET {{HostAddress}}/media-albums
+
+### Get Media Album By Id
+GET {{HostAddress}}/media-albums/5d91433e-f36b-1410-8eea-004c9c71f7b7
+
+### Get Media Album By Name
+GET {{HostAddress}}/media-albums/test-media-album-3

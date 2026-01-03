@@ -25,4 +25,8 @@
       <Folder Include="wwwroot\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="Requests\http-client.env.json.user" />
+    </ItemGroup>
+
 </Project>
