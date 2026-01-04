@@ -1,4 +1,4 @@
-﻿/*namespace MaaldoCom.Services.Api.Endpoints.Default;
+﻿namespace MaaldoCom.Services.Api.Endpoints.Default;
 
 public class GetDefaultEndpoint : EndpointWithoutRequest
 {
@@ -25,7 +25,7 @@ public class GetDefaultEndpoint : EndpointWithoutRequest
                                          <h1>hello...</h1>
                                          <div class="container"> 
                                              <div class="bottom-center-div">
-                                                 v2025.12.31b
+                                                 v2026.01.04a
                                              </div>
                                          </div>
                                      </body>
@@ -34,4 +34,4 @@ public class GetDefaultEndpoint : EndpointWithoutRequest
 
         await Send.StringAsync(htmlContent, contentType: "text/html", cancellation: ct);
     }
-}*/
+}

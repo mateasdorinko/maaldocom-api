@@ -7,4 +7,6 @@ public class MediaTag
     
     public Media Media { get; set; } = null!;
     public Tag Tag { get; set; } = null!;
+
+    public override string ToString() => $"{Media}:{Tag}";
 }

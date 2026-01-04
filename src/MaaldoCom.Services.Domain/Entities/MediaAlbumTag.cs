@@ -7,4 +7,6 @@ public class MediaAlbumTag
     
     public MediaAlbum MediaAlbum { get; set; } = null!;
     public Tag Tag { get; set; } = null!;
+
+    public override string ToString() => $"{MediaAlbum}:{Tag}";
 }

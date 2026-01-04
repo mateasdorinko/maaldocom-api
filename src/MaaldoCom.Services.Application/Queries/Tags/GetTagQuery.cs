@@ -41,24 +41,24 @@ public class GetTagQueryHandler(ICacheManager cacheManager)
 
                 return dto != null ?
                     Result.Ok(dto)! :
-                    Result.Fail<TagDto>(new EntityNotFound("Tag", query.SearchBy, query.SearchValue));
+                    Result.Fail<TagDto>(new EntityNotFoundError("Tag", query.SearchBy, query.SearchValue));
             case SearchBy.Name:
                 var cachedTagByName = (await CacheManager.ListTagsAsync(cancellationToken))
                     .FirstOrDefault(x => x.Name == query.SearchValue.ToString());
 
                 if (cachedTagByName == null)
                 {
-                    return Result.Fail<TagDto>(new EntityNotFound("Tag", query.SearchBy, query.SearchValue));
+                    return Result.Fail<TagDto>(new EntityNotFoundError("Tag", query.SearchBy, query.SearchValue));
                 }
 
                 dto = await CacheManager.GetTagDetailAsync(cachedTagByName!.Id, cancellationToken);
 
                 return dto != null ?
                     Result.Ok(dto)! :
-                    Result.Fail<TagDto>(new EntityNotFound("Tag", query.SearchBy, query.SearchValue));
+                    Result.Fail<TagDto>(new EntityNotFoundError("Tag", query.SearchBy, query.SearchValue));
             case SearchBy.NotSet:
             default:
-                return Result.Fail<TagDto>(new EntityNotFound("Tag", query.SearchBy, query.SearchValue));
+                return Result.Fail<TagDto>(new EntityNotFoundError("Tag", query.SearchBy, query.SearchValue));
         }
     }
 }

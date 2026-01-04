@@ -31,6 +31,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Actions", "GitHub Actions", "{953EB560-8ED6-4A22-94DE-61EF4BBFAE6A}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\1-restore-build-test.yml = .github\workflows\1-restore-build-test.yml
+		.github\workflows\2-build-package-publish.yml = .github\workflows\2-build-package-publish.yml
+		.github\workflows\3-deploy-to-dev.yml = .github\workflows\3-deploy-to-dev.yml
+		.github\workflows\4-deploy-to-test.yml = .github\workflows\4-deploy-to-test.yml
+		.github\workflows\5-deploy-to-prod.yml = .github\workflows\5-deploy-to-prod.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +57,7 @@ Global
 		{38DC43E4-AD5B-4CA5-BA8F-09D50111FB5E} = {ED845241-31AD-451B-BDEC-7F0E36DA220A}
 		{FB552D89-1D87-4A5A-95C3-A9CF927C931F} = {ED845241-31AD-451B-BDEC-7F0E36DA220A}
 		{F696F347-1250-4A31-B088-9100193F41DD} = {ED845241-31AD-451B-BDEC-7F0E36DA220A}
+		{953EB560-8ED6-4A22-94DE-61EF4BBFAE6A} = {3D16D652-71EE-46C5-A0FC-02869A49E3E6}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F9624FC0-587C-4312-8D07-0C85514ABD89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

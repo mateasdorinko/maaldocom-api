@@ -1,6 +1,6 @@
 using MaaldoCom.Services.Application.Queries;
 
-namespace Tests.Unit.Application.Errors.EntityNotFoundTests;
+namespace Tests.Unit.Application.Errors.EntityNotFoundErrorTests;
 
 public class Ctor
 {
@@ -13,7 +13,7 @@ public class Ctor
         const string searchValue = "value1";
 
         // assert
-        var error = new EntityNotFound(entityType, searchBy, searchValue);
+        var error = new EntityNotFoundError(entityType, searchBy, searchValue);
 
         // act
         error.Metadata["EntityType"].ShouldBe(entityType);

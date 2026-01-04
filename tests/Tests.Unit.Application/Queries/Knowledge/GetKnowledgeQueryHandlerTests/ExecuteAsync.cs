@@ -58,7 +58,7 @@ public class ExecuteAsync
 
         // assert
         result.IsFailed.ShouldBe(true);
-        result.Errors[0].ShouldBeOfType<EntityNotFound>();
+        result.Errors[0].ShouldBeOfType<EntityNotFoundError>();
         result.Errors[0].Metadata["EntityType"].ShouldBe("Knowledge");
     }
 }
