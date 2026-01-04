@@ -14,11 +14,6 @@
 ```yaml
 ```
 
-#### Key Vault
-
-```yaml
-```
-
 ### Local User Secrets
 
 [MaaldoCom.Services.Api Readme](/src/MaaldoCom.Services.Api/README.md)

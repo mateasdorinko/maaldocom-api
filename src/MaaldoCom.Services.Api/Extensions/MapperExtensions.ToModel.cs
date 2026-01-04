@@ -96,6 +96,7 @@ public static partial class MapperExtensions
             model.Media = dto.Media.Select(m => new GetMediaTagResponse
             {
                 Name = m.FileName,
+                MediaAlbumName = m.MediaAlbumName,
                 Href = UrlMaker.GetMediaUrl(m.MediaAlbumId, m.Id)
             });
 
