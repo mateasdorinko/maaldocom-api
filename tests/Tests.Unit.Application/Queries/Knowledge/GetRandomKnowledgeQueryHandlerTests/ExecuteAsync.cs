@@ -27,13 +27,10 @@ public class ExecuteAsync
         // act
         var result = await handler.ExecuteAsync(query, ct);
 
-        var matchedKnowledge = knowledgeList.FirstOrDefault(k =>
-            k.Id == result.Value.Id &&
-            k.Title == result.Value.Title &&
-            k.Quote == result.Value.Quote);
+        var matchedKnowledge = knowledgeList.FirstOrDefault(k => k.Id == result.Value.Id);
 
         // assert
         result.IsSuccess.ShouldBe(true);
-        matchedKnowledge.ShouldNotBeNull();
+        result.Value.ShouldBe(matchedKnowledge);
     }
 }

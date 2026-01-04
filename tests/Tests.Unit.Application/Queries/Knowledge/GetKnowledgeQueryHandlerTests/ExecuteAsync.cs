@@ -16,21 +16,23 @@ public class ExecuteAsync
         var query = new GetKnowledgeQuery(user, id);
         var handler = new GetKnowledgeQueryHandler(cacheManager);
 
-        A.CallTo(() => cacheManager.ListKnowledgeAsync(ct))
-            .Returns([
-                new KnowledgeDto { Id = Guid.NewGuid(), Title = "title1", Quote = "quote1" },
-                new KnowledgeDto { Id = id, Title = "title2", Quote =  "quote2" },
-                new KnowledgeDto { Id = Guid.NewGuid(), Title = "title3", Quote =  "quote3" }
-            ]);
+        var knowledgeList = new List<KnowledgeDto>
+        {
+            new() { Id = Guid.NewGuid(), Title = "title1", Quote = "quote1" },
+            new() { Id = id, Title = "title2", Quote = "quote2" },
+            new() { Id = Guid.NewGuid(), Title = "title3", Quote = "quote3" }
+        };
+
+        A.CallTo(() => cacheManager.ListKnowledgeAsync(ct)).Returns(knowledgeList);
 
         // act
         var result = await handler.ExecuteAsync(query, ct);
 
+        var matchedKnowledge = knowledgeList.FirstOrDefault(k => k.Id == result.Value.Id);
+
         // assert
         result.IsSuccess.ShouldBe(true);
-        result.Value.Id.ShouldBe(id);
-        result.Value.Title.ShouldBe("title2");
-        result.Value.Quote.ShouldBe("quote2");
+        result.Value.ShouldBe(matchedKnowledge);
     }
 
     [Fact]

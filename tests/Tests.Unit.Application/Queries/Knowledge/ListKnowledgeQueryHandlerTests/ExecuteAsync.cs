@@ -5,7 +5,7 @@ namespace Tests.Unit.Application.Queries.Knowledge.ListKnowledgeQueryHandlerTest
 public class ExecuteAsync
 {
     [Fact]
-    public async Task ExecuteAsync_x_y()
+    public async Task ExecuteAsync_Invoked_ReturnsKnowledgeList()
     {
         // arrange
         var user = A.Fake<ClaimsPrincipal>();
@@ -29,6 +29,6 @@ public class ExecuteAsync
 
         // assert
         result.IsSuccess.ShouldBe(true);
-        result.Value.Count().ShouldBe(3);
+        result.Value.ShouldBe(knowledgeList);
     }
 }

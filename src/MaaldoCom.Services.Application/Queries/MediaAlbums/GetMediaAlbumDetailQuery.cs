@@ -58,7 +58,7 @@ public class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager)
                     Result.Fail<MediaAlbumDto>(new EntityNotFound(nameof(MediaAlbum), query.SearchBy, query.SearchValue));
             case SearchBy.NotSet:
             default:
-                return Result.Fail<MediaAlbumDto>(new EntityNotFound(nameof(MediaAlbum), query.SearchBy, query.SearchValue));
+                 return Result.Fail<MediaAlbumDto>(new EntityNotFound(nameof(MediaAlbum), query.SearchBy, query.SearchValue));
         }
     }
 }
