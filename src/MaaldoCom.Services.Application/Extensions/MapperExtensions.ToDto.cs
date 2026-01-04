@@ -62,17 +62,6 @@ public static partial class MapperExtensions
 
     public static TagDto ToDto(this Tag entity)
     {
-        /*
-        ArgumentNullException.ThrowIfNull(entity);
-
-        var dto = new TagDto().MapFromBaseEntity(entity);
-
-        dto.Name = entity.Name;
-        dto.MediaAlbums = entity.MediaAlbumTags?.Select(mat => mat.MediaAlbum.ToDto()).ToList()!;
-        dto.Media = entity.MediaTags?.Select(mt => mt.Media.ToDto()).ToList()!;
-
-        return dto;
-*/
         ArgumentNullException.ThrowIfNull(entity);
 
         var dto = new TagDto().MapFromBaseEntity(entity);

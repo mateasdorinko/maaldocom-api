@@ -41,24 +41,24 @@ public class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager)
 
                 return dto != null ?
                     Result.Ok(dto)! :
-                    Result.Fail<MediaAlbumDto>(new EntityNotFound("MediaAlbum", query.SearchBy, query.SearchValue));
+                    Result.Fail<MediaAlbumDto>(new EntityNotFound(nameof(MediaAlbum), query.SearchBy, query.SearchValue));
             case SearchBy.Name:
                 var cachedMediaAlbumByName = (await CacheManager.ListMediaAlbumsAsync(cancellationToken))
                     .FirstOrDefault(x => x.UrlFriendlyName == query.SearchValue.ToString());
 
                 if (cachedMediaAlbumByName == null)
                 {
-                    return Result.Fail<MediaAlbumDto>(new EntityNotFound("MediaAlbum", query.SearchBy, query.SearchValue));
+                    return Result.Fail<MediaAlbumDto>(new EntityNotFound(nameof(MediaAlbum), query.SearchBy, query.SearchValue));
                 }
 
                 dto = await CacheManager.GetMediaAlbumDetailAsync(cachedMediaAlbumByName!.Id, cancellationToken);
 
                 return dto != null ?
                     Result.Ok(dto)! :
-                    Result.Fail<MediaAlbumDto>(new EntityNotFound("MediaAlbum", query.SearchBy, query.SearchValue));
+                    Result.Fail<MediaAlbumDto>(new EntityNotFound(nameof(MediaAlbum), query.SearchBy, query.SearchValue));
             case SearchBy.NotSet:
             default:
-                return Result.Fail<MediaAlbumDto>(new EntityNotFound("MediaAlbum", query.SearchBy, query.SearchValue));
+                return Result.Fail<MediaAlbumDto>(new EntityNotFound(nameof(MediaAlbum), query.SearchBy, query.SearchValue));
         }
     }
 }
