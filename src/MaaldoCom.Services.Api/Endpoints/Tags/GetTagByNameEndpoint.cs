@@ -7,7 +7,7 @@ public class GetTagByNameEndpoint : Endpoint<GetTagByNameRequest, GetTagDetailRe
 {
     public override void Configure()
     {
-        Get($"{UrlMaker.GetTagsUrl()}/{{name}}");
+        Get($"{UrlMaker.TagsRoute}/{{name}}");
         ResponseCache(60);
         AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));

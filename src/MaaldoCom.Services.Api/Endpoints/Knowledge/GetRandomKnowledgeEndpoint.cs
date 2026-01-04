@@ -7,7 +7,7 @@ public class GetRandomKnowledgeEndpoint : EndpointWithoutRequest<GetKnowledgeRes
 {
     public override void Configure()
     {
-        Get($"{UrlMaker.GetKnowledgeUrl()}/random");
+        Get($"{UrlMaker.KnowledgeRoute}/random");
         AllowAnonymous();
     }
     

@@ -13,7 +13,7 @@ public class GetRandomKnowledgeQueryHandler(ICacheManager cacheManager)
         var cachedKnowledge = (await CacheManager.ListKnowledgeAsync(cancellationToken)).ToList();
 
         var random = new Random();
-        var randomKnowledge = cachedKnowledge.ElementAt(random.Next(cachedKnowledge.Count));
+        var randomKnowledge = cachedKnowledge[random.Next(cachedKnowledge.Count)];
 
         return Result.Ok(randomKnowledge);
     }

@@ -7,7 +7,7 @@ public class ListMediaAlbumsEndpoint : EndpointWithoutRequest<IEnumerable<GetMed
 {
     public override void Configure()
     {
-        Get(UrlMaker.GetMediaAlbumsUrl());
+        Get(UrlMaker.MediaAlbumsRoute);
         ResponseCache(60);
         AllowAnonymous();
     }
