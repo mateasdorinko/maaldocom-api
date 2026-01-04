@@ -1,4 +1,4 @@
-# maaldocom-services
+# Maaldocom.Services
 
 ## Setup
 
