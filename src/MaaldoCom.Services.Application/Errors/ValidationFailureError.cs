@@ -1,3 +1,3 @@
 namespace MaaldoCom.Services.Application.Errors;
 
-public class ValidationFailure { }
+public class ValidationFailureError { }

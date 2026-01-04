@@ -20,7 +20,7 @@ app.UseResponseCaching()
     .UseFastEndpoints();
 
 app.MapOpenApi();
-app.MapScalarApiReference("/", options => { options.WithTitle("maaldo.com API Reference"); });
+app.MapScalarApiReference("/docs", options => { options.WithTitle("maaldo.com API Reference"); });
 
 if (app.Environment.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
 

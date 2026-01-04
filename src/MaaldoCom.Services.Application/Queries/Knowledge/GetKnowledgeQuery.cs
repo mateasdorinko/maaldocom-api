@@ -19,6 +19,6 @@ public class GetKnowledgeQueryHandler(ICacheManager cacheManager)
 
         return knowledge != null ?
             Result.Ok(knowledge)! :
-            Result.Fail<KnowledgeDto>(new EntityNotFound(nameof(Knowledge), SearchBy.Id, query.Id));
+            Result.Fail<KnowledgeDto>(new EntityNotFoundError(nameof(Knowledge), SearchBy.Id, query.Id));
     }
 }

@@ -1,4 +1,4 @@
-namespace Tests.Unit.Application.Errors.DuplicateEntityCreationTests;
+namespace Tests.Unit.Application.Errors.ValidationFailureErrorTests;
 
 public class Ctor
 {

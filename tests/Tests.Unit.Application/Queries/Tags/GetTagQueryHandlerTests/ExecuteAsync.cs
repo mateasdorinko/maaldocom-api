@@ -49,7 +49,7 @@ public class ExecuteAsync
 
         // assert
         result.IsFailed.ShouldBe(true);
-        result.Errors[0].ShouldBeOfType<EntityNotFound>();
+        result.Errors[0].ShouldBeOfType<EntityNotFoundError>();
         result.Errors[0].Metadata["EntityType"].ShouldBe("Tag");
     }
 
@@ -77,7 +77,7 @@ public class ExecuteAsync
 
         // assert
         result.IsFailed.ShouldBe(true);
-        result.Errors[0].ShouldBeOfType<EntityNotFound>();
+        result.Errors[0].ShouldBeOfType<EntityNotFoundError>();
         result.Errors[0].Metadata["EntityType"].ShouldBe("Tag");
         A.CallTo(() => cacheManager.GetTagDetailAsync(A.Dummy<Guid>(), ct)).MustNotHaveHappened();
     }
@@ -135,7 +135,7 @@ public class ExecuteAsync
 
         // assert
         result.IsFailed.ShouldBe(true);
-        result.Errors[0].ShouldBeOfType<EntityNotFound>();
+        result.Errors[0].ShouldBeOfType<EntityNotFoundError>();
         result.Errors[0].Metadata["EntityType"].ShouldBe("Tag");
     }
 }

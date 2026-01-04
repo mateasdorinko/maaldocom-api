@@ -11,5 +11,5 @@ public class Media : BaseAuditableEntity
     public MediaAlbum MediaAlbum { get; set; } = null!;
     public ICollection<MediaTag> MediaTags { get; set; } = null!;
 
-    public override string? ToString() => FileName;
+    public override string ToString() => $"{MediaAlbum}:{FileName}";
 }
