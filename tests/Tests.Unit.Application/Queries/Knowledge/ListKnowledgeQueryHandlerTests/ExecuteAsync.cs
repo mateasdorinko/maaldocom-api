@@ -1,16 +1,34 @@
-﻿namespace Tests.Unit.Application.Queries.Knowledge.ListKnowledgeQueryHandlerTests;
+﻿using MaaldoCom.Services.Application.Queries.Knowledge;
+
+namespace Tests.Unit.Application.Queries.Knowledge.ListKnowledgeQueryHandlerTests;
 
 public class ExecuteAsync
 {
-    [Fact(Skip = "Not implemented yet")]
+    [Fact]
     public async Task ExecuteAsync_x_y()
     {
         // arrange
+        var user = A.Fake<ClaimsPrincipal>();
+        var cacheManager = A.Fake<ICacheManager>();
+        var ct = CancellationToken.None;
+
+        var knowledgeList = new List<KnowledgeDto>
+        {
+            new() { Id = Guid.NewGuid(), Title = "title1", Quote = "quote1" },
+            new() { Id = Guid.NewGuid(), Title = "title2", Quote =  "quote2" },
+            new() { Id = Guid.NewGuid(), Title = "title3", Quote =  "quote3" }
+        };
+
+        var query = new ListKnowledgeQuery(user);
+        var handler = new ListKnowledgeQueryHandler(cacheManager);
+
+        A.CallTo(() => cacheManager.ListKnowledgeAsync(ct)).Returns(knowledgeList);
 
         // act
-        await Task.CompletedTask;
+        var result = await handler.ExecuteAsync(query, ct);
 
         // assert
-        Assert.True(true);
+        result.IsSuccess.ShouldBe(true);
+        result.Value.Count().ShouldBe(3);
     }
 }

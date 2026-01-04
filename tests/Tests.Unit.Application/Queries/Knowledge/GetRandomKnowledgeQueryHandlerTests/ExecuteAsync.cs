@@ -1,16 +1,39 @@
-﻿namespace Tests.Unit.Application.Queries.Knowledge.GetRandomKnowledgeQueryHandlerTests;
+﻿using MaaldoCom.Services.Application.Queries.Knowledge;
+
+namespace Tests.Unit.Application.Queries.Knowledge.GetRandomKnowledgeQueryHandlerTests;
 
 public class ExecuteAsync
 {
-    [Fact(Skip = "Not implemented yet")]
-    public async Task ExecuteAsync_x_y()
+    [Fact]
+    public async Task ExecuteAsync_Invoked_ReturnsRandomizedKnowledge()
     {
         // arrange
+        var user = A.Fake<ClaimsPrincipal>();
+        var cacheManager = A.Fake<ICacheManager>();
+        var ct = CancellationToken.None;
+
+        var knowledgeList = new List<KnowledgeDto>
+        {
+            new() { Id = Guid.NewGuid(), Title = "title1", Quote = "quote1" },
+            new() { Id = Guid.NewGuid(), Title = "title2", Quote =  "quote2" },
+            new() { Id = Guid.NewGuid(), Title = "title3", Quote =  "quote3" }
+        };
+
+        var query = new GetRandomKnowledgeQuery(user);
+        var handler = new GetRandomKnowledgeQueryHandler(cacheManager);
+
+        A.CallTo(() => cacheManager.ListKnowledgeAsync(ct)).Returns(knowledgeList);
 
         // act
-        await Task.CompletedTask;
+        var result = await handler.ExecuteAsync(query, ct);
+
+        var matchedKnowledge = knowledgeList.FirstOrDefault(k =>
+            k.Id == result.Value.Id &&
+            k.Title == result.Value.Title &&
+            k.Quote == result.Value.Quote);
 
         // assert
-        Assert.True(true);
+        result.IsSuccess.ShouldBe(true);
+        matchedKnowledge.ShouldNotBeNull();
     }
 }
