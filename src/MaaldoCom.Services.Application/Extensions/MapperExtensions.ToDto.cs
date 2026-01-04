@@ -50,6 +50,7 @@ public static partial class MapperExtensions
         var dto = new MediaDto().MapFromBaseAuditableEntity(entity);
 
         dto.MediaAlbumId = entity.MediaAlbumId;
+        dto.MediaAlbumName = entity.MediaAlbum?.Name;
         dto.FileName = entity.FileName;
         dto.Description = entity.Description;
         dto.SizeInBytes = entity.SizeInBytes;
@@ -86,6 +87,7 @@ public static partial class MapperExtensions
         dto.Media = entity.MediaTags?.Select(mt => new MediaDto
         {
             Id = mt.Media.Id,
+            MediaAlbumName = mt.Media.MediaAlbum!.Name,
             FileName = mt.Media.FileName,
             MediaAlbumId = mt.Media.MediaAlbumId
         }).ToList()!;
