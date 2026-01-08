@@ -1,3 +1,4 @@
+using MaaldoCom.Services.Application.Messaging;
 using MaaldoCom.Services.Infrastructure;
 using Scalar.AspNetCore;
 
@@ -10,6 +11,8 @@ builder.Services
     .AddResponseCaching()
     .AddOpenApi()
     .AddInfrastructureServices(builder.Configuration);
+
+//builder.Services.AddMediator();
 
 var app = builder.Build();
 app.UseResponseCaching()
