@@ -1,6 +1,3 @@
-using MaaldoCom.Services.Application.Dtos;
-using MaaldoCom.Services.Application.Interfaces;
-
 namespace MaaldoCom.Services.Application.Queries.Knowledge;
 
 public class GetRandomKnowledgeQuery(ClaimsPrincipal user) : BaseQuery(user), ICommand<Result<KnowledgeDto>> { }

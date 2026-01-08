@@ -1,6 +1,6 @@
 ﻿using MaaldoCom.Services.Application.Dtos;
 
-namespace MaaldoCom.Services.Application.Interfaces;
+namespace MaaldoCom.Services.Application.Cache;
 
 public interface ICacheManager
 {

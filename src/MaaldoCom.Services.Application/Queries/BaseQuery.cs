@@ -1,5 +1,3 @@
-using MaaldoCom.Services.Application.Interfaces;
-
 namespace MaaldoCom.Services.Application.Queries;
 
 public abstract class BaseQuery(ClaimsPrincipal user)

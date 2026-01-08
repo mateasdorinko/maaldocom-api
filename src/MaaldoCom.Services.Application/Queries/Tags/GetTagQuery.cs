@@ -1,8 +1,4 @@
-﻿using MaaldoCom.Services.Application.Dtos;
-using MaaldoCom.Services.Application.Errors;
-using MaaldoCom.Services.Application.Interfaces;
-
-namespace MaaldoCom.Services.Application.Queries.Tags;
+﻿namespace MaaldoCom.Services.Application.Queries.Tags;
 
 public class GetTagQuery : BaseQuery, ICommand<Result<TagDto>>
 {

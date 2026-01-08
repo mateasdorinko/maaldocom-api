@@ -1,6 +1,3 @@
-using MaaldoCom.Services.Application.Dtos;
-using MaaldoCom.Services.Application.Interfaces;
-
 namespace MaaldoCom.Services.Application.Queries.MediaAlbums;
 
 public class ListMediaAlbumsQuery(ClaimsPrincipal user) : BaseQuery(user), ICommand<Result<IEnumerable<MediaAlbumDto>>> { }

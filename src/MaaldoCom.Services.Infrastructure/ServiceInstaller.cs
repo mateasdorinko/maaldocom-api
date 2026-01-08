@@ -1,4 +1,5 @@
-using MaaldoCom.Services.Application.Interfaces;
+using MaaldoCom.Services.Application.Database;
+using MaaldoCom.Services.Application.Cache;
 using MaaldoCom.Services.Infrastructure.Database;
 using MaaldoCom.Services.Infrastructure.Cache;
 using Microsoft.EntityFrameworkCore;

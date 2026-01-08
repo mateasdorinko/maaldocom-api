@@ -1,6 +1,7 @@
 ﻿using MaaldoCom.Services.Application.Dtos;
 using MaaldoCom.Services.Application.Extensions;
-using MaaldoCom.Services.Application.Interfaces;
+using MaaldoCom.Services.Application.Cache;
+using MaaldoCom.Services.Application.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Hybrid;
 
