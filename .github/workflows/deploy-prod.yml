@@ -44,7 +44,7 @@ jobs:
         run: ./efbundle --connection "${{ secrets.AZURE_PRD_MIGRATIONS_CONNECTION_STRING }}" --verbose
 
       - name: Wait for deployment to stabilize
-        run: sleep 30
+        run: sleep 60
 
       - name: Health check
         run: |
