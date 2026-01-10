@@ -96,6 +96,17 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore
+
       - name: Create EF migration bundle
         run: |
           dotnet tool install --global dotnet-ef
@@ -103,6 +114,7 @@ jobs:
             --project src/MaaldoCom.Services.Infrastructure/MaaldoCom.Services.Infrastructure.csproj \
             --startup-project src/MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj \
             --configuration Release \
+            --no-build \
             --output efbundle \
             --self-contained
 
