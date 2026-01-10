@@ -1,8 +1,22 @@
-using MaaldoCom.Services.Application.Messaging;
+using Azure.Extensions.AspNetCore.Configuration.Secrets;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+//using MaaldoCom.Services.Application.Messaging;
 using MaaldoCom.Services.Infrastructure;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var keyVaultUri = builder.Configuration["AzureKeyVaultUri"];
+
+if (!string.IsNullOrEmpty(keyVaultUri))
+{
+    var credential = new DefaultAzureCredential();
+    var secretClient = new SecretClient(new Uri(keyVaultUri), credential);
+
+    builder.Configuration.AddAzureKeyVault(secretClient, new KeyVaultSecretManager());
+}
+
 builder.Services
     .AddFastEndpoints(options =>
     {
