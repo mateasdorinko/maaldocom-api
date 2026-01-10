@@ -58,12 +58,12 @@ jobs:
           name: efbundle
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ inputs.workflow-run-id }}
-        if: ${{ inputs.workflow-run-id != '' && secrets.migrations-connection-string != '' }}
+        if: ${{ inputs.workflow-run-id != '' }}
 
       - name: Make efbundle executable
         run: chmod +x efbundle
-        if: ${{ inputs.workflow-run-id != '' && secrets.migrations-connection-string != '' }}
+        if: ${{ inputs.workflow-run-id != '' }}
 
       - name: Run EF migrations
         run: ./efbundle --connection "${{ secrets.migrations-connection-string }}" --verbose
-        if: ${{ inputs.workflow-run-id != '' && secrets.migrations-connection-string != '' }}
+        if: ${{ inputs.workflow-run-id != '' }}
