@@ -33,11 +33,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Actions", "GitHub Actions", "{953EB560-8ED6-4A22-94DE-61EF4BBFAE6A}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\1-restore-build-test.yml = .github\workflows\1-restore-build-test.yml
-		.github\workflows\2-build-package-publish.yml = .github\workflows\2-build-package-publish.yml
-		.github\workflows\3-deploy-to-dev.yml = .github\workflows\3-deploy-to-dev.yml
-		.github\workflows\4-deploy-to-test.yml = .github\workflows\4-deploy-to-test.yml
-		.github\workflows\5-deploy-to-prod.yml = .github\workflows\5-deploy-to-prod.yml
 		.github\workflows\deploy-reusable.yml = .github\workflows\deploy-reusable.yml
 	EndProjectSection
 EndProject
