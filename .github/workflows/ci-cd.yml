@@ -154,4 +154,3 @@ jobs:
 
       - name: Run EF migrations
         run: ./efbundle --connection "${{ secrets.AZURE_DEV_MIGRATIONS_CONNECTION_STRING }}" --verbose
-        if: ${{ secrets.AZURE_DEV_MIGRATIONS_CONNECTION_STRING != '' }}
