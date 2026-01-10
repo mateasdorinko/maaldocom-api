@@ -23,7 +23,7 @@ jobs:
         run: dotnet restore
 
       - name: Build solution
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build --no-restore --configuration Release -o ${{ env.DOTNET_ROOT }}
       
       - name: Run tests
         run: dotnet test --no-restore --logger:"junit;LogFilePath=${{ github.workspace }}/results/test-results.xml"
