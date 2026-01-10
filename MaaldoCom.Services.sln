@@ -32,6 +32,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Actions", "GitHub Actions", "{953EB560-8ED6-4A22-94DE-61EF4BBFAE6A}"
+	ProjectSection(SolutionItems) = preProject
+		.github\dependabot.yml = .github\dependabot.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "actions", "actions", "{67510D09-0D16-461E-BD5C-0D2EEA2E4B97}"
 EndProject
@@ -40,6 +43,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\ci-cd.yml = .github\workflows\ci-cd.yml
 		.github\workflows\deploy-prod.yml = .github\workflows\deploy-prod.yml
 		.github\workflows\deploy-test.yml = .github\workflows\deploy-test.yml
+		.github\workflows\rollback.yml = .github\workflows\rollback.yml
 	EndProjectSection
 EndProject
 Global

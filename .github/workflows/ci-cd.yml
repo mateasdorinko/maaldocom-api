@@ -99,11 +99,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-output
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
@@ -127,7 +122,6 @@ jobs:
             --project src/MaaldoCom.Services.Infrastructure/MaaldoCom.Services.Infrastructure.csproj \
             --startup-project src/MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj \
             --configuration Release \
-            --no-build \
             --output efbundle \
             --self-contained
 
