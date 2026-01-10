@@ -11,18 +11,27 @@ on:
         description: 'Azure Web App name'
         required: true
         type: string
+      workflow-run-id:
+        description: 'Workflow run ID to download artifacts from (optional, required for migrations)'
+        required: false
+        type: string
     secrets:
       publish-profile:
         description: 'Azure publish profile'
         required: true
+      migrations-connection-string:
+        description: 'EF migrations connection string (optional)'
+        required: false
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   deploy:
     permissions:
       contents: none
+      actions: read
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment }}
@@ -42,3 +51,19 @@ jobs:
           app-name: ${{ inputs.app-name }}
           publish-profile: ${{ secrets.publish-profile }}
           images: 'ghcr.io/${{ env.REPO }}:${{ github.sha }}'
+
+      - name: Download EF migration bundle
+        uses: actions/download-artifact@v4
+        with:
+          name: efbundle
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ inputs.workflow-run-id }}
+        if: ${{ inputs.workflow-run-id != '' && secrets.migrations-connection-string != '' }}
+
+      - name: Make efbundle executable
+        run: chmod +x efbundle
+        if: ${{ inputs.workflow-run-id != '' && secrets.migrations-connection-string != '' }}
+
+      - name: Run EF migrations
+        run: ./efbundle --connection "${{ secrets.migrations-connection-string }}" --verbose
+        if: ${{ inputs.workflow-run-id != '' && secrets.migrations-connection-string != '' }}

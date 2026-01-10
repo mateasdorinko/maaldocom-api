@@ -2,6 +2,11 @@ name: 5. Deploy to Prod
 
 on:
   workflow_dispatch:
+    inputs:
+      workflow-run-id:
+        description: 'Workflow run ID to download EF bundle from (leave empty to skip migrations)'
+        required: false
+        type: string
 
 jobs:
   deploy-to-prod:
@@ -9,5 +14,7 @@ jobs:
     with:
       environment: 'Prod'
       app-name: 'app-maaldocomapi-prd-cus'
+      workflow-run-id: ${{ inputs.workflow-run-id }}
     secrets:
       publish-profile: ${{ secrets.AZURE_PRD_WEBAPP_PUBLISH_PROFILE }}
+      migrations-connection-string: ${{ secrets.AZURE_PRD_MIGRATIONS_CONNECTION_STRING }}

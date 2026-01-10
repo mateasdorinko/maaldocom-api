@@ -32,10 +32,22 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
 
-#      - name: Create EF migration bundle
-#        run: |
-#          dotnet tool install --global dotnet-ef
-#          dotnet ef migrations bundle --project MaaldoCom.Services.Infrastructure/MaaldoCom.Services.Infrastructure.csproj --startup-project MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj --output efbundle
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Create EF migration bundle
+        run: |
+          dotnet tool install --global dotnet-ef
+          dotnet ef migrations bundle --project MaaldoCom.Services.Infrastructure/MaaldoCom.Services.Infrastructure.csproj --startup-project MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj --output efbundle --self-contained
+
+      - name: Upload EF migration bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: efbundle
+          path: efbundle
+          retention-days: 1
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@f95db51fddba0c2d1ec667646a06c2ce06100226 # v3.0.0
