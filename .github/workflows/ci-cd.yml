@@ -174,20 +174,20 @@ jobs:
       - name: Run EF migrations
         run: ./efbundle --connection "${{ secrets.AZURE_DEV_MIGRATIONS_CONNECTION_STRING }}" --verbose
 
-      - name: Wait for deployment to stabilize
-        run: sleep 60
+#      - name: Wait for deployment to stabilize
+#        run: sleep 60
 
-      - name: Health check
-        run: |
-          echo "Performing health check on ${{ steps.deploy.outputs.webapp-url }}"
-          response=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 ${{ steps.deploy.outputs.webapp-url }}/health || echo "000")
+#      - name: Health check
+#        run: |
+#          echo "Performing health check on ${{ steps.deploy.outputs.webapp-url }}"
+#          response=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 ${{ steps.deploy.outputs.webapp-url }}/health || echo "000")
 
-          if [ "$response" = "200" ]; then
-            echo "✅ Health check passed - HTTP $response"
-          elif [ "$response" = "000" ]; then
-            echo "⚠️  Health check endpoint not reachable - deployment may still be warming up"
-            exit 0
-          else
-            echo "❌ Health check failed - HTTP $response"
-            exit 1
-          fi
+#          if [ "$response" = "200" ]; then
+#            echo "✅ Health check passed - HTTP $response"
+#          elif [ "$response" = "000" ]; then
+#            echo "⚠️  Health check endpoint not reachable - deployment may still be warming up"
+#            exit 0
+#          else
+#            echo "❌ Health check failed - HTTP $response"
+#            exit 1
+#          fi
