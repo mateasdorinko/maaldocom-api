@@ -86,7 +86,7 @@ jobs:
 
       - name: Deploy to Azure Web App
         id: deploy
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ steps.config.outputs.app-name }}
           publish-profile: ${{ inputs.environment == 'Dev' && secrets.AZURE_DEV_WEBAPP_PUBLISH_PROFILE || inputs.environment == 'Test' && secrets.AZURE_TST_WEBAPP_PUBLISH_PROFILE || secrets.AZURE_PRD_WEBAPP_PUBLISH_PROFILE }}
