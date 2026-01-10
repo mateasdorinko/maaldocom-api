@@ -34,7 +34,7 @@ jobs:
         run: dotnet build --no-restore --configuration Release
       
       - name: Run tests
-        run: dotnet test --no-build --configuration Release --logger:"junit;LogFilePath=${{ github.workspace }}/results/test-results.xml"
+        run: dotnet test --no-build --configuration Release --logger:"junit;LogFilePath=${{ github.workspace }}/results/{assembly}-test-results.xml"
 
       - name: Create test summary
         uses: test-summary/action@v2.4

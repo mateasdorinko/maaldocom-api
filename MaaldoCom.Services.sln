@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Actions", "GitHub Ac
 		.github\workflows\3-deploy-to-dev.yml = .github\workflows\3-deploy-to-dev.yml
 		.github\workflows\4-deploy-to-test.yml = .github\workflows\4-deploy-to-test.yml
 		.github\workflows\5-deploy-to-prod.yml = .github\workflows\5-deploy-to-prod.yml
+		.github\workflows\deploy-reusable.yml = .github\workflows\deploy-reusable.yml
 	EndProjectSection
 EndProject
 Global
