@@ -3,7 +3,7 @@
 public class ToDto
 {
     [Fact]
-    public void ToDto_MappingMediaAlbumEntity_MapsAllPropertiesCorrectly()
+    public void ToDto_FromMediaAlbumEntity_MapsAllPropertiesCorrectly()
     {
         // arrange
         var entity = new MediaAlbum
@@ -66,7 +66,7 @@ public class ToDto
     }
 
     [Fact]
-    public void ToDto_NullMediaAlbumEntity_ThrowsArgumentNullException()
+    public void ToDto_FromNullMediaAlbumEntity_ThrowsArgumentNullException()
     {
         // arrange
         MediaAlbum? entity = null;
@@ -76,7 +76,7 @@ public class ToDto
     }
 
     [Fact]
-    public void ToDto_MappingMediaEntity_MapsAllPropertiesCorrectly()
+    public void ToDto_FromMediaEntity_MapsAllPropertiesCorrectly()
     {
         // arrange
         var entity = new Media
@@ -125,7 +125,7 @@ public class ToDto
     }
 
     [Fact]
-    public void ToDto_NullMediaEntity_ThrowsArgumentNullException()
+    public void ToDto_FromNullMediaEntity_ThrowsArgumentNullException()
     {
         // arrange
         Media? entity = null;
@@ -135,7 +135,7 @@ public class ToDto
     }
 
     [Fact]
-    public void ToDto_MappingTagEntity_MapsAllPropertiesCorrectly()
+    public void ToDto_FromTagEntity_MapsAllPropertiesCorrectly()
     {
         // arrange
         var entity = new Tag
@@ -153,7 +153,7 @@ public class ToDto
     }
 
     [Fact]
-    public void ToDto_NullTagEntity_ThrowsArgumentNullException()
+    public void ToDto_FromNullTagEntity_ThrowsArgumentNullException()
     {
         // arrange
         Tag? entity = null;
@@ -163,7 +163,7 @@ public class ToDto
     }
 
     [Fact]
-    public void ToDto_MappingKnowledgeEntity_MapsAllPropertiesCorrectly()
+    public void ToDto_FromKnowledgeEntity_MapsAllPropertiesCorrectly()
     {
         // arrange
         var entity = new Knowledge
@@ -183,7 +183,7 @@ public class ToDto
     }
 
     [Fact]
-    public void ToDto_NullKnowledgeEntity_ThrowsArgumentNullException()
+    public void ToDto_FromNullKnowledgeEntity_ThrowsArgumentNullException()
     {
         // arrange
         Knowledge? entity = null;

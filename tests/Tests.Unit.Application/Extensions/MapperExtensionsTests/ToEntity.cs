@@ -3,7 +3,7 @@
 public class ToEntity
 {
     [Fact]
-    public void ToEntity_MappingMediaAlbumDto_MapsAllPropertiesCorrectly()
+    public void ToEntity_FromMediaAlbumDto_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dto = new MediaAlbumDto
@@ -63,7 +63,7 @@ public class ToEntity
     }
 
     [Fact]
-    public void ToEntity_NullMediaAlbumDto_ThrowsArgumentNullException()
+    public void ToEntity_FromNullMediaAlbumDto_ThrowsArgumentNullException()
     {
         // arrange
         MediaAlbumDto? dto = null;
@@ -73,7 +73,7 @@ public class ToEntity
     }
 
     [Fact]
-    public void ToEntity_MappingMediaDto_MapsAllPropertiesCorrectly()
+    public void ToEntity_FromMediaDto_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dto = new MediaDto
@@ -119,7 +119,7 @@ public class ToEntity
     }
 
     [Fact]
-    public void ToEntity_NullMediaDto_ThrowsArgumentNullException()
+    public void ToEntity_FromNullMediaDto_ThrowsArgumentNullException()
     {
         // arrange
         MediaDto? dto = null;
@@ -129,7 +129,7 @@ public class ToEntity
     }
 
     [Fact]
-    public void ToEntity_MappingTagDto_MapsAllPropertiesCorrectly()
+    public void ToEntity_FromTagDto_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dto = new TagDto
@@ -147,7 +147,7 @@ public class ToEntity
     }
 
     [Fact]
-    public void ToEntity_NullTagDto_ThrowsArgumentNullException()
+    public void ToEntity_FromNullTagDto_ThrowsArgumentNullException()
     {
         // arrange
         TagDto? dto = null;
@@ -157,7 +157,7 @@ public class ToEntity
     }
     
     [Fact]
-    public void ToEntity_MappingKnowledgeDto_MapsAllPropertiesCorrectly()
+    public void ToEntity_FromKnowledgeDto_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dto = new KnowledgeDto
@@ -182,7 +182,7 @@ public class ToEntity
     }
 
     [Fact]
-    public void ToEntity_NullKnowledgeDto_ThrowsArgumentNullException()
+    public void ToEntity_FromNullKnowledgeDto_ThrowsArgumentNullException()
     {
         // arrange
         KnowledgeDto? dto = null;

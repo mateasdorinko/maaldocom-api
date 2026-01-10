@@ -1,8 +1,4 @@
-﻿using MaaldoCom.Services.Application.Dtos;
-using MaaldoCom.Services.Application.Errors;
-using MaaldoCom.Services.Application.Interfaces;
-
-namespace MaaldoCom.Services.Application.Queries.Knowledge;
+﻿namespace MaaldoCom.Services.Application.Queries.Knowledge;
 
 public class GetKnowledgeQuery(ClaimsPrincipal user, Guid id) : BaseQuery(user), ICommand<Result<KnowledgeDto>>
 {

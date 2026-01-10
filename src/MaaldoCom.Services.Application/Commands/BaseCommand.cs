@@ -1,5 +1,3 @@
-using MaaldoCom.Services.Application.Interfaces;
-
 namespace MaaldoCom.Services.Application.Commands;
 
 public abstract class BaseCommand(ClaimsPrincipal user)

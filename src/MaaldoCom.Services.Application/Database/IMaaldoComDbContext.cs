@@ -1,8 +1,6 @@
-using System.Security.Claims;
-using MaaldoCom.Services.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace MaaldoCom.Services.Application.Interfaces;
+namespace MaaldoCom.Services.Application.Database;
 
 public interface IMaaldoComDbContext
 {

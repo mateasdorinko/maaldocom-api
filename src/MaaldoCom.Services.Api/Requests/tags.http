@@ -2,7 +2,7 @@
 GET {{HostAddress}}/tags
 
 ### Get Tag By Id
-GET {{HostAddress}}/tags/b13e433e-f36b-1410-8919-00414d3e33ca
+GET {{HostAddress}}/tags/3d4e433e-f36b-1410-8682-000a6a85c942
 
 ### Get Tag By Name
-GET {{HostAddress}}/tags/vacations
+GET {{HostAddress}}/tags/matt

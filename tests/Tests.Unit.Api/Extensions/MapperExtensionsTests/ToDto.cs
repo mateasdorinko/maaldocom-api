@@ -3,7 +3,7 @@
 public class ToDto
 {
     [Fact]
-    public void ToDto_MappingGetMediaAlbumResponseModel_MapsAllPropertiesCorrectly()
+    public void ToDto_FromGetMediaAlbumResponseModel_MapsAllPropertiesCorrectly()
     {
         // arrange
         var model = new GetMediaAlbumResponse
@@ -28,7 +28,7 @@ public class ToDto
     }
     
     [Fact]
-    public void ToDto_NullGetMediaAlbumResponseModel_ThrowsArgumentNullException()
+    public void ToDto_FromNullGetMediaAlbumResponseModel_ThrowsArgumentNullException()
     {
         // arrange
         GetMediaAlbumResponse? model = null;
@@ -38,7 +38,58 @@ public class ToDto
     }
 
     [Fact]
-    public void ToDto_MappingGetMediaResponseModel_MapsAllPropertiesCorrectly()
+    public void ToDto_FromGetMediaAlbumDetailResponse_MapsAllPropertiesCorrectly()
+    {
+        // arrange
+        var model = new GetMediaAlbumDetailResponse
+        {
+            Id = Guid.NewGuid(),
+            Name = "Sample Album",
+            UrlFriendlyName = "sample-album",
+            Created = DateTime.UtcNow,
+            Description = "This is a sample media album.",
+            Active = true,
+            Tags = new List<string> { "SampleTag" },
+            Media = new List<GetMediaResponse>
+            {
+                new()
+                {
+                    Id = Guid.NewGuid(),
+                    FileName = "sample.jpg",
+                    Description = "This is a sample media file.",
+                    Tags = new List<string> { "SampleTag" }
+                }
+            }
+        };
+
+        // act
+        var dto = model.ToDto();
+
+        // assert
+        dto.Id.ShouldBeEquivalentTo(model.Id);
+        dto.Name.ShouldBeEquivalentTo(model.Name);
+        dto.UrlFriendlyName.ShouldBeEquivalentTo(model.UrlFriendlyName);
+        dto.Created.ShouldBeEquivalentTo(model.Created);
+        dto.Description.ShouldBeEquivalentTo(model.Description);
+        dto.Active.ShouldBeEquivalentTo(model.Active);
+        dto.Tags.Count.ShouldBe(1);
+        dto.Tags.First().Name.ShouldBeEquivalentTo("SampleTag");
+        dto.Media.Count.ShouldBe(1);
+        dto.Media.First().Id.ShouldBeEquivalentTo(model.Media.First().Id);
+    }
+
+    [Fact]
+    public void ToDto_FromNullGetMediaAlbumDetailResponse_ThrowsArgumentNullException()
+    {
+        // arrange
+        GetMediaAlbumDetailResponse? model = null;
+
+        // act & assert
+        Assert.Throws<ArgumentNullException>(() => model!.ToDto());
+    }
+
+    [Fact]
+    public void ToDto_FromGetMediaResponseModel_MapsAllPropertiesCorrectly()
     {
         // arrange
         var model = new GetMediaResponse
@@ -61,7 +112,7 @@ public class ToDto
     }
     
     [Fact]
-    public void ToDto_NullGetMediaResponseModel_ThrowsArgumentNullException()
+    public void ToDto_FromNullGetMediaResponseModel_ThrowsArgumentNullException()
     {
         // arrange
         GetMediaResponse? model = null;
@@ -71,7 +122,7 @@ public class ToDto
     }
 
     [Fact]
-    public void ToDto_MappingGetTagResponseModel_MapsAllPropertiesCorrectly()
+    public void ToDto_FromGetTagResponseModel_MapsAllPropertiesCorrectly()
     {
         // arrange
         var model = new GetTagResponse
@@ -89,7 +140,7 @@ public class ToDto
     }
     
     [Fact]
-    public void ToDto_NullGetTagResponseModel_ThrowsArgumentNullException()
+    public void ToDto_FromNullGetTagResponseModel_ThrowsArgumentNullException()
     {
         // arrange
         GetTagResponse? model = null;
@@ -99,7 +150,7 @@ public class ToDto
     }
 
     [Fact]
-    public void ToDto_MappingGetKnowledgeResponseModel_MapsAllPropertiesCorrectly()
+    public void ToDto_FromGetKnowledgeResponseModel_MapsAllPropertiesCorrectly()
     {
         // arrange
         var model = new GetKnowledgeResponse()
@@ -119,7 +170,7 @@ public class ToDto
     }
     
     [Fact]
-    public void ToDto_NullGetKnowledgeResponseModel_ThrowsArgumentNullException()
+    public void ToDto_FromNullGetKnowledgeResponseModel_ThrowsArgumentNullException()
     {
         // arrange
         GetKnowledgeResponse? model = null;

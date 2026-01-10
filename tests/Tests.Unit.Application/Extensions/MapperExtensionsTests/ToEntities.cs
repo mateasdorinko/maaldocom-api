@@ -3,7 +3,7 @@ namespace Tests.Unit.Application.Extensions.MapperExtensionsTests;
 public class ToEntities
 {
     [Fact]
-    public void ToEntities_MappingMediaAlbumDtos_MapsAllPropertiesCorrectly()
+    public void ToEntities_FromMediaAlbumDtos_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dtos = new List<MediaAlbumDto>
@@ -39,7 +39,7 @@ public class ToEntities
     }
 
     [Fact]
-    public void ToEntities_NullMediaAlbumDtos_ThrowsArgumentNullException()
+    public void ToEntities_FromNullMediaAlbumDtos_ThrowsArgumentNullException()
     {
         // arrange
         List<MediaAlbumDto>? dtos = null;
@@ -49,7 +49,7 @@ public class ToEntities
     }
 
     [Fact]
-    public void ToEntities_EmptyMediaAlbumDtos_ReturnsEmptyList()
+    public void ToEntities_FromEmptyMediaAlbumDtos_ReturnsEmptyList()
     {
         // arrange
         var dtos = new List<MediaAlbumDto>();
@@ -62,7 +62,7 @@ public class ToEntities
     }
     
     [Fact]
-    public void ToEntities_MappingMediaDtos_MapsAllPropertiesCorrectly()
+    public void ToEntities_FromMediaDtos_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dtos = new List<MediaDto>
@@ -95,7 +95,7 @@ public class ToEntities
     }
     
     [Fact]
-    public void ToEntities_NullMediaDtos_ThrowsArgumentNullException()
+    public void ToEntities_FromNullMediaDtos_ThrowsArgumentNullException()
     {
         // arrange
         List<MediaDto>? dtos = null;
@@ -105,7 +105,7 @@ public class ToEntities
     }
 
     [Fact]
-    public void ToEntities_EmptyMediaDtos_ReturnsEmptyList()
+    public void ToEntities_FromEmptyMediaDtos_ReturnsEmptyList()
     {
         // arrange
         var dtos = new List<MediaDto>();
@@ -118,7 +118,7 @@ public class ToEntities
     }
     
     [Fact]
-    public void ToEntities_MappingTagDtos_MapsAllPropertiesCorrectly()
+    public void ToEntities_FromTagDtos_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dtos = new List<TagDto>
@@ -148,7 +148,7 @@ public class ToEntities
     }
     
     [Fact]
-    public void ToEntities_NullTagDtos_ThrowsArgumentNullException()
+    public void ToEntities_FromNullTagDtos_ThrowsArgumentNullException()
     {
         // arrange
         List<TagDto>? dtos = null;
@@ -158,7 +158,7 @@ public class ToEntities
     }
     
     [Fact]
-    public void ToEntities_EmptyTagDtos_ReturnsEmptyList()
+    public void ToEntities_FromEmptyTagDtos_ReturnsEmptyList()
     {
         // arrange
         var dtos = new List<TagDto>();
@@ -171,7 +171,7 @@ public class ToEntities
     }
     
     [Fact]
-    public void ToEntities_MappingKnowledgeDtos_MapsAllPropertiesCorrectly()
+    public void ToEntities_FromKnowledgeDtos_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dtos = new List<KnowledgeDto>
@@ -204,7 +204,7 @@ public class ToEntities
     }
 
     [Fact]
-    public void ToEntities_NullKnowledgeDtos_ThrowsArgumentNullException()
+    public void ToEntities_FromNullKnowledgeDtos_ThrowsArgumentNullException()
     {
         // arrange
         List<KnowledgeDto>? dtos = null;
@@ -214,7 +214,7 @@ public class ToEntities
     }
     
     [Fact]
-    public void ToEntities_EmptyKnowledgeDtos_ReturnsEmptyList()
+    public void ToEntities_FromEmptyKnowledgeDtos_ReturnsEmptyList()
     {
         // arrange
         var dtos = new List<KnowledgeDto>();

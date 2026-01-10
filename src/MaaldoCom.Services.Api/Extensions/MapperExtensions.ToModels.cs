@@ -7,21 +7,11 @@ namespace MaaldoCom.Services.Api.Extensions;
 
 public static partial class MapperExtensions
 {
-    extension(IEnumerable<MediaAlbumDto> dtos)
+    public static IEnumerable<GetMediaAlbumResponse> ToModels(this IEnumerable<MediaAlbumDto> dtos)
     {
-        public IEnumerable<GetMediaAlbumResponse> ToModels()
-        {
-            ArgumentNullException.ThrowIfNull(dtos);
+        ArgumentNullException.ThrowIfNull(dtos);
 
-            return dtos.Select(dto => dto.ToModel()).ToList();
-        }
-
-        public IEnumerable<GetMediaAlbumDetailResponse> ToDetailModels()
-        {
-            ArgumentNullException.ThrowIfNull(dtos);
-
-            return dtos.Select(dto => dto.ToDetailModel()).ToList();
-        }
+        return dtos.Select(dto => dto.ToModel()).ToList();
     }
 
     public static IEnumerable<GetMediaResponse> ToModels(this IEnumerable<MediaDto> dtos)

@@ -1,8 +1,4 @@
-﻿using MaaldoCom.Services.Application.Dtos;
-using MaaldoCom.Services.Application.Errors;
-using MaaldoCom.Services.Application.Interfaces;
-
-namespace MaaldoCom.Services.Application.Queries.MediaAlbums;
+﻿namespace MaaldoCom.Services.Application.Queries.MediaAlbums;
 
 public class GetMediaAlbumDetailQuery : BaseQuery, ICommand<Result<MediaAlbumDto>>
 {

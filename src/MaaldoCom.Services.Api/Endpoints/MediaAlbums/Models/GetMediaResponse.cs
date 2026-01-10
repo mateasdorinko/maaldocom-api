@@ -16,6 +16,9 @@ public class GetMediaResponse : BaseModel
     
     [JsonIgnore]
     public Guid MediaAlbumId { get; set; }
+
+    [JsonPropertyOrder(6)]
+    public string? BlobUrl { get; set; }
     
     public override string? Href => UrlMaker.GetMediaUrl(MediaAlbumId, Id);
 }

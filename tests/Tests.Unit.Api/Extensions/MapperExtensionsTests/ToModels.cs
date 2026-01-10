@@ -3,7 +3,7 @@ namespace Tests.Unit.Api.Extensions.MapperExtensionsTests;
 public class ToModels
 {
     [Fact]
-    public void ToModels_MappingMediaAlbumDtos_MapsAllPropertiesCorrectly()
+    public void ToModels_FromMediaAlbumDtos_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dtos = new List<MediaAlbumDto>
@@ -36,7 +36,7 @@ public class ToModels
     }
 
     [Fact]
-    public void ToModels_NullMediaAlbumDtos_ThrowsArgumentNullException()
+    public void ToModels_FromNullMediaAlbumDtos_ThrowsArgumentNullException()
     {
         // arrange
         List<MediaAlbumDto>? dtos = null;
@@ -46,7 +46,7 @@ public class ToModels
     }
 
     [Fact]
-    public void ToModels_EmptyMediaAlbumDtos_ReturnsEmptyList()
+    public void ToModels_FromEmptyMediaAlbumDtos_ReturnsEmptyList()
     {
         // arrange
         var dtos = new List<MediaAlbumDto>();
@@ -59,63 +59,7 @@ public class ToModels
     }
 
     [Fact]
-    public void ToDetailModels_MappingMediaAlbumDtos_MapsAllPropertiesCorrectly()
-    {
-        // arrange
-        var dtos = new List<MediaAlbumDto>
-        {
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Sample Album 1",
-                UrlFriendlyName = "sample-album-1",
-                Created = DateTime.UtcNow
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Sample Album 2",
-                UrlFriendlyName = "sample-album-2",
-                Created = DateTime.UtcNow
-            }
-        };
-
-        // act
-        var models = dtos.ToDetailModels().ToList();
-
-        // assert
-        models.Count.ShouldBe(2);
-        models[0].Id.ShouldBeEquivalentTo(dtos[0].Id);
-        models[0].Name.ShouldBeEquivalentTo(dtos[0].Name);
-        models[1].Id.ShouldBeEquivalentTo(dtos[1].Id);
-        models[1].Name.ShouldBeEquivalentTo(dtos[1].Name);
-    }
-
-    [Fact]
-    public void ToDetailModels_NullMediaAlbumDtos_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<MediaAlbumDto>? dtos = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dtos!.ToDetailModels());
-    }
-
-    [Fact]
-    public void ToDetailModels_EmptyMediaAlbumDtos_ReturnsEmptyList()
-    {
-        // arrange
-        var dtos = new List<MediaAlbumDto>();
-
-        // act
-        var models = dtos.ToDetailModels().ToList();
-
-        // assert
-        dtos.ShouldBeEmpty();
-    }
-
-    [Fact]
-    public void ToModels_MappingMediaDtos_MapsAllPropertiesCorrectly()
+    public void ToModels_FromMediaDtos_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dtos = new List<MediaDto>
@@ -185,7 +129,7 @@ public class ToModels
     }
 
     [Fact]
-    public void ToModels_NullMediaDtos_ThrowsArgumentNullException()
+    public void ToModels_FromNullMediaDtos_ThrowsArgumentNullException()
     {
         // arrange
         List<MediaDto>? dtos = null;
@@ -195,7 +139,7 @@ public class ToModels
     }
 
     [Fact]
-    public void ToModels_EmptyMediaDtos_ReturnsEmptyList()
+    public void ToModels_FromEmptyMediaDtos_ReturnsEmptyList()
     {
         // arrange
         var dtos = new List<MediaDto>();
@@ -208,7 +152,7 @@ public class ToModels
     }
 
     [Fact]
-    public void ToModels_MappingTagDtos_MapsAllPropertiesCorrectly()
+    public void ToModels_FromTagDtos_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dtos = new List<TagDto>
@@ -240,7 +184,7 @@ public class ToModels
     }
 
     [Fact]
-    public void ToModels_NullTagDtos_ThrowsArgumentNullException()
+    public void ToModels_FromNullTagDtos_ThrowsArgumentNullException()
     {
         // arrange
         List<TagDto>? dtos = null;
@@ -250,7 +194,7 @@ public class ToModels
     }
 
     [Fact]
-    public void ToModels_EmptyTagDtos_ReturnsEmptyList()
+    public void ToModels_FromEmptyTagDtos_ReturnsEmptyList()
     {
         // arrange
         var dtos = new List<TagDto>();
@@ -263,7 +207,7 @@ public class ToModels
     }
 
     [Fact]
-    public void ToModels_MappingKnowledgeDtos_MapsAllPropertiesCorrectly()
+    public void ToModels_FromKnowledgeDtos_MapsAllPropertiesCorrectly()
     {
         // arrange
         var dtos = new List<KnowledgeDto>
@@ -298,7 +242,7 @@ public class ToModels
     }
 
     [Fact]
-    public void ToModels_NullKnowledgeDtos_ThrowsArgumentNullException()
+    public void ToModels_FromNullKnowledgeDtos_ThrowsArgumentNullException()
     {
         // arrange
         List<KnowledgeDto>? dtos = null;
@@ -308,7 +252,7 @@ public class ToModels
     }
 
     [Fact]
-    public void ToModels_EmptyKnowledgeDtos_ReturnsEmptyList()
+    public void ToModels_FromEmptyKnowledgeDtos_ReturnsEmptyList()
     {
         // arrange
         var dtos = new List<KnowledgeDto>();

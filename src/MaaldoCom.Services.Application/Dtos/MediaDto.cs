@@ -8,6 +8,7 @@ public class MediaDto : BaseDto
     public string? Description { get; set; }
     public long SizeInBytes { get; set; }
     public string? FileExtension { get; set; }
+    public string? BlobUrl { get; set; }
     
     public IList<TagDto> Tags { get; set; } = new List<TagDto>();
 

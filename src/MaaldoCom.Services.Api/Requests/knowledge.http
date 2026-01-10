@@ -5,4 +5,4 @@ GET {{HostAddress}}/knowledge
 GET {{HostAddress}}/knowledge/random
 
 ### Get Knowledge By Id
-GET {{HostAddress}}/knowledge/ad3e433e-f36b-1410-8919-00414d3e33ca
+GET {{HostAddress}}/knowledge/114e433e-f36b-1410-8682-000a6a85c942

@@ -1,6 +1,3 @@
-using MaaldoCom.Services.Application.Dtos;
-using MaaldoCom.Services.Domain.Entities;
-
 namespace MaaldoCom.Services.Application.Extensions;
 
 public static partial class MapperExtensions
