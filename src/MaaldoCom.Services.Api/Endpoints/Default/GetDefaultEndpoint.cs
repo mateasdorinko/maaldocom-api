@@ -25,7 +25,7 @@ public class GetDefaultEndpoint : EndpointWithoutRequest
                                          <h1>hello...</h1>
                                          <div class="container"> 
                                              <div class="bottom-center-div">
-                                                 v2026.01.10k
+                                                 v2026.01.10l
                                              </div>
                                          </div>
                                      </body>
