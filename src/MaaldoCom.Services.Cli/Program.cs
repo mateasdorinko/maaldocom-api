@@ -1,3 +1,12 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using MaaldoCom.Services.Cli;
 
-Console.WriteLine("Hello, World!");
+AnsiConsole.MarkupLine("[red bold]Hello world![/]");
+AnsiConsole.MarkupLine("Hello world!");
+AnsiConsole.MarkupLine("[red on white]Hello world![/]");
+
+Styles.WriteError("This is an error message.");
+Styles.WriteWarning("This is a warning message.");
+
+Console.ReadLine();
+AnsiConsole.Clear();
+

@@ -7,7 +7,7 @@ public class GetMediaByIdEndpoint : Endpoint<GetMediaByIdRequest, GetMediaRespon
 {
     public override void Configure()
     {
-        Get($"{UrlMaker.MediaAlbumsRoute}/{{mediaAlbumId:guid}}/media/{{mediaId:guid}}"); //TODO: fix this to use UrlMaker
+        Get($"{UrlMaker.MediaAlbumsRoute}/{{mediaAlbumId:guid}}/media/{{mediaId:guid}}");
         ResponseCache(60);
         AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));
