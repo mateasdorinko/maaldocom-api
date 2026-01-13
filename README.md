@@ -62,8 +62,8 @@ _.env_
 
 ### Local User Secrets
 
-[MaaldoCom.Services.Api Readme](/src/MaaldoCom.Services.Api/README.md)
+[MaaldoCom.Services.Api Readme](/src/MaaldoCom.Services.Api/README.md#Setup)
 
 ### Migrations
 
-[MaaldoCom.Services.Infrastructure Readme](/src/MaaldoCom.Services.Infrastructure/README.md)
+[MaaldoCom.Services.Infrastructure Readme](/src/MaaldoCom.Services.Infrastructure/README.md#Setup)
