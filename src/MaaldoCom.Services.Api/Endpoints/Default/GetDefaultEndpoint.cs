@@ -33,5 +33,6 @@ public class GetDefaultEndpoint : EndpointWithoutRequest
                                    """;
 
         await Send.StringAsync(htmlContent, contentType: "text/html", cancellation: ct);
+        
     }
 }
