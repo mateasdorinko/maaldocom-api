@@ -115,19 +115,15 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build solution
-        run: dotnet build --no-restore --configuration Release --verbosity detailed
-
       - name: Create EF migration bundle
         run: |
-          dotnet tool install --global dotnet-ef
+          dotnet tool install --global dotnet-ef --version 10.0.0
           dotnet ef migrations bundle \
             --project src/MaaldoCom.Services.Infrastructure/MaaldoCom.Services.Infrastructure.csproj \
             --startup-project src/MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj \
             --configuration Release \
             --output efbundle \
-            --self-contained \
-            --verbose
+            --self-contained
 
       - name: Upload EF migration bundle
         uses: actions/upload-artifact@v6
