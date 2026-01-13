@@ -1,8 +1,10 @@
 # MaaldoCom.Services.Infrastructure
 
-## Entity Framework
+## Setup
 
-### Migration Requisites
+### Entity Framework
+
+#### Migration Requisites
 
 Before creating or applying migrations, ensure that you have the following prerequisites installed:
 
@@ -10,9 +12,9 @@ Before creating or applying migrations, ensure that you have the following prere
 dotnet tool install --global dotnet-ef
 ```
 
-### Migration Commands
+#### Migration Commands
 
-#### Adding a Migration
+##### Adding a Migration
 
 Migration commands must be executed in the `MaaldoCom.Services.Infrastructure` project, while the startup project is 
 set to `MaaldoCom.Services.Api`. This ensures that the correct configuration and dependencies are used.
@@ -21,13 +23,13 @@ set to `MaaldoCom.Services.Api`. This ensures that the correct configuration and
 dotnet ef migrations add [MIGRATION_NAME] --output-dir Database/Migrations --startup-project ../MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj
 ```
 
-#### Applying Migrations
+##### Applying Migrations
 
 ```shell
 dotnet ef database update --startup-project ../MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj
 ```
 
-#### Removing a Migration
+##### Removing a Migration
 
 ```shell
 dotnet ef migrations remove --startup-project ../MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj
