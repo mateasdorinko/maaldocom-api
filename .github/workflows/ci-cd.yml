@@ -104,16 +104,11 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Cache NuGet packages
-        uses: actions/cache@v5
+      - name: Download build artifacts
+        uses: actions/download-artifact@v6
         with:
-          path: ~/.nuget/packages
-          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
-          restore-keys: |
-            ${{ runner.os }}-nuget-
-
-      - name: Restore dependencies
-        run: dotnet restore
+          name: build-output
+          path: .
 
       - name: Create EF migration bundle
         run: |
@@ -123,7 +118,8 @@ jobs:
             --startup-project src/MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj \
             --configuration Release \
             --output efbundle \
-            --self-contained
+            --self-contained \
+            --no-build
 
       - name: Upload EF migration bundle
         uses: actions/upload-artifact@v6
