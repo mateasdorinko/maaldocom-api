@@ -22,4 +22,21 @@ app.Configure(config =>
 
 return await app.RunAsync(args);
 */
-Console.ReadLine();
+
+using System.Text.Json;
+using Microsoft.Extensions.DependencyInjection;
+using Refit;
+
+var services = new ServiceCollection();
+
+var options = new JsonSerializerOptions
+{
+    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    PropertyNameCaseInsensitive = true
+};
+
+// services.AddRefitClient<IMaaldoApiClient>(new RefitSettings
+//     {
+//         ContentSerializer = new SystemTextJsonContentSerializer(options)
+//     })
+//     .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.maaldo.com"));

@@ -33,10 +33,12 @@ builder.Services
         {
             document.Info = new OpenApiInfo
             {
-                Title = apiDocTitle
+                Title = apiDocTitle,
+                Version = "1.0.0"
             };
             return Task.CompletedTask;
         });
+        options.OpenApiVersion = OpenApiSpecVersion.OpenApi3_0;
     })
     .Configure<ForwardedHeadersOptions>(options =>
     {
