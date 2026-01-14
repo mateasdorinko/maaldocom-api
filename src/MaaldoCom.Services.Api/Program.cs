@@ -1,10 +1,10 @@
 using Azure.Extensions.AspNetCore.Configuration.Secrets;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
+using FastEndpoints.Swagger;
 //using MaaldoCom.Services.Application.Messaging;
 using MaaldoCom.Services.Infrastructure;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.OpenApi;
 using Scalar.AspNetCore;
 
 const string apiDocTitle = "maaldo.com API Reference";
@@ -27,18 +27,13 @@ builder.Services
         options.Assemblies = [MaaldoCom.Services.Application.AssemblyReference.Assembly];
     })
     .AddResponseCaching()
-    .AddOpenApi(options =>
+    .SwaggerDocument(options =>
     {
-        options.AddDocumentTransformer((document, _, _) =>
+        options.DocumentSettings = s =>
         {
-            document.Info = new OpenApiInfo
-            {
-                Title = apiDocTitle,
-                Version = "1.0.0"
-            };
-            return Task.CompletedTask;
-        });
-        options.OpenApiVersion = OpenApiSpecVersion.OpenApi3_0;
+            s.Title = apiDocTitle;
+            s.Version = "v1";
+        };
     })
     .Configure<ForwardedHeadersOptions>(options =>
     {
@@ -58,13 +53,14 @@ app.UseResponseCaching()
     .UseDefaultExceptionHandler()
     .UseFastEndpoints();
 
-app.MapOpenApi();
+app.UseSwaggerGen();
 app.UseForwardedHeaders();
 app.MapScalarApiReference("/docs", options =>
 {
     options.WithTitle(apiDocTitle);
     options.OperationTitleSource = OperationTitleSource.Path;
     options.ShowOperationId();
+    options.WithOpenApiRoutePattern("/swagger/v1/swagger.json");
 });
 
 if (app.Environment.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
