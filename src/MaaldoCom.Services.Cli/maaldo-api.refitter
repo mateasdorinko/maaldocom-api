@@ -1,13 +1,12 @@
 ﻿{
   "$schema": "https://raw.githubusercontent.com/christianhelle/refitter/main/src/Refitter/refitter.schema.json",
-  "openApiPath": "https://app-maaldocomapi-tst-cus.azurewebsites.net/openapi/v1.json",
+  "openApiPath": "./maaldo-openapi.json",
   "namespace": "MaaldoCom.Services.Cli",
   "naming": {
     "useOpenApiTitle": false,
-    "interfaceName": "IMaaldoApiClient"
+    "interfaceName": "MaaldoApiClient"
   },
   "generateContracts": true,
-  "returnIApiResponse": false,
   "codeGeneratorSettings": {
     "jsonLibrary": "SystemTextJson"
   }

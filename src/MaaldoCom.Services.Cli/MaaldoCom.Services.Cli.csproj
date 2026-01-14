@@ -21,10 +21,15 @@
     <PackageReference Include="Spectre.Console" Version="0.54.0" />
     <PackageReference Include="Spectre.Console.Cli" Version="0.53.1" />
   </ItemGroup>
-<!--
+
   <ItemGroup>
-    <AdditionalFiles Include="MaaldoApi.refitter" />
+    <AdditionalFiles Include="maaldo-api.refitter" />
+    <None Include="maaldo-openapi.json" CopyToOutputDirectory="Never" />
   </ItemGroup>
--->
+
+  <ItemGroup>
+    <Folder Include="Generated\" />
+  </ItemGroup>
+
 
 </Project>
