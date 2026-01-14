@@ -6,8 +6,8 @@ using System.Text.Json;
 using Spectre.Console.Cli;
 
 var services = new ServiceCollection();
-var registrar = new TypeRegistrar(services);
-var app = new CommandApp(registrar);
+//var registrar = new TypeRegistrar(services);
+//var app = new CommandApp(registrar);
 
 var options = new JsonSerializerOptions
 {

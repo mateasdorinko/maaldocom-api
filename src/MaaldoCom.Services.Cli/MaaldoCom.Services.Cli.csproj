@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <AdditionalFiles Include="maaldo-api.refitter" />
-    <None Include="maaldo-openapi.json" CopyToOutputDirectory="Never" />
   </ItemGroup>
 
   <ItemGroup>
