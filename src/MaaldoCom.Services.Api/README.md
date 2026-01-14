@@ -2,6 +2,8 @@
 
 ## API Setup
 
+These commands are intended to be run from the `MaaldoCom.Services.Api` project directory.
+
 ### Local User Secrets
 
 ### Initialization

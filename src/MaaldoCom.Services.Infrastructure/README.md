@@ -2,6 +2,8 @@
 
 ## Infrastructure Setup
 
+These commands are intended to be run from the `MaaldoCom.Services.Infrastructure` project directory.
+
 ### Entity Framework
 
 #### Migration Requisites

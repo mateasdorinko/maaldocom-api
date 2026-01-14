@@ -2,22 +2,20 @@
 
 ## CLI Setup
 
+These commands are intended to be run from the `MaaldoCom.Services.Cli` project directory.
+
 ### OpenAPI Document Specification Generation
 
-Run the following command to install the Kiota tool globally:
+Run the following command to install the Refitter tool globally:
 
 ```shell
-dotnet tool install --global Microsoft.OpenApi.Kiota
+dotnet tool install --global Refitter
 ```
 
-To generate the Kiota client code from the OpenAPI document, use the following command:
+To generate the proxy client code from the OpenAPI document with Refitter, use the following command:
 
 ```shell
-kiota generate \
-  -l CSharp \
-  -d "https://app-maaldocomapi-dev-cus.azurewebsites.net/openapi/v1.json" \
-  -c MaaldoApiClient \
-  -n MaaldoCom.Services.Cli \
-  -o ./MaaldoApiClient \
-  --clean-output
+Refitter --url https://app-maaldocomapi-tst-cus.azurewebsites.net/openapi/v1.json --output ./IApiClient.cs --namespace MaaldoCom.Services.Cli
 ```
+
+
