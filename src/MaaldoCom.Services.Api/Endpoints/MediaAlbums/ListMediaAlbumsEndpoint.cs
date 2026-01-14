@@ -8,7 +8,10 @@ public class ListMediaAlbumsEndpoint : EndpointWithoutRequest<IEnumerable<GetMed
     public override void Configure()
     {
         Get(UrlMaker.MediaAlbumsRoute);
-        Description(x => x.WithName("ListMediaAlbums").WithSummary("Lists all media albums."));
+        Description(x => x
+            .WithName("ListMediaAlbums")
+            .WithSummary("Lists all media albums.")
+            .WithTags("Endpoints"));
         ResponseCache(60);
         AllowAnonymous();
     }

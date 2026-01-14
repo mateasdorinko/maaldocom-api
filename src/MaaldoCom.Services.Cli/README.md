@@ -4,14 +4,20 @@
 
 ### OpenAPI Document Specification Generation
 
-Run the following command to install the OpenAPI tool globally:
+Run the following command to install the Kiota tool globally:
 
 ```shell
-dotnet tool install -g Microsoft.dotnet-openapi
+dotnet tool install --global Microsoft.OpenApi.Kiota
 ```
 
-Run the following command to generate or update the OpenAPI document specification:
+To generate the Kiota client code from the OpenAPI document, use the following command:
 
 ```shell
-dotnet openapi add url https://app-maaldocomapi-tst-cus.azurewebsites.net/openapi/v1.json
+kiota generate \
+  -l CSharp \
+  -d "https://app-maaldocomapi-dev-cus.azurewebsites.net/openapi/v1.json" \
+  -c MaaldoApiClient \
+  -n MaaldoCom.Services.Cli \
+  -o ./MaaldoApiClient \
+  --clean-output
 ```

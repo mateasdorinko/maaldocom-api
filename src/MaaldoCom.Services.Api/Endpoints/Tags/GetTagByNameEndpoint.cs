@@ -8,7 +8,10 @@ public class GetTagByNameEndpoint : Endpoint<GetTagByNameRequest, GetTagDetailRe
     public override void Configure()
     {
         Get($"{UrlMaker.TagsRoute}/{{name}}");
-        Description(x => x.WithName("GetTagByName").WithSummary("Gets a tag by its name and associated tagged entities."));
+        Description(x => x
+            .WithName("GetTagByName")
+            .WithSummary("Gets a tag by its name and associated tagged entities.")
+            .WithTags("Endpoints"));
         ResponseCache(60);
         AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));

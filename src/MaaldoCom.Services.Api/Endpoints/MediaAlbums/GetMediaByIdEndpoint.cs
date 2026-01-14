@@ -8,7 +8,10 @@ public class GetMediaByIdEndpoint : Endpoint<GetMediaByIdRequest, GetMediaRespon
     public override void Configure()
     {
         Get($"{UrlMaker.MediaAlbumsRoute}/{{mediaAlbumId:guid}}/media/{{mediaId:guid}}");
-        Description(x => x.WithName("GetMediaById").WithSummary("Gets a media item by its unique identifier within a media album."));
+        Description(x => x
+            .WithName("GetMediaById")
+            .WithSummary("Gets a media item by its unique identifier within a media album.")
+            .WithTags("Endpoints"));
         ResponseCache(60);
         AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));
