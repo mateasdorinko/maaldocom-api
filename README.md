@@ -64,3 +64,4 @@ _.env_
 
 - [Local User Secrets](/src/MaaldoCom.Services.Api/README.md#local-user-secrets)
 - [Entity Framework](/src/MaaldoCom.Services.Infrastructure/README.md#entity-framework)
+- [API Client Generation](/src/MaaldoCom.Services.Cli/README.md)
