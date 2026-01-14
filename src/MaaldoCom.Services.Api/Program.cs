@@ -4,7 +4,10 @@ using Azure.Security.KeyVault.Secrets;
 //using MaaldoCom.Services.Application.Messaging;
 using MaaldoCom.Services.Infrastructure;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.OpenApi;
 using Scalar.AspNetCore;
+
+const string apiDocTitle = "maaldo.com API Reference";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +27,17 @@ builder.Services
         options.Assemblies = [MaaldoCom.Services.Application.AssemblyReference.Assembly];
     })
     .AddResponseCaching()
-    .AddOpenApi()
+    .AddOpenApi(options =>
+    {
+        options.AddDocumentTransformer((document, _, _) =>
+        {
+            document.Info = new OpenApiInfo
+            {
+                Title = apiDocTitle
+            };
+            return Task.CompletedTask;
+        });
+    })
     .Configure<ForwardedHeadersOptions>(options =>
     {
         options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
@@ -45,7 +58,12 @@ app.UseResponseCaching()
 
 app.MapOpenApi();
 app.UseForwardedHeaders();
-app.MapScalarApiReference("/docs", options => { options.WithTitle("maaldo.com API Reference"); });
+app.MapScalarApiReference("/docs", options =>
+{
+    options.WithTitle(apiDocTitle);
+    options.OperationTitleSource = OperationTitleSource.Path;
+    options.ShowOperationId();
+});
 
 if (app.Environment.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
 

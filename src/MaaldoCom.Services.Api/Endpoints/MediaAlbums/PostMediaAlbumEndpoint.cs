@@ -7,7 +7,10 @@ public class PostMediaAlbumEndpoint : Endpoint<PostMediaAlbumRequest, PostMediaA
     public override void Configure()
     {
         Post(UrlMaker.MediaAlbumsRoute);
-        Description(x => x.WithName("PostMediaAlbum").WithSummary("Creates a new media album."));
+        Description(x => x
+            .WithName("PostMediaAlbum")
+            .WithSummary("Creates a new media album.")
+            .WithTags("Endpoints"));
     }
 
     public override async Task HandleAsync(PostMediaAlbumRequest req, CancellationToken ct)
