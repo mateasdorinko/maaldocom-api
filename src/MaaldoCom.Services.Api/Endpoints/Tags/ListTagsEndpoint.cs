@@ -8,6 +8,7 @@ public class ListTagsEndpoint : EndpointWithoutRequest<IEnumerable<GetTagRespons
     public override void Configure()
     {
         Get(UrlMaker.TagsRoute);
+        Description(x => x.WithName("ListTags").WithSummary("Lists all tags."));
         ResponseCache(60);
         AllowAnonymous();
     }
