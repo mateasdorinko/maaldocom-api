@@ -7,6 +7,7 @@ public class PostTagEndpoint : Endpoint<PostTagRequest, PostTagResponse>
     public override void Configure()
     {
         Post(UrlMaker.TagsRoute);
+        Description(x => x.WithName("PostTag").WithSummary("Creates a new tag."));
     }
 
     public override async Task HandleAsync(PostTagRequest req, CancellationToken ct)

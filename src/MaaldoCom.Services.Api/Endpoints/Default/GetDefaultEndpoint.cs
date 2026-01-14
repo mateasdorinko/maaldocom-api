@@ -6,6 +6,7 @@ public class GetDefaultEndpoint : EndpointWithoutRequest
     {
         Get("/");
         AllowAnonymous();
+        Description(x => x.WithName("GetDefault"));
         Options(x => x.ExcludeFromDescription());
     }
 

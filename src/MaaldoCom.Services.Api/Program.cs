@@ -41,10 +41,7 @@ app.UseResponseCaching()
     .UseHttpsRedirection()
     .UseStaticFiles()
     .UseDefaultExceptionHandler()
-    .UseFastEndpoints(c =>
-    {
-        c.Endpoints.ShortNames = true;
-    });
+    .UseFastEndpoints();
 
 app.MapOpenApi();
 app.UseForwardedHeaders();

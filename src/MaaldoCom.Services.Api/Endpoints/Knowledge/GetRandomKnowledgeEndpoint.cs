@@ -8,6 +8,7 @@ public class GetRandomKnowledgeEndpoint : EndpointWithoutRequest<GetKnowledgeRes
     public override void Configure()
     {
         Get($"{UrlMaker.KnowledgeRoute}/random");
+        Description(x => x.WithName("GetRandomKnowledge").WithSummary("Gets a random knowledge item."));
         AllowAnonymous();
     }
     

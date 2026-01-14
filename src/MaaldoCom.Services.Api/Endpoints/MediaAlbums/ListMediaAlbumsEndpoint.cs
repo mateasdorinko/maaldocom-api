@@ -8,6 +8,7 @@ public class ListMediaAlbumsEndpoint : EndpointWithoutRequest<IEnumerable<GetMed
     public override void Configure()
     {
         Get(UrlMaker.MediaAlbumsRoute);
+        Description(x => x.WithName("ListMediaAlbums").WithSummary("Lists all media albums."));
         ResponseCache(60);
         AllowAnonymous();
     }

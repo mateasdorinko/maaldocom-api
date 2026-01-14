@@ -8,6 +8,7 @@ public class ListKnowledgeEndpoint : EndpointWithoutRequest<IEnumerable<GetKnowl
     public override void Configure()
     {
         Get($"{UrlMaker.KnowledgeRoute}");
+        Description(x => x.WithName("ListKnowledge").WithSummary("Lists all knowledge items."));
         ResponseCache(60);
         AllowAnonymous();
     }
