@@ -23,8 +23,13 @@ services.AddRefitClient<IMaaldoApiClient>(new RefitSettings
 
 var client = RestService.For<IMaaldoApiClient>("https://app-maaldocomapi-tst-cus.azurewebsites.net");
 
-var response = await client.GetRandomKnowledge();
-Console.WriteLine($"Random Knowledge: {response.Title} - {response.Quote}");
+for (var i = 0; i < 10; i++)
+{
+    var response = await client.GetRandomKnowledge();
+    Console.WriteLine($"{response.Title} - {response.Quote}");
+}
+
+
 
 /*
 app.Configure(config =>

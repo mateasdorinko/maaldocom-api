@@ -32,7 +32,7 @@ namespace MaaldoCom.Services.Cli
         /// </exception>
         [Headers("Accept: application/json")]
         [Get("/tags/{id}")]
-        Task<MaaldoComServicesApiEndpointsTagsModelsGetTagDetailResponse> GetTagById(System.Guid id);
+        Task<GetTagDetailResponse> GetTagById(System.Guid id);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">
@@ -50,13 +50,13 @@ namespace MaaldoCom.Services.Cli
         /// </exception>
         [Headers("Accept: application/json")]
         [Get("/tags/{name}")]
-        Task<MaaldoComServicesApiEndpointsTagsModelsGetTagDetailResponse> GetTagByName(string name);
+        Task<GetTagDetailResponse> GetTagByName(string name);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/tags")]
-        Task<ICollection<MaaldoComServicesApiEndpointsTagsModelsGetTagResponse>> ListTags();
+        Task<ICollection<GetTagResponse>> ListTags();
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">
@@ -74,7 +74,7 @@ namespace MaaldoCom.Services.Cli
         /// </exception>
         [Headers("Accept: application/json", "Content-Type: application/json")]
         [Post("/tags")]
-        Task<MaaldoComServicesApiEndpointsTagsModelsPostTagResponse> PostTag([Body, AliasAs("PostTagRequest")] MaaldoComServicesApiEndpointsTagsModelsPostTagRequest postTagRequest);
+        Task<PostTagResponse> PostTag([Body, AliasAs("PostTagRequest")] PostTagRequest postTagRequest);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">
@@ -92,7 +92,7 @@ namespace MaaldoCom.Services.Cli
         /// </exception>
         [Headers("Accept: application/json")]
         [Get("/media-albums/{id}")]
-        Task<MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaAlbumDetailResponse> GetMediaAlbumById(System.Guid id);
+        Task<GetMediaAlbumDetailResponse> GetMediaAlbumById(System.Guid id);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">
@@ -110,7 +110,7 @@ namespace MaaldoCom.Services.Cli
         /// </exception>
         [Headers("Accept: application/json")]
         [Get("/media-albums/{name}")]
-        Task<MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaAlbumDetailResponse> GetMediaAlbumByName(string name);
+        Task<GetMediaAlbumDetailResponse> GetMediaAlbumByName(string name);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">
@@ -128,13 +128,13 @@ namespace MaaldoCom.Services.Cli
         /// </exception>
         [Headers("Accept: application/json")]
         [Get("/media-albums/{mediaAlbumId}/media/{mediaId}")]
-        Task<MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaResponse> GetMediaById(System.Guid mediaAlbumId, System.Guid mediaId);
+        Task<GetMediaResponse> GetMediaById(System.Guid mediaAlbumId, System.Guid mediaId);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/media-albums")]
-        Task<ICollection<MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaAlbumResponse>> ListMediaAlbums();
+        Task<ICollection<GetMediaAlbumResponse>> ListMediaAlbums();
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">
@@ -152,7 +152,7 @@ namespace MaaldoCom.Services.Cli
         /// </exception>
         [Headers("Accept: application/json", "Content-Type: application/json")]
         [Post("/media-albums")]
-        Task<MaaldoComServicesApiEndpointsMediaAlbumsModelsPostMediaAlbumResponse> PostMediaAlbum([Body, AliasAs("PostMediaAlbumRequest")] MaaldoComServicesApiEndpointsMediaAlbumsModelsPostMediaAlbumRequest postMediaAlbumRequest);
+        Task<PostMediaAlbumResponse> PostMediaAlbum([Body, AliasAs("PostMediaAlbumRequest")] PostMediaAlbumRequest postMediaAlbumRequest);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">
@@ -170,19 +170,19 @@ namespace MaaldoCom.Services.Cli
         /// </exception>
         [Headers("Accept: application/json")]
         [Get("/knowledge/{id}")]
-        Task<MaaldoComServicesApiEndpointsKnowledgeModelsGetKnowledgeResponse> GetKnowledgeById(System.Guid id);
+        Task<GetKnowledgeResponse> GetKnowledgeById(System.Guid id);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/knowledge/random")]
-        Task<MaaldoComServicesApiEndpointsKnowledgeModelsGetKnowledgeResponse> GetRandomKnowledge();
+        Task<GetKnowledgeResponse> GetRandomKnowledge();
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
         [Get("/knowledge")]
-        Task<ICollection<MaaldoComServicesApiEndpointsKnowledgeModelsGetKnowledgeResponse>> ListKnowledge();
+        Task<ICollection<GetKnowledgeResponse>> ListKnowledge();
 
 
     }
@@ -218,19 +218,19 @@ namespace MaaldoCom.Services.Cli
     
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsTagsModelsGetTagDetailResponse : MaaldoComServicesApiEndpointsTagsModelsGetTagResponse
+    public partial class GetTagDetailResponse : GetTagResponse
     {
 
         [JsonPropertyName("mediaAlbums")]
-        public ICollection<MaaldoComServicesApiEndpointsTagsModelsGetMediaAlbumTagResponse> MediaAlbums { get; set; }
+        public ICollection<GetMediaAlbumTagResponse> MediaAlbums { get; set; }
 
         [JsonPropertyName("media")]
-        public ICollection<MaaldoComServicesApiEndpointsTagsModelsGetMediaTagResponse> Media { get; set; }
+        public ICollection<GetMediaTagResponse> Media { get; set; }
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsTagsModelsGetMediaAlbumTagResponse
+    public partial class GetMediaAlbumTagResponse
     {
 
         [JsonPropertyName("name")]
@@ -242,7 +242,7 @@ namespace MaaldoCom.Services.Cli
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsTagsModelsGetMediaTagResponse
+    public partial class GetMediaTagResponse
     {
 
         [JsonPropertyName("mediaAlbumName")]
@@ -257,7 +257,7 @@ namespace MaaldoCom.Services.Cli
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsTagsModelsGetTagResponse : MaaldoComServicesApiEndpointsBaseModel
+    public partial class GetTagResponse : BaseModel
     {
 
         [JsonPropertyName("name")]
@@ -272,7 +272,7 @@ namespace MaaldoCom.Services.Cli
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public abstract partial class MaaldoComServicesApiEndpointsBaseModel
+    public abstract partial class BaseModel
     {
 
         [JsonPropertyName("id")]
@@ -281,28 +281,19 @@ namespace MaaldoCom.Services.Cli
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsTagsModelsGetTagByIdRequest
+    public partial class GetTagByIdRequest
     {
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsTagsModelsGetTagByNameRequest
+    public partial class GetTagByNameRequest
     {
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsTagsModelsPostTagResponse
-    {
-
-        [JsonPropertyName("tempPropertyDeleteMeLater")]
-        public string TempPropertyDeleteMeLater { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsTagsModelsPostTagRequest
+    public partial class PostTagResponse
     {
 
         [JsonPropertyName("tempPropertyDeleteMeLater")]
@@ -311,7 +302,16 @@ namespace MaaldoCom.Services.Cli
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaAlbumDetailResponse : MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaAlbumResponse
+    public partial class PostTagRequest
+    {
+
+        [JsonPropertyName("tempPropertyDeleteMeLater")]
+        public string TempPropertyDeleteMeLater { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class GetMediaAlbumDetailResponse : GetMediaAlbumResponse
     {
 
         [JsonPropertyName("description")]
@@ -321,12 +321,12 @@ namespace MaaldoCom.Services.Cli
         public bool Active { get; set; }
 
         [JsonPropertyName("media")]
-        public ICollection<MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaResponse> Media { get; set; }
+        public ICollection<GetMediaResponse> Media { get; set; }
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaResponse : MaaldoComServicesApiEndpointsBaseModel
+    public partial class GetMediaResponse : BaseModel
     {
 
         [JsonPropertyName("fileName")]
@@ -350,7 +350,7 @@ namespace MaaldoCom.Services.Cli
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaAlbumResponse : MaaldoComServicesApiEndpointsBaseModel
+    public partial class GetMediaAlbumResponse : BaseModel
     {
 
         [JsonPropertyName("name")]
@@ -374,34 +374,25 @@ namespace MaaldoCom.Services.Cli
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaAlbumByIdRequest
+    public partial class GetMediaAlbumByIdRequest
     {
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaAlbumByNameRequest
+    public partial class GetMediaAlbumByNameRequest
     {
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsMediaAlbumsModelsGetMediaByIdRequest
+    public partial class GetMediaByIdRequest
     {
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsMediaAlbumsModelsPostMediaAlbumResponse
-    {
-
-        [JsonPropertyName("tempPropertyDeleteMeLater")]
-        public string TempPropertyDeleteMeLater { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsMediaAlbumsModelsPostMediaAlbumRequest
+    public partial class PostMediaAlbumResponse
     {
 
         [JsonPropertyName("tempPropertyDeleteMeLater")]
@@ -410,7 +401,16 @@ namespace MaaldoCom.Services.Cli
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsKnowledgeModelsGetKnowledgeResponse : MaaldoComServicesApiEndpointsBaseModel
+    public partial class PostMediaAlbumRequest
+    {
+
+        [JsonPropertyName("tempPropertyDeleteMeLater")]
+        public string TempPropertyDeleteMeLater { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class GetKnowledgeResponse : BaseModel
     {
 
         [JsonPropertyName("title")]
@@ -425,7 +425,7 @@ namespace MaaldoCom.Services.Cli
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class MaaldoComServicesApiEndpointsKnowledgeModelsGetKnowledgeByIdRequest
+    public partial class GetKnowledgeByIdRequest
     {
 
     }
