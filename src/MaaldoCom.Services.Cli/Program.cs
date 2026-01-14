@@ -35,8 +35,10 @@ var options = new JsonSerializerOptions
     PropertyNameCaseInsensitive = true
 };
 
-// services.AddRefitClient<IMaaldoApiClient>(new RefitSettings
-//     {
-//         ContentSerializer = new SystemTextJsonContentSerializer(options)
-//     })
-//     .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.maaldo.com"));
+services.AddRefitClient<IMaaldoApiClient>(new RefitSettings
+    {
+        ContentSerializer = new SystemTextJsonContentSerializer(options)
+    })
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.maaldo.com"));
+
+public interface IMaaldoApiClient { }
