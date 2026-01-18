@@ -7,6 +7,8 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ["Directory.Build.props", "./"]
+COPY ["Directory.Packages.props", "./"]
 COPY ["src/MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj", "src/MaaldoCom.Services.Api/"]
 COPY ["src/MaaldoCom.Services.Infrastructure/MaaldoCom.Services.Infrastructure.csproj", "src/MaaldoCom.Services.Infrastructure/"]
 COPY ["src/MaaldoCom.Services.Application/MaaldoCom.Services.Application.csproj", "src/MaaldoCom.Services.Application/"]
