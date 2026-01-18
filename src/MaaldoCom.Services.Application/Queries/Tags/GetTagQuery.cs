@@ -26,20 +26,20 @@ public class GetTagQuery : BaseQuery, ICommand<Result<TagDto>>
 public class GetTagQueryHandler(ICacheManager cacheManager)
     : BaseQueryHandler(cacheManager), ICommandHandler<GetTagQuery, Result<TagDto>>
 {
-    public async Task<Result<TagDto>> ExecuteAsync(GetTagQuery query, CancellationToken cancellationToken)
+    public async Task<Result<TagDto>> ExecuteAsync(GetTagQuery query, CancellationToken ct)
     {
         TagDto? dto;
 
         switch (query.SearchBy)
         {
             case SearchBy.Id:
-                dto = await CacheManager.GetTagDetailAsync(query.Id!.Value, cancellationToken);
+                dto = await CacheManager.GetTagDetailAsync(query.Id!.Value, ct);
 
                 return dto != null ?
                     Result.Ok(dto)! :
                     Result.Fail<TagDto>(new EntityNotFoundError("Tag", query.SearchBy, query.SearchValue));
             case SearchBy.Name:
-                var cachedTagByName = (await CacheManager.ListTagsAsync(cancellationToken))
+                var cachedTagByName = (await CacheManager.ListTagsAsync(ct))
                     .FirstOrDefault(x => x.Name == query.SearchValue.ToString());
 
                 if (cachedTagByName == null)
@@ -47,7 +47,7 @@ public class GetTagQueryHandler(ICacheManager cacheManager)
                     return Result.Fail<TagDto>(new EntityNotFoundError("Tag", query.SearchBy, query.SearchValue));
                 }
 
-                dto = await CacheManager.GetTagDetailAsync(cachedTagByName!.Id, cancellationToken);
+                dto = await CacheManager.GetTagDetailAsync(cachedTagByName!.Id, ct);
 
                 return dto != null ?
                     Result.Ok(dto)! :

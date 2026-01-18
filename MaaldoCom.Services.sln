@@ -29,6 +29,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3D16D652-71EE-46C5-A0FC-02869A49E3E6}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Actions", "GitHub Actions", "{953EB560-8ED6-4A22-94DE-61EF4BBFAE6A}"

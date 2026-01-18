@@ -13,8 +13,6 @@ public class Ctor
             UrlFriendlyName = "test-media-album"
         };
 
-        object entity = mediaAlbum.Name;
-
         // assert
         var error = new DuplicateEntityCreationError<MediaAlbum>(mediaAlbum);
 

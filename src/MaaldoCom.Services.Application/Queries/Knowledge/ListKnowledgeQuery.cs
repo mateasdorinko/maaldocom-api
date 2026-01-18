@@ -5,9 +5,9 @@ public class ListKnowledgeQuery(ClaimsPrincipal user) : BaseQuery(user), IComman
 public class ListKnowledgeQueryHandler(ICacheManager cacheManager)
     : BaseQueryHandler(cacheManager), ICommandHandler<ListKnowledgeQuery, Result<IEnumerable<KnowledgeDto>>>
 {
-    public async Task<Result<IEnumerable<KnowledgeDto>>> ExecuteAsync(ListKnowledgeQuery query, CancellationToken cancellationToken)
+    public async Task<Result<IEnumerable<KnowledgeDto>>> ExecuteAsync(ListKnowledgeQuery query, CancellationToken ct)
     {
-        var knowledge = await CacheManager.ListKnowledgeAsync(cancellationToken);
+        var knowledge = await CacheManager.ListKnowledgeAsync(ct);
 
         return Result.Ok(knowledge);
     }

@@ -24,7 +24,7 @@ public class ToDto
         dto.UrlFriendlyName.ShouldBeEquivalentTo(model.UrlFriendlyName);
         dto.Created.ShouldBeEquivalentTo(model.Created);
         dto.Tags.Count.ShouldBe(1);
-        dto.Tags.First().Name.ShouldBeEquivalentTo("SampleTag");
+        dto.Tags[0].Name.ShouldBeEquivalentTo("SampleTag");
     }
     
     [Fact]
@@ -73,9 +73,9 @@ public class ToDto
         dto.Description.ShouldBeEquivalentTo(model.Description);
         dto.Active.ShouldBeEquivalentTo(model.Active);
         dto.Tags.Count.ShouldBe(1);
-        dto.Tags.First().Name.ShouldBeEquivalentTo("SampleTag");
+        dto.Tags[0].Name.ShouldBeEquivalentTo("SampleTag");
         dto.Media.Count.ShouldBe(1);
-        dto.Media.First().Id.ShouldBeEquivalentTo(model.Media.First().Id);
+        dto.Media[0].Id.ShouldBeEquivalentTo(model.Media.First().Id);
     }
 
     [Fact]
@@ -108,7 +108,7 @@ public class ToDto
         dto.FileName.ShouldBeEquivalentTo(model.FileName);
         dto.Description.ShouldBeEquivalentTo(model.Description);
         dto.Tags.Count.ShouldBe(1);
-        dto.Tags.First().Name.ShouldBeEquivalentTo("SampleTag");
+        dto.Tags[0].Name.ShouldBeEquivalentTo("SampleTag");
     }
     
     [Fact]

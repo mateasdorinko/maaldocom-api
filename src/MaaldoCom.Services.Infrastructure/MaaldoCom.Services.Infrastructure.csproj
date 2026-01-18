@@ -1,19 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-
     <ItemGroup>
       <ProjectReference Include="..\MaaldoCom.Services.Application\MaaldoCom.Services.Application.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.2" />
-      <PackageReference Include="ZiggyCreatures.FusionCache" Version="2.5.0" />
-      <PackageReference Include="ZiggyCreatures.FusionCache.Serialization.SystemTextJson" Version="2.5.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+      <PackageReference Include="ZiggyCreatures.FusionCache" />
+      <PackageReference Include="ZiggyCreatures.FusionCache.Serialization.SystemTextJson" />
     </ItemGroup>
 
     <ItemGroup>

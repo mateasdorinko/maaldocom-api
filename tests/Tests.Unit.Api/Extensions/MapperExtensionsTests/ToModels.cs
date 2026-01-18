@@ -55,7 +55,7 @@ public class ToModels
         var models = dtos.ToModels().ToList();
 
         // assert
-        dtos.ShouldBeEmpty();
+        models.ShouldBeEmpty();
     }
 
     [Fact]
@@ -148,7 +148,7 @@ public class ToModels
         var models = dtos.ToModels().ToList();
         
         // assert
-        dtos.ShouldBeEmpty();
+        models.ShouldBeEmpty();
     }
 
     [Fact]
@@ -203,7 +203,7 @@ public class ToModels
         var models = dtos.ToModels().ToList();
 
         // assert
-        dtos.ShouldBeEmpty();
+        models.ShouldBeEmpty();
     }
 
     [Fact]
@@ -261,6 +261,6 @@ public class ToModels
         var models = dtos.ToModels().ToList();
 
         // assert
-        dtos.ShouldBeEmpty();
+        models.ShouldBeEmpty();
     }
 }

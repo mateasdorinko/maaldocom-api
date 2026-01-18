@@ -1,14 +1,14 @@
 using MaaldoCom.Services.Cli;
-using MaaldoCom.Services.Cli.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
 using System.Text.Json;
-using Spectre.Console.Cli;
+using Microsoft.Extensions.Configuration;
 
+var config = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .Build();
 var services = new ServiceCollection();
-//var registrar = new TypeRegistrar(services);
-//var app = new CommandApp(registrar);
-
 var options = new JsonSerializerOptions
 {
     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -19,24 +19,12 @@ services.AddRefitClient<IMaaldoApiClient>(new RefitSettings
     {
         ContentSerializer = new SystemTextJsonContentSerializer(options)
     })
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.maaldo.com"));
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(config["maaldoApiBaseUrl"]!));
 
-var client = RestService.For<IMaaldoApiClient>("https://app-maaldocomapi-tst-cus.azurewebsites.net");
+var client = RestService.For<IMaaldoApiClient>(config["maaldoApiBaseUrl"]!);
 
-for (var i = 0; i < 10; i++)
+for (var i = 0; i < 100; i++)
 {
     var response = await client.GetRandomKnowledge();
     Console.WriteLine($"{response.Title} - {response.Quote}");
 }
-
-
-
-/*
-app.Configure(config =>
-{
-    config.AddCommand<KnowledgeCommand>("knowledge")
-        .WithDescription("List knowledge items from the API");
-});
-
-return await app.RunAsync(args);
-*/

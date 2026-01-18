@@ -2,7 +2,6 @@ using Azure.Extensions.AspNetCore.Configuration.Secrets;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using FastEndpoints.Swagger;
-//using MaaldoCom.Services.Application.Messaging;
 using MaaldoCom.Services.Infrastructure;
 using Microsoft.AspNetCore.HttpOverrides;
 using Scalar.AspNetCore;
@@ -43,8 +42,6 @@ builder.Services
         options.KnownProxies.Clear();
     })
     .AddInfrastructureServices(builder.Configuration);
-
-//builder.Services.AddMediator();
 
 var app = builder.Build();
 app.UseResponseCaching()

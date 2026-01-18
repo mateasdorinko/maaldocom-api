@@ -1,19 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-
     <ItemGroup>
       <ProjectReference Include="..\MaaldoCom.Services.Domain\MaaldoCom.Services.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="FastEndpoints.Messaging.Core" Version="7.2.0" />
-      <PackageReference Include="FluentResults" Version="4.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.2" />
+      <PackageReference Include="FastEndpoints.Messaging.Core" />
+      <PackageReference Include="FluentResults" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" />
     </ItemGroup>
 
 </Project>

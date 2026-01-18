@@ -18,7 +18,6 @@ public class GetMediaByIdEndpoint : Endpoint<GetMediaByIdRequest, GetMediaRespon
 
     public override async Task HandleAsync(GetMediaByIdRequest req, CancellationToken ct)
     {
-        var contentType = ContentTypeMapper.GetContentType(".png");
         await Send.RedirectAsync("https://maaldo.com/logo.png", allowRemoteRedirects: true);
     }
 }

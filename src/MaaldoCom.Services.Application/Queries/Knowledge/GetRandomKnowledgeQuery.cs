@@ -5,9 +5,9 @@ public class GetRandomKnowledgeQuery(ClaimsPrincipal user) : BaseQuery(user), IC
 public class GetRandomKnowledgeQueryHandler(ICacheManager cacheManager)
     : BaseQueryHandler(cacheManager), ICommandHandler<GetRandomKnowledgeQuery, Result<KnowledgeDto>>
 {
-    public async Task<Result<KnowledgeDto>> ExecuteAsync(GetRandomKnowledgeQuery query, CancellationToken cancellationToken)
+    public async Task<Result<KnowledgeDto>> ExecuteAsync(GetRandomKnowledgeQuery query, CancellationToken ct)
     {
-        var cachedKnowledge = (await CacheManager.ListKnowledgeAsync(cancellationToken)).ToList();
+        var cachedKnowledge = (await CacheManager.ListKnowledgeAsync(ct)).ToList();
 
         var random = new Random();
         var randomKnowledge = cachedKnowledge[random.Next(cachedKnowledge.Count)];
