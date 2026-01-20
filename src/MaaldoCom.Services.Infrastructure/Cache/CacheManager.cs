@@ -79,6 +79,18 @@ public class CacheManager : ICacheManager
         return knowledge;
     }
 
+    public async Task RefreshCacheAsync(CancellationToken cancellationToken)
+    {
+        var tasks = new Task[]
+        {
+            ListMediaAlbumsAsync(cancellationToken),
+            ListTagsAsync(cancellationToken),
+            ListKnowledgeAsync(cancellationToken)
+        };
+
+        await Task.WhenAny(tasks);
+    }
+
     private static string GetDetailCacheKey(string listCacheKey, Guid detailId) => $"{listCacheKey}:{detailId}";
     
     private async Task<IEnumerable<MediaAlbumDto>> ListMediaAlbumsFromDbAsync(CancellationToken cancellationToken)

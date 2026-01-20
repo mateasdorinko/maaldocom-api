@@ -13,4 +13,6 @@ internal static class UrlMaker
     public const string TagsRoute = "/tags";
     public static string GetTagUrl(Guid id) => $"{TagsRoute}/{id}";
     public static string GetTagUrl(string name) => $"{TagsRoute}/{name}";
+
+    public const string CacheRefreshRoute = "/support/cache-refresh";
 }
