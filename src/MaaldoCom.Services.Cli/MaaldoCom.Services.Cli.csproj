@@ -2,6 +2,10 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <AssemblyName>maaldocom-cli</AssemblyName>
+        <PackageId>MaaldoCom.Services.Cli</PackageId>
+        <Authors />
+        <Company />
+        <Product />
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,6 +27,7 @@
 
     <ItemGroup>
         <Folder Include="Generated\"/>
+        <Folder Include="Infrastructure\" />
     </ItemGroup>
 
     <ItemGroup>

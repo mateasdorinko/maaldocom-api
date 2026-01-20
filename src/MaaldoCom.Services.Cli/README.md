@@ -1,4 +1,4 @@
-# MaaldoCom.Services.Cli
+# `MaaldoCom.Services.Cli`
 
 ## CLI Setup
 
