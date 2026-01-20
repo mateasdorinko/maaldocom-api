@@ -120,6 +120,7 @@ public class CacheManager : ICacheManager
             .Include(t => t.MediaTags)
             .ThenInclude(mt => mt.Media)
             .ThenInclude(m => m.MediaAlbum)
+            .AsSplitQuery()
             .FirstOrDefaultAsync(cancellationToken);
 
         return entity!.ToDto();

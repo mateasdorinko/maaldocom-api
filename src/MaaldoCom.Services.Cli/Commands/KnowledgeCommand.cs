@@ -1,48 +1,35 @@
-using MaaldoCom.Services.Cli.Infrastructure;
-
 namespace MaaldoCom.Services.Cli.Commands;
 
-public sealed class ListKnowledgeSettings : CommandSettings
+public static class KnowledgeCommandConfigurator
 {
-    [CommandArgument(0, "<environment>")]
-    [Description("The target environment (local, dev, test, prod)")]
-    public required string Environment { get; init; } = "dev";
-
-    [CommandOption("-r|--random")]
-    [Description("Get a random knowledge item instead of listing all")]
-    public bool Random { get; init; } = false;
-
-    public override ValidationResult Validate()
+    public static void AddKnowledgeCommand(this IConfigurator configurator)
     {
-        try
-        {
-            ApiEnvironmentExtensions.ParseEnvironment(Environment);
-            return ValidationResult.Success();
-        }
-        catch (ArgumentException ex)
-        {
-            return ValidationResult.Error(ex.Message);
-        }
+        configurator.AddCommand<KnowledgeCommand>("knowledge")
+            .WithDescription("Lists knowledge from the API")
+            .WithExample("knowledge", "dev")
+            .WithExample("knowledge", "--random", "prod")
+            .WithExample("knowledge", "-r", "test");
     }
 }
 
-public sealed class ListKnowledgeCommand(IApiClientFactory clientFactory) : AsyncCommand<ListKnowledgeSettings>
+public sealed class KnowledgeCommandSettings : BaseApiCommandSettings
 {
-    public override async Task<int> ExecuteAsync(CommandContext context, ListKnowledgeSettings settings, CancellationToken cancellationToken)
+    [CommandOption("-r|--random")]
+    [Description("Gets a random knowledge item")]
+    public bool Random { get; init; } = false;
+}
+
+public sealed class KnowledgeCommand(IApiClientFactory clientFactory) : AsyncCommand<KnowledgeCommandSettings>
+{
+    public override async Task<int> ExecuteAsync(CommandContext context, KnowledgeCommandSettings settings, CancellationToken cancellationToken)
     {
         var environment = ApiEnvironmentExtensions.ParseEnvironment(settings.Environment);
         var client = clientFactory.CreateClient(environment);
 
         AnsiConsole.MarkupLine($"[grey]Using environment:[/] [yellow]{environment}[/]");
 
-        if (settings.Random)
-        {
-            await DisplayRandomKnowledge(client);
-        }
-        else
-        {
-            await DisplayAllKnowledge(client);
-        }
+        if (settings.Random) { await DisplayRandomKnowledge(client); }
+        else { await DisplayAllKnowledge(client); }
 
         return 0;
     }
@@ -73,12 +60,14 @@ public sealed class ListKnowledgeCommand(IApiClientFactory clientFactory) : Asyn
     {
         var table = new Table()
             .Border(TableBorder.Rounded)
+            .AddColumn(new TableColumn("[bold]Id[/]").NoWrap())
             .AddColumn(new TableColumn("[bold]Title[/]").NoWrap())
             .AddColumn(new TableColumn("[bold]Quote[/]"));
 
         foreach (var item in knowledgeItems)
         {
             table.AddRow(
+                Markup.Escape(item.Id.ToString()),
                 Markup.Escape(item.Title),
                 Markup.Escape(item.Quote)
             );
