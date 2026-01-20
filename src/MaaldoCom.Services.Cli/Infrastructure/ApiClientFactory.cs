@@ -31,15 +31,21 @@ public sealed class ApiClientFactory(IConfiguration configuration) : IApiClientF
 
     private static HttpClient CreateHttpClient(ApiEnvironment environment, string baseUrl)
     {
-        if (environment != ApiEnvironment.Local) return new HttpClient { BaseAddress = new Uri(baseUrl) };
+        var innerHandler = CreateInnerHandler(environment);
+        var timingHandler = new TimingHandler(innerHandler);
+
+        return new HttpClient(timingHandler) { BaseAddress = new Uri(baseUrl) };
+    }
+
+    private static HttpMessageHandler CreateInnerHandler(ApiEnvironment environment)
+    {
+        if (environment != ApiEnvironment.Local) return new HttpClientHandler();
 
 #pragma warning disable S4830 // Server certificates should be verified during SSL/TLS connections
-        var handler = new HttpClientHandler
+        return new HttpClientHandler
         {
             ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
         };
 #pragma warning restore S4830
-
-        return new HttpClient(handler) { BaseAddress = new Uri(baseUrl) };
     }
 }

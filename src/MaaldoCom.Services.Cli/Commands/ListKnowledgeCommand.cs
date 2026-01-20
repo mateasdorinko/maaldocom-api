@@ -34,7 +34,6 @@ public sealed class ListKnowledgeCommand(IApiClientFactory clientFactory) : Asyn
         var client = clientFactory.CreateClient(environment);
 
         AnsiConsole.MarkupLine($"[grey]Using environment:[/] [yellow]{environment}[/]");
-        AnsiConsole.WriteLine();
 
         if (settings.Random)
         {
