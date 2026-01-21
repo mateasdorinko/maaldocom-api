@@ -28,6 +28,7 @@ app.Configure(config =>
     config.SetApplicationName("maaldocom-cli");
     config.AddKnowledgeCommand();
     config.AddTagsCommand();
+    config.AddCacheRefreshCommand();
 });
 
 return await app.RunAsync(args);

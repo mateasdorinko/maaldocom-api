@@ -76,6 +76,11 @@ namespace MaaldoCom.Services.Cli.Infrastructure
         [Post("/tags")]
         Task<PostTagResponse> PostTag([Body, AliasAs("PostTagRequest")] PostTagRequest postTagRequest);
 
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
+        [Get("/support/cache-refresh")]
+        Task RefreshCache();
+
         /// <returns>Success</returns>
         /// <exception cref="ApiException">
         /// Thrown when the request returns a non-success status code:

@@ -88,7 +88,7 @@ public class CacheManager : ICacheManager
             ListKnowledgeAsync(cancellationToken)
         };
 
-        await Task.WhenAny(tasks);
+        await Task.WhenAll(tasks);
     }
 
     private static string GetDetailCacheKey(string listCacheKey, Guid detailId) => $"{listCacheKey}:{detailId}";
