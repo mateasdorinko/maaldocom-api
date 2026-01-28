@@ -1,6 +1,6 @@
-# `Maaldocom.Services`
-
 <img src="assets/logo.svg" width="100" />
+
+# Maaldocom.Services
 
 [![CI/CD Pipeline](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/ci-cd.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mateasdorinko_maaldocom-services&metric=alert_status&token=REDACTED_TOKEN)](https://sonarcloud.io/summary/new_code?id=mateasdorinko_maaldocom-services)
