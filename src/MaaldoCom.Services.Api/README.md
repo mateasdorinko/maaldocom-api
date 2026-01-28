@@ -1,5 +1,7 @@
 # `MaaldoCom.Services.Api`
 
+<img src="assets/logo.svg" width="100" />
+
 ## API Setup
 
 These commands are intended to be run from the `MaaldoCom.Services.Api` project directory.

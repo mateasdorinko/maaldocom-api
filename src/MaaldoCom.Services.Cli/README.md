@@ -1,5 +1,7 @@
 # `MaaldoCom.Services.Cli`
 
+<img src="assets/logo.svg" width="100" />
+
 ## CLI Setup
 
 These commands are intended to be run from the `MaaldoCom.Services.Cli` project directory.

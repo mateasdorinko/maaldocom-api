@@ -1,5 +1,7 @@
 # `MaaldoCom.Services.Infrastructure`
 
+<img src="assets/logo.svg" width="100" />
+
 ## Infrastructure Setup
 
 These commands are intended to be run from the `MaaldoCom.Services.Infrastructure` project directory.
