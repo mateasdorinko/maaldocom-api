@@ -1,8 +1,6 @@
-using MaaldoCom.Services.Application.Database;
-using MaaldoCom.Services.Application.Cache;
 using MaaldoCom.Services.Infrastructure.Database;
 using MaaldoCom.Services.Infrastructure.Cache;
-using Microsoft.EntityFrameworkCore;
+using MaaldoCom.Services.Infrastructure.Email;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ZiggyCreatures.Caching.Fusion;
@@ -20,6 +18,10 @@ public static class ServiceInstaller
         });
         services.AddScoped<IMaaldoComDbContext>(provider => provider.GetRequiredService<MaaldoComDbContext>());
         services.AddScoped<ICacheManager, CacheManager>();
+        services.AddScoped<IEmailProvider, SendGridEmailProvider>(_
+            => new SendGridEmailProvider(configuration["sendgrid-api-key"]!,
+                configuration["sendgrid-default-from-email"]!,
+                configuration["sendgrid-default-to-email"]!));
 
         services.AddFusionCache()
             .WithDefaultEntryOptions(options => options.Duration = TimeSpan.FromMinutes(20))

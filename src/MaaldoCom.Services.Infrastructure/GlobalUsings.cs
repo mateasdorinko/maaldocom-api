@@ -1,0 +1,10 @@
+global using MaaldoCom.Services.Application.Cache;
+global using MaaldoCom.Services.Application.Database;
+global using MaaldoCom.Services.Application.Dtos;
+global using MaaldoCom.Services.Application.Email;
+global using MaaldoCom.Services.Application.Extensions;
+global using MaaldoCom.Services.Application.MediaMetaData;
+global using MaaldoCom.Services.Application.Storage;
+global using MaaldoCom.Services.Domain.Entities;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;

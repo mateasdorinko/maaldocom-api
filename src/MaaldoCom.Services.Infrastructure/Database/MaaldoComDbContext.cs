@@ -1,8 +1,5 @@
 using System.Security.Claims;
-using MaaldoCom.Services.Application.Database;
-using MaaldoCom.Services.Domain.Entities;
 using MaaldoCom.Services.Domain.Extensions;
-using Microsoft.EntityFrameworkCore;
 
 namespace MaaldoCom.Services.Infrastructure.Database;
 

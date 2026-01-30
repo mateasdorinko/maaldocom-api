@@ -1,7 +1,3 @@
-using MaaldoCom.Services.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace MaaldoCom.Services.Infrastructure.Database.Configurations;
 
 public class MediaAlbumTagConfiguration : IEntityTypeConfiguration<MediaAlbumTag>
