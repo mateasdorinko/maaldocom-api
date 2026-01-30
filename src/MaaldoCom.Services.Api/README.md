@@ -29,8 +29,10 @@ dotnet user-secrets set "Key" "Value" --project MaaldoCom.Services.Api.csproj
 Create configuration entries for the following keys:
 
 - maaldocom-db-connection-string-api-user
+- maaldocom-db-connection-string-migrations-user
 - sendgrid-api-key
 - sendgrid-default-from-email
 - sendgrid-default-to-email
+- azure-storage-account-connection-string
 
 
