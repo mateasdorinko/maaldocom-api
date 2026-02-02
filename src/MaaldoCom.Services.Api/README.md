@@ -21,18 +21,17 @@ locally. It only needs to be created once, and all other computers only need to 
 
 ### Setting User Secrets
 
-To set user secrets, use the following command format:
-
-```shell
-dotnet user-secrets set "Key" "Value" --project MaaldoCom.Services.Api.csproj
-```
 Create configuration entries for the following keys:
 
-- maaldocom-db-connection-string-api-user
-- maaldocom-db-connection-string-migrations-user
-- sendgrid-api-key
-- sendgrid-default-from-email
-- sendgrid-default-to-email
-- azure-storage-account-connection-string
-
+```shell
+dotnet user-secrets set "maaldocom-db-connection-string-api-user" "SECRET_VALUE"
+dotnet user-secrets set "maaldocom-db-connection-string-migrations-user" "SECRET_VALUE"
+dotnet user-secrets set "sendgrid-api-key" "SECRET_VALUE"
+dotnet user-secrets set "sendgrid-default-from-email" "SECRET_VALUE"
+dotnet user-secrets set "sendgrid-default-to-email" "SECRET_VALUE"
+dotnet user-secrets set "azure-storage-account-connection-string" "SECRET_VALUE"
+dotnet user-secrets set "scalar-client-id" "SECRET_VALUE"
+dotnet user-secrets set "auth0-domain" "SECRET_VALUE"
+dotnet user-secrets set "auth0-audience" "SECRET_VALUE"
+```
 
