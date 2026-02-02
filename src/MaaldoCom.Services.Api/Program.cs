@@ -104,6 +104,7 @@ app.MapScalarApiReference("/docs", options =>
     {
         flow.ClientId = auth0ClientId;
         flow.Pkce = Pkce.Sha256;
+        flow.WithCredentialsLocation(CredentialsLocation.Body);
         flow.SelectedScopes = ["openid", "profile"];
         flow.AdditionalQueryParameters = new Dictionary<string, string>
         {
