@@ -18,6 +18,9 @@
     <ItemGroup>
       <None Remove="Database\Sql\Seeding\InsertKnowledge.sql" />
       <None Remove="Database\Sql\Seeding\InsertTags.sql" />
+      <None Update="MediaMetaData\lib\ffmpeg.exe">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

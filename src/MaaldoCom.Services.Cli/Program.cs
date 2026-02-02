@@ -1,12 +1,11 @@
+using MaaldoCom.Services.Application.MediaMetaData;
 using MaaldoCom.Services.Cli.Commands;
+using MaaldoCom.Services.Infrastructure.MediaMetaData;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
-var figlet = new FigletText("maaldo.com cli")
-    {
-        Color = Color.Blue
-    };
-
+var figlet = new FigletText("maaldo.com cli") { Color = Color.Blue };
 AnsiConsole.Write(figlet);
 
 var configuration = new ConfigurationBuilder()
@@ -18,6 +17,7 @@ var services = new ServiceCollection();
 
 services.AddSingleton<IConfiguration>(configuration);
 services.AddSingleton<IApiClientFactory, ApiClientFactory>();
+services.AddSingleton<IMediaMetaDataCreator, FFmpegMediaMetaDataCreator>();
 
 var registrar = new TypeRegistrar(services);
 
@@ -29,6 +29,7 @@ app.Configure(config =>
     config.AddKnowledgeCommand();
     config.AddTagsCommand();
     config.AddCacheRefreshCommand();
+    config.AddCreateMediaAlbumMetaFilesCommand();
 });
 
 return await app.RunAsync(args);
