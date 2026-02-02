@@ -7,7 +7,6 @@
     <ItemGroup>
       <PackageReference Include="Azure.Storage.Blobs" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
-      <PackageReference Include="SendGrid" />
       <PackageReference Include="ZiggyCreatures.FusionCache" />
       <PackageReference Include="ZiggyCreatures.FusionCache.Serialization.SystemTextJson" />
     </ItemGroup>

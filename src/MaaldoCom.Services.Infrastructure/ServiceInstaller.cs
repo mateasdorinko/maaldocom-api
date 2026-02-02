@@ -18,10 +18,12 @@ public static class ServiceInstaller
         });
         services.AddScoped<IMaaldoComDbContext>(provider => provider.GetRequiredService<MaaldoComDbContext>());
         services.AddScoped<ICacheManager, CacheManager>();
-        services.AddScoped<IEmailProvider, SendGridEmailProvider>(_
-            => new SendGridEmailProvider(configuration["sendgrid-api-key"]!,
-                configuration["sendgrid-default-from-email"]!,
-                configuration["sendgrid-default-to-email"]!));
+        services.AddScoped<IEmailProvider, MailGunEmailProvider>(_
+            => new MailGunEmailProvider(configuration["mailgun-api-key"]!,
+                configuration["mailgun-domain"]!,
+                configuration["mailgun-base-url"]!,
+                configuration["mailgun-default-from-email"]!,
+                configuration["mailgun-default-to-email"]!));
 
         services.AddFusionCache()
             .WithDefaultEntryOptions(options => options.Duration = TimeSpan.FromMinutes(20))
