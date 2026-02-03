@@ -1,4 +1,5 @@
-﻿using MaaldoCom.Services.Application.MediaMetaData;
+﻿using System.Text.Json;
+using MaaldoCom.Services.Application.MediaMetaData;
 
 namespace MaaldoCom.Services.Cli.Commands;
 
@@ -25,7 +26,31 @@ public sealed class CreateMediaAlbumMetaFilesCommand(IMediaMetaDataCreator media
 {
     public override async Task<int> ExecuteAsync(CommandContext context, CreateMediaAlbumMetaFilesCommandSettings settings, CancellationToken cancellationToken)
     {
+        var mediaAlbumFolder = new DirectoryInfo(settings.Path);
+
+        var postRequest = new PostMediaAlbumRequest
+        {
+            Name = mediaAlbumFolder.Name,
+            UrlFriendlyName = mediaAlbumFolder.Name,
+            Description = "TEST_DESCRIPTION",
+            Created = DateTime.Now,
+            Media = mediaAlbumFolder.GetFiles().Select(f => new PostMediumRequest
+            {
+                FileName = f.Name,
+                Description = "TEST_DESCRIPTION",
+                FileExtension = f.Extension,
+                SizeInBytes = f.Length,
+                Tags = ["TAG1", "TAG2"]
+            }).ToList(),
+            Tags = ["TAG1", "TAG2"]
+        };
+
         await mediaMetaDataCreator.CreateMediaMetaDataFilesAsync(settings.Path, cancellationToken);
+
+        var json = JsonSerializer.Serialize(postRequest, options: new JsonSerializerOptions { WriteIndented = true });
+
+        await File.WriteAllTextAsync($"{settings.Path}/request.json", json, cancellationToken);
+        Console.WriteLine("PostMediaAlbumRequest file (request.json) created successfully.");
 
         return 0;
     }

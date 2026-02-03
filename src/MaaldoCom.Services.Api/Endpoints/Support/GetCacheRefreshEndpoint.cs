@@ -10,7 +10,6 @@ public class GetCacheRefreshEndpoint : EndpointWithoutRequest
         Description(x => x
             .WithName("RefreshCache")
             .WithSummary("Refreshes cached data"));
-        Options(x => x.ExcludeFromDescription());
         AllowAnonymous();
     }
 

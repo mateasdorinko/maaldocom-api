@@ -14,11 +14,12 @@ public static class CacheRefreshCommandConfigurator
 
 public sealed class CacheRefreshCommandSettings : BaseApiCommandSettings { }
 
-public class CacheRefreshCommand(IApiClientFactory clientFactory) : AsyncCommand<CacheRefreshCommandSettings>
+public class CacheRefreshCommand(/*IApiClientFactory clientFactory*/) : AsyncCommand<CacheRefreshCommandSettings>
 {
     public override async Task<int> ExecuteAsync(CommandContext context, CacheRefreshCommandSettings settings, CancellationToken cancellationToken)
     {
-        var environment = ApiEnvironmentExtensions.ParseEnvironment(settings.Environment);
+#pragma warning disable S125
+        /*var environment = ApiEnvironmentExtensions.ParseEnvironment(settings.Environment);
         var client = clientFactory.CreateClient(environment);
 
         AnsiConsole.MarkupLine($"[grey]Using environment:[/] [yellow]{environment}[/]");
@@ -30,8 +31,9 @@ public class CacheRefreshCommand(IApiClientFactory clientFactory) : AsyncCommand
                 await client.RefreshCache();
             });
 
-        AnsiConsole.MarkupLine($"[grey]Cache refreshed.[/]");
-
+        AnsiConsole.MarkupLine($"[grey]Cache refreshed.[/]");*/
+#pragma warning restore S125
+        await Task.Delay(0, cancellationToken);
         return 0;
     }
 }

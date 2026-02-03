@@ -60,11 +60,6 @@ namespace MaaldoCom.Services.Cli.Infrastructure
         [Get("/tags")]
         Task<ICollection<GetTagResponse>> ListTags();
 
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
-        /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Get("/support/cache-refresh")]
-        Task RefreshCache();
-
         /// <param name="id">id parameter</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">
@@ -373,11 +368,26 @@ namespace MaaldoCom.Services.Cli.Infrastructure
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PostMediaAlbumResponse
+    public partial class PostMediaAlbumResponse : BaseModel
     {
 
-        [JsonPropertyName("tempPropertyDeleteMeLater")]
-        public string TempPropertyDeleteMeLater { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("urlFriendlyName")]
+        public string UrlFriendlyName { get; set; }
+
+        [JsonPropertyName("created")]
+        public System.DateTimeOffset Created { get; set; }
+
+        [JsonPropertyName("tags")]
+        public ICollection<string> Tags { get; set; }
+
+        [JsonPropertyName("href")]
+        public string Href { get; set; }
+
+        [JsonPropertyName("altHref")]
+        public string AltHref { get; set; }
 
     }
 
@@ -385,8 +395,44 @@ namespace MaaldoCom.Services.Cli.Infrastructure
     public partial class PostMediaAlbumRequest
     {
 
-        [JsonPropertyName("tempPropertyDeleteMeLater")]
-        public string TempPropertyDeleteMeLater { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("urlFriendlyName")]
+        public string UrlFriendlyName { get; set; }
+
+        [JsonPropertyName("created")]
+        public System.DateTimeOffset Created { get; set; }
+
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
+
+        [JsonPropertyName("media")]
+        public ICollection<PostMediumRequest> Media { get; set; }
+
+        [JsonPropertyName("tags")]
+        public ICollection<string> Tags { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PostMediumRequest
+    {
+
+        [JsonPropertyName("fileName")]
+        public string FileName { get; set; }
+
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
+
+        [JsonPropertyName("sizeInBytes")]
+        public long SizeInBytes { get; set; }
+
+        [JsonPropertyName("fileExtension")]
+        public string FileExtension { get; set; }
+
+        [JsonPropertyName("tags")]
+        public ICollection<string> Tags { get; set; }
 
     }
 
