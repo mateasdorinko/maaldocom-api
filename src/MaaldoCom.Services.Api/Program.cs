@@ -96,6 +96,7 @@ app.UseForwardedHeaders();
 app.MapScalarApiReference("/docs", options =>
 {
     options.WithTitle(apiDocTitle);
+    options.WithFavicon("/favicon.ico");
     options.OperationTitleSource = OperationTitleSource.Path;
     options.ShowOperationId();
     options.WithOpenApiRoutePattern("/swagger/v1/swagger.json");

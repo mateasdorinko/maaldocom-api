@@ -6,8 +6,6 @@ namespace MaaldoCom.Services.Infrastructure.MediaMetaData;
 
 public class FFmpegMediaMetaDataCreator : IMediaMetaDataCreator
 {
-    private readonly string _ffmpegPath = $@"{Environment.CurrentDirectory}\MediaMetaData\lib\ffmpeg.exe";
-
     public async Task CreateMediaMetaDataFilesAsync(string mediaAlbumFolderPath, CancellationToken cancellationToken)
     {
         var mediaAlbumFolder = new DirectoryInfo(mediaAlbumFolderPath);
@@ -33,7 +31,7 @@ public class FFmpegMediaMetaDataCreator : IMediaMetaDataCreator
         Console.WriteLine("\r\nMedia metadata files created successfully.");
     }
 
-    private async Task CreatePicMetaFilesAsync(FileInfo file, string mediaAlbumFolderPath)
+    private static async Task CreatePicMetaFilesAsync(FileInfo file, string mediaAlbumFolderPath)
     {
         var thumbImageArgs = BuildFFmpegArguments(true, file.FullName,
             Constants.ThumbnailWidth,
@@ -47,7 +45,7 @@ public class FFmpegMediaMetaDataCreator : IMediaMetaDataCreator
         await CreateMetaFileAsync(viewerImageArgs);
     }
 
-    private async Task CreateVidMetaFileAsync(FileInfo file, string mediaAlbumFolderPath)
+    private static async Task CreateVidMetaFileAsync(FileInfo file, string mediaAlbumFolderPath)
     {
         var newVidThumbnailPath = Path.ChangeExtension(file.Name, ".jpg");
         var thumbImageArgs = BuildFFmpegArguments(false, file.FullName,
@@ -74,14 +72,16 @@ public class FFmpegMediaMetaDataCreator : IMediaMetaDataCreator
         return args.ToString();
     }
 
-    private async Task CreateMetaFileAsync(string args)
+    private static async Task CreateMetaFileAsync(string args)
     {
-        var process = new ProcessStartInfo
-        {
-            FileName = _ffmpegPath,
-            Arguments = args
-        };
+        var process = new Process();
+        process.StartInfo.FileName = "ffmpeg";
+        process.StartInfo.Arguments = args;
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.RedirectStandardOutput = true;
 
-        await Process.Start(process)!.WaitForExitAsync();
+        process.Start();
+
+        await process.WaitForExitAsync();
     }
 }

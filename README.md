@@ -33,7 +33,7 @@
 
 #### SQL Server
 
-Create both the docker-compose and .env files on your machine. Replace the `MY_SUPER_SECRET_PASSWORD` token with a 
+Create both the docker-compose and .env files on your machine. Replace the `MY_SUPER_SECRET_PASSWORD` token with a
 strong password in the .env file.
 
 _docker-compose.yml_
@@ -89,6 +89,9 @@ volumes:
 
 - [Local User Secrets](src/MaaldoCom.Services.Api/README.md#local-user-secrets)
 - [Entity Framework](src/MaaldoCom.Services.Infrastructure/README.md#entity-framework)
+- [FFMpeg](src/MaaldoCom.Services.Infrastructure/README.md#ffmpeg)
+
+
 
 
 

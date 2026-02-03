@@ -27,22 +27,23 @@ public sealed class CreateMediaAlbumMetaFilesCommand(IMediaMetaDataCreator media
     public override async Task<int> ExecuteAsync(CommandContext context, CreateMediaAlbumMetaFilesCommandSettings settings, CancellationToken cancellationToken)
     {
         var mediaAlbumFolder = new DirectoryInfo(settings.Path);
+        var now = DateTime.Now;
 
         var postRequest = new PostMediaAlbumRequest
         {
             Name = mediaAlbumFolder.Name,
             UrlFriendlyName = mediaAlbumFolder.Name,
-            Description = "TEST_DESCRIPTION",
-            Created = DateTime.Now,
+            Description = string.Empty,
+            Created = new DateTimeOffset(now.Year, now.Month, now.Day, 12, 0, 0, TimeSpan.Zero),
+            Tags = [],
             Media = mediaAlbumFolder.GetFiles().Select(f => new PostMediumRequest
             {
                 FileName = f.Name,
-                Description = "TEST_DESCRIPTION",
+                Description = string.Empty,
                 FileExtension = f.Extension,
                 SizeInBytes = f.Length,
-                Tags = ["TAG1", "TAG2"]
-            }).ToList(),
-            Tags = ["TAG1", "TAG2"]
+                Tags = []
+            }).ToList()
         };
 
         await mediaMetaDataCreator.CreateMediaMetaDataFilesAsync(settings.Path, cancellationToken);

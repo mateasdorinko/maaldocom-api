@@ -1,0 +1,15 @@
+.TOCHeader .logo-title, .TOCHeader .logo-subtitle {
+    display: none !important;
+}
+
+.TOCHeader .logo a {
+    background-image: url('/images/logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 50px;
+    height: 40px;
+    display: block;
+    width: 100%;
+    text-indent: -9999px;
+}

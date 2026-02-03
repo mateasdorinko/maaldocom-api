@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="2500" height="2500" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;fill-rule:evenodd;clip-rule:evenodd" viewBox="0 0 692.85 692.85">
+    <defs>
+        <style>
+            .fil1{fill:#fff;fill-rule:nonzero}
+        </style>
+    </defs>
+    <g id="Layer_x0020_1">
+        <rect width="692.85" height="692.85" rx="148.7" ry="148.7" style="fill:#2962FF"/>
+        <path class="fil1" d="M392.42 240.16h141.64c47.24 0 70.84 23.64 70.84 70.84v70.85c0 47.25-23.6 70.84-70.84 70.84H392.98l-19.18-42.53h-84.31l18.97-42.17h46.32l-25.49-56.53-64.13 141.23-25.21-55.91 67.7-156.57h43.46l73.47 169.98h103.53c22.68 0 34-11.17 34-33.56v-60.5c0-22.29-11.27-33.47-33.86-33.47h-93.03v123.39h-8.38l-34.42-79.63v-86.26zM87.95 452.69l91.88-212.48h43.46l39.88 92.27-25.56 59.12-36.14-80.14-63.57 141.23z"/>
+    </g>
+</svg>
