@@ -1,6 +1,6 @@
 ﻿namespace Tests.Unit.Api.Extensions.MapperExtensionsTests;
 
-public class ToModel
+public class ToGetModel
 {
     [Fact]
     public void ToModel_FromMediaAlbumDto_MapsAllPropertiesCorrectly()
@@ -24,7 +24,7 @@ public class ToModel
                     Id = Guid.NewGuid(),
                     Name = "SampleTag"
                 }
-            },  
+            },
             Media = new List<MediaDto>
             {
                 new()
@@ -44,7 +44,7 @@ public class ToModel
         };
 
         // act
-        var model = dto.ToModel();
+        var model = dto.ToGetModel();
 
         // assert
         model.Id.ShouldBeEquivalentTo(dto.Id);
@@ -62,7 +62,7 @@ public class ToModel
         MediaAlbumDto? dto = null;
 
         // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToModel());
+        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
     }
 
     [Fact]
@@ -93,7 +93,7 @@ public class ToModel
         };
 
         // act
-        var model = dto.ToModel();
+        var model = dto.ToGetModel();
 
         // assert
         model.Id.ShouldBeEquivalentTo(dto.Id);
@@ -108,7 +108,7 @@ public class ToModel
         MediaDto? dto = null;
 
         // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToModel());
+        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
     }
 
     [Fact]
@@ -122,7 +122,7 @@ public class ToModel
         };
 
         // act
-        var model = dto.ToModel();
+        var model = dto.ToGetModel();
 
         // assert
         model.Id.ShouldBeEquivalentTo(dto.Id);
@@ -136,7 +136,7 @@ public class ToModel
         TagDto? dto = null;
 
         // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToModel());
+        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
     }
 
     [Fact]
@@ -156,7 +156,7 @@ public class ToModel
         };
 
         // act
-        var model = dto.ToModel();
+        var model = dto.ToGetModel();
 
         // assert
         model.Id.ShouldBeEquivalentTo(dto.Id);
@@ -171,6 +171,6 @@ public class ToModel
         KnowledgeDto? dto = null;
 
         // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToModel());
+        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
     }
 }

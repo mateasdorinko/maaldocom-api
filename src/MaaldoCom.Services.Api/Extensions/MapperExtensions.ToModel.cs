@@ -18,7 +18,7 @@ public static partial class MapperExtensions
         }
     }
 
-    public static GetMediaAlbumResponse ToModel(this MediaAlbumDto dto)
+    public static GetMediaAlbumResponse ToGetModel(this MediaAlbumDto dto)
     {
         ArgumentNullException.ThrowIfNull(dto);
 
@@ -32,7 +32,7 @@ public static partial class MapperExtensions
         return model;
     }
 
-    public static GetMediaResponse ToModel(this MediaDto dto)
+    public static GetMediaResponse ToGetModel(this MediaDto dto)
     {
         ArgumentNullException.ThrowIfNull(dto);
 
@@ -49,7 +49,7 @@ public static partial class MapperExtensions
         return model;
     }
 
-    public static GetTagResponse ToModel(this TagDto dto)
+    public static GetTagResponse ToGetModel(this TagDto dto)
     {
         ArgumentNullException.ThrowIfNull(dto);
 
@@ -60,7 +60,7 @@ public static partial class MapperExtensions
         return model;
     }
 
-    public static GetKnowledgeResponse ToModel(this KnowledgeDto dto)
+    public static GetKnowledgeResponse ToGetModel(this KnowledgeDto dto)
     {
         ArgumentNullException.ThrowIfNull(dto);
 
@@ -68,6 +68,24 @@ public static partial class MapperExtensions
 
         model.Title = dto.Title;
         model.Quote = dto.Quote;
+
+        return model;
+    }
+
+    public static PostMediaAlbumResponse ToPostModel(this MediaAlbumDto dto)
+    {
+        ArgumentNullException.ThrowIfNull(dto);
+
+        var model = new PostMediaAlbumResponse().MapToBaseModel(dto);
+
+        model.Name = dto.Name;
+        model.UrlFriendlyName = dto.UrlFriendlyName;
+        model.Created = dto.Created;
+
+        if (dto.Tags != null)
+        {
+            model.Tags = dto.Tags.Select(m => m.Name!).ToList();
+        }
 
         return model;
     }

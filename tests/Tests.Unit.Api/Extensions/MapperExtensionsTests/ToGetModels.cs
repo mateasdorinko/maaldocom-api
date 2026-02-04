@@ -1,6 +1,6 @@
 namespace Tests.Unit.Api.Extensions.MapperExtensionsTests;
 
-public class ToModels
+public class ToGetModels
 {
     [Fact]
     public void ToModels_FromMediaAlbumDtos_MapsAllPropertiesCorrectly()
@@ -25,7 +25,7 @@ public class ToModels
         };
 
         // act
-        var models = dtos.ToModels().ToList();
+        var models = dtos.ToGetModels().ToList();
 
         // assert
         models.Count.ShouldBe(2);
@@ -42,7 +42,7 @@ public class ToModels
         List<MediaAlbumDto>? dtos = null;
 
         // act & assert
-        Assert.Throws<ArgumentNullException>(() => dtos!.ToModels());
+        Assert.Throws<ArgumentNullException>(() => dtos!.ToGetModels());
     }
 
     [Fact]
@@ -52,7 +52,7 @@ public class ToModels
         var dtos = new List<MediaAlbumDto>();
 
         // act
-        var models = dtos.ToModels().ToList();
+        var models = dtos.ToGetModels().ToList();
 
         // assert
         models.ShouldBeEmpty();
@@ -112,10 +112,10 @@ public class ToModels
                 }
             }
         };
-        
+
         // act
-        var models = dtos.ToModels().ToList();
-        
+        var models = dtos.ToGetModels().ToList();
+
         // assert
         models.Count.ShouldBe(dtos.Count);
         for (var i = 0; i < models.Count; i++)
@@ -135,7 +135,7 @@ public class ToModels
         List<MediaDto>? dtos = null;
 
         // act & assert
-        Assert.Throws<ArgumentNullException>(() => dtos!.ToModels());
+        Assert.Throws<ArgumentNullException>(() => dtos!.ToGetModels());
     }
 
     [Fact]
@@ -143,10 +143,10 @@ public class ToModels
     {
         // arrange
         var dtos = new List<MediaDto>();
-        
+
         // act
-        var models = dtos.ToModels().ToList();
-        
+        var models = dtos.ToGetModels().ToList();
+
         // assert
         models.ShouldBeEmpty();
     }
@@ -172,7 +172,7 @@ public class ToModels
         };
 
         // act
-        var models = dtos.ToModels().ToList();
+        var models = dtos.ToGetModels().ToList();
 
         // assert
         models.Count.ShouldBe(dtos.Count);
@@ -190,7 +190,7 @@ public class ToModels
         List<TagDto>? dtos = null;
 
         // act & assert
-        Assert.Throws<ArgumentNullException>(() => dtos!.ToModels());
+        Assert.Throws<ArgumentNullException>(() => dtos!.ToGetModels());
     }
 
     [Fact]
@@ -200,7 +200,7 @@ public class ToModels
         var dtos = new List<TagDto>();
 
         // act
-        var models = dtos.ToModels().ToList();
+        var models = dtos.ToGetModels().ToList();
 
         // assert
         models.ShouldBeEmpty();
@@ -229,7 +229,7 @@ public class ToModels
         };
 
         // act
-        var models = dtos.ToModels().ToList();
+        var models = dtos.ToGetModels().ToList();
 
         // assert
         models.Count.ShouldBe(dtos.Count);
@@ -248,7 +248,7 @@ public class ToModels
         List<KnowledgeDto>? dtos = null;
 
         // act & assert
-        Assert.Throws<ArgumentNullException>(() => dtos!.ToModels());
+        Assert.Throws<ArgumentNullException>(() => dtos!.ToGetModels());
     }
 
     [Fact]
@@ -258,7 +258,7 @@ public class ToModels
         var dtos = new List<KnowledgeDto>();
 
         // act
-        var models = dtos.ToModels().ToList();
+        var models = dtos.ToGetModels().ToList();
 
         // assert
         models.ShouldBeEmpty();

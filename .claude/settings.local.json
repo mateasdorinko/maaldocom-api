@@ -5,7 +5,9 @@
       "Bash(find:*)",
       "WebSearch",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:blog.scalar.com)"
+      "WebFetch(domain:blog.scalar.com)",
+      "WebFetch(domain:fast-endpoints.com)",
+      "WebFetch(domain:api-ref.fast-endpoints.com)"
     ]
   }
 }

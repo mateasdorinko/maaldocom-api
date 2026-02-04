@@ -21,7 +21,7 @@ public class GetKnowledgeByIdEndpoint : Endpoint<GetKnowledgeByIdRequest, GetKno
         var result = await new GetKnowledgeQuery(User, req.Id).ExecuteAsync(ct);
 
         await result.Match(
-            onSuccess: _ => Send.OkAsync(result.Value.ToModel(), ct),
+            onSuccess: _ => Send.OkAsync(result.Value.ToGetModel(), ct),
             onFailure: _ => Send.NotFoundAsync(ct)
         );
     }

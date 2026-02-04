@@ -18,7 +18,7 @@ public class ListTagsEndpoint : EndpointWithoutRequest<IEnumerable<GetTagRespons
     public override async Task HandleAsync(CancellationToken ct)
     {
         var result = (await new ListTagsQuery(User).ExecuteAsync(ct)).Value;
-        var response = result.ToModels();
+        var response = result.ToGetModels();
 
         await Send.OkAsync(response, ct);
     }

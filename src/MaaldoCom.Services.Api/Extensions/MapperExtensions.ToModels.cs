@@ -7,31 +7,31 @@ namespace MaaldoCom.Services.Api.Extensions;
 
 public static partial class MapperExtensions
 {
-    public static IEnumerable<GetMediaAlbumResponse> ToModels(this IEnumerable<MediaAlbumDto> dtos)
+    public static IEnumerable<GetMediaAlbumResponse> ToGetModels(this IEnumerable<MediaAlbumDto> dtos)
     {
         ArgumentNullException.ThrowIfNull(dtos);
 
-        return dtos.Select(dto => dto.ToModel()).ToList();
+        return dtos.Select(dto => dto.ToGetModel()).ToList();
     }
 
-    public static IEnumerable<GetMediaResponse> ToModels(this IEnumerable<MediaDto> dtos)
+    public static IEnumerable<GetMediaResponse> ToGetModels(this IEnumerable<MediaDto> dtos)
     {
         ArgumentNullException.ThrowIfNull(dtos);
 
-        return dtos.Select(dto => dto.ToModel()).ToList();
+        return dtos.Select(dto => dto.ToGetModel()).ToList();
     }
 
-    public static IEnumerable<GetTagResponse> ToModels(this IEnumerable<TagDto> dtos)
+    public static IEnumerable<GetTagResponse> ToGetModels(this IEnumerable<TagDto> dtos)
     {
         ArgumentNullException.ThrowIfNull(dtos);
 
-        return dtos.Select(dto => dto.ToModel()).ToList();
+        return dtos.Select(dto => dto.ToGetModel()).ToList();
     }
 
-    public static IEnumerable<GetKnowledgeResponse> ToModels(this IEnumerable<KnowledgeDto> dtos)
+    public static IEnumerable<GetKnowledgeResponse> ToGetModels(this IEnumerable<KnowledgeDto> dtos)
     {
         ArgumentNullException.ThrowIfNull(dtos);
 
-        return dtos.Select(dto => dto.ToModel()).ToList();
+        return dtos.Select(dto => dto.ToGetModel()).ToList();
     }
 }

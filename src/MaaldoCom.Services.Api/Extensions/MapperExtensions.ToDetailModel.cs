@@ -18,7 +18,7 @@ public static partial class MapperExtensions
         model.Created = dto.Created;
         model.Description = dto.Description;
         model.Active = dto.Active;
-        model.Media = dto.Media.Select(m => m.ToModel()).ToList();
+        model.Media = dto.Media.Select(m => m.ToGetModel()).ToList();
         model.Tags = dto.Tags.Select(m => m.Name!).ToList();
 
         return model;

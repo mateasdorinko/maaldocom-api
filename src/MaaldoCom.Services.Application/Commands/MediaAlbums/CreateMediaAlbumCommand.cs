@@ -10,7 +10,22 @@ public class CreateMediaAlbumCommandHandler(IMaaldoComDbContext maaldoComDbConte
 {
     public async Task<Result<MediaAlbumDto>> ExecuteAsync(CreateMediaAlbumCommand command, CancellationToken ct)
     {
-        return await Task.FromResult(Result.Ok());
+        var validationResult = await new CreateMediaAlbumCommandValidator(MaaldoComDbContext).ValidateAsync(command, ct);
+
+        if (!validationResult.IsValid)
+        {
+            return Result.Fail<MediaAlbumDto>(validationResult.Errors.Select(IError (e) => new Error(e.ErrorMessage)).ToList());
+        }
+
+        command.MediaAlbum.Active = true;
+        foreach (var media in command.MediaAlbum.Media) { media.Active = true; }
+
+        var entity = command.MediaAlbum.ToEntity(command.User);
+
+        await MaaldoComDbContext.MediaAlbums.AddAsync(entity, ct);
+        await MaaldoComDbContext.SaveChangesAsync(command.User, ct);
+
+        return Result.Ok(entity.ToDto());
     }
 }
 

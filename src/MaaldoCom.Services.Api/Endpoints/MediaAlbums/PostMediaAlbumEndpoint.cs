@@ -18,8 +18,17 @@ public class PostMediaAlbumEndpoint : Endpoint<PostMediaAlbumRequest, PostMediaA
     {
         var dto = req.ToDto();
         var result = await new CreateMediaAlbumCommand(User, dto).ExecuteAsync(ct);
-        var response = result.Value.ToModel();
 
-        await Send.CreatedAtAsync(string.Empty, response, cancellation: ct);
+        await result.Match(
+            onSuccess: _ => Send.CreatedAtAsync<GetMediaAlbumByIdEndpoint>(
+                routeValues: new { result.Value.Id },
+                responseBody: result.Value.ToPostModel(),
+                cancellation: ct),
+            onFailure: errors =>
+            {
+                foreach (var error in errors) { AddError(error.Message); }
+                return Send.ErrorsAsync(cancellation: ct);
+            }
+        );
     }
 }

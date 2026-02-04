@@ -42,16 +42,16 @@ public class ToEntity
                 }
             }
         };
-        
+        var user = A.Fake<ClaimsPrincipal>();
+
         // act
-        var entity = dto.ToEntity();
-        
+        var entity = dto.ToEntity(user);
+
         // assert
         entity.Id.ShouldBeEquivalentTo(dto.Id);
         entity.Name.ShouldBeEquivalentTo(dto.Name);
         entity.UrlFriendlyName.ShouldBeEquivalentTo(dto.UrlFriendlyName);
         entity.Description.ShouldBeEquivalentTo(dto.Description);
-        entity.CreatedBy.ShouldBeEquivalentTo(dto.CreatedBy);
         entity.Created.ShouldBeEquivalentTo(dto.Created);
         entity.LastModifiedBy.ShouldBeEquivalentTo(dto.LastModifiedBy);
         entity.LastModified.ShouldBeEquivalentTo(dto.LastModified);
@@ -67,9 +67,10 @@ public class ToEntity
     {
         // arrange
         MediaAlbumDto? dto = null;
-        
+        var user = A.Fake<ClaimsPrincipal>();
+
         // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToEntity());
+        Assert.Throws<ArgumentNullException>(() => dto!.ToEntity(user));
     }
 
     [Fact]
@@ -98,10 +99,11 @@ public class ToEntity
                 }
             }
         };
-        
+        var user = A.Fake<ClaimsPrincipal>();
+
         // act
-        var entity = dto.ToEntity();
-        
+        var entity = dto.ToEntity(user);
+
         // assert
         entity.Id.ShouldBeEquivalentTo(dto.Id);
         entity.MediaAlbumId.ShouldBeEquivalentTo(dto.MediaAlbumId);
@@ -109,7 +111,6 @@ public class ToEntity
         entity.Description.ShouldBeEquivalentTo(dto.Description);
         entity.SizeInBytes.ShouldBeEquivalentTo(dto.SizeInBytes);
         entity.FileExtension.ShouldBeEquivalentTo(dto.FileExtension);
-        entity.CreatedBy.ShouldBeEquivalentTo(dto.CreatedBy);
         entity.Created.ShouldBeEquivalentTo(dto.Created);
         entity.LastModifiedBy.ShouldBeEquivalentTo(dto.LastModifiedBy);
         entity.LastModified.ShouldBeEquivalentTo(dto.LastModified);
@@ -123,9 +124,10 @@ public class ToEntity
     {
         // arrange
         MediaDto? dto = null;
-        
+        var user = A.Fake<ClaimsPrincipal>();
+
         // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToEntity());
+        Assert.Throws<ArgumentNullException>(() => dto!.ToEntity(user));
     }
 
     [Fact]
@@ -137,10 +139,10 @@ public class ToEntity
             Id = Guid.NewGuid(),
             Name = "SampleTag"
         };
-        
+
         // act
         var entity = dto.ToEntity();
-        
+
         // assert
         entity.Id.ShouldBeEquivalentTo(dto.Id);
         entity.Name.ShouldBeEquivalentTo(dto.Name);
@@ -151,11 +153,11 @@ public class ToEntity
     {
         // arrange
         TagDto? dto = null;
-        
+
         // act & assert
         Assert.Throws<ArgumentNullException>(() => dto!.ToEntity());
     }
-    
+
     [Fact]
     public void ToEntity_FromKnowledgeDto_MapsAllPropertiesCorrectly()
     {
@@ -171,10 +173,10 @@ public class ToEntity
             LastModified = DateTime.UtcNow,
             Active = true
         };
-        
+
         // act
         var entity = dto.ToEntity();
-        
+
         // assert
         entity.Id.ShouldBeEquivalentTo(dto.Id);
         entity.Title.ShouldBeEquivalentTo(dto.Title);
@@ -186,7 +188,7 @@ public class ToEntity
     {
         // arrange
         KnowledgeDto? dto = null;
-        
+
         // act & assert
         Assert.Throws<ArgumentNullException>(() => dto!.ToEntity());
     }

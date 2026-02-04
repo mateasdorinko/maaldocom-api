@@ -10,7 +10,9 @@ public class CreateMediaAlbumValidator : AbstractValidator<MediaAlbumDto>
     {
         _maaldoComDbContext = maaldoComDbContext;
 
-        RuleFor(dto => dto).Must(IsUniqueAsync);
+        RuleFor(dto => dto)
+            .Must(IsUniqueAsync)
+            .WithMessage("Media album already exists");
         RuleFor(dto => dto.Name)
             .NotEmpty()
             .WithMessage("Name is required")
