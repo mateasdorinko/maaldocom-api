@@ -18,7 +18,7 @@ public class GetMediaByIdEndpoint : Endpoint<GetMediaByIdRequest, GetMediaRespon
 
     public override async Task HandleAsync(GetMediaByIdRequest req, CancellationToken ct)
     {
-        var result = await new GetMediaBlobQuery(User, "media-albums", req.MediaAlbumId, req.MediaId, req.MediaType).ExecuteAsync(ct);
+        var result = await new GetMediaBlobQuery(User, req.MediaAlbumId, req.MediaId, req.MediaType).ExecuteAsync(ct);
 
         await result.Match(
             onSuccess: _ => Send.StreamAsync(result.Value.Stream!, result.Value.FileName, result.Value.SizeInBytes, result.Value.ContentType!, cancellation: ct),
