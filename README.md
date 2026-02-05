@@ -73,7 +73,7 @@ services:
     image: mcr.microsoft.com/azure-storage/azurite
     container_name: azurite-emulator
     restart: unless-stopped
-    command: "azurite --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0 --location /data --debug /data/debug.log"
+    command: "azurite --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0 --location /data --debug /data/debug.log --skipApiVersionCheck --loose"
     ports:
       - "10000:10000" # blob storage service
       - "10001:10001" # queue storage service

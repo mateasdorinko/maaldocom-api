@@ -7,10 +7,10 @@ public class GetMediaByIdEndpoint : Endpoint<GetMediaByIdRequest, GetMediaRespon
 {
     public override void Configure()
     {
-        Get("/asdfasdf");
+        Get($"/media-albums/{{mediaAlbumId:guid}}/media/{{mediaId:guid}}/{{mediaType:regex(original|viewer|thumb)}}");
         Description(x => x
             .WithName("GetMediaById")
-            .WithSummary("Gets a media item by its unique identifier within a media album."));
+            .WithSummary("Gets a media item stream by its unique identifier within a media album."));
         ResponseCache(60);
         AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));
@@ -18,6 +18,11 @@ public class GetMediaByIdEndpoint : Endpoint<GetMediaByIdRequest, GetMediaRespon
 
     public override async Task HandleAsync(GetMediaByIdRequest req, CancellationToken ct)
     {
-        await Send.RedirectAsync("https://maaldo.com/logo.png", allowRemoteRedirects: true);
+        var result = await new GetMediaBlobQuery(User, "media-albums", req.MediaAlbumId, req.MediaId, req.MediaType).ExecuteAsync(ct);
+
+        await result.Match(
+            onSuccess: _ => Send.StreamAsync(result.Value.Stream!, result.Value.FileName, result.Value.SizeInBytes, result.Value.ContentType!, cancellation: ct),
+            onFailure: _ => Send.NotFoundAsync(ct)
+        );
     }
 }

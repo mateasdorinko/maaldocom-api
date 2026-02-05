@@ -1,3 +1,5 @@
+using MaaldoCom.Services.Application.Blobs;
+
 namespace MaaldoCom.Services.Application.Dtos;
 
 public class MediaDto : BaseDto
@@ -8,6 +10,8 @@ public class MediaDto : BaseDto
     public string? Description { get; set; }
     public long SizeInBytes { get; set; }
     public string? FileExtension { get; set; }
+    public Stream? Stream { get; set; }
+    public string? ContentType { get; set; }
 
     public IList<TagDto> Tags { get; set; } = new List<TagDto>();
 
