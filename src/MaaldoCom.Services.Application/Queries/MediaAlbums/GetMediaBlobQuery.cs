@@ -24,9 +24,10 @@ public class GetMediaBlobQueryHandler(ICacheManager cacheManager, IBlobsProvider
             return Result.Fail<MediaDto>(new BlobNotFoundError(containerName, $"MediaAlbum:{query.MediaAlbumId}/Media:{query.MediaId}"));
         }
 
-        var blobName = query.MediaType is "thumb" or "viewer" ?
-            $"{mediaAlbum!.UrlFriendlyName}/{query.MediaType}/{query.MediaType}-{MediaAlbumHelper.GetMetaFileExtension(media.FileName!)}" : // thumb or viewer
-            $"{mediaAlbum!.UrlFriendlyName}/{query.MediaType}/{media.FileName}";                    // original
+        var thumbOrViewerBlobName = $"{mediaAlbum!.UrlFriendlyName}/{query.MediaType}/{query.MediaType}-{MediaAlbumHelper.GetMetaFileExtension(media.FileName!)}";
+        var originalBlobName = $"{mediaAlbum.UrlFriendlyName}/{query.MediaType}/{media.FileName}";
+
+        var blobName = query.MediaType is "thumb" or "viewer" ? thumbOrViewerBlobName : originalBlobName;
 
         var dto = await blobsProvider.GetBlobAsync(containerName, blobName, ct);
 
