@@ -38,6 +38,15 @@ public class CacheManager : ICacheManager
         return mediaAlbumDetail;
     }
 
+    public async Task<MediaAlbumDto?> GetHotshotsMediaAlbumDetailAsync(CancellationToken cancellationToken)
+    {
+        var mediaAlbums = await HybridCache.GetOrCreateAsync<MediaAlbumDto>(
+            $"{CacheKeys.MediaAlbumList}:hotshots",
+            async _ => await GetHotshotsMediaAlbumDetailFromDbAsync(cancellationToken), cancellationToken: cancellationToken);
+
+        return mediaAlbums;
+    }
+
     public async Task<IEnumerable<TagDto>> ListTagsAsync(CancellationToken cancellationToken)
     {
         var tags = await HybridCache.GetOrCreateAsync(
@@ -108,6 +117,30 @@ public class CacheManager : ICacheManager
             .FirstOrDefaultAsync(ma => ma.Id == id, cancellationToken);
 
         return entity!.ToDto();
+    }
+
+    private async Task<MediaAlbumDto> GetHotshotsMediaAlbumDetailFromDbAsync(CancellationToken cancellationToken)
+    {
+        var entity = await MaaldoComDbContext.MediaAlbums
+            .Where(ma => ma.UrlFriendlyName == "hotshots")
+            .Include(ma => ma.MediaAlbumTags)
+            .ThenInclude(mat => mat.Tag)
+            .Include(ma => ma.Media.OrderBy(m => m.Created))
+            .ThenInclude(m => m.MediaTags)
+            .ThenInclude(mt => mt.Tag)
+            .AsSplitQuery()
+            .FirstOrDefaultAsync(cancellationToken);
+
+        var dto = entity!.ToDto();
+
+        var taggedMedia = await MaaldoComDbContext.Media
+            .Where(m => m.MediaAlbumId != entity!.Id && m.MediaTags.Any(mt => mt.Tag.Name == "hotshots"))
+            .OrderBy(m => m.Created)
+            .ToListAsync(cancellationToken);
+
+        foreach (var media in taggedMedia) { dto.Media.Add(media.ToDto()); }
+
+        return dto;
     }
 
     private async Task<IEnumerable<TagDto>> ListTagsFromDbAsync(CancellationToken cancellationToken)

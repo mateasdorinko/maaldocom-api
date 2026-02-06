@@ -23,7 +23,8 @@ public class GetMediaAlbumDetailQuery : BaseQuery, ICommand<Result<MediaAlbumDto
     public readonly object SearchValue;
 }
 
-public class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager) : BaseQueryHandler(cacheManager), ICommandHandler<GetMediaAlbumDetailQuery, Result<MediaAlbumDto>>
+public class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager)
+    : BaseQueryHandler(cacheManager), ICommandHandler<GetMediaAlbumDetailQuery, Result<MediaAlbumDto>>
 {
     public async Task<Result<MediaAlbumDto>> ExecuteAsync(GetMediaAlbumDetailQuery query, CancellationToken ct)
     {
