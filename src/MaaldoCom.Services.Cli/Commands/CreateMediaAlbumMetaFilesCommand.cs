@@ -47,12 +47,24 @@ public sealed class CreateMediaAlbumMetaFilesCommand(IMediaMetaDataCreator media
             }).ToList()
         };
 
-        await mediaMetaDataCreator.CreateMediaMetaDataFilesAsync(settings.Path, cancellationToken);
+        await AnsiConsole.Status()
+            .Spinner(Spinner.Known.Dots)
+            .StartAsync("Abra cadabra...", async _ =>
+            {
+                await mediaMetaDataCreator.CreateMediaMetaDataFilesAsync(settings.Path, AnsiConsole.MarkupLine, cancellationToken);
+            });
 
         var json = JsonSerializer.Serialize(postRequest, options: new JsonSerializerOptions { WriteIndented = true });
 
-        await File.WriteAllTextAsync($"{settings.Path}/request.json", json, cancellationToken);
-        Console.WriteLine("PostMediaAlbumRequest file (request.json) created successfully.");
+        const string requestFileName = "create-mediaalbum-request.json";
+
+        await File.WriteAllTextAsync($"{settings.Path}/{requestFileName}", json, cancellationToken);
+
+        AnsiConsole.MarkupLine(string.Empty);
+        AnsiConsole.MarkupLine($"[grey]Media album metadata files created successfully.[/]");
+        AnsiConsole.MarkupLine(string.Empty);
+        AnsiConsole.MarkupLine($"[grey]PostMediaAlbumRequest requestion file created successfully:[/] [yellow]{requestFileName}[/]");
+        AnsiConsole.MarkupLine(string.Empty);
 
         return 0;
     }

@@ -2,17 +2,20 @@
 
 public static class MediaAlbumHelper
 {
+    private static readonly string[] picExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp" };
+    private static readonly string[] vidExtensions = [".mp4", ".mov", ".avi", ".mkv", ".wmv", ".flv",".webm"];
+
     public static bool IsPic(FileInfo file)
-    {
-        var picExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp" };
-        return picExtensions.Contains(file.Extension, StringComparer.OrdinalIgnoreCase);
-    }
+        => picExtensions.Contains(file.Extension, StringComparer.OrdinalIgnoreCase);
+
+    public static bool IsPic(string fileName)
+        => picExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase);
 
     public static bool IsVid(FileInfo file)
-    {
-        var vidExtensions = new[] { ".mp4", ".mov", ".avi", ".mkv", ".wmv", ".flv",".webm" };
-        return vidExtensions.Contains(file.Extension, StringComparer.OrdinalIgnoreCase);
-    }
+        => vidExtensions.Contains(file.Extension, StringComparer.OrdinalIgnoreCase);
+
+    public static bool IsVid(string fileName)
+        => vidExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase);
 
     public static void SanitizeFileName(FileInfo file)
     {
@@ -36,5 +39,17 @@ public static class MediaAlbumHelper
         });
 
         return string.Join(" ", words);
+    }
+
+    // this is crap... refactor at some point
+    public static string GetThumbnailMetaFile(string originalFileName)
+    {
+        var currentExtension = Path.GetExtension(originalFileName);
+        var thumbNailFile = vidExtensions.Contains(currentExtension, StringComparer.OrdinalIgnoreCase)
+            ? Path.ChangeExtension(originalFileName, ".jpg")
+            : originalFileName;
+        var prefixedThumbNailFile = $"{Constants.ThumbnailFolderName}-{thumbNailFile}";
+
+        return prefixedThumbNailFile;
     }
 }

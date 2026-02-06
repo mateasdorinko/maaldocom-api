@@ -7,17 +7,29 @@ public class GetMediaByIdEndpoint : Endpoint<GetMediaByIdRequest, GetMediaRespon
 {
     public override void Configure()
     {
-        Get("/asdfasdf");
+        Get($"/media-albums/{{mediaAlbumId:guid}}/media/{{mediaId:guid}}/{{mediaType:regex(original|viewer|thumb)}}");
         Description(x => x
             .WithName("GetMediaById")
-            .WithSummary("Gets a media item by its unique identifier within a media album."));
-        ResponseCache(60);
+            .WithSummary("Gets a media item stream by its unique identifier within a media album."));
+        //ResponseCache(2600000); // about a month
         AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));
     }
 
     public override async Task HandleAsync(GetMediaByIdRequest req, CancellationToken ct)
     {
-        await Send.RedirectAsync("https://maaldo.com/logo.png", allowRemoteRedirects: true);
+        var result = await new GetMediaBlobQuery(User, req.MediaAlbumId, req.MediaId, req.MediaType).ExecuteAsync(ct);
+
+        await result.Match(
+            onSuccess: async _ =>
+            {
+                await using var stream = result.Value.Stream!;
+                // pass filename only for download (sets Content-Disposition: attachment)
+                // pass null for viewer/thumb to stream inline (no Content-Disposition header)
+                var fileName = req.MediaType == "original" ? result.Value.FileName : null;
+                await Send.StreamAsync(stream, fileName, result.Value.SizeInBytes, result.Value.ContentType!, cancellation: ct);
+            },
+            onFailure: _ => Send.NotFoundAsync(ct)
+        );
     }
 }

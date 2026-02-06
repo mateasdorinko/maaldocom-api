@@ -6,7 +6,7 @@ namespace MaaldoCom.Services.Infrastructure.MediaMetaData;
 
 public class FFmpegMediaMetaDataCreator : IMediaMetaDataCreator
 {
-    public async Task CreateMediaMetaDataFilesAsync(string mediaAlbumFolderPath, CancellationToken cancellationToken)
+    public async Task CreateMediaMetaDataFilesAsync(string mediaAlbumFolderPath, Action<string> writeToConsole, CancellationToken cancellationToken)
     {
         var mediaAlbumFolder = new DirectoryInfo(mediaAlbumFolderPath);
         var mediaAlbumFiles = mediaAlbumFolder.GetFiles();
@@ -22,13 +22,11 @@ public class FFmpegMediaMetaDataCreator : IMediaMetaDataCreator
             if (MediaAlbumHelper.IsPic(file)) { await CreatePicMetaFilesAsync(file, mediaAlbumFolderPath); }
             if (MediaAlbumHelper.IsVid(file)) { await CreateVidMetaFileAsync(file, mediaAlbumFolderPath); }
 
-            Console.WriteLine($"Processed: {file.FullName}");
+            writeToConsole($"Processed: {file.FullName}");
 
             // move originals to original directory
             file.MoveTo($@"{file.DirectoryName}\{Constants.OriginalResFolderName}\{file.Name}");
         }
-
-        Console.WriteLine("\r\nMedia metadata files created successfully.");
     }
 
     private static async Task CreatePicMetaFilesAsync(FileInfo file, string mediaAlbumFolderPath)

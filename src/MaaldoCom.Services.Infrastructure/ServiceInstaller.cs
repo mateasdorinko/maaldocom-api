@@ -1,3 +1,4 @@
+using MaaldoCom.Services.Infrastructure.Blobs;
 using MaaldoCom.Services.Infrastructure.Database;
 using MaaldoCom.Services.Infrastructure.Cache;
 using MaaldoCom.Services.Infrastructure.Email;
@@ -18,7 +19,9 @@ public static class ServiceInstaller
         });
         services.AddScoped<IMaaldoComDbContext>(provider => provider.GetRequiredService<MaaldoComDbContext>());
         services.AddScoped<ICacheManager, CacheManager>();
-        services.AddScoped<IEmailProvider, MailGunEmailProvider>(_
+        services.AddSingleton<IBlobsProvider, AzureStorageBlobsProvider>(_
+            => new AzureStorageBlobsProvider(configuration["azure-storage-account-connection-string"]!));
+        services.AddSingleton<IEmailProvider, MailGunEmailProvider>(_
             => new MailGunEmailProvider(configuration["mailgun-api-key"]!,
                 configuration["mailgun-domain"]!,
                 configuration["mailgun-base-url"]!,
