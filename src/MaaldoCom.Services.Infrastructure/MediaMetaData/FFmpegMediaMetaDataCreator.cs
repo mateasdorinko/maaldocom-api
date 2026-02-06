@@ -11,7 +11,7 @@ public class FFmpegMediaMetaDataCreator : IMediaMetaDataCreator
         var mediaAlbumFolder = new DirectoryInfo(mediaAlbumFolderPath);
         var mediaAlbumFiles = mediaAlbumFolder.GetFiles();
 
-        mediaAlbumFolder.CreateSubdirectory(Constants.OriginalResFolderName);
+        mediaAlbumFolder.CreateSubdirectory(Constants.OriginalResolutionFolderName);
         mediaAlbumFolder.CreateSubdirectory(Constants.ViewerFolderName);
         mediaAlbumFolder.CreateSubdirectory(Constants.ThumbnailFolderName);
 
@@ -25,7 +25,7 @@ public class FFmpegMediaMetaDataCreator : IMediaMetaDataCreator
             writeToConsole($"Processed: {file.FullName}");
 
             // move originals to original directory
-            file.MoveTo($@"{file.DirectoryName}\{Constants.OriginalResFolderName}\{file.Name}");
+            file.MoveTo($@"{file.DirectoryName}\{Constants.OriginalResolutionFolderName}\{file.Name}");
         }
     }
 

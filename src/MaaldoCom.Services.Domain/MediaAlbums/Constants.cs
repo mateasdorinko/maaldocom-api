@@ -2,7 +2,7 @@
 
 public static class Constants
 {
-    public static string OriginalResFolderName => "original";
+    public static string OriginalResolutionFolderName => "original";
     public static string ViewerFolderName => "viewer";
     public static string ThumbnailFolderName => "thumb";
 

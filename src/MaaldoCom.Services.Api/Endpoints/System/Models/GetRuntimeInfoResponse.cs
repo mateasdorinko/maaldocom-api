@@ -2,6 +2,8 @@
 
 public class GetRuntimeInfoResponse
 {
-    public string X { get; set; } = string.Empty;
-    public string Y { get; set; } = string.Empty;
+    public string? AspNetCoreEnvironment { get; set; }
+    public string? MachineName { get; set; }
+    public string? OsVersion { get; set; }
+    public string? ClrVersion { get; set; }
 }

@@ -62,8 +62,29 @@ namespace MaaldoCom.Services.Cli.Infrastructure
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Get("/support/cache-refresh")]
+        [Get("/system/cache-refresh")]
         Task RefreshCache();
+
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">
+        /// Thrown when the request returns a non-success status code:
+        /// <list type="table">
+        /// <listheader>
+        /// <term>Status</term>
+        /// <description>Description</description>
+        /// </listheader>
+        /// <item>
+        /// <term>401</term>
+        /// <description>Unauthorized</description>
+        /// </item>
+        /// <item>
+        /// <term>403</term>
+        /// <description>Forbidden</description>
+        /// </item>
+        /// </list>
+        /// </exception>
+        [Get("/system/runtime-info")]
+        Task GetRuntimeInfo();
 
         /// <param name="id">id parameter</param>
         /// <returns>Success</returns>

@@ -5,17 +5,11 @@ public static class MediaAlbumHelper
     private static readonly string[] picExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp" };
     private static readonly string[] vidExtensions = [".mp4", ".mov", ".avi", ".mkv", ".wmv", ".flv",".webm"];
 
-    public static bool IsPic(FileInfo file)
-        => picExtensions.Contains(file.Extension, StringComparer.OrdinalIgnoreCase);
+    public static bool IsPic(FileInfo file) => IsPic(file.Name);
+    public static bool IsPic(string fileName) => picExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase);
 
-    public static bool IsPic(string fileName)
-        => picExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase);
-
-    public static bool IsVid(FileInfo file)
-        => vidExtensions.Contains(file.Extension, StringComparer.OrdinalIgnoreCase);
-
-    public static bool IsVid(string fileName)
-        => vidExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase);
+    public static bool IsVid(FileInfo file) => IsVid(file.Name);
+    public static bool IsVid(string fileName) => vidExtensions.Contains(Path.GetExtension(fileName), StringComparer.OrdinalIgnoreCase);
 
     public static void SanitizeFileName(FileInfo file)
     {
@@ -28,7 +22,7 @@ public static class MediaAlbumHelper
         file.MoveTo($"{file.DirectoryName}\\{newName}", true);
     }
 
-    public static string GetNameFromFolder(string folderName)
+    public static string GetProperNameFromFolder(string folderName)
     {
         var parts = folderName.Split(['-'], StringSplitOptions.RemoveEmptyEntries);
 
@@ -41,14 +35,28 @@ public static class MediaAlbumHelper
         return string.Join(" ", words);
     }
 
-    // this is crap... refactor at some point
-    public static string GetThumbnailMetaFile(string originalFileName)
+    public static string GetOriginalMetaFilePath(string mediaAlbumFolder, string originalFileName)
+    {
+        return $"{mediaAlbumFolder}/{Constants.OriginalResolutionFolderName}/{originalFileName}";
+    }
+
+    public static string GetViewerMetaFilePath(string mediaAlbumFolder, string originalFileName)
+    {
+        var currentExtension = Path.GetExtension(originalFileName);
+        var viewerFile = vidExtensions.Contains(currentExtension, StringComparer.OrdinalIgnoreCase)
+            ? $"{mediaAlbumFolder}/{Constants.OriginalResolutionFolderName}/{originalFileName}"                         // vid - viewer file is same as original
+            : $"{mediaAlbumFolder}/{Constants.ViewerFolderName}/{Constants.ViewerFolderName}-{originalFileName}";       // pic - viewer file is in viewer folder
+
+        return viewerFile;
+    }
+
+    public static string GetThumbnailMetaFilePath(string mediaAlbumFolder, string originalFileName)
     {
         var currentExtension = Path.GetExtension(originalFileName);
         var thumbNailFile = vidExtensions.Contains(currentExtension, StringComparer.OrdinalIgnoreCase)
-            ? Path.ChangeExtension(originalFileName, ".jpg")
-            : originalFileName;
-        var prefixedThumbNailFile = $"{Constants.ThumbnailFolderName}-{thumbNailFile}";
+            ? Path.ChangeExtension(originalFileName, ".jpg")                                               // vid - thumbnail is jpg of the video
+            : originalFileName;                                                                                         // pic - thumbnail type is same as original
+        var prefixedThumbNailFile = $"{mediaAlbumFolder}/{Constants.ThumbnailFolderName}/{Constants.ThumbnailFolderName}-{thumbNailFile}";
 
         return prefixedThumbNailFile;
     }

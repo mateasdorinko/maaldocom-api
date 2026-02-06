@@ -15,7 +15,13 @@ public class GetRuntimeInfoEndpoint : EndpointWithoutRequest
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var response = new GetRuntimeInfoResponse { };
+        var response = new GetRuntimeInfoResponse
+        {
+            AspNetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")!,
+            MachineName = Environment.MachineName,
+            OsVersion = Environment.OSVersion.ToString(),
+            ClrVersion = Environment.Version.ToString(),
+        };
 
         await Send.OkAsync(response, ct);
     }

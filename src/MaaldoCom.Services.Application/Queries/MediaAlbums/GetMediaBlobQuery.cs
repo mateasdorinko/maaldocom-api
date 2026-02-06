@@ -25,19 +25,17 @@ public class GetMediaBlobQueryHandler(ICacheManager cacheManager, IBlobsProvider
         if (media == null) { return notFoundResult; }
 
         // account for all mutations of blob names based on media type (original/viewer/thumb) and file type (pic/vid)
-        string blobName = string.Empty;
+        string blobName;
         switch (query.MediaType)
         {
             case "original":
-                blobName = $"{mediaAlbum!.UrlFriendlyName}/{query.MediaType}/{media.FileName}";
+                blobName = $"{MediaAlbumHelper.GetOriginalMetaFilePath(mediaAlbum?.UrlFriendlyName!, media.FileName!)}";
                 break;
             case "viewer":
-                blobName = MediaAlbumHelper.IsVid(media.FileName!)
-                    ? $"{mediaAlbum!.UrlFriendlyName}/original/{media.FileName}"
-                    : $"{mediaAlbum!.UrlFriendlyName}/{query.MediaType}/{query.MediaType}-{media.FileName}";
+                blobName = $"{MediaAlbumHelper.GetViewerMetaFilePath(mediaAlbum?.UrlFriendlyName!, media.FileName!)}";
                 break;
             case "thumb":
-                blobName = $"{mediaAlbum!.UrlFriendlyName}/{query.MediaType}/{MediaAlbumHelper.GetThumbnailMetaFile(media.FileName!)}";
+                blobName = $"{MediaAlbumHelper.GetThumbnailMetaFilePath(mediaAlbum?.UrlFriendlyName!, media.FileName!)}";
                 break;
             default:
                 return notFoundResult;

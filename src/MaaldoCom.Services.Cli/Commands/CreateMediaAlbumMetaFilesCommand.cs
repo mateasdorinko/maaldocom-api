@@ -32,7 +32,7 @@ public sealed class CreateMediaAlbumMetaFilesCommand(IMediaMetaDataCreator media
 
         var postRequest = new PostMediaAlbumRequest
         {
-            Name = MediaAlbumHelper.GetNameFromFolder(mediaAlbumFolder.Name),
+            Name = MediaAlbumHelper.GetProperNameFromFolder(mediaAlbumFolder.Name),
             UrlFriendlyName = mediaAlbumFolder.Name,
             Description = string.Empty,
             Created = new DateTimeOffset(now.Year, now.Month, now.Day, 12, 0, 0, TimeSpan.Zero),
@@ -55,8 +55,7 @@ public sealed class CreateMediaAlbumMetaFilesCommand(IMediaMetaDataCreator media
             });
 
         var json = JsonSerializer.Serialize(postRequest, options: new JsonSerializerOptions { WriteIndented = true });
-
-        const string requestFileName = "create-mediaalbum-request.json";
+        const string requestFileName = $"post-mediaalbum-request.json";
 
         await File.WriteAllTextAsync($"{settings.Path}/{requestFileName}", json, cancellationToken);
 
