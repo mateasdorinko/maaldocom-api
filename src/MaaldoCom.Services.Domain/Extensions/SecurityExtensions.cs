@@ -5,7 +5,7 @@ public static class SecurityExtensions
     extension(ClaimsPrincipal user)
     {
         public string? GetUserId()
-            => user.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            => user.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "guest";
 
         public IEnumerable<string> GetUserClaims()
         {

@@ -1,4 +1,5 @@
 ﻿using MaaldoCom.Services.Api.Endpoints.System.Models;
+using MaaldoCom.Services.Domain.Extensions;
 
 namespace MaaldoCom.Services.Api.Endpoints.System;
 
@@ -18,9 +19,12 @@ public class GetRuntimeInfoEndpoint : EndpointWithoutRequest
         var response = new GetRuntimeInfoResponse
         {
             AspNetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")!,
+            ClrVersion = Environment.Version.ToString(),
+            Is64BitSystem = Environment.Is64BitOperatingSystem,
+            Is64BitProcess = Environment.Is64BitProcess,
             MachineName = Environment.MachineName,
             OsVersion = Environment.OSVersion.ToString(),
-            ClrVersion = Environment.Version.ToString(),
+            User = User.GetUserId()
         };
 
         await Send.OkAsync(response, ct);
