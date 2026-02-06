@@ -31,6 +31,7 @@ internal static class UrlMaker
     public static string GetTagUrl(Guid id) => GetTagUrl(id.ToString());
     public static string GetTagUrl(string idOrName) => $"{TagsRoute}/{idOrName}";
 
-    public const string SupportRoute = "/support";
-    public static string GetCacheRefreshUrl() => $"{SupportRoute}/cache-refresh";
+    public const string SystemRoute = "/system";
+    public static string GetCacheRefreshUrl() => $"{SystemRoute}/cache-refresh";
+    public static string GetRuntimeInfoUrl() => $"{SystemRoute}/runtime-info";
 }

@@ -1,6 +1,6 @@
 ﻿using MaaldoCom.Services.Application.Queries.Support;
 
-namespace MaaldoCom.Services.Api.Endpoints.Support;
+namespace MaaldoCom.Services.Api.Endpoints.System;
 
 public class GetCacheRefreshEndpoint : EndpointWithoutRequest
 {

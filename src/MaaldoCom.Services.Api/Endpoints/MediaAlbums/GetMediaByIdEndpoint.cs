@@ -11,7 +11,7 @@ public class GetMediaByIdEndpoint : Endpoint<GetMediaByIdRequest, GetMediaRespon
         Description(x => x
             .WithName("GetMediaById")
             .WithSummary("Gets a media item stream by its unique identifier within a media album."));
-        //ResponseCache(2600000); // about a month
+        ResponseCache(2600000); // about a month
         AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));
     }

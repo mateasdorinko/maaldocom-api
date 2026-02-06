@@ -105,6 +105,7 @@ namespace MaaldoCom.Services.Cli.Infrastructure
 
         /// <param name="mediaAlbumId">mediaAlbumId parameter</param>
         /// <param name="mediaId">mediaId parameter</param>
+        /// <param name="mediaType">mediaType parameter</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">
         /// Thrown when the request returns a non-success status code:
@@ -120,8 +121,8 @@ namespace MaaldoCom.Services.Cli.Infrastructure
         /// </list>
         /// </exception>
         [Headers("Accept: application/json")]
-        [Get("/media-albums/{mediaAlbumId}/media/{mediaId}")]
-        Task<GetMediaResponse> GetMediaById(System.Guid mediaAlbumId, System.Guid mediaId);
+        [Get("/media-albums/{mediaAlbumId}/media/{mediaId}/{mediaType}")]
+        Task<GetMediaResponse> GetMediaById(System.Guid mediaAlbumId, System.Guid mediaId, string mediaType);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
@@ -322,11 +323,14 @@ namespace MaaldoCom.Services.Cli.Infrastructure
         [JsonPropertyName("tags")]
         public ICollection<string> Tags { get; set; }
 
-        [JsonPropertyName("blobUrl")]
-        public string BlobUrl { get; set; }
-
         [JsonPropertyName("href")]
         public string Href { get; set; }
+
+        [JsonPropertyName("thumbHref")]
+        public string ThumbHref { get; set; }
+
+        [JsonPropertyName("viewerHref")]
+        public string ViewerHref { get; set; }
 
     }
 
@@ -351,6 +355,9 @@ namespace MaaldoCom.Services.Cli.Infrastructure
 
         [JsonPropertyName("altHref")]
         public string AltHref { get; set; }
+
+        [JsonPropertyName("thumbHref")]
+        public string ThumbHref { get; set; }
 
     }
 
