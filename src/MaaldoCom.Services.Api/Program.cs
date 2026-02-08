@@ -87,9 +87,12 @@ builder.Services
 
 if (!string.IsNullOrEmpty(otelEndpoint))
 {
-    Action<OtlpExporterOptions> otlpExporterOptions = options =>
+    // Force explicit bucket histograms; Grafana Cloud does not support ExponentialHistogram
+    Environment.SetEnvironmentVariable("OTEL_EXPORTER_OTLP_METRICS_DEFAULT_HISTOGRAM_AGGREGATION", "explicit_bucket_histogram");
+
+    Action<OtlpExporterOptions> otlpExporterOptions(string signalPath) => options =>
     {
-        options.Endpoint = new Uri(otelEndpoint);
+        options.Endpoint = new Uri($"{otelEndpoint}{signalPath}");
         options.Protocol = OtlpExportProtocol.HttpProtobuf;
         options.Headers = otelHeaders;
     };
@@ -109,7 +112,11 @@ if (!string.IsNullOrEmpty(otelEndpoint))
         {
             metrics.AddAspNetCoreInstrumentation();
             metrics.AddHttpClientInstrumentation();
-            metrics.AddOtlpExporter(otlpExporterOptions);
+            metrics.AddOtlpExporter((exporterOptions, metricReaderOptions) =>
+            {
+                otlpExporterOptions("/v1/metrics")(exporterOptions);
+                metricReaderOptions.TemporalityPreference = MetricReaderTemporalityPreference.Cumulative;
+            });
         })
         .WithTracing(tracing =>
         {
@@ -117,11 +124,11 @@ if (!string.IsNullOrEmpty(otelEndpoint))
             tracing.AddAspNetCoreInstrumentation();
             //tracing.AddEntityFrameworkCoreInstrumentation();
             //tracing.AddSource();
-            tracing.AddOtlpExporter(otlpExporterOptions);
+            tracing.AddOtlpExporter(otlpExporterOptions("/v1/traces"));
         })
         .WithLogging(logging =>
         {
-            logging.AddOtlpExporter(otlpExporterOptions);
+            logging.AddOtlpExporter(otlpExporterOptions("/v1/logs"));
 
             if (builder.Environment.IsDevelopment()) { logging.AddConsoleExporter(); }
         }, options =>
