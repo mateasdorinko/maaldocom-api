@@ -15,16 +15,11 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-const string apiDocTitle = "maaldo.com API Reference";
-var auth0Domain = builder.Configuration["auth0-domain"]!;
-var auth0Audience = builder.Configuration["auth0-audience"]!;
-var auth0ClientId = builder.Configuration["scalar-client-id"]!;
-var keyVaultUri = builder.Configuration["AzureKeyVaultUri"]!;
-var otelEndpoint = builder.Configuration["grafana-cloud-otel-exporter-otlp-endpoint"];
-var otelHeaders = builder.Configuration["grafana-cloud-otel-exporter-otlp-headers"];
-
 builder.Logging.ClearProviders();
 
+const string apiDocTitle = "maaldo.com API Reference";
+
+var keyVaultUri = builder.Configuration["AzureKeyVaultUri"]!;
 if (!string.IsNullOrEmpty(keyVaultUri))
 {
     var credential = new DefaultAzureCredential();
@@ -32,6 +27,12 @@ if (!string.IsNullOrEmpty(keyVaultUri))
 
     builder.Configuration.AddAzureKeyVault(secretClient, new KeyVaultSecretManager());
 }
+
+var auth0Domain = builder.Configuration["auth0-domain"]!;
+var auth0Audience = builder.Configuration["auth0-audience"]!;
+var auth0ClientId = builder.Configuration["scalar-client-id"]!;
+var otelEndpoint = builder.Configuration["grafana-cloud-otel-exporter-otlp-endpoint"];
+var otelHeaders = builder.Configuration["grafana-cloud-otel-exporter-otlp-headers"];
 
 builder.Services
     .AddAuthentication(options =>
