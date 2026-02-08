@@ -20,8 +20,8 @@ var auth0Domain = builder.Configuration["auth0-domain"]!;
 var auth0Audience = builder.Configuration["auth0-audience"]!;
 var auth0ClientId = builder.Configuration["scalar-client-id"]!;
 var keyVaultUri = builder.Configuration["AzureKeyVaultUri"]!;
-var otelEndpoint = builder.Configuration["grafana-cloud-otel-exporter-otlp-endpoint"]!;
-var otelHeaders = builder.Configuration["grafana-cloud-otel-exporter-otlp-headers"]!;
+var otelEndpoint = builder.Configuration["grafana-cloud-otel-exporter-otlp-endpoint"];
+var otelHeaders = builder.Configuration["grafana-cloud-otel-exporter-otlp-headers"];
 
 builder.Logging.ClearProviders();
 
@@ -84,48 +84,51 @@ builder.Services
     })
     .AddInfrastructureServices(builder.Configuration);
 
-Action<OtlpExporterOptions> otlpExporterOptions = options =>
+if (!string.IsNullOrEmpty(otelEndpoint))
 {
-    options.Endpoint = new Uri(otelEndpoint);
-    options.Protocol = OtlpExportProtocol.HttpProtobuf;
-    options.Headers = otelHeaders;
-};
+    Action<OtlpExporterOptions> otlpExporterOptions = options =>
+    {
+        options.Endpoint = new Uri(otelEndpoint);
+        options.Protocol = OtlpExportProtocol.HttpProtobuf;
+        options.Headers = otelHeaders;
+    };
 
-builder.Services.AddOpenTelemetry()
-    .ConfigureResource(resource =>
-    {
-        resource
-            .AddService("maaldo-com-api")
-            .AddAttributes(new List<KeyValuePair<string, object>>
-            {
-                new ("deployment.environment", builder.Environment.EnvironmentName),
-                new ("service.namespace", "maaldo-com")
-            });
-    })
-    .WithMetrics(metrics =>
-    {
-        metrics.AddAspNetCoreInstrumentation();
-        metrics.AddHttpClientInstrumentation();
-        metrics.AddOtlpExporter(otlpExporterOptions);
-    })
-    .WithTracing(tracing =>
-    {
-        tracing.AddHttpClientInstrumentation();
-        tracing.AddAspNetCoreInstrumentation();
-        //tracing.AddEntityFrameworkCoreInstrumentation();
-        //tracing.AddSource();
-        tracing.AddOtlpExporter(otlpExporterOptions);
-    })
-    .WithLogging(logging =>
-    {
-        logging.AddOtlpExporter(otlpExporterOptions);
+    builder.Services.AddOpenTelemetry()
+        .ConfigureResource(resource =>
+        {
+            resource
+                .AddService("maaldo-com-api")
+                .AddAttributes(new List<KeyValuePair<string, object>>
+                {
+                    new ("deployment.environment", builder.Environment.EnvironmentName),
+                    new ("service.namespace", "maaldo-com")
+                });
+        })
+        .WithMetrics(metrics =>
+        {
+            metrics.AddAspNetCoreInstrumentation();
+            metrics.AddHttpClientInstrumentation();
+            metrics.AddOtlpExporter(otlpExporterOptions);
+        })
+        .WithTracing(tracing =>
+        {
+            tracing.AddHttpClientInstrumentation();
+            tracing.AddAspNetCoreInstrumentation();
+            //tracing.AddEntityFrameworkCoreInstrumentation();
+            //tracing.AddSource();
+            tracing.AddOtlpExporter(otlpExporterOptions);
+        })
+        .WithLogging(logging =>
+        {
+            logging.AddOtlpExporter(otlpExporterOptions);
 
-        if (builder.Environment.IsDevelopment()) { logging.AddConsoleExporter(); }
-    }, options =>
-    {
-        options.IncludeScopes = true;
-        options.IncludeFormattedMessage = true;
-    });
+            if (builder.Environment.IsDevelopment()) { logging.AddConsoleExporter(); }
+        }, options =>
+        {
+            options.IncludeScopes = true;
+            options.IncludeFormattedMessage = true;
+        });
+}
 
 var app = builder.Build();
 
