@@ -5,7 +5,7 @@ namespace MaaldoCom.Services.Infrastructure.Email;
 
 public class MailGunEmailProvider(string apiKey, string domain, string apiBaseUrl, string defaultFrom, string defaultTo) : IEmailProvider
 {
-    public async Task<EmailResponse> SendEmailAsync(string to, string from, string subject, string body)
+    public async Task<EmailResponse> SendEmailAsync(string to, string from, string subject, string body, CancellationToken ct)
     {
         using var client = new HttpClient();
         client.BaseAddress = new Uri(apiBaseUrl);
@@ -20,16 +20,16 @@ public class MailGunEmailProvider(string apiKey, string domain, string apiBaseUr
         ]);
 
         var requestUri = $"/v3/{domain}/messages";
-        var response = await client.PostAsync(requestUri, formContent);
+        var response = await client.PostAsync(requestUri, formContent, ct);
 
         return ToEmailResponse(response);
     }
 
-    public async Task<EmailResponse> SendEmailAsync(string from, string subject, string body) =>
-        await SendEmailAsync(defaultTo, from, subject, body);
+    public async Task<EmailResponse> SendEmailAsync(string from, string subject, string body, CancellationToken ct) =>
+        await SendEmailAsync(defaultTo, from, subject, body, ct);
 
-    public async Task<EmailResponse> SendEmailAsync(string subject, string body) =>
-        await SendEmailAsync(defaultFrom, subject, body);
+    public async Task<EmailResponse> SendEmailAsync(string subject, string body, CancellationToken ct) =>
+        await SendEmailAsync(defaultFrom, subject, body, ct);
 
     private static EmailResponse ToEmailResponse(HttpResponseMessage response) =>
         new()

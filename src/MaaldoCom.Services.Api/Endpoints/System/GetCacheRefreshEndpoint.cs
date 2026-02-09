@@ -1,4 +1,4 @@
-﻿using MaaldoCom.Services.Application.Queries.Support;
+﻿using MaaldoCom.Services.Application.Queries.System;
 
 namespace MaaldoCom.Services.Api.Endpoints.System;
 

@@ -1,4 +1,4 @@
-﻿namespace MaaldoCom.Services.Application.Queries.Support;
+﻿namespace MaaldoCom.Services.Application.Queries.System;
 
 public class RefreshCacheQuery(ClaimsPrincipal user) : BaseQuery(user), ICommand<Result>;
 
