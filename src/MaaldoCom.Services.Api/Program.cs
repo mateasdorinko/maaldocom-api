@@ -7,6 +7,7 @@ using MaaldoCom.Services.Infrastructure.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
+builder.SetupDevEnvironmentOnlyConfig();
 
 const string apiDocTitle = "maaldo.com API Reference";
 
@@ -51,6 +52,6 @@ app.UseResponseCaching()
     .UseForwardedHeaders();
 
 app.UseScalar(apiDocTitle, auth0ClientId, auth0Audience);
-app.UseDevelopmentEnvironmentOnlyMiddleware();
+app.UseDevEnvironmentOnlyMiddleware();
 
 await app.RunAsync();

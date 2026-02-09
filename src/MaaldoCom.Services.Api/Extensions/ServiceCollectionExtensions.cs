@@ -12,7 +12,7 @@ using OpenTelemetry.Trace;
 
 namespace MaaldoCom.Services.Api.Extensions;
 
-public static class ServiceExtensions
+public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
@@ -115,7 +115,7 @@ public static class ServiceExtensions
                 {
                     logging.AddOtlpExporter(OtlpExporterOptions("/v1/logs"));
 
-                    if (builder.Environment.IsDevelopment()) { logging.AddConsoleExporter(); }
+                    //logging.AddConsoleExporter(); // only use this for debugging in dev only, not for prod use
                 }, options =>
                 {
                     options.IncludeScopes = true;

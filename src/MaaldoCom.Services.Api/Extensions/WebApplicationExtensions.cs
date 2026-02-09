@@ -2,7 +2,7 @@ using Scalar.AspNetCore;
 
 namespace MaaldoCom.Services.Api.Extensions;
 
-public static class PipelineExtensions
+public static class WebApplicationExtensions
 {
     extension(WebApplication app)
     {
@@ -28,7 +28,7 @@ public static class PipelineExtensions
             });
         }
 
-        public IApplicationBuilder UseDevelopmentEnvironmentOnlyMiddleware()
+        public IApplicationBuilder UseDevEnvironmentOnlyMiddleware()
         {
             if (app.Environment.IsDevelopment())
             {
@@ -38,7 +38,7 @@ public static class PipelineExtensions
             return app;
         }
 
-        public IApplicationBuilder UseProductionEnvironmentOnlyMiddleware()
+        public IApplicationBuilder UseProdEnvironmentOnlyMiddleware()
         {
             // if (app.Environment.IsProduction())
             // {
