@@ -7,10 +7,10 @@ public class PostMailEndpoint : Endpoint<PostEmailRequest>
 {
     public override void Configure()
     {
-        Post("/emails");
+        Post(UrlMaker.GetMailUrl());
         Description(x => x.WithName("PostEmail"));
         //AllowAnonymous();
-        Options(x => x.ExcludeFromDescription());
+        //Options(x => x.ExcludeFromDescription());
         Permissions("write:emails");
     }
 

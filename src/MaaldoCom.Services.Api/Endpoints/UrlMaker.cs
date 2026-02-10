@@ -36,4 +36,5 @@ internal static class UrlMaker
     public const string SystemRoute = "/system";
     public static string GetCacheRefreshUrl() => $"{SystemRoute}/cache-refreshes";
     public static string GetRuntimeInfoUrl() => $"{SystemRoute}/runtime-info";
+    public static string GetMailUrl() => $"{SystemRoute}/mail";
 }
