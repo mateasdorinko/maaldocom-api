@@ -20,12 +20,12 @@
     <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.15.0" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.15.0" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.15.0" />
-    <PackageVersion Include="Scalar.AspNetCore" Version="2.12.30" />
+    <PackageVersion Include="Scalar.AspNetCore" Version="2.12.36" />
     <PackageVersion Include="FastEndpoints.Messaging.Core" Version="7.2.0" />
     <PackageVersion Include="FluentResults" Version="4.0.0" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="10.0.2" />
-    <PackageVersion Include="Refit" Version="9.0.2" />
-    <PackageVersion Include="Refit.HttpClientFactory" Version="9.0.2" />
+    <PackageVersion Include="Refit" Version="10.0.1" />
+    <PackageVersion Include="Refit.HttpClientFactory" Version="10.0.1" />
     <PackageVersion Include="Refitter.SourceGenerator" Version="1.7.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

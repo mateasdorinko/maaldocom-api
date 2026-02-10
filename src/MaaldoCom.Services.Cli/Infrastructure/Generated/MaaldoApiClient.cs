@@ -62,7 +62,7 @@ namespace MaaldoCom.Services.Cli.Infrastructure
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
-        [Get("/system/cache-refresh")]
+        [Post("/system/cache-refreshes")]
         Task RefreshCache();
 
         /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
@@ -210,6 +210,25 @@ namespace MaaldoCom.Services.Cli.Infrastructure
         [Headers("Accept: application/json")]
         [Get("/knowledge")]
         Task<ICollection<GetKnowledgeResponse>> ListKnowledge();
+
+        /// <param name="postEmailRequest">postEmailRequest parameter</param>
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">
+        /// Thrown when the request returns a non-success status code:
+        /// <list type="table">
+        /// <listheader>
+        /// <term>Status</term>
+        /// <description>Description</description>
+        /// </listheader>
+        /// <item>
+        /// <term>403</term>
+        /// <description>Forbidden</description>
+        /// </item>
+        /// </list>
+        /// </exception>
+        [Headers("Content-Type: application/json")]
+        [Post("/emails")]
+        Task PostEmail([Body, AliasAs("PostEmailRequest")] PostEmailRequest postEmailRequest);
 
 
     }
@@ -496,6 +515,21 @@ namespace MaaldoCom.Services.Cli.Infrastructure
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class GetKnowledgeByIdRequest
     {
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PostEmailRequest
+    {
+
+        [JsonPropertyName("from")]
+        public string From { get; set; }
+
+        [JsonPropertyName("subject")]
+        public string Subject { get; set; }
+
+        [JsonPropertyName("body")]
+        public string Body { get; set; }
 
     }
 
