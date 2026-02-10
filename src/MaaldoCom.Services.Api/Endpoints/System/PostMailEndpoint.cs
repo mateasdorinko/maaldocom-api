@@ -8,7 +8,8 @@ public class PostMailEndpoint : Endpoint<PostMailRequest>
     public override void Configure()
     {
         Post(UrlMaker.GetMailUrl());
-        Description(x => x.WithName("PostEmail"));
+        Description(x => x.WithName("PostMail")
+            .WithSummary("Creates a new email."));
         //AllowAnonymous();
         //Options(x => x.ExcludeFromDescription());
         Permissions("write:emails");

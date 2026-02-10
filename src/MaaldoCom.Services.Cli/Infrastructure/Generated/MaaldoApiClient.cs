@@ -86,6 +86,29 @@ namespace MaaldoCom.Services.Cli.Infrastructure
         [Get("/system/runtime-info")]
         Task GetRuntimeInfo();
 
+        /// <param name="postMailRequest">postMailRequest parameter</param>
+        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
+        /// <exception cref="ApiException">
+        /// Thrown when the request returns a non-success status code:
+        /// <list type="table">
+        /// <listheader>
+        /// <term>Status</term>
+        /// <description>Description</description>
+        /// </listheader>
+        /// <item>
+        /// <term>401</term>
+        /// <description>Unauthorized</description>
+        /// </item>
+        /// <item>
+        /// <term>403</term>
+        /// <description>Forbidden</description>
+        /// </item>
+        /// </list>
+        /// </exception>
+        [Headers("Content-Type: application/json")]
+        [Post("/system/mail")]
+        Task PostEmail([Body, AliasAs("PostMailRequest")] PostMailRequest postMailRequest);
+
         /// <returns>Success</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>
         [Headers("Accept: application/json")]
@@ -211,29 +234,6 @@ namespace MaaldoCom.Services.Cli.Infrastructure
         [Get("/knowledge")]
         Task<ICollection<GetKnowledgeResponse>> ListKnowledge();
 
-        /// <param name="postEmailRequest">postEmailRequest parameter</param>
-        /// <returns>A <see cref="Task"/> that completes when the request is finished.</returns>
-        /// <exception cref="ApiException">
-        /// Thrown when the request returns a non-success status code:
-        /// <list type="table">
-        /// <listheader>
-        /// <term>Status</term>
-        /// <description>Description</description>
-        /// </listheader>
-        /// <item>
-        /// <term>401</term>
-        /// <description>Unauthorized</description>
-        /// </item>
-        /// <item>
-        /// <term>403</term>
-        /// <description>Forbidden</description>
-        /// </item>
-        /// </list>
-        /// </exception>
-        [Headers("Content-Type: application/json")]
-        [Post("/emails")]
-        Task PostEmail([Body, AliasAs("PostEmailRequest")] PostEmailRequest postEmailRequest);
-
 
     }
 
@@ -342,6 +342,21 @@ namespace MaaldoCom.Services.Cli.Infrastructure
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class GetTagByNameRequest
     {
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PostMailRequest
+    {
+
+        [JsonPropertyName("from")]
+        public string From { get; set; }
+
+        [JsonPropertyName("subject")]
+        public string Subject { get; set; }
+
+        [JsonPropertyName("body")]
+        public string Body { get; set; }
 
     }
 
@@ -519,21 +534,6 @@ namespace MaaldoCom.Services.Cli.Infrastructure
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial class GetKnowledgeByIdRequest
     {
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.6.3.0 (NJsonSchema v11.5.2.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class PostEmailRequest
-    {
-
-        [JsonPropertyName("from")]
-        public string From { get; set; }
-
-        [JsonPropertyName("subject")]
-        public string Subject { get; set; }
-
-        [JsonPropertyName("body")]
-        public string Body { get; set; }
 
     }
 
