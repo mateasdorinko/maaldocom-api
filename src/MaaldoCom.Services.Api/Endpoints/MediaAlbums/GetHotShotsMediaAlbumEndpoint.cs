@@ -11,8 +11,8 @@ public class GetHotShotsMediaAlbumEndpoint : EndpointWithoutRequest<GetMediaAlbu
         Description(x => x
             .WithName("GetHotshotsMediaAlbum")
             .WithSummary("Gets the Hotshots media album."));
-        ResponseCache(1200); // 20 minutes
         AllowAnonymous();
+        ResponseCache(1200); // 20 minutes
     }
 
     public override async Task HandleAsync(CancellationToken ct)

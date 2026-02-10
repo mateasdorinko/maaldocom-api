@@ -11,9 +11,9 @@ public class GetTagByNameEndpoint : Endpoint<GetTagByNameRequest, GetTagDetailRe
         Description(x => x
             .WithName("GetTagByName")
             .WithSummary("Gets a tag by its name and associated tagged entities."));
-        ResponseCache(60);
-        AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));
+        AllowAnonymous();
+        ResponseCache(60);
     }
 
     public override async Task HandleAsync(GetTagByNameRequest req, CancellationToken ct)

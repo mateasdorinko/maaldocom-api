@@ -11,8 +11,8 @@ public class ListMediaAlbumsEndpoint : EndpointWithoutRequest<IEnumerable<GetMed
         Description(x => x
             .WithName("ListMediaAlbums")
             .WithSummary("Lists all media albums."));
-        ResponseCache(60);
         AllowAnonymous();
+        ResponseCache(60);
     }
 
     public override async Task HandleAsync(CancellationToken ct)

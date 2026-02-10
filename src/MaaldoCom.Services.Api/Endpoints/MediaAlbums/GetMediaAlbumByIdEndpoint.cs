@@ -11,9 +11,9 @@ public class GetMediaAlbumByIdEndpoint : Endpoint<GetMediaAlbumByIdRequest, GetM
         Description(x => x
             .WithName("GetMediaAlbumById")
             .WithSummary("Gets a media album by its unique identifier and associated media items."));
-        ResponseCache(1200); // 20 minutes
-        AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));
+        AllowAnonymous();
+        ResponseCache(1200); // 20 minutes
     }
 
     public override async Task HandleAsync(GetMediaAlbumByIdRequest req, CancellationToken ct)

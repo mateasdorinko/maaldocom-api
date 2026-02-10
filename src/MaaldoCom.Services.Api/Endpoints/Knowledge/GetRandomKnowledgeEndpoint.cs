@@ -13,12 +13,12 @@ public class GetRandomKnowledgeEndpoint : EndpointWithoutRequest<GetKnowledgeRes
             .WithSummary("Gets a random knowledge item."));
         AllowAnonymous();
     }
-    
+
     public override async Task HandleAsync(CancellationToken ct)
     {
         var result = (await new GetRandomKnowledgeQuery(User).ExecuteAsync(ct));
         var response = result.Value.ToGetModel();
-        
+
         await Send.OkAsync(response, ct);
     }
 }

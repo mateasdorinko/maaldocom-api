@@ -6,7 +6,7 @@ public class GetCacheRefreshEndpoint : EndpointWithoutRequest
 {
     public override void Configure()
     {
-        Get(UrlMaker.GetCacheRefreshUrl());
+        Post(UrlMaker.GetCacheRefreshUrl());
         Description(x => x
             .WithName("RefreshCache")
             .WithSummary("Refreshes cached data"));

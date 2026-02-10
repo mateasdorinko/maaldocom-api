@@ -11,8 +11,8 @@ public class ListTagsEndpoint : EndpointWithoutRequest<IEnumerable<GetTagRespons
         Description(x => x
             .WithName("ListTags")
             .WithSummary("Lists all tags."));
-        ResponseCache(60);
         AllowAnonymous();
+        ResponseCache(60);
     }
 
     public override async Task HandleAsync(CancellationToken ct)

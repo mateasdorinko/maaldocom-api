@@ -11,9 +11,9 @@ public class GetTagByIdEndpoint : Endpoint<GetTagByIdRequest, GetTagDetailRespon
         Description(x => x
             .WithName("GetTagById")
             .WithSummary("Gets a tag by its unique identifier and associated tagged entities."));
-        ResponseCache(60);
-        AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));
+        AllowAnonymous();
+        ResponseCache(60);
     }
 
     public override async Task HandleAsync(GetTagByIdRequest req, CancellationToken ct)

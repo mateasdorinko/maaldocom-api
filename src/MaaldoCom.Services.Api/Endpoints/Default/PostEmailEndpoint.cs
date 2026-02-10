@@ -7,10 +7,11 @@ public class PostMailEndpoint : Endpoint<PostEmailRequest>
 {
     public override void Configure()
     {
-        Post("/email");
-        AllowAnonymous();
+        Post("/emails");
         Description(x => x.WithName("PostEmail"));
+        AllowAnonymous();
         //Options(x => x.ExcludeFromDescription());
+        Permissions("write:emails");
     }
 
     public override async Task HandleAsync(PostEmailRequest req, CancellationToken ct)

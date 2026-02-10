@@ -11,9 +11,9 @@ public class GetKnowledgeByIdEndpoint : Endpoint<GetKnowledgeByIdRequest, GetKno
         Description(x => x
             .WithName("GetKnowledgeById")
             .WithSummary("Gets a knowledge item by its ID."));
-        ResponseCache(60);
-        AllowAnonymous();
         Description(b => b.Produces(StatusCodes.Status404NotFound));
+        AllowAnonymous();
+        ResponseCache(60);
     }
 
     public override async Task HandleAsync(GetKnowledgeByIdRequest req, CancellationToken ct)

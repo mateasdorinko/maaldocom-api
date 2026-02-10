@@ -5,8 +5,8 @@ public class GetDefaultEndpoint : EndpointWithoutRequest
     public override void Configure()
     {
         Get("/");
-        AllowAnonymous();
         Description(x => x.WithName("GetDefault"));
+        AllowAnonymous();
         Options(x => x.ExcludeFromDescription());
     }
 

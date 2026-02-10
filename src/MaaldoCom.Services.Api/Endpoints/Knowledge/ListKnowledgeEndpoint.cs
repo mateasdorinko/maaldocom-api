@@ -11,15 +11,15 @@ public class ListKnowledgeEndpoint : EndpointWithoutRequest<IEnumerable<GetKnowl
         Description(x => x
             .WithName("ListKnowledge")
             .WithSummary("Lists all knowledge items."));
-        ResponseCache(60);
         AllowAnonymous();
+        ResponseCache(60);
     }
 
     public override async Task HandleAsync(CancellationToken ct)
     {
         var result = (await new ListKnowledgeQuery(User).ExecuteAsync(ct)).Value;
         var response = result.ToGetModels();
-        
+
         await Send.OkAsync(response, ct);
     }
 }

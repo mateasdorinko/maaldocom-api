@@ -8,10 +8,10 @@ public class GetRuntimeInfoEndpoint : EndpointWithoutRequest
     public override void Configure()
     {
         Get(UrlMaker.GetRuntimeInfoUrl());
-        Permissions("read:runtime-info");
         Description(x => x
             .WithName("GetRuntimeInfo")
             .WithSummary("Gets runtime info"));
+        Permissions("read:runtime-info");
     }
 
     public override async Task HandleAsync(CancellationToken ct)

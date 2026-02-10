@@ -30,6 +30,30 @@ public static class ServiceCollectionExtensions
             });
         }
 
+        public IServiceCollection AddMaaldoCors()
+        {
+            var corsOrigins = new[]
+            {
+                "http://localhost:3000",
+                "https://app-maaldocomweb-dev-cus.azurewebsites.net",
+                "https://app-maaldocomweb-tst-cus.azurewebsites.net",
+                "https://app-maaldocomweb-prd-cus.azurewebsites.net",
+                "https://www.maaldo.com",
+                "https://maaldo.com"
+            };
+
+            return services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    policy =>
+                    {
+                        policy.WithOrigins(corsOrigins)
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
+        }
+
         public IServiceCollection AddSwaggerDocumentForFastEndpoints(string apiDocTitle, string auth0Domain, string auth0Audience)
         {
             return services.SwaggerDocument(options =>

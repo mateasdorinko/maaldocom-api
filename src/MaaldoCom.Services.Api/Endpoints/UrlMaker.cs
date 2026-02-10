@@ -34,6 +34,6 @@ internal static class UrlMaker
     public static string GetTagUrl(string idOrName) => $"{TagsRoute}/{idOrName}";
 
     public const string SystemRoute = "/system";
-    public static string GetCacheRefreshUrl() => $"{SystemRoute}/cache-refresh";
+    public static string GetCacheRefreshUrl() => $"{SystemRoute}/cache-refreshes";
     public static string GetRuntimeInfoUrl() => $"{SystemRoute}/runtime-info";
 }
