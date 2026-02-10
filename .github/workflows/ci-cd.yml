@@ -88,6 +88,7 @@ jobs:
       - name: Publish coverage badges
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
+          cp -r ${{ github.workspace }}/results/coverage /tmp/coverage-badges
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git stash --include-untracked
@@ -99,7 +100,7 @@ jobs:
           fi
           rm -rf badges
           mkdir -p badges
-          cp ${{ github.workspace }}/results/coverage/badge_*.svg badges/
+          cp /tmp/coverage-badges/badge_*.svg badges/
           git add badges/
           git diff --cached --quiet && exit 0
           git commit -m "Update coverage badges"
