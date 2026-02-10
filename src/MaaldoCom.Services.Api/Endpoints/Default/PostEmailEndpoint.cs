@@ -10,7 +10,7 @@ public class PostMailEndpoint : Endpoint<PostEmailRequest>
         Post("/emails");
         Description(x => x.WithName("PostEmail"));
         //AllowAnonymous();
-        //Options(x => x.ExcludeFromDescription());
+        Options(x => x.ExcludeFromDescription());
         Permissions("write:emails");
     }
 
