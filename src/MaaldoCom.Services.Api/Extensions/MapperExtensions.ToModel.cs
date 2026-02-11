@@ -42,6 +42,7 @@ public static partial class MapperExtensions
         model.FileName = dto.FileName;
         model.Description = dto.Description;
         model.SizeInBytes = dto.SizeInBytes;
+        model.ContentType = dto.ContentType;
         model.Tags = dto.Tags?.Select(m => m.Name!).ToList()!;
 
         model.MediaAlbumId = dto.MediaAlbumId;

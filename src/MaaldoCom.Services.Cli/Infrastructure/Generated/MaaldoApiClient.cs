@@ -107,7 +107,7 @@ namespace MaaldoCom.Services.Cli.Infrastructure
         /// </exception>
         [Headers("Content-Type: application/json")]
         [Post("/system/mail")]
-        Task PostEmail([Body, AliasAs("PostMailRequest")] PostMailRequest postMailRequest);
+        Task PostMail([Body, AliasAs("PostMailRequest")] PostMailRequest postMailRequest);
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">Thrown when the request returns a non-success status code.</exception>

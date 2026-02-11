@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Hybrid;
+﻿using MaaldoCom.Services.Domain.MediaAlbums;
+using Microsoft.Extensions.Caching.Hybrid;
 
 namespace MaaldoCom.Services.Infrastructure.Cache;
 
@@ -60,7 +61,10 @@ public class CacheManager : ICacheManager
                 .AsSplitQuery()
                 .FirstOrDefaultAsync(ma => ma.Id == id, cancellationToken);
 
-            return entity!.ToDto();
+            var dto = entity!.ToDto();
+            SetMediaContentType(dto);
+
+            return dto;
         }
     }
 
@@ -85,6 +89,7 @@ public class CacheManager : ICacheManager
                 .FirstOrDefaultAsync(cancellationToken);
 
             var dto = entity!.ToDto();
+            SetMediaContentType(dto);
 
             var taggedMedia = await MaaldoComDbContext.Media
                 .Where(m => m.MediaAlbumId != entity!.Id && m.MediaTags.Any(mt => mt.Tag.Name == "hotshots"))
@@ -173,4 +178,13 @@ public class CacheManager : ICacheManager
     public async Task InvalidateCache(string cacheKey, CancellationToken cancellationToken) => await HybridCache.RemoveAsync(cacheKey, cancellationToken);
 
     private static string GetDetailCacheKey(string listCacheKey, Guid detailId) => $"{listCacheKey}:{detailId}";
+
+    private static void SetMediaContentType(MediaAlbumDto dto)
+    {
+        foreach (var media in dto.Media)
+        {
+            if (MediaAlbumHelper.IsPic(media.FileName!)) { media.ContentType = "image"; }
+            if (MediaAlbumHelper.IsVid(media.FileName!)) { media.ContentType = "video";}
+        }
+    }
 }

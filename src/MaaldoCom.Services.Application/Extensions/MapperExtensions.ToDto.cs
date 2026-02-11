@@ -77,6 +77,7 @@ public static partial class MapperExtensions
             Id = mt.Media.Id,
             MediaAlbumName = mt.Media.MediaAlbum!.Name,
             FileName = mt.Media.FileName,
+            MediaAlbumUrlFriendlyName = mt.Media.MediaAlbum!.UrlFriendlyName,
             MediaAlbumId = mt.Media.MediaAlbumId
         }).ToList()!;
 

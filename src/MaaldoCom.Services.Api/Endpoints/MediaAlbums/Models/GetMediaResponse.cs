@@ -12,6 +12,9 @@ public class GetMediaResponse : BaseModel
     public long SizeInBytes { get; set; }
 
     [JsonPropertyOrder(7)]
+    public string? ContentType { get; set; }
+
+    [JsonPropertyOrder(8)]
     public IEnumerable<string> Tags { get; set; } = new List<string>();
 
     [JsonIgnore]

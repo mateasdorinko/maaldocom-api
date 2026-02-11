@@ -36,12 +36,17 @@ public static partial class MapperExtensions
         model.MediaAlbums = dto.MediaAlbums.Select(ma => new GetMediaAlbumTagResponse
         {
             Name = ma.Name,
+            MediaAlbumId = ma.Id,
+            UrlFriendlyName = ma.UrlFriendlyName,
             Href = UrlMaker.GetMediaAlbumUrl(ma.Id)
         });
         model.Media = dto.Media.Select(m => new GetMediaTagResponse
         {
             Name = m.FileName,
+            MediaId = m.Id,
+            MediaAlbumId = m.MediaAlbumId,
             MediaAlbumName = m.MediaAlbumName,
+            MediaAlbumUrlFriendlyName = m.MediaAlbumUrlFriendlyName,
             Href = UrlMaker.GetMediaUrl(m.MediaAlbumId, m.Id)
         });
 
