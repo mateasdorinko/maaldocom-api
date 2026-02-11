@@ -283,8 +283,14 @@ namespace MaaldoCom.Services.Cli.Infrastructure
     public partial class GetMediaAlbumTagResponse
     {
 
+        [JsonPropertyName("mediaAlbumId")]
+        public System.Guid MediaAlbumId { get; set; }
+
         [JsonPropertyName("name")]
         public string Name { get; set; }
+
+        [JsonPropertyName("urlFriendlyName")]
+        public string UrlFriendlyName { get; set; }
 
         [JsonPropertyName("href")]
         public string Href { get; set; }
@@ -295,8 +301,17 @@ namespace MaaldoCom.Services.Cli.Infrastructure
     public partial class GetMediaTagResponse
     {
 
+        [JsonPropertyName("mediaAlbumId")]
+        public System.Guid MediaAlbumId { get; set; }
+
         [JsonPropertyName("mediaAlbumName")]
         public string MediaAlbumName { get; set; }
+
+        [JsonPropertyName("mediaAlbumUrlFriendlyName")]
+        public string MediaAlbumUrlFriendlyName { get; set; }
+
+        [JsonPropertyName("mediaId")]
+        public System.Guid MediaId { get; set; }
 
         [JsonPropertyName("name")]
         public string Name { get; set; }
@@ -387,6 +402,9 @@ namespace MaaldoCom.Services.Cli.Infrastructure
 
         [JsonPropertyName("sizeInBytes")]
         public long SizeInBytes { get; set; }
+
+        [JsonPropertyName("contentType")]
+        public string ContentType { get; set; }
 
         [JsonPropertyName("tags")]
         public ICollection<string> Tags { get; set; }
