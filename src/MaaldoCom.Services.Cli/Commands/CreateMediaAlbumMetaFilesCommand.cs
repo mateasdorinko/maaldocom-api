@@ -30,6 +30,8 @@ public sealed class CreateMediaAlbumMetaFilesCommand(IMediaMetaDataCreator media
         var mediaAlbumFolder = new DirectoryInfo(settings.Path);
         var now = DateTime.Now;
 
+        foreach (var file in mediaAlbumFolder.GetFiles()) { MediaAlbumHelper.SanitizeFileName(file); }
+
         var postRequest = new PostMediaAlbumRequest
         {
             Name = MediaAlbumHelper.GetProperNameFromFolder(mediaAlbumFolder.Name),

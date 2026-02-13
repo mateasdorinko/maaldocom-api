@@ -16,6 +16,7 @@ public static class MediaAlbumHelper
         // update name
         var newName = file.Name
             .Replace("_", "-")
+            .Replace(" ", "-")
             .ToLower();
 
         // replace file
