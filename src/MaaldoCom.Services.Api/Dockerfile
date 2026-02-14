@@ -25,4 +25,6 @@ RUN dotnet publish "./MaaldoCom.Services.Api.csproj" -c $BUILD_CONFIGURATION -o 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+  CMD wget -qO- http://localhost:8080/health || exit 1
 ENTRYPOINT ["dotnet", "MaaldoCom.Services.Api.dll"]
