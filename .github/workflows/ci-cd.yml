@@ -210,7 +210,9 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
       - name: Run EF migrations
-        run: ./efbundle --connection "${{ secrets.AZURE_DEV_MIGRATIONS_CONNECTION_STRING }}" --verbose
+        env:
+          CONNECTION_STRING: ${{ secrets.AZURE_DEV_MIGRATIONS_CONNECTION_STRING }}
+        run: ./efbundle --connection "$CONNECTION_STRING" --verbose
 
 #      - name: Wait for deployment to stabilize
 #        run: sleep 60

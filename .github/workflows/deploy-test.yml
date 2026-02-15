@@ -73,7 +73,9 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.get-latest.outputs.sha }}
 
       - name: Run EF migrations
-        run: ./efbundle --connection "${{ secrets.AZURE_TST_MIGRATIONS_CONNECTION_STRING }}" --verbose
+        env:
+          CONNECTION_STRING: ${{ secrets.AZURE_TST_MIGRATIONS_CONNECTION_STRING }}
+        run: ./efbundle --connection "$CONNECTION_STRING" --verbose
 
 #      - name: Wait for deployment to stabilize
 #        run: sleep 60

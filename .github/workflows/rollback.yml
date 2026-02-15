@@ -46,11 +46,13 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Verify image exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "Verifying image exists: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image-tag }}"
 
           # Login to GHCR
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
+          echo "$GH_TOKEN" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
 
           # Check if image exists
           if docker manifest inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image-tag }} > /dev/null 2>&1; then
@@ -93,7 +95,9 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image-tag }}
 
       - name: Run EF migrations
-        run: ./efbundle --connection "${{ inputs.environment == 'Dev' && secrets.AZURE_DEV_MIGRATIONS_CONNECTION_STRING || inputs.environment == 'Test' && secrets.AZURE_TST_MIGRATIONS_CONNECTION_STRING || secrets.AZURE_PRD_MIGRATIONS_CONNECTION_STRING }}" --verbose
+        env:
+          CONNECTION_STRING: ${{ inputs.environment == 'Dev' && secrets.AZURE_DEV_MIGRATIONS_CONNECTION_STRING || inputs.environment == 'Test' && secrets.AZURE_TST_MIGRATIONS_CONNECTION_STRING || secrets.AZURE_PRD_MIGRATIONS_CONNECTION_STRING }}
+        run: ./efbundle --connection "$CONNECTION_STRING" --verbose
         if: ${{ !inputs.skip-migrations }}
 
       - name: Wait for deployment to stabilize
