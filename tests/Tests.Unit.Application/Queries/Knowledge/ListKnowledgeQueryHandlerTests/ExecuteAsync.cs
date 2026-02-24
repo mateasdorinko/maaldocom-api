@@ -8,7 +8,6 @@ public class ExecuteAsync
     public async Task ExecuteAsync_Invoked_ReturnsKnowledgeList()
     {
         // arrange
-        var user = A.Fake<ClaimsPrincipal>();
         var cacheManager = A.Fake<ICacheManager>();
         var ct = CancellationToken.None;
 
@@ -19,8 +18,8 @@ public class ExecuteAsync
             new() { Id = Guid.NewGuid(), Title = "title3", Quote =  "quote3" }
         };
 
-        var query = new ListKnowledgeQuery(user);
-        var handler = new ListKnowledgeQueryHandler(cacheManager, NullLogger<ListKnowledgeQueryHandler>.Instance);
+        var query = new ListKnowledgeQuery();
+        var handler = new ListKnowledgeQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListKnowledgeAsync(ct)).Returns(knowledgeList);
 

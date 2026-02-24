@@ -8,7 +8,6 @@ public class ExecuteAsync
     public async Task ExecuteAsync_Invoked_ReturnsActiveMediaAlbumList()
     {
         // arrange
-        var user = A.Fake<ClaimsPrincipal>();
         var cacheManager = A.Fake<ICacheManager>();
         var ct = CancellationToken.None;
 
@@ -20,8 +19,8 @@ public class ExecuteAsync
             new() { Id = Guid.NewGuid(), Name = "Album 4", UrlFriendlyName =  "album-4", Active =  false  },
         };
 
-        var query = new ListMediaAlbumsQuery(user);
-        var handler = new ListMediaAlbumsQueryHandler(cacheManager, NullLogger<ListMediaAlbumsQueryHandler>.Instance);
+        var query = new ListMediaAlbumsQuery();
+        var handler = new ListMediaAlbumsQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListMediaAlbumsAsync(ct)).Returns(mediaAlbums);
 

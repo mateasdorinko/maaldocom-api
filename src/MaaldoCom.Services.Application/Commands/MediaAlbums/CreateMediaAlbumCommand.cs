@@ -2,17 +2,18 @@
 
 namespace MaaldoCom.Services.Application.Commands.MediaAlbums;
 
-public class CreateMediaAlbumCommand(ClaimsPrincipal user, MediaAlbumDto dto) : BaseCommand(user), ICommand<Result<MediaAlbumDto>>
+public class CreateMediaAlbumCommand(ClaimsPrincipal user, MediaAlbumDto dto) : ICommand<Result<MediaAlbumDto>>
 {
+    public ClaimsPrincipal User { get; } = user;
     public MediaAlbumDto MediaAlbum { get; set; } = dto;
 }
 
-public class CreateMediaAlbumCommandHandler(IMaaldoComDbContext maaldoComDbContext, ICacheManager cacheManager, ILogger<CreateMediaAlbumCommandHandler> logger)
-    : BaseCommandHandler<CreateMediaAlbumCommandHandler>(maaldoComDbContext, cacheManager, logger), ICommandHandler<CreateMediaAlbumCommand, Result<MediaAlbumDto>>
+public class CreateMediaAlbumCommandHandler(IMaaldoComDbContext maaldoComDbContext, ICacheManager cacheManager)
+    : ICommandHandler<CreateMediaAlbumCommand, Result<MediaAlbumDto>>
 {
     public async Task<Result<MediaAlbumDto>> ExecuteAsync(CreateMediaAlbumCommand command, CancellationToken ct)
     {
-        var validationResult = await new CreateMediaAlbumCommandValidator(MaaldoComDbContext).ValidateAsync(command, ct);
+        var validationResult = await new CreateMediaAlbumCommandValidator(maaldoComDbContext).ValidateAsync(command, ct);
 
         if (!validationResult.IsValid)
         {
@@ -30,7 +31,7 @@ public class CreateMediaAlbumCommandHandler(IMaaldoComDbContext maaldoComDbConte
             .ToList();
 
         // resolve existing tags from the database
-        var matchingTagsInDb = await MaaldoComDbContext.Tags
+        var matchingTagsInDb = await maaldoComDbContext.Tags
             .Where(t => allTagNamesInRequest.Contains(t.Name!.ToLower()))
             .ToListAsync(ct);
 
@@ -41,7 +42,7 @@ public class CreateMediaAlbumCommandHandler(IMaaldoComDbContext maaldoComDbConte
             .Select(name => new Tag { Name = name })
             .ToList();
 
-        if (newTagsToCreate.Count > 0) { await MaaldoComDbContext.Tags.AddRangeAsync(newTagsToCreate, ct); }
+        if (newTagsToCreate.Count > 0) { await maaldoComDbContext.Tags.AddRangeAsync(newTagsToCreate, ct); }
 
         // build lookup dictionary keyed by lowercase name
         var tagLookup = matchingTagsInDb.Concat(newTagsToCreate).ToDictionary(t => t.Name!.ToLowerInvariant());
@@ -61,11 +62,11 @@ public class CreateMediaAlbumCommandHandler(IMaaldoComDbContext maaldoComDbConte
                 .ToList();
         }
 
-        await MaaldoComDbContext.MediaAlbums.AddAsync(entity, ct);
-        await MaaldoComDbContext.SaveChangesAsync(command.User, ct);
+        await maaldoComDbContext.MediaAlbums.AddAsync(entity, ct);
+        await maaldoComDbContext.SaveChangesAsync(command.User, ct);
 
-        await CacheManager.InvalidateCache(CacheKeys.MediaAlbumList, ct);
-        await CacheManager.InvalidateCache(CacheKeys.TagList, ct);
+        await cacheManager.InvalidateCache(CacheKeys.MediaAlbumList, ct);
+        await cacheManager.InvalidateCache(CacheKeys.TagList, ct);
 
         return Result.Ok(entity.ToDto());
     }

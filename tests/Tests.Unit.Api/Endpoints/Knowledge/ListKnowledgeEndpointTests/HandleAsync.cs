@@ -14,8 +14,7 @@ public class HandleAsync
         var knowledge = new List<KnowledgeDto> { new() { Id = Guid.NewGuid(), Title = "Title1", Quote = "Quote1" } };
         var result = new Result<IEnumerable<KnowledgeDto>>().WithValue(knowledge);
 
-        var user = A.Fake<ClaimsPrincipal>();
-        var query = new ListKnowledgeQuery(user);
+        var query = new ListKnowledgeQuery();
 
         A.CallTo(() => handler.ExecuteAsync(A<ListKnowledgeQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 

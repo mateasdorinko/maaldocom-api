@@ -8,7 +8,6 @@ public class ExecuteAsync
     public async Task ExecuteAsync_ByIdIsValid_ReturnsTag()
     {
         // arrange
-        var user = A.Fake<ClaimsPrincipal>();
         var cacheManager = A.Fake<ICacheManager>();
         var ct = CancellationToken.None;
 
@@ -18,8 +17,8 @@ public class ExecuteAsync
             Name = "name1",
         };
 
-        var query = new GetTagQuery(user, tag.Id);
-        var handler = new GetTagQueryHandler(cacheManager, NullLogger<GetTagQueryHandler>.Instance);
+        var query = new GetTagQuery(tag.Id);
+        var handler = new GetTagQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.GetTagDetailAsync(tag.Id, ct)).Returns(tag);
 
@@ -35,12 +34,11 @@ public class ExecuteAsync
     public async Task ExecuteAsync_ByIdNotValid_ReturnsNotFound()
     {
         // arrange
-        var user = A.Fake<ClaimsPrincipal>();
         var cacheManager = A.Fake<ICacheManager>();
         var ct = CancellationToken.None;
 
-        var query = new GetTagQuery(user, Guid.NewGuid());
-        var handler = new GetTagQueryHandler(cacheManager, NullLogger<GetTagQueryHandler>.Instance);
+        var query = new GetTagQuery(Guid.NewGuid());
+        var handler = new GetTagQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.GetTagDetailAsync(query.Id!.Value, ct)).Returns(default(TagDto));
 
@@ -57,7 +55,6 @@ public class ExecuteAsync
     public async Task ExecuteAsync_ByUrlFriendlyNameNotInCachedList_ReturnsNotFound()
     {
         // arrange
-        var user = A.Fake<ClaimsPrincipal>();
         var cacheManager = A.Fake<ICacheManager>();
         var ct = CancellationToken.None;
 
@@ -67,8 +64,8 @@ public class ExecuteAsync
             Name = "name1",
         };
 
-        var query = new GetTagQuery(user, tag.Name!);
-        var handler = new GetTagQueryHandler(cacheManager, NullLogger<GetTagQueryHandler>.Instance);
+        var query = new GetTagQuery(tag.Name!);
+        var handler = new GetTagQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListTagsAsync(ct)).Returns(new List<TagDto> { new(), new() });
 
@@ -86,7 +83,6 @@ public class ExecuteAsync
     public async Task ExecuteAsync_ByUrlFriendlyNameInCachedListAndInDb_ReturnsTag()
     {
         // arrange
-        var user = A.Fake<ClaimsPrincipal>();
         var cacheManager = A.Fake<ICacheManager>();
         var ct = CancellationToken.None;
 
@@ -96,8 +92,8 @@ public class ExecuteAsync
             Name = "name1",
         };
 
-        var query = new GetTagQuery(user, tag.Name!);
-        var handler = new GetTagQueryHandler(cacheManager, NullLogger<GetTagQueryHandler>.Instance);
+        var query = new GetTagQuery(tag.Name!);
+        var handler = new GetTagQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListTagsAsync(ct)).Returns(new List<TagDto> { new(), tag, new() });
         A.CallTo(() => cacheManager.GetTagDetailAsync(tag.Id, ct)).Returns(tag);
@@ -114,7 +110,6 @@ public class ExecuteAsync
     public async Task ExecuteAsync_ByUrlFriendlyNameInCachedListButNotInDb_ReturnsNotFound()
     {
         // arrange
-        var user = A.Fake<ClaimsPrincipal>();
         var cacheManager = A.Fake<ICacheManager>();
         var ct = CancellationToken.None;
 
@@ -124,8 +119,8 @@ public class ExecuteAsync
             Name = "name1",
         };
 
-        var query = new GetTagQuery(user, tag.Name!);
-        var handler = new GetTagQueryHandler(cacheManager, NullLogger<GetTagQueryHandler>.Instance);
+        var query = new GetTagQuery(tag.Name!);
+        var handler = new GetTagQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListTagsAsync(ct)).Returns(new List<TagDto> { new(), tag, new() });
         A.CallTo(() => cacheManager.GetTagDetailAsync(tag.Id, ct)).Returns(default(TagDto));

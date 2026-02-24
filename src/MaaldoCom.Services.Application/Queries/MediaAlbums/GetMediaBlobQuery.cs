@@ -3,23 +3,22 @@ using MaaldoCom.Services.Domain.MediaAlbums;
 
 namespace MaaldoCom.Services.Application.Queries.MediaAlbums;
 
-public class GetMediaBlobQuery(ClaimsPrincipal user, Guid mediaAlbumId, Guid mediaId, string mediaType)
-    : BaseQuery(user), ICommand<Result<MediaDto>>
+public class GetMediaBlobQuery(Guid mediaAlbumId, Guid mediaId, string mediaType) : ICommand<Result<MediaDto>>
 {
     public Guid MediaAlbumId { get; } = mediaAlbumId;
     public Guid MediaId { get; } = mediaId;
     public string MediaType { get; } = mediaType;
 }
 
-public class GetMediaBlobQueryHandler(ICacheManager cacheManager, ILogger<GetMediaBlobQueryHandler> logger, IBlobsProvider blobsProvider)
-    : BaseQueryHandler<GetMediaBlobQueryHandler>(cacheManager, logger), ICommandHandler<GetMediaBlobQuery, Result<MediaDto>>
+public class GetMediaBlobQueryHandler(ICacheManager cacheManager, IBlobsProvider blobsProvider)
+    : ICommandHandler<GetMediaBlobQuery, Result<MediaDto>>
 {
     public async Task<Result<MediaDto>> ExecuteAsync(GetMediaBlobQuery query, CancellationToken ct)
     {
         const string containerName = "media-albums";
         var notFoundResult = Result.Fail<MediaDto>(new BlobNotFoundError(containerName, $"MediaAlbum:{query.MediaAlbumId}/Media:{query.MediaId}"));
 
-        var mediaAlbum = await CacheManager.GetMediaAlbumDetailAsync(query.MediaAlbumId, ct);
+        var mediaAlbum = await cacheManager.GetMediaAlbumDetailAsync(query.MediaAlbumId, ct);
         var media = mediaAlbum?.Media.FirstOrDefault(m => m.Id == query.MediaId);
 
         if (media == null) { return notFoundResult; }

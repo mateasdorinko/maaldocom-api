@@ -17,7 +17,7 @@ public class PostMailEndpoint : Endpoint<PostMailRequest>
 
     public override async Task HandleAsync(PostMailRequest req, CancellationToken ct)
     {
-        var result = await new SendEmailCommand(User, req.From, req.Subject, req.Body).ExecuteAsync(ct);
+        var result = await new SendEmailCommand(req.From, req.Subject, req.Body).ExecuteAsync(ct);
 
         await result.Match(
             onSuccess: _ => Send.CreatedAtAsync<PostMailEndpoint>(cancellation: ct),

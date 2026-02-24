@@ -1,15 +1,15 @@
 ﻿namespace MaaldoCom.Services.Application.Queries.Tags;
 
-public class GetTagQuery : BaseQuery, ICommand<Result<TagDto>>
+public class GetTagQuery : ICommand<Result<TagDto>>
 {
-    public GetTagQuery(ClaimsPrincipal user, string name) : base(user)
+    public GetTagQuery(string name)
     {
         Name = name;
         SearchBy = SearchBy.Name;
         SearchValue = name;
     }
 
-    public GetTagQuery(ClaimsPrincipal user, Guid id) : base(user)
+    public GetTagQuery(Guid id)
     {
         Id = id;
         SearchBy = SearchBy.Id;
@@ -23,8 +23,7 @@ public class GetTagQuery : BaseQuery, ICommand<Result<TagDto>>
     public readonly object SearchValue;
 }
 
-public class GetTagQueryHandler(ICacheManager cacheManager, ILogger<GetTagQueryHandler> logger)
-    : BaseQueryHandler<GetTagQueryHandler>(cacheManager, logger), ICommandHandler<GetTagQuery, Result<TagDto>>
+public class GetTagQueryHandler(ICacheManager cacheManager) : ICommandHandler<GetTagQuery, Result<TagDto>>
 {
     public async Task<Result<TagDto>> ExecuteAsync(GetTagQuery query, CancellationToken ct)
     {
@@ -33,13 +32,13 @@ public class GetTagQueryHandler(ICacheManager cacheManager, ILogger<GetTagQueryH
         switch (query.SearchBy)
         {
             case SearchBy.Id:
-                dto = await CacheManager.GetTagDetailAsync(query.Id!.Value, ct);
+                dto = await cacheManager.GetTagDetailAsync(query.Id!.Value, ct);
 
                 return dto != null ?
                     Result.Ok(dto)! :
                     Result.Fail<TagDto>(new EntityNotFoundError("Tag", query.SearchBy, query.SearchValue));
             case SearchBy.Name:
-                var cachedTagByName = (await CacheManager.ListTagsAsync(ct))
+                var cachedTagByName = (await cacheManager.ListTagsAsync(ct))
                     .FirstOrDefault(x => x.Name == query.SearchValue.ToString());
 
                 if (cachedTagByName == null)
@@ -47,7 +46,7 @@ public class GetTagQueryHandler(ICacheManager cacheManager, ILogger<GetTagQueryH
                     return Result.Fail<TagDto>(new EntityNotFoundError("Tag", query.SearchBy, query.SearchValue));
                 }
 
-                dto = await CacheManager.GetTagDetailAsync(cachedTagByName!.Id, ct);
+                dto = await cacheManager.GetTagDetailAsync(cachedTagByName!.Id, ct);
 
                 return dto != null ?
                     Result.Ok(dto)! :

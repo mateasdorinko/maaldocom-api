@@ -8,7 +8,6 @@ public class ExecuteAsync
     public async Task ExecuteAsync_Invoked_ReturnsRandomizedKnowledge()
     {
         // arrange
-        var user = A.Fake<ClaimsPrincipal>();
         var cacheManager = A.Fake<ICacheManager>();
         var ct = CancellationToken.None;
 
@@ -19,8 +18,8 @@ public class ExecuteAsync
             new() { Id = Guid.NewGuid(), Title = "title3", Quote =  "quote3" }
         };
 
-        var query = new GetRandomKnowledgeQuery(user);
-        var handler = new GetRandomKnowledgeQueryHandler(cacheManager, NullLogger<GetRandomKnowledgeQueryHandler>.Instance);
+        var query = new GetRandomKnowledgeQuery();
+        var handler = new GetRandomKnowledgeQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListKnowledgeAsync(ct)).Returns(knowledgeList);
 

@@ -1,16 +1,16 @@
 ﻿namespace MaaldoCom.Services.Application.Commands.MediaAlbums;
 
-public class CreateMediaCommand(ClaimsPrincipal user) : BaseCommand(user), ICommand<Result<MediaDto>>
+public class CreateMediaCommand(ClaimsPrincipal user) : ICommand<Result<MediaDto>>
 {
+    public ClaimsPrincipal User { get; } = user;
     public required MediaDto Media { get; set; }
 }
 
-public class CreateMediaCommandHandler(IMaaldoComDbContext maaldoComDbContext, ICacheManager cacheManager, ILogger<CreateMediaCommandHandler> logger)
-    : BaseCommandHandler<CreateMediaCommandHandler>(maaldoComDbContext, cacheManager, logger), ICommandHandler<CreateMediaCommand, Result<MediaDto>>
+public class CreateMediaCommandHandler(IMaaldoComDbContext maaldoComDbContext) : ICommandHandler<CreateMediaCommand, Result<MediaDto>>
 {
     public async Task<Result<MediaDto>> ExecuteAsync(CreateMediaCommand command, CancellationToken ct)
     {
-        var validationResult = await new CreateMediaCommandValidator(MaaldoComDbContext).ValidateAsync(command, ct);
+        var validationResult = await new CreateMediaCommandValidator(maaldoComDbContext).ValidateAsync(command, ct);
 
         if (!validationResult.IsValid)
         {
@@ -19,8 +19,8 @@ public class CreateMediaCommandHandler(IMaaldoComDbContext maaldoComDbContext, I
 
         var entity = command.Media.ToEntity();
 
-        await MaaldoComDbContext.Media.AddAsync(entity, ct);
-        await MaaldoComDbContext.SaveChangesAsync(command.User, ct);
+        await maaldoComDbContext.Media.AddAsync(entity, ct);
+        await maaldoComDbContext.SaveChangesAsync(command.User, ct);
 
         return Result.Ok(entity.ToDto());
     }

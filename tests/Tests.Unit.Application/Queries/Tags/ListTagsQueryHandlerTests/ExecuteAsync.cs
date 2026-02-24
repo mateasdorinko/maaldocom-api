@@ -8,7 +8,6 @@ public class ExecuteAsync
     public async Task ExecuteAsync_Invoked_ReturnsTagList()
     {
         // arrange
-        var user = A.Fake<ClaimsPrincipal>();
         var cacheManager = A.Fake<ICacheManager>();
         var ct = CancellationToken.None;
 
@@ -19,8 +18,8 @@ public class ExecuteAsync
             new() { Id = Guid.NewGuid(), Name = "tag3" }
         };
 
-        var query = new ListTagsQuery(user);
-        var handler = new ListTagsQueryHandler(cacheManager, NullLogger<ListTagsQueryHandler>.Instance);
+        var query = new ListTagsQuery();
+        var handler = new ListTagsQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListTagsAsync(ct)).Returns(tagList);
 

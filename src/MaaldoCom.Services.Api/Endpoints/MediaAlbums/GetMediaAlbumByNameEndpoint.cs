@@ -18,7 +18,7 @@ public class GetMediaAlbumByNameEndpoint : Endpoint<GetMediaAlbumByNameRequest, 
 
     public override async Task HandleAsync(GetMediaAlbumByNameRequest req, CancellationToken ct)
     {
-        var result = await new GetMediaAlbumDetailQuery(User, req.Name).ExecuteAsync(ct);
+        var result = await new GetMediaAlbumDetailQuery(req.Name).ExecuteAsync(ct);
 
         await result.Match(
             onSuccess: _ =>

@@ -1,15 +1,15 @@
 ﻿namespace MaaldoCom.Services.Application.Queries.MediaAlbums;
 
-public class GetMediaAlbumDetailQuery : BaseQuery, ICommand<Result<MediaAlbumDto>>
+public class GetMediaAlbumDetailQuery : ICommand<Result<MediaAlbumDto>>
 {
-    public GetMediaAlbumDetailQuery(ClaimsPrincipal user, string name) : base(user)
+    public GetMediaAlbumDetailQuery(string name)
     {
         Name = name;
         SearchBy = SearchBy.Name;
         SearchValue = name;
     }
 
-    public GetMediaAlbumDetailQuery(ClaimsPrincipal user, Guid id) : base(user)
+    public GetMediaAlbumDetailQuery(Guid id)
     {
         Id = id;
         SearchBy = SearchBy.Id;
@@ -23,8 +23,8 @@ public class GetMediaAlbumDetailQuery : BaseQuery, ICommand<Result<MediaAlbumDto
     public readonly object SearchValue;
 }
 
-public class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager, ILogger<GetMediaAlbumDetailQueryHandler> logger)
-    : BaseQueryHandler<GetMediaAlbumDetailQueryHandler>(cacheManager, logger), ICommandHandler<GetMediaAlbumDetailQuery, Result<MediaAlbumDto>>
+public class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager)
+    : ICommandHandler<GetMediaAlbumDetailQuery, Result<MediaAlbumDto>>
 {
     public async Task<Result<MediaAlbumDto>> ExecuteAsync(GetMediaAlbumDetailQuery query, CancellationToken ct)
     {
@@ -33,13 +33,13 @@ public class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager, ILogger
         switch (query.SearchBy)
         {
             case SearchBy.Id:
-                dto = await CacheManager.GetMediaAlbumDetailAsync(query.Id!.Value, ct);
+                dto = await cacheManager.GetMediaAlbumDetailAsync(query.Id!.Value, ct);
 
                 return dto != null ?
                     Result.Ok(dto)! :
                     Result.Fail<MediaAlbumDto>(new EntityNotFoundError(nameof(MediaAlbum), query.SearchBy, query.SearchValue));
             case SearchBy.Name:
-                var cachedMediaAlbumByName = (await CacheManager.ListMediaAlbumsAsync(ct))
+                var cachedMediaAlbumByName = (await cacheManager.ListMediaAlbumsAsync(ct))
                     .FirstOrDefault(x => x.UrlFriendlyName == query.SearchValue.ToString());
 
                 if (cachedMediaAlbumByName == null)
@@ -47,7 +47,7 @@ public class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager, ILogger
                     return Result.Fail<MediaAlbumDto>(new EntityNotFoundError(nameof(MediaAlbum), query.SearchBy, query.SearchValue));
                 }
 
-                dto = await CacheManager.GetMediaAlbumDetailAsync(cachedMediaAlbumByName!.Id, ct);
+                dto = await cacheManager.GetMediaAlbumDetailAsync(cachedMediaAlbumByName!.Id, ct);
 
                 return dto != null ?
                     Result.Ok(dto)! :

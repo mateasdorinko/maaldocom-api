@@ -18,7 +18,7 @@ public class GetKnowledgeByIdEndpoint : Endpoint<GetKnowledgeByIdRequest, GetKno
 
     public override async Task HandleAsync(GetKnowledgeByIdRequest req, CancellationToken ct)
     {
-        var result = await new GetKnowledgeQuery(User, req.Id).ExecuteAsync(ct);
+        var result = await new GetKnowledgeQuery(req.Id).ExecuteAsync(ct);
 
         await result.Match(
             onSuccess: _ => Send.OkAsync(result.Value.ToGetModel(), ct),

@@ -18,7 +18,7 @@ public class GetTagByNameEndpoint : Endpoint<GetTagByNameRequest, GetTagDetailRe
 
     public override async Task HandleAsync(GetTagByNameRequest req, CancellationToken ct)
     {
-        var result = await new GetTagQuery(User, req.Name).ExecuteAsync(ct);
+        var result = await new GetTagQuery(req.Name).ExecuteAsync(ct);
 
         await result.Match(
             onSuccess: _ => Send.OkAsync(result.Value.ToDetailModel(), ct),

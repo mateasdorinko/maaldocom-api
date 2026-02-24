@@ -2,16 +2,14 @@
 
 namespace MaaldoCom.Services.Application.Commands.System;
 
-public class SendEmailCommand(ClaimsPrincipal user, string from, string subject, string body)
-    : BaseCommand(user), ICommand<Result<EmailResponse>>
+public class SendEmailCommand(string from, string subject, string body) : ICommand<Result<EmailResponse>>
 {
     public string From { get; } = from;
     public string Subject { get; } = subject;
     public string Body { get; } = body;
 }
 
-public class SendEmailCommandHandler(IMaaldoComDbContext maaldoComDbContext, ICacheManager cacheManager, ILogger<SendEmailCommandHandler> logger, IEmailProvider emailProvider)
-    : BaseCommandHandler<SendEmailCommandHandler>(maaldoComDbContext, cacheManager, logger), ICommandHandler<SendEmailCommand, Result<EmailResponse>>
+public class SendEmailCommandHandler(IEmailProvider emailProvider) : ICommandHandler<SendEmailCommand, Result<EmailResponse>>
 {
     public async Task<Result<EmailResponse>> ExecuteAsync(SendEmailCommand command, CancellationToken ct)
     {

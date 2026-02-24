@@ -17,7 +17,7 @@ public class GetHotShotsMediaAlbumEndpoint : EndpointWithoutRequest<GetMediaAlbu
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var result = await new GetHotshotsMediaAlbumDetailQuery(User).ExecuteAsync(ct);
+        var result = await new GetHotshotsMediaAlbumDetailQuery().ExecuteAsync(ct);
 
         result.Value.Media = result.Value.Media.Where(m => m.Active).ToList();
         await Send.OkAsync(result.Value.ToDetailModel(), ct);

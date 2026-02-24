@@ -1,8 +1,8 @@
-﻿using MaaldoCom.Services.Application.Queries.System;
+﻿using MaaldoCom.Services.Application.Commands.System;
 
 namespace MaaldoCom.Services.Api.Endpoints.System;
 
-public class GetCacheRefreshEndpoint : EndpointWithoutRequest
+public class PostCacheRefreshEndpoint : EndpointWithoutRequest
 {
     public override void Configure()
     {
@@ -15,7 +15,7 @@ public class GetCacheRefreshEndpoint : EndpointWithoutRequest
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        await new RefreshCacheQuery(User).ExecuteAsync(ct);
+        await new CacheRefreshCommand().ExecuteAsync(ct);
         await Send.NoContentAsync(ct);
     }
 }

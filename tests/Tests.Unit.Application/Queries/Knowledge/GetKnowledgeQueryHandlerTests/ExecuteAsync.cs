@@ -8,13 +8,12 @@ public class ExecuteAsync
     public async Task ExecuteAsync_InvokedWithExistentId_ReturnsKnowledge()
     {
         // arrange
-        var user = A.Fake<ClaimsPrincipal>();
         var id = Guid.NewGuid();
         var cacheManager = A.Fake<ICacheManager>();
         var ct = CancellationToken.None;
 
-        var query = new GetKnowledgeQuery(user, id);
-        var handler = new GetKnowledgeQueryHandler(cacheManager, NullLogger<GetKnowledgeQueryHandler>.Instance);
+        var query = new GetKnowledgeQuery(id);
+        var handler = new GetKnowledgeQueryHandler(cacheManager);
 
         var knowledgeList = new List<KnowledgeDto>
         {
@@ -39,12 +38,11 @@ public class ExecuteAsync
     public async Task ExecuteAsync_InvokedWithNonExistentId_ReturnsNotFound()
     {
         // arrange
-        var user = A.Fake<ClaimsPrincipal>();
         var cacheManager = A.Fake<ICacheManager>();
         var ct = CancellationToken.None;
 
-        var query = new GetKnowledgeQuery(user, Guid.NewGuid());
-        var handler = new GetKnowledgeQueryHandler(cacheManager, NullLogger<GetKnowledgeQueryHandler>.Instance);
+        var query = new GetKnowledgeQuery(Guid.NewGuid());
+        var handler = new GetKnowledgeQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListKnowledgeAsync(ct))
             .Returns([
