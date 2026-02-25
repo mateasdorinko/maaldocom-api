@@ -8,6 +8,7 @@
       <PackageReference Include="FastEndpoints.Messaging.Core" />
       <PackageReference Include="FluentResults" />
       <PackageReference Include="FluentValidation" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" />
     </ItemGroup>
 
