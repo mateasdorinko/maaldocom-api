@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using MaaldoCom.Services.Application.Messaging;
+﻿using MaaldoCom.Services.Application.Messaging;
 using MaaldoCom.Services.Application.Messaging.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,68 +8,33 @@ public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddMediator(params Assembly[] assemblies)
+        public IServiceCollection AddMediator()
         {
-            services.AddSingleton<IMediator, Mediator>();
+            services.Scan(scan => scan.FromAssembliesOf(typeof(AssemblyReference))
+                .AddClasses(classes => classes.AssignableTo(typeof(IQueryHandler<,>)), publicOnly: false)
+                .AsImplementedInterfaces()
+                .WithScopedLifetime()
+                .AddClasses(classes => classes.AssignableTo(typeof(ICommandHandler<>)), publicOnly: false)
+                .AsImplementedInterfaces()
+                .WithScopedLifetime()
+                .AddClasses(classes => classes.AssignableTo(typeof(ICommandHandler<,>)), publicOnly: false)
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
 
-            // Register handlers
-            var handlerTypes = assemblies
-                .SelectMany(a => a.GetTypes())
-                .Where(t => t is { IsClass: true, IsAbstract: false })
-                .Where(t => t.GetInterfaces()
-                    .Any(i => i.IsGenericType &&
-                              i.GetGenericTypeDefinition() == typeof(IRequestHandler<,>)))
-                .ToList();
+            services.Decorate(typeof(ICommandHandler<,>), typeof(ValidationDecorator.CommandHandler<,>));
+            services.Decorate(typeof(ICommandHandler<>), typeof(ValidationDecorator.CommandBaseHandler<>));
 
-            foreach (var handlerType in handlerTypes)
-            {
-                var interfaceType = handlerType.GetInterfaces()
-                    .First(i => i.IsGenericType &&
-                                i.GetGenericTypeDefinition() == typeof(IRequestHandler<,>));
+            services.Decorate(typeof(IQueryHandler<,>), typeof(LoggingDecorator.QueryHandler<,>));
+            services.Decorate(typeof(ICommandHandler<,>), typeof(LoggingDecorator.CommandHandler<,>));
+            services.Decorate(typeof(ICommandHandler<>), typeof(LoggingDecorator.CommandBaseHandler<>));
 
-                services.AddTransient(interfaceType, handlerType);
-            }
+            // services.Scan(scan => scan.FromAssembliesOf(typeof(AssemblyReference))
+            //     .AddClasses(classes => classes.AssignableTo(typeof(IDomainEventHandler<>)), publicOnly: false)
+            //     .AsImplementedInterfaces()
+            //     .WithScopedLifetime());
 
-            // Register notification handlers
-            var notificationHandlerTypes = assemblies
-                .SelectMany(a => a.GetTypes())
-                .Where(t => t is { IsClass: true, IsAbstract: false })
-                .Where(t => t.GetInterfaces()
-                    .Any(i => i.IsGenericType &&
-                              i.GetGenericTypeDefinition() == typeof(INotificationHandler<>)))
-                .ToList();
+            services.AddValidatorsFromAssembly(AssemblyReference.Assembly, includeInternalTypes: true);
 
-            foreach (var handlerType in notificationHandlerTypes)
-            {
-                var interfaces = handlerType.GetInterfaces()
-                    .Where(i => i.IsGenericType &&
-                                i.GetGenericTypeDefinition() == typeof(INotificationHandler<>));
-
-                foreach (var interfaceType in interfaces)
-                {
-                    services.AddTransient(interfaceType, handlerType);
-                }
-            }
-
-            // Register validators from FluentValidation
-            services.AddValidatorsFromAssemblies(assemblies);
-
-            return services;
-        }
-
-        public IServiceCollection AddPipelineBehavior<TBehavior>() where TBehavior : class
-        {
-            // Register as open generic for all request types
-            var behaviorType = typeof(TBehavior);
-
-            if (!behaviorType.IsGenericTypeDefinition)
-            {
-#pragma warning disable S3928
-                throw new ArgumentException("TBehavior must be an open generic type", nameof(TBehavior));
-#pragma warning restore S3928
-            }
-
-            services.AddTransient(typeof(IPipelineBehavior<,>), behaviorType);
             return services;
         }
     }

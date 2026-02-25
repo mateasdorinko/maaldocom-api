@@ -1,4 +1,3 @@
-global using FastEndpoints;
 global using FluentResults;
 global using FluentValidation;
 global using MaaldoCom.Services.Application.Cache;
