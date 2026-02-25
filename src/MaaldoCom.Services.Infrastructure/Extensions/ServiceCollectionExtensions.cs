@@ -9,7 +9,7 @@ using ZiggyCreatures.Caching.Fusion.Serialization.SystemTextJson;
 
 namespace MaaldoCom.Services.Infrastructure.Extensions;
 
-public static class ServiceExtensions
+public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
