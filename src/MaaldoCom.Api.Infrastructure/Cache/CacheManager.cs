@@ -145,7 +145,7 @@ public sealed class CacheManager : ICacheManager, IDisposable
         {
             var entity = await MaaldoComDbContext.Tags
                 .Where(t => t.Id == id)
-                .Include(t => t.MediaAlbumTags.OrderBy(mat => mat.MediaAlbum.Created))
+                .Include(t => t.MediaAlbumTags.OrderByDescending(mat => mat.MediaAlbum.Created))
                 .ThenInclude(mat => mat.MediaAlbum)
                 .Include(t => t.MediaTags.OrderByDescending(mt => mt.Media.Created))
                 .ThenInclude(mt => mt.Media)
