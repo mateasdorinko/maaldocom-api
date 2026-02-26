@@ -1,19 +1,25 @@
 ﻿using MaaldoCom.Api.Domain.MediaAlbums;
+using MaaldoCom.Api.Infrastructure.Database;
 using Microsoft.Extensions.Caching.Hybrid;
 
 namespace MaaldoCom.Api.Infrastructure.Cache;
 
-public class CacheManager : ICacheManager
+public sealed class CacheManager : ICacheManager, IDisposable
 {
-    private IMaaldoComDbContext MaaldoComDbContext { get; }
+    private MaaldoComDbContext MaaldoComDbContext { get; }
     private HybridCache HybridCache { get; }
 
-    public CacheManager(IMaaldoComDbContext maaldoComDbContext, HybridCache hybridCache)
+    public CacheManager(IDbContextFactory<MaaldoComDbContext> dbContextFactory, HybridCache hybridCache)
     {
-        MaaldoComDbContext = maaldoComDbContext;
-        HybridCache = hybridCache;
-
+        MaaldoComDbContext = dbContextFactory.CreateDbContext();
         MaaldoComDbContext.DisableChangeTracking();
+        HybridCache = hybridCache;
+    }
+
+    public void Dispose()
+    {
+        MaaldoComDbContext.Dispose();
+        GC.SuppressFinalize(this);
     }
 
     public async Task<IEnumerable<MediaAlbumDto>> ListMediaAlbumsAsync(CancellationToken cancellationToken)

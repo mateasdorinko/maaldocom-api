@@ -15,10 +15,11 @@ public static class ServiceCollectionExtensions
     {
         public IServiceCollection AddInfrastructureServices(IConfiguration configuration)
         {
-            services.AddDbContext<MaaldoComDbContext>(options =>
-            {
+            Action<DbContextOptionsBuilder> dbOptions = options =>
                 options.UseSqlServer(configuration["maaldocom-db-connection-string-api-user"], providerOptions => providerOptions.EnableRetryOnFailure());
-            });
+
+            services.AddDbContext<MaaldoComDbContext>(dbOptions);
+            services.AddDbContextFactory<MaaldoComDbContext>(dbOptions, ServiceLifetime.Scoped);
             services.AddScoped<IMaaldoComDbContext>(provider => provider.GetRequiredService<MaaldoComDbContext>());
             services.AddScoped<ICacheManager, CacheManager>();
             services.AddSingleton<IBlobsProvider, AzureStorageBlobsProvider>(_

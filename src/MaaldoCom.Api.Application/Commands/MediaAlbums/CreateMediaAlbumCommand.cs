@@ -1,9 +1,4 @@
-﻿using MaaldoCom.Api.Application.Cache;
-using MaaldoCom.Api.Application.Database;
-using MaaldoCom.Api.Application.Dtos;
-using MaaldoCom.Api.Application.Dtos.Validators;
-using MaaldoCom.Api.Application.Messaging;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace MaaldoCom.Api.Application.Commands.MediaAlbums;
 
