@@ -1,14 +1,10 @@
 ﻿namespace MaaldoCom.Services.Application.Queries.Knowledge;
 
-public class GetKnowledgeQuery(Guid id) : ICommand<Result<KnowledgeDto>>
-{
-    public Guid Id { get; } = id;
-}
+public sealed record GetKnowledgeQuery(Guid Id) : IQuery<KnowledgeDto>;
 
-public class GetKnowledgeQueryHandler(ICacheManager cacheManager)
-    : ICommandHandler<GetKnowledgeQuery, Result<KnowledgeDto>>
+internal sealed class GetKnowledgeQueryHandler(ICacheManager cacheManager) : IQueryHandler<GetKnowledgeQuery, KnowledgeDto>
 {
-    public async Task<Result<KnowledgeDto>> ExecuteAsync(GetKnowledgeQuery query, CancellationToken ct)
+    public async Task<Result<KnowledgeDto>> HandleAsync(GetKnowledgeQuery query, CancellationToken ct)
     {
         var cachedKnowledge = (await cacheManager.ListKnowledgeAsync(ct)).ToList();
         var knowledge = cachedKnowledge.FirstOrDefault(k => k.Id == query.Id);

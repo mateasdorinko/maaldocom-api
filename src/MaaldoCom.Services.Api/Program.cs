@@ -35,7 +35,8 @@ builder.Services
     .AddSwaggerDocumentForFastEndpoints(apiDocTitle, auth0Domain, auth0Audience)
     .ConfigureForwardedHeaders()
     .AddMaaldoCors()
-    .AddInfrastructureServices(builder.Configuration);
+    .AddInfrastructureServices(builder.Configuration)
+    .AddMediator();
 
 builder.Services.AddOtel(builder, otelEndpoint, otelHeaders, false);
 

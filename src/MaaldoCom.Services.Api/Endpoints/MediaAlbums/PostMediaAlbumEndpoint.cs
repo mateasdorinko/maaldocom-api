@@ -3,7 +3,8 @@ using MaaldoCom.Services.Application.Commands.MediaAlbums;
 
 namespace MaaldoCom.Services.Api.Endpoints.MediaAlbums;
 
-public class PostMediaAlbumEndpoint : Endpoint<PostMediaAlbumRequest, PostMediaAlbumResponse>
+public class PostMediaAlbumEndpoint(Application.Messaging.ICommandHandler<CreateMediaAlbumCommand, MediaAlbumDto> handler)
+    : Endpoint<PostMediaAlbumRequest, PostMediaAlbumResponse>
 {
     public override void Configure()
     {
@@ -17,7 +18,8 @@ public class PostMediaAlbumEndpoint : Endpoint<PostMediaAlbumRequest, PostMediaA
     public override async Task HandleAsync(PostMediaAlbumRequest req, CancellationToken ct)
     {
         var dto = req.ToDto();
-        var result = await new CreateMediaAlbumCommand(User, dto).ExecuteAsync(ct);
+        var command = new CreateMediaAlbumCommand(User, dto);
+        var result = await handler.HandleAsync(command, ct);
 
         await result.Match(
             onSuccess: _ => Send.CreatedAtAsync<GetMediaAlbumByIdEndpoint>(

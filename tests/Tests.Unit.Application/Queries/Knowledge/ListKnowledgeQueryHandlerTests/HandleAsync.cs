@@ -1,11 +1,11 @@
 ﻿using MaaldoCom.Services.Application.Queries.Knowledge;
 
-namespace Tests.Unit.Application.Queries.Knowledge.GetRandomKnowledgeQueryHandlerTests;
+namespace Tests.Unit.Application.Queries.Knowledge.ListKnowledgeQueryHandlerTests;
 
-public class ExecuteAsync
+public class HandleAsync
 {
     [Fact]
-    public async Task ExecuteAsync_Invoked_ReturnsRandomizedKnowledge()
+    public async Task HandleAsync_Invoked_ReturnsKnowledgeList()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -18,18 +18,16 @@ public class ExecuteAsync
             new() { Id = Guid.NewGuid(), Title = "title3", Quote =  "quote3" }
         };
 
-        var query = new GetRandomKnowledgeQuery();
-        var handler = new GetRandomKnowledgeQueryHandler(cacheManager);
+        var query = new ListKnowledgeQuery();
+        var handler = new ListKnowledgeQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListKnowledgeAsync(ct)).Returns(knowledgeList);
 
         // act
-        var result = await handler.ExecuteAsync(query, ct);
-
-        var matchedKnowledge = knowledgeList.FirstOrDefault(k => k.Id == result.Value.Id);
+        var result = await handler.HandleAsync(query, ct);
 
         // assert
         result.IsSuccess.ShouldBe(true);
-        result.Value.ShouldBe(matchedKnowledge);
+        result.Value.ShouldBe(knowledgeList);
     }
 }

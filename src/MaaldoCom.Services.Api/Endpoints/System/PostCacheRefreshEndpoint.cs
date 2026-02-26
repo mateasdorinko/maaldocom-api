@@ -2,7 +2,7 @@
 
 namespace MaaldoCom.Services.Api.Endpoints.System;
 
-public class PostCacheRefreshEndpoint : EndpointWithoutRequest
+public class PostCacheRefreshEndpoint(Application.Messaging.ICommandHandler<CacheRefreshCommand> handler) : EndpointWithoutRequest
 {
     public override void Configure()
     {
@@ -15,7 +15,9 @@ public class PostCacheRefreshEndpoint : EndpointWithoutRequest
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        await new CacheRefreshCommand().ExecuteAsync(ct);
+        var command = new CacheRefreshCommand();
+        var result = await handler.HandleAsync(command, ct);
+
         await Send.NoContentAsync(ct);
     }
 }

@@ -5,10 +5,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="FastEndpoints.Messaging.Core" />
       <PackageReference Include="FluentResults" />
       <PackageReference Include="FluentValidation" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" />
+      <PackageReference Include="Scrutor" />
     </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tests.Unit.Application" />
+  </ItemGroup>
 
 </Project>

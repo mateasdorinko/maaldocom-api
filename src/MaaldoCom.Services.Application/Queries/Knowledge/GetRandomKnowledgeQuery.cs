@@ -1,11 +1,11 @@
 namespace MaaldoCom.Services.Application.Queries.Knowledge;
 
-public class GetRandomKnowledgeQuery : ICommand<Result<KnowledgeDto>> { }
+public sealed record GetRandomKnowledgeQuery : IQuery<KnowledgeDto>;
 
-public class GetRandomKnowledgeQueryHandler(ICacheManager cacheManager)
-    : ICommandHandler<GetRandomKnowledgeQuery, Result<KnowledgeDto>>
+internal sealed class GetRandomKnowledgeQueryHandler(ICacheManager cacheManager)
+    : IQueryHandler<GetRandomKnowledgeQuery, KnowledgeDto>
 {
-    public async Task<Result<KnowledgeDto>> ExecuteAsync(GetRandomKnowledgeQuery query, CancellationToken ct)
+    public async Task<Result<KnowledgeDto>> HandleAsync(GetRandomKnowledgeQuery query, CancellationToken ct)
     {
         var cachedKnowledge = (await cacheManager.ListKnowledgeAsync(ct)).ToList();
 

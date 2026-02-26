@@ -2,10 +2,10 @@ using MaaldoCom.Services.Application.Queries.MediaAlbums;
 
 namespace Tests.Unit.Application.Queries.MediaAlbums.ListMediaAlbumsQueryHandlerTests;
 
-public class ExecuteAsync
+public class HandleAsync
 {
     [Fact]
-    public async Task ExecuteAsync_Invoked_ReturnsActiveMediaAlbumList()
+    public async Task HandleAsync_Invoked_ReturnsActiveMediaAlbumList()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -25,7 +25,7 @@ public class ExecuteAsync
         A.CallTo(() => cacheManager.ListMediaAlbumsAsync(ct)).Returns(mediaAlbums);
 
         // act
-        var result = await handler.ExecuteAsync(query, ct);
+        var result = await handler.HandleAsync(query, ct);
 
         // assert
         result.IsSuccess.ShouldBe(true);

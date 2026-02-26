@@ -1,9 +1,10 @@
 ﻿using MaaldoCom.Services.Api.Endpoints.System.Models;
 using MaaldoCom.Services.Application.Commands.System;
+using MaaldoCom.Services.Application.Email;
 
 namespace MaaldoCom.Services.Api.Endpoints.System;
 
-public class PostMailEndpoint : Endpoint<PostMailRequest>
+public class PostMailEndpoint(Application.Messaging.ICommandHandler<SendEmailCommand, EmailResponse> handler) : Endpoint<PostMailRequest>
 {
     public override void Configure()
     {
@@ -17,7 +18,8 @@ public class PostMailEndpoint : Endpoint<PostMailRequest>
 
     public override async Task HandleAsync(PostMailRequest req, CancellationToken ct)
     {
-        var result = await new SendEmailCommand(req.From, req.Subject, req.Body).ExecuteAsync(ct);
+        var command = new SendEmailCommand(req.From, req.Subject, req.Body);
+        var result = await handler.HandleAsync(command, ct);
 
         await result.Match(
             onSuccess: _ => Send.CreatedAtAsync<PostMailEndpoint>(cancellation: ct),

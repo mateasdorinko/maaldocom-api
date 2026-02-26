@@ -2,10 +2,10 @@
 
 namespace Tests.Unit.Application.Queries.Knowledge.GetKnowledgeQueryHandlerTests;
 
-public class ExecuteAsync
+public class HandleAsync
 {
     [Fact]
-    public async Task ExecuteAsync_InvokedWithExistentId_ReturnsKnowledge()
+    public async Task HandleAsync_InvokedWithExistentId_ReturnsKnowledge()
     {
         // arrange
         var id = Guid.NewGuid();
@@ -25,7 +25,7 @@ public class ExecuteAsync
         A.CallTo(() => cacheManager.ListKnowledgeAsync(ct)).Returns(knowledgeList);
 
         // act
-        var result = await handler.ExecuteAsync(query, ct);
+        var result = await handler.HandleAsync(query, ct);
 
         var matchedKnowledge = knowledgeList.FirstOrDefault(k => k.Id == result.Value.Id);
 
@@ -35,7 +35,7 @@ public class ExecuteAsync
     }
 
     [Fact]
-    public async Task ExecuteAsync_InvokedWithNonExistentId_ReturnsNotFound()
+    public async Task HandleAsync_InvokedWithNonExistentId_ReturnsNotFound()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -52,7 +52,7 @@ public class ExecuteAsync
             ]);
 
         // act
-        var result = await handler.ExecuteAsync(query, ct);
+        var result = await handler.HandleAsync(query, ct);
 
         // assert
         result.IsFailed.ShouldBe(true);
