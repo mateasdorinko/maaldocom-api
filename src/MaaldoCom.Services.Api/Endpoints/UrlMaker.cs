@@ -24,6 +24,10 @@ internal static class UrlMaker
     public static string GetThumbnailMediaUrl(string mediaAlbumId, string mediaId) => $"{GetMediaUrl(mediaAlbumId, mediaId)}/thumb";
     public static string GetThumbnailMediaUrl(Guid mediaAlbumId, Guid mediaId) => $"{GetThumbnailMediaUrl(mediaAlbumId.ToString(), mediaId.ToString())}";
 
+    public const string DefaultRoute = "/";
+    public static string GetDocsUrl() => $"{DefaultRoute}docs";
+    public static string GetHealthCheckUrl() => $"{DefaultRoute}health";
+
     public const string KnowledgeRoute = "/knowledge";
     public static string GetKnowledgeUrl(Guid id) => $"{KnowledgeRoute}/{id}";
     public static string GetKnowledgeUrl(string idRouteParam) => $"{KnowledgeRoute}/{idRouteParam}";

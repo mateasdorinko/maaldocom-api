@@ -12,6 +12,6 @@ public class GetDefaultEndpoint : EndpointWithoutRequest
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        await Send.RedirectAsync("/docs");
+        await Send.RedirectAsync(UrlMaker.GetDocsUrl());
     }
 }

@@ -26,11 +26,4 @@
       <ProjectReference Include="..\..\src\MaaldoCom.Services.Api\MaaldoCom.Services.Api.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Knowledge\" />
-      <Folder Include="MediaAlbums\" />
-      <Folder Include="System\" />
-      <Folder Include="Tags\" />
-    </ItemGroup>
-
 </Project>
