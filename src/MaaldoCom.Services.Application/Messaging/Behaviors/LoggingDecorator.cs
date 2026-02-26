@@ -8,25 +8,16 @@ internal static class LoggingDecorator
         : ICommandHandler<TCommand, TResponse>
         where TCommand : ICommand<TResponse>
     {
-        public async Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken cancellationToken)
+        public async Task<Result<TResponse>> HandleAsync(TCommand command, CancellationToken ct)
         {
             string commandName = typeof(TCommand).Name;
 
             logger.LogInformation("Processing command {Command}", commandName);
 
-            Result<TResponse> result = await innerHandler.HandleAsync(command, cancellationToken);
+            Result<TResponse> result = await innerHandler.HandleAsync(command, ct);
 
-            if (result.IsSuccess)
-            {
-                logger.LogInformation("Completed command {Command}", commandName);
-            }
-            else
-            {
-                using (LogContext.PushProperty("Error", result.Error, true))
-                {
-                    logger.LogError("Completed command {Command} with error", commandName);
-                }
-            }
+            if (result.IsSuccess) { logger.LogInformation("Completed command {Command}", commandName); }
+            else { logger.LogWarning("Completed command: {Command} with errors: {Error}", commandName, result.Errors.Select(e => e.Message).ToArray()); }
 
             return result;
         }
@@ -38,25 +29,16 @@ internal static class LoggingDecorator
         : ICommandHandler<TCommand>
         where TCommand : ICommand
     {
-        public async Task<Result> HandleAsync(TCommand command, CancellationToken cancellationToken)
+        public async Task<Result> HandleAsync(TCommand command, CancellationToken ct)
         {
             string commandName = typeof(TCommand).Name;
 
             logger.LogInformation("Processing command {Command}", commandName);
 
-            Result result = await innerHandler.HandleAsync(command, cancellationToken);
+            Result result = await innerHandler.HandleAsync(command, ct);
 
-            if (result.IsSuccess)
-            {
-                logger.LogInformation("Completed command {Command}", commandName);
-            }
-            else
-            {
-                using (LogContext.PushProperty("Error", result.Error, true))
-                {
-                    logger.LogError("Completed command {Command} with error", commandName);
-                }
-            }
+            if (result.IsSuccess) { logger.LogInformation("Completed command {Command}", commandName); }
+            else { logger.LogWarning("Completed command: {Command} with errors: {Error}", commandName, result.Errors.Select(e => e.Message).ToArray()); }
 
             return result;
         }
@@ -68,25 +50,16 @@ internal static class LoggingDecorator
         : IQueryHandler<TQuery, TResponse>
         where TQuery : IQuery<TResponse>
     {
-        public async Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken cancellationToken)
+        public async Task<Result<TResponse>> HandleAsync(TQuery query, CancellationToken ct)
         {
             string queryName = typeof(TQuery).Name;
 
             logger.LogInformation("Processing query {Query}", queryName);
 
-            Result<TResponse> result = await innerHandler.HandleAsync(query, cancellationToken);
+            Result<TResponse> result = await innerHandler.HandleAsync(query, ct);
 
-            if (result.IsSuccess)
-            {
-                logger.LogInformation("Completed query {Query}", queryName);
-            }
-            else
-            {
-                using (LogContext.PushProperty("Error", result.Error, true))
-                {
-                    logger.LogError("Completed query {Query} with error", queryName);
-                }
-            }
+            if (result.IsSuccess) { logger.LogInformation("Completed query {Query}", queryName); }
+            else { logger.LogWarning("Completed query: {Query} with errors: {Error}", queryName, result.Errors.Select(e => e.Message).ToArray()); }
 
             return result;
         }

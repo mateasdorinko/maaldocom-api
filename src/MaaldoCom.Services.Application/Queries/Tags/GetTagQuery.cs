@@ -1,6 +1,6 @@
 ﻿namespace MaaldoCom.Services.Application.Queries.Tags;
 
-public class GetTagQuery : ICommand<Result<TagDto>>
+public sealed record GetTagQuery : IQuery<TagDto>
 {
     public GetTagQuery(string name)
     {
@@ -23,9 +23,9 @@ public class GetTagQuery : ICommand<Result<TagDto>>
     public readonly object SearchValue;
 }
 
-public class GetTagQueryHandler(ICacheManager cacheManager) : ICommandHandler<GetTagQuery, Result<TagDto>>
+internal sealed class GetTagQueryHandler(ICacheManager cacheManager) : IQueryHandler<GetTagQuery, TagDto>
 {
-    public async Task<Result<TagDto>> ExecuteAsync(GetTagQuery query, CancellationToken ct)
+    public async Task<Result<TagDto>> HandleAsync(GetTagQuery query, CancellationToken ct)
     {
         TagDto? dto;
 

@@ -3,7 +3,7 @@ using MaaldoCom.Services.Application.Queries.Knowledge;
 
 namespace MaaldoCom.Services.Api.Endpoints.Knowledge;
 
-public class GetKnowledgeByIdEndpoint : Endpoint<GetKnowledgeByIdRequest, GetKnowledgeResponse>
+public class GetKnowledgeByIdEndpoint(IQueryHandler<GetKnowledgeQuery, KnowledgeDto> handler) : Endpoint<GetKnowledgeByIdRequest, GetKnowledgeResponse>
 {
     public override void Configure()
     {
@@ -18,7 +18,8 @@ public class GetKnowledgeByIdEndpoint : Endpoint<GetKnowledgeByIdRequest, GetKno
 
     public override async Task HandleAsync(GetKnowledgeByIdRequest req, CancellationToken ct)
     {
-        var result = await new GetKnowledgeQuery(req.Id).ExecuteAsync(ct);
+        var query = new GetKnowledgeQuery(req.Id);
+        var result = await handler.HandleAsync(query, ct);
 
         await result.Match(
             onSuccess: _ => Send.OkAsync(result.Value.ToGetModel(), ct),

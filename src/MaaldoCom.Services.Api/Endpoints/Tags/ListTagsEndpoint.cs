@@ -3,7 +3,7 @@ using MaaldoCom.Services.Application.Queries.Tags;
 
 namespace MaaldoCom.Services.Api.Endpoints.Tags;
 
-public class ListTagsEndpoint : EndpointWithoutRequest<IEnumerable<GetTagResponse>>
+public class ListTagsEndpoint(IQueryHandler<ListTagsQuery, IEnumerable<TagDto>> handler) : EndpointWithoutRequest<IEnumerable<GetTagResponse>>
 {
     public override void Configure()
     {
@@ -17,9 +17,9 @@ public class ListTagsEndpoint : EndpointWithoutRequest<IEnumerable<GetTagRespons
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var result = (await new ListTagsQuery().ExecuteAsync(ct)).Value;
-        var response = result.ToGetModels();
+        var query = new ListTagsQuery();
+        var result = await handler.HandleAsync(query, ct);
 
-        await Send.OkAsync(response, ct);
+        await Send.OkAsync(result.Value.ToGetModels(), ct);
     }
 }

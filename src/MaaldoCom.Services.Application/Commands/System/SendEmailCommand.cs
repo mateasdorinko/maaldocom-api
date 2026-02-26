@@ -2,24 +2,12 @@
 
 namespace MaaldoCom.Services.Application.Commands.System;
 
-public class SendEmailCommand(string from, string subject, string body) : ICommand<Result<EmailResponse>>
-{
-    public string From { get; } = from;
-    public string Subject { get; } = subject;
-    public string Body { get; } = body;
-}
+public sealed record SendEmailCommand(string From, string Subject, string Body) : ICommand<EmailResponse>;
 
-public class SendEmailCommandHandler(IEmailProvider emailProvider) : ICommandHandler<SendEmailCommand, Result<EmailResponse>>
+internal sealed class SendEmailCommandHandler(IEmailProvider emailProvider) : ICommandHandler<SendEmailCommand, EmailResponse>
 {
-    public async Task<Result<EmailResponse>> ExecuteAsync(SendEmailCommand command, CancellationToken ct)
+    public async Task<Result<EmailResponse>> HandleAsync(SendEmailCommand command, CancellationToken ct)
     {
-        var validationResult = await new SendEmailCommandValidator().ValidateAsync(command, ct);
-
-        if (!validationResult.IsValid)
-        {
-            return Result.Fail<EmailResponse>(validationResult.Errors.Select(IError (e) => new Error(e.ErrorMessage)).ToList());
-        }
-
         var response = await emailProvider.SendEmailAsync(command.From, command.Subject, command.Body, ct);
 
         return Result.Ok(response);

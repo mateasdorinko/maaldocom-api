@@ -7,5 +7,5 @@ global using MaaldoCom.Services.Api.Endpoints.MediaAlbums.Models;
 global using MaaldoCom.Services.Api.Endpoints.Tags.Models;
 global using MaaldoCom.Services.Api.Extensions;
 global using MaaldoCom.Services.Application.Dtos;
+global using MaaldoCom.Services.Application.Messaging;
 global using Shouldly;
-global using System.Security.Claims;

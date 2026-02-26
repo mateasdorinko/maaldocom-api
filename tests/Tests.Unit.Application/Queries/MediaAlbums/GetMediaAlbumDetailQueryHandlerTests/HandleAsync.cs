@@ -2,10 +2,10 @@
 
 namespace Tests.Unit.Application.Queries.MediaAlbums.GetMediaAlbumDetailQueryHandlerTests;
 
-public class ExecuteAsync
+public class HandleAsync
 {
     [Fact]
-    public async Task ExecuteAsync_ByIdIsValid_ReturnsMediaAlbum()
+    public async Task HandleAsync_ByIdIsValid_ReturnsMediaAlbum()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -23,7 +23,7 @@ public class ExecuteAsync
         A.CallTo(() => cacheManager.GetMediaAlbumDetailAsync(mediaAlbum.Id, ct)).Returns(mediaAlbum);
 
         // act
-        var result = await handler.ExecuteAsync(query, ct);
+        var result = await handler.HandleAsync(query, ct);
 
         // assert
         result.IsSuccess.ShouldBe(true);
@@ -31,7 +31,7 @@ public class ExecuteAsync
     }
 
     [Fact]
-    public async Task ExecuteAsync_ByIdNotValid_ReturnsNotFound()
+    public async Task HandleAsync_ByIdNotValid_ReturnsNotFound()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -43,7 +43,7 @@ public class ExecuteAsync
         A.CallTo(() => cacheManager.GetMediaAlbumDetailAsync(query.Id!.Value, ct)).Returns(default(MediaAlbumDto));
 
         // act
-        var result = await handler.ExecuteAsync(query, ct);
+        var result = await handler.HandleAsync(query, ct);
 
         // assert
         result.IsFailed.ShouldBe(true);
@@ -52,7 +52,7 @@ public class ExecuteAsync
     }
 
     [Fact]
-    public async Task ExecuteAsync_ByUrlFriendlyNameNotInCachedList_ReturnsNotFound()
+    public async Task HandleAsync_ByUrlFriendlyNameNotInCachedList_ReturnsNotFound()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -70,7 +70,7 @@ public class ExecuteAsync
         A.CallTo(() => cacheManager.ListMediaAlbumsAsync(ct)).Returns(new List<MediaAlbumDto> { new(), new() });
 
         // act
-        var result = await handler.ExecuteAsync(query, ct);
+        var result = await handler.HandleAsync(query, ct);
 
         // assert
         result.IsFailed.ShouldBe(true);
@@ -80,7 +80,7 @@ public class ExecuteAsync
     }
 
     [Fact]
-    public async Task ExecuteAsync_ByUrlFriendlyNameInCachedListAndInDb_ReturnsMediaAlbum()
+    public async Task HandleAsync_ByUrlFriendlyNameInCachedListAndInDb_ReturnsMediaAlbum()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -99,7 +99,7 @@ public class ExecuteAsync
         A.CallTo(() => cacheManager.GetMediaAlbumDetailAsync(mediaAlbum.Id, ct)).Returns(mediaAlbum);
 
         // act
-        var result = await handler.ExecuteAsync(query, ct);
+        var result = await handler.HandleAsync(query, ct);
 
         // assert
         result.IsSuccess.ShouldBe(true);
@@ -107,7 +107,7 @@ public class ExecuteAsync
     }
 
     [Fact]
-    public async Task ExecuteAsync_ByUrlFriendlyNameInCachedListButNotInDb_ReturnsNotFound()
+    public async Task HandleAsync_ByUrlFriendlyNameInCachedListButNotInDb_ReturnsNotFound()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -126,7 +126,7 @@ public class ExecuteAsync
         A.CallTo(() => cacheManager.GetMediaAlbumDetailAsync(mediaAlbum.Id, ct)).Returns(default(MediaAlbumDto));
 
         // act
-        var result = await handler.ExecuteAsync(query, ct);
+        var result = await handler.HandleAsync(query, ct);
 
         // assert
         result.IsFailed.ShouldBe(true);

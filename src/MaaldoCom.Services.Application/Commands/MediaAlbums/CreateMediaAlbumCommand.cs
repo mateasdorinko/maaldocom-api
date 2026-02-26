@@ -2,24 +2,13 @@
 
 namespace MaaldoCom.Services.Application.Commands.MediaAlbums;
 
-public class CreateMediaAlbumCommand(ClaimsPrincipal user, MediaAlbumDto dto) : ICommand<Result<MediaAlbumDto>>
-{
-    public ClaimsPrincipal User { get; } = user;
-    public MediaAlbumDto MediaAlbum { get; set; } = dto;
-}
+public sealed record CreateMediaAlbumCommand(ClaimsPrincipal User, MediaAlbumDto MediaAlbum) : ICommand<MediaAlbumDto>;
 
-public class CreateMediaAlbumCommandHandler(IMaaldoComDbContext maaldoComDbContext, ICacheManager cacheManager)
-    : ICommandHandler<CreateMediaAlbumCommand, Result<MediaAlbumDto>>
+internal sealed class CreateMediaAlbumCommandHandler(IMaaldoComDbContext maaldoComDbContext, ICacheManager cacheManager)
+    : ICommandHandler<CreateMediaAlbumCommand, MediaAlbumDto>
 {
-    public async Task<Result<MediaAlbumDto>> ExecuteAsync(CreateMediaAlbumCommand command, CancellationToken ct)
+    public async Task<Result<MediaAlbumDto>> HandleAsync(CreateMediaAlbumCommand command, CancellationToken ct)
     {
-        var validationResult = await new CreateMediaAlbumCommandValidator(maaldoComDbContext).ValidateAsync(command, ct);
-
-        if (!validationResult.IsValid)
-        {
-            return Result.Fail<MediaAlbumDto>(validationResult.Errors.Select(IError (e) => new Error(e.ErrorMessage)).ToList());
-        }
-
         command.MediaAlbum.Active = true;
         foreach (var media in command.MediaAlbum.Media) { media.Active = true; }
 

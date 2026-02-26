@@ -9,18 +9,12 @@ public class HandleAsync
     public async Task HandleAsync_Invoked_ReturnsKnowledgeAndHttpOk()
     {
         // arrange
-        var endpoint = Factory.Create<ListKnowledgeEndpoint>();
-        var handler = A.Fake<ICommandHandler<ListKnowledgeQuery, Result<IEnumerable<KnowledgeDto>>>>();
-        var knowledge = new List<KnowledgeDto> { new() { Id = Guid.NewGuid(), Title = "Title1", Quote = "Quote1" } };
-        var result = new Result<IEnumerable<KnowledgeDto>>().WithValue(knowledge);
+        var handler = A.Fake<IQueryHandler<ListKnowledgeQuery, IEnumerable<KnowledgeDto>>>();
+        var endpoint = Factory.Create<ListKnowledgeEndpoint>(handler);
+        var result = new Result<IEnumerable<KnowledgeDto>>()
+            .WithValue(new List<KnowledgeDto> { new() { Id = Guid.NewGuid(), Title = "Title1", Quote = "Quote1" } });
 
-        var query = new ListKnowledgeQuery();
-
-        A.CallTo(() => handler.ExecuteAsync(A<ListKnowledgeQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
-
-        handler.RegisterForTesting();
-
-        await query.ExecuteAsync();
+        A.CallTo(() => handler.HandleAsync(A<ListKnowledgeQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
         await endpoint.HandleAsync(CancellationToken.None);

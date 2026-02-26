@@ -12,4 +12,8 @@
       <PackageReference Include="Scrutor" />
     </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tests.Unit.Application" />
+  </ItemGroup>
+
 </Project>

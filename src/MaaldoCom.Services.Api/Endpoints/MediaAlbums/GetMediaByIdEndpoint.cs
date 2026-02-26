@@ -3,7 +3,7 @@ using MaaldoCom.Services.Application.Queries.MediaAlbums;
 
 namespace MaaldoCom.Services.Api.Endpoints.MediaAlbums;
 
-public class GetMediaByIdEndpoint : Endpoint<GetMediaByIdRequest, GetMediaResponse>
+public class GetMediaByIdEndpoint(IQueryHandler<GetMediaBlobQuery, MediaDto> handler) : Endpoint<GetMediaByIdRequest, GetMediaResponse>
 {
     public override void Configure()
     {
@@ -18,7 +18,8 @@ public class GetMediaByIdEndpoint : Endpoint<GetMediaByIdRequest, GetMediaRespon
 
     public override async Task HandleAsync(GetMediaByIdRequest req, CancellationToken ct)
     {
-        var result = await new GetMediaBlobQuery(req.MediaAlbumId, req.MediaId, req.MediaType).ExecuteAsync(ct);
+        var query = new GetMediaBlobQuery(req.MediaAlbumId, req.MediaId, req.MediaType);
+        var result = await handler.HandleAsync(query, ct);
 
         await result.Match(
             onSuccess: async _ =>

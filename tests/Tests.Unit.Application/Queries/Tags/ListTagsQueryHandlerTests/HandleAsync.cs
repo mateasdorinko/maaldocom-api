@@ -2,10 +2,10 @@
 
 namespace Tests.Unit.Application.Queries.Tags.ListTagsQueryHandlerTests;
 
-public class ExecuteAsync
+public class HandleAsync
 {
     [Fact]
-    public async Task ExecuteAsync_Invoked_ReturnsTagList()
+    public async Task HandleAsync_Invoked_ReturnsTagList()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -24,7 +24,7 @@ public class ExecuteAsync
         A.CallTo(() => cacheManager.ListTagsAsync(ct)).Returns(tagList);
 
         // act
-        var result = await handler.ExecuteAsync(query, ct);
+        var result = await handler.HandleAsync(query, ct);
 
         // assert
         result.IsSuccess.ShouldBe(true);

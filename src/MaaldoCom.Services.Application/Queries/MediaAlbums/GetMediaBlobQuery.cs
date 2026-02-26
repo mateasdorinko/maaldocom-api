@@ -3,17 +3,12 @@ using MaaldoCom.Services.Domain.MediaAlbums;
 
 namespace MaaldoCom.Services.Application.Queries.MediaAlbums;
 
-public class GetMediaBlobQuery(Guid mediaAlbumId, Guid mediaId, string mediaType) : ICommand<Result<MediaDto>>
-{
-    public Guid MediaAlbumId { get; } = mediaAlbumId;
-    public Guid MediaId { get; } = mediaId;
-    public string MediaType { get; } = mediaType;
-}
+public sealed record GetMediaBlobQuery(Guid MediaAlbumId, Guid MediaId, string MediaType) : IQuery<MediaDto>;
 
-public class GetMediaBlobQueryHandler(ICacheManager cacheManager, IBlobsProvider blobsProvider)
-    : ICommandHandler<GetMediaBlobQuery, Result<MediaDto>>
+internal sealed class GetMediaBlobQueryHandler(ICacheManager cacheManager, IBlobsProvider blobsProvider)
+    : IQueryHandler<GetMediaBlobQuery, MediaDto>
 {
-    public async Task<Result<MediaDto>> ExecuteAsync(GetMediaBlobQuery query, CancellationToken ct)
+    public async Task<Result<MediaDto>> HandleAsync(GetMediaBlobQuery query, CancellationToken ct)
     {
         const string containerName = "media-albums";
         var notFoundResult = Result.Fail<MediaDto>(new BlobNotFoundError(containerName, $"MediaAlbum:{query.MediaAlbumId}/Media:{query.MediaId}"));

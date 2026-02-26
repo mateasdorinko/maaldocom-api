@@ -1,6 +1,6 @@
 ﻿namespace MaaldoCom.Services.Application.Queries.MediaAlbums;
 
-public class GetMediaAlbumDetailQuery : ICommand<Result<MediaAlbumDto>>
+public sealed record GetMediaAlbumDetailQuery : IQuery<MediaAlbumDto>
 {
     public GetMediaAlbumDetailQuery(string name)
     {
@@ -23,10 +23,10 @@ public class GetMediaAlbumDetailQuery : ICommand<Result<MediaAlbumDto>>
     public readonly object SearchValue;
 }
 
-public class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager)
-    : ICommandHandler<GetMediaAlbumDetailQuery, Result<MediaAlbumDto>>
+internal sealed class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager)
+    : IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto>
 {
-    public async Task<Result<MediaAlbumDto>> ExecuteAsync(GetMediaAlbumDetailQuery query, CancellationToken ct)
+    public async Task<Result<MediaAlbumDto>> HandleAsync(GetMediaAlbumDetailQuery query, CancellationToken ct)
     {
         MediaAlbumDto? dto;
 

@@ -1,10 +1,10 @@
 ﻿namespace MaaldoCom.Services.Application.Commands.System;
 
-public class CacheRefreshCommand : ICommand<Result>;
+public sealed record CacheRefreshCommand : ICommand;
 
-public class CacheRefreshCommandHandler(ICacheManager cacheManager) : ICommandHandler<CacheRefreshCommand, Result>
+internal sealed class CacheRefreshCommandHandler(ICacheManager cacheManager) : ICommandHandler<CacheRefreshCommand>
 {
-    public async Task<Result> ExecuteAsync(CacheRefreshCommand command, CancellationToken ct)
+    public async Task<Result> HandleAsync(CacheRefreshCommand command, CancellationToken ct)
     {
         await cacheManager.RefreshCacheAsync(ct);
         return Result.Ok();
