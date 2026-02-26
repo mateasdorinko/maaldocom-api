@@ -5,16 +5,32 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.collector" />
+        <PackageReference Include="coverlet.collector">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="FastEndpoints.Testing" />
         <PackageReference Include="JunitXml.TestLogger" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="Microsoft.Testing.Platform" />
         <PackageReference Include="Shouldly" />
-        <PackageReference Include="xunit" />
         <PackageReference Include="xunit.runner.visualstudio" />
+        <PackageReference Include="xunit.v3" />
     </ItemGroup>
 
     <ItemGroup>
         <Using Include="Xunit"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\MaaldoCom.Services.Api\MaaldoCom.Services.Api.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Knowledge\" />
+      <Folder Include="MediaAlbums\" />
+      <Folder Include="System\" />
+      <Folder Include="Tags\" />
     </ItemGroup>
 
 </Project>
