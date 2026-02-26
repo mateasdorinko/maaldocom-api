@@ -13,8 +13,7 @@ internal sealed class GetRandomKnowledgeQueryHandler(ICacheManager cacheManager)
     {
         var cachedKnowledge = (await cacheManager.ListKnowledgeAsync(ct)).ToList();
 
-        var random = new Random();
-        var randomKnowledge = cachedKnowledge[random.Next(cachedKnowledge.Count)];
+        var randomKnowledge = cachedKnowledge[Random.Shared.Next(cachedKnowledge.Count)];
 
         return Result.Ok(randomKnowledge);
     }
