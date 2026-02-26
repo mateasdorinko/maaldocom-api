@@ -8,7 +8,7 @@
 [![Deploy to Test](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/deploy-test.yml/badge.svg)](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/deploy-test.yml)
 [![Deploy to Production](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/deploy-prod.yml/badge.svg)](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/deploy-prod.yml)
 
-This repository contains the back-end services for maaldo.com, my personal website, exposed via API and CLI. The
+This repository contains the back-end REST API services for maaldo.com, my personal website. The
 solution is structured into multiple projects, each responsible for a specific aspect of the application, following
 Clean Architecture principles.
 
@@ -102,7 +102,6 @@ volumes:
 | Src Project                                                                          | Tst Project                                                             |
 |--------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
 | [MaaldoCom.Services.Api (Presentation)](src/MaaldoCom.Services.Api/README.md)        | [Tests.Unit.Api](tests/Tests.Unit.Api/README.md)                        |
-| [MaaldoCom.Services.Cli](src/MaaldoCom.Services.Cli/README.md)                       | [Tests.Unit.Cli](tests/Tests.Unit.Cli/README.md)                        |
 | [MaaldoCom.Services.Infrastructure](src/MaaldoCom.Services.Infrastructure/README.md) | [Tests.Unit.Infrastructure](tests/Tests.Unit.Infrastructure/README.md)  |
 | [MaaldoCom.Services.Application](src/MaaldoCom.Services.Application/README.md)       | [Tests.Unit.Application](tests/Tests.Unit.Application/README.md)        |
 | [MaaldoCom.Services.Domain](src/MaaldoCom.Services.Domain/README.md)                 | [Tests.Unit.Domain](tests/Tests.Unit.Domain/README.md)                  |
