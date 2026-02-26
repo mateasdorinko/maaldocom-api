@@ -2,8 +2,8 @@ namespace Tests.Unit.Application.Errors.ValidationFailureErrorTests;
 
 public class Ctor
 {
-    [Fact(Skip = "Not implemented")]
-    public void Ctor_Instantiated_ArgsAreMappedCorrectly()
+    [Fact(Skip = "Scaffolded, but not implemented yet")]
+    public void Ctor_Instantiated_CONDITION_EXPECTATION()
     {
         // arrange
 
