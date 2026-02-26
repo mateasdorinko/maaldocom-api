@@ -30,7 +30,7 @@ public static class ServiceCollectionExtensions
             });
         }
 
-        public IServiceCollection AddMaaldoCors()
+        public IServiceCollection AddCrossOriginResourceSharing()
         {
             var corsOrigins = new[]
             {

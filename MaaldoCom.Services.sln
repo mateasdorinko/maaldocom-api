@@ -62,8 +62,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{E0D37A
 		assets\monogram.svg = assets\monogram.svg
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit", "tests\Tests.Unit\Tests.Unit.csproj", "{E20414EE-F144-49CA-A62A-1701BD153BDD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,7 +83,6 @@ Global
 		{67510D09-0D16-461E-BD5C-0D2EEA2E4B97} = {953EB560-8ED6-4A22-94DE-61EF4BBFAE6A}
 		{2A0A87D9-8FAB-48D4-85CB-EC128099DA31} = {953EB560-8ED6-4A22-94DE-61EF4BBFAE6A}
 		{E0D37ACD-1A6B-4B8D-B71C-C3A05A5BBAA4} = {3D16D652-71EE-46C5-A0FC-02869A49E3E6}
-		{E20414EE-F144-49CA-A62A-1701BD153BDD} = {ED845241-31AD-451B-BDEC-7F0E36DA220A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F9624FC0-587C-4312-8D07-0C85514ABD89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -132,9 +129,5 @@ Global
 		{F696F347-1250-4A31-B088-9100193F41DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F696F347-1250-4A31-B088-9100193F41DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F696F347-1250-4A31-B088-9100193F41DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E20414EE-F144-49CA-A62A-1701BD153BDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E20414EE-F144-49CA-A62A-1701BD153BDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E20414EE-F144-49CA-A62A-1701BD153BDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E20414EE-F144-49CA-A62A-1701BD153BDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

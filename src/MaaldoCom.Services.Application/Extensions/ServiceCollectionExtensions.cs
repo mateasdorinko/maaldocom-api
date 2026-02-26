@@ -8,7 +8,7 @@ public static class ServiceCollectionExtensions
 {
     extension(IServiceCollection services)
     {
-        public IServiceCollection AddMediator()
+        public IServiceCollection AddApplicationServices()
         {
             services.Scan(scan => scan.FromAssembliesOf(typeof(AssemblyReference))
                 .AddClasses(classes => classes.AssignableTo(typeof(IQueryHandler<,>)), publicOnly: false)

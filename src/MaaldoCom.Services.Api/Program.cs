@@ -34,9 +34,9 @@ builder.Services
     .AddResponseCaching()
     .AddSwaggerDocumentForFastEndpoints(apiDocTitle, auth0Domain, auth0Audience)
     .ConfigureForwardedHeaders()
-    .AddMaaldoCors()
+    .AddCrossOriginResourceSharing()
     .AddInfrastructureServices(builder.Configuration)
-    .AddMediator();
+    .AddApplicationServices();
 
 builder.Services.AddOtel(builder, otelEndpoint, otelHeaders, false);
 
