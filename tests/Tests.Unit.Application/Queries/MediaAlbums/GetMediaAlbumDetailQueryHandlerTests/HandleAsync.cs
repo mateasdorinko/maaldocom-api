@@ -1,4 +1,4 @@
-﻿using MaaldoCom.Services.Application.Queries.MediaAlbums;
+﻿using MaaldoCom.Api.Application.Queries.MediaAlbums;
 
 namespace Tests.Unit.Application.Queries.MediaAlbums.GetMediaAlbumDetailQueryHandlerTests;
 

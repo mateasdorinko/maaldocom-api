@@ -6,10 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ```shell
 # Build the entire solution
-dotnet build MaaldoCom.Services.sln
+dotnet build MaaldoCom.Api.sln
 
 # Run all tests
-dotnet test MaaldoCom.Services.sln
+dotnet test MaaldoCom.Api.sln
 
 # Run a single test project
 dotnet test tests/Tests.Unit.Application/Tests.Unit.Application.csproj
@@ -18,27 +18,27 @@ dotnet test tests/Tests.Unit.Application/Tests.Unit.Application.csproj
 dotnet test --filter "FullyQualifiedName~MyTestClass.MyTestMethod"
 
 # Run the API locally
-dotnet run --project src/MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj
+dotnet run --project src/MaaldoCom.Api/MaaldoCom.Api.csproj
 ```
 
 ### Entity Framework Migrations
 
-Run from the `src/MaaldoCom.Services.Infrastructure` directory:
+Run from the `src/MaaldoCom.Api.Infrastructure` directory:
 
 ```shell
 # Add migration
-dotnet ef migrations add [NAME] --output-dir Database/Migrations --startup-project ../MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj
+dotnet ef migrations add [NAME] --output-dir Database/Migrations --startup-project ../MaaldoCom.Api/MaaldoCom.Api.csproj
 
 # Apply migrations
-dotnet ef database update --startup-project ../MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj
+dotnet ef database update --startup-project ../MaaldoCom.Api/MaaldoCom.Api.csproj
 
 # Remove last migration
-dotnet ef migrations remove --startup-project ../MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj
+dotnet ef migrations remove --startup-project ../MaaldoCom.Api/MaaldoCom.Api.csproj
 ```
 
 ## Architecture
 
-Clean Architecture with .NET 10.0. Five source projects, six test projects. Centralized package management via `Directory.Packages.props`. `Directory.Build.props` enforces nullable, implicit usings, warnings-as-errors, and SonarAnalyzer on all projects.
+Clean Architecture with .NET 10.0. Four source projects, five test projects. Centralized package management via `Directory.Packages.props`. `Directory.Build.props` enforces nullable, implicit usings, warnings-as-errors, and SonarAnalyzer on all projects.
 
 ### Layer Dependency Flow
 
@@ -48,7 +48,6 @@ Clean Architecture with .NET 10.0. Five source projects, six test projects. Cent
 - **Application** — Custom mediator pattern. Interfaces: `IQuery<TResponse>` / `IQueryHandler<TQuery, TResponse>` and `ICommand<TResponse>` / `ICommandHandler<TCommand, TResponse>`. Commands take a `ClaimsPrincipal`. Handlers registered via Scrutor assembly scanning with decorator pipeline (validation on commands, logging on all). Results wrapped in `FluentResults.Result<T>` with custom error types (`EntityNotFoundError`, `DuplicateEntityCreationError`, `ValidationFailureError`, `BlobNotFoundError`). DTOs with FluentValidation validators.
 - **Infrastructure** — EF Core with SQL Server (`MaaldoComDbContext`), audit tracking on save, FusionCache hybrid caching (`ICacheManager`), Azure Blob Storage (`IBlobProvider`), Mailgun email (`IEmailProvider`). All services registered via `AddInfrastructureServices()` extension.
 - **Api** — FastEndpoints. Each endpoint class overrides `Configure()` (route, auth, caching) and `HandleAsync()`. Queries/commands executed via `ExecuteAsync()`. Results matched with `result.Match(onSuccess, onFailure)` to send appropriate HTTP responses. Response models extend `BaseModel` with HATEOAS `href`. API docs served via Scalar at `/docs`.
-- **Cli** — Spectre.Console CLI tool. Uses Refitter source generator to auto-generate `MaaldoApiClient` from the API's OpenAPI spec (`Infrastructure/Generated/MaaldoApiClient.cs` — do not edit manually).
 
 ### Key Patterns
 

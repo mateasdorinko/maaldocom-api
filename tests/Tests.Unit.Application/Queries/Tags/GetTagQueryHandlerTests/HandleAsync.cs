@@ -1,4 +1,4 @@
-﻿using MaaldoCom.Services.Application.Queries.Tags;
+﻿using MaaldoCom.Api.Application.Queries.Tags;
 
 namespace Tests.Unit.Application.Queries.Tags.GetTagQueryHandlerTests;
 

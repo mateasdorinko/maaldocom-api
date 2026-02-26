@@ -7,9 +7,9 @@ public class CleanArchitectureTests
     [Fact]
     public void DomainLayer_ShouldNotHaveDependencyOn_ApiLayer()
     {
-        var result = Types.InAssembly(MaaldoCom.Services.Domain.AssemblyReference.Assembly)
+        var result = Types.InAssembly(MaaldoCom.Api.Domain.AssemblyReference.Assembly)
             .Should()
-            .NotHaveDependencyOn(MaaldoCom.Services.Api.AssemblyReference.Assembly.GetName().Name)
+            .NotHaveDependencyOn("MaaldoCom.Api.Endpoints")
             .GetResult();
 
         result.IsSuccessful.ShouldBeTrue();
@@ -18,9 +18,9 @@ public class CleanArchitectureTests
     [Fact]
     public void ApplicationLayer_ShouldNotHaveDependencyOn_ApiLayer()
     {
-        var result = Types.InAssembly(MaaldoCom.Services.Application.AssemblyReference.Assembly)
+        var result = Types.InAssembly(MaaldoCom.Api.Application.AssemblyReference.Assembly)
             .Should()
-            .NotHaveDependencyOn(MaaldoCom.Services.Api.AssemblyReference.Assembly.GetName().Name)
+            .NotHaveDependencyOn("MaaldoCom.Api.Endpoints")
             .GetResult();
 
         result.IsSuccessful.ShouldBeTrue();
@@ -29,9 +29,9 @@ public class CleanArchitectureTests
     [Fact]
     public void InfrastructureLayer_ShouldNotHaveDependencyOn_ApiLayer()
     {
-        var result = Types.InAssembly(MaaldoCom.Services.Infrastructure.AssemblyReference.Assembly)
+        var result = Types.InAssembly(MaaldoCom.Api.Infrastructure.AssemblyReference.Assembly)
             .Should()
-            .NotHaveDependencyOn(MaaldoCom.Services.Api.AssemblyReference.Assembly.GetName().Name)
+            .NotHaveDependencyOn("MaaldoCom.Api.Endpoints")
             .GetResult();
 
         result.IsSuccessful.ShouldBeTrue();

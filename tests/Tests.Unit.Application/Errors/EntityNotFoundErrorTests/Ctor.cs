@@ -1,4 +1,4 @@
-using MaaldoCom.Services.Application.Queries;
+using MaaldoCom.Api.Application.Queries;
 
 namespace Tests.Unit.Application.Errors.EntityNotFoundErrorTests;
 

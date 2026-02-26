@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\MaaldoCom.Services.Domain\MaaldoCom.Services.Domain.csproj" />
+      <ProjectReference Include="..\..\src\MaaldoCom.Api.Domain\MaaldoCom.Api.Domain.csproj" />
     </ItemGroup>
 
 </Project>
