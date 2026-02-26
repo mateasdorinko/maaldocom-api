@@ -1,4 +1,4 @@
-﻿using MaaldoCom.Services.Application.Queries.Knowledge;
+﻿using MaaldoCom.Api.Application.Queries.Knowledge;
 
 namespace Tests.Unit.Application.Queries.Knowledge.ListKnowledgeQueryHandlerTests;
 

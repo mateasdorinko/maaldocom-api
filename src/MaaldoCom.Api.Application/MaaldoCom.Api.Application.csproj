@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+      <ProjectReference Include="..\MaaldoCom.Api.Domain\MaaldoCom.Api.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentResults" />
+      <PackageReference Include="FluentValidation" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" />
+      <PackageReference Include="Scrutor" />
+    </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tests.Unit.Application" />
+  </ItemGroup>
+
+</Project>

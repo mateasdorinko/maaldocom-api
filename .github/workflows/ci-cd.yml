@@ -157,8 +157,8 @@ jobs:
         run: |
           dotnet tool install --global dotnet-ef --version 10.0.0
           dotnet ef migrations bundle \
-            --project src/MaaldoCom.Services.Infrastructure/MaaldoCom.Services.Infrastructure.csproj \
-            --startup-project src/MaaldoCom.Services.Api/MaaldoCom.Services.Api.csproj \
+            --project src/MaaldoCom.Api.Infrastructure/MaaldoCom.Api.Infrastructure.csproj \
+            --startup-project src/MaaldoCom.Api/MaaldoCom.Api.csproj \
             --configuration Release \
             --output efbundle \
             --self-contained
@@ -194,7 +194,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./src/MaaldoCom.Services.Api/Dockerfile
+          file: ./src/MaaldoCom.Api/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

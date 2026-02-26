@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+      <ProjectReference Include="..\MaaldoCom.Api.Application\MaaldoCom.Api.Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Azure.Storage.Blobs" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+      <PackageReference Include="ZiggyCreatures.FusionCache" />
+      <PackageReference Include="ZiggyCreatures.FusionCache.Serialization.SystemTextJson" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Database\Migrations\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Database\Sql\Seeding\InsertKnowledge.sql" />
+      <None Remove="Database\Sql\Seeding\InsertTags.sql" />
+    </ItemGroup>
+
+</Project>

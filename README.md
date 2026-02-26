@@ -1,12 +1,12 @@
 <img src="assets/logo.svg" alt="logo" width="100" />
 
-# MaaldoCom Services
+# MaaldoCom Api
 
-[![CI/CD Pipeline](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/ci-cd.yml)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mateasdorinko_maaldocom-services&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mateasdorinko_maaldocom-services)
-![Code Coverage](https://raw.githubusercontent.com/mateasdorinko/maaldocom-services/badges/badges/badge_linecoverage.svg)
-[![Deploy to Test](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/deploy-test.yml/badge.svg)](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/deploy-test.yml)
-[![Deploy to Production](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/deploy-prod.yml/badge.svg)](https://github.com/mateasdorinko/maaldocom-services/actions/workflows/deploy-prod.yml)
+[![CI/CD Pipeline](https://github.com/mateasdorinko/maaldocom-api/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/mateasdorinko/maaldocom-api/actions/workflows/ci-cd.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mateasdorinko_maaldocom-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mateasdorinko_maaldocom-api)
+![Code Coverage](https://raw.githubusercontent.com/mateasdorinko/maaldocom-api/badges/badges/badge_linecoverage.svg)
+[![Deploy to Test](https://github.com/mateasdorinko/maaldocom-api/actions/workflows/deploy-test.yml/badge.svg)](https://github.com/mateasdorinko/maaldocom-api/actions/workflows/deploy-test.yml)
+[![Deploy to Production](https://github.com/mateasdorinko/maaldocom-api/actions/workflows/deploy-prod.yml/badge.svg)](https://github.com/mateasdorinko/maaldocom-api/actions/workflows/deploy-prod.yml)
 
 This repository contains the back-end REST API services for maaldo.com, my personal website. The
 solution is structured into multiple projects, each responsible for a specific aspect of the application, following
@@ -17,7 +17,7 @@ Clean Architecture principles.
 - **Framework**: ASP.NET Core Web API
 - **Language**: C#
 - **Runtime**: .NET 10
-- **Testing**: xUnit, Moq, FluentAssertions
+- **Testing**: xUnit, Shouldly, FakeItEasy
 - **Database**: SQL Server (Docker), Azure Edge SQL (MicroK8s)
 - **Storage**: Azure Blob Storage (Azurite for local development)
 - **Authentication:** Auth0 (OpenID Connect)
@@ -92,20 +92,20 @@ volumes:
 
 ### Other Setup
 
-- [Local User Secrets](src/MaaldoCom.Services.Api/README.md#local-user-secrets)
-- [Entity Framework](src/MaaldoCom.Services.Infrastructure/README.md#entity-framework)
-- [FFMpeg](src/MaaldoCom.Services.Infrastructure/README.md#ffmpeg)
+- [Local User Secrets](src/MaaldoCom.Api/README.md#local-user-secrets)
+- [Entity Framework](src/MaaldoCom.Api.Infrastructure/README.md#entity-framework)
+- [FFMpeg](src/MaaldoCom.Api.Infrastructure/README.md#ffmpeg)
 
 
 ## Projects
 
-| Src Project                                                                          | Tst Project                                                             |
-|--------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| [MaaldoCom.Services.Api (Presentation)](src/MaaldoCom.Services.Api/README.md)        | [Tests.Unit.Api](tests/Tests.Unit.Api/README.md)                        |
-| [MaaldoCom.Services.Infrastructure](src/MaaldoCom.Services.Infrastructure/README.md) | [Tests.Unit.Infrastructure](tests/Tests.Unit.Infrastructure/README.md)  |
-| [MaaldoCom.Services.Application](src/MaaldoCom.Services.Application/README.md)       | [Tests.Unit.Application](tests/Tests.Unit.Application/README.md)        |
-| [MaaldoCom.Services.Domain](src/MaaldoCom.Services.Domain/README.md)                 | [Tests.Unit.Domain](tests/Tests.Unit.Domain/README.md)                  |
-|                                                                                      | [Tests.Integration](tests/Tests.Integration/README.md)                  |
+| Src Project                                                                | Tst Project                                                            |
+|----------------------------------------------------------------------------|------------------------------------------------------------------------|
+| [MaaldoCom.Api (Presentation)](src/MaaldoCom.Api/README.md)                | [Tests.Unit.Api](tests/Tests.Unit.Api/README.md)                       |
+| [MaaldoCom.Api.Infrastructure](src/MaaldoCom.Api.Infrastructure/README.md) | [Tests.Unit.Infrastructure](tests/Tests.Unit.Infrastructure/README.md) |
+| [MaaldoCom.Api.Application](src/MaaldoCom.Api.Application/README.md)       | [Tests.Unit.Application](tests/Tests.Unit.Application/README.md)       |
+| [MaaldoCom.Api.Domain](src/MaaldoCom.Api.Domain/README.md)                 | [Tests.Unit.Domain](tests/Tests.Unit.Domain/README.md)                 |
+|                                                                            | [Tests.Integration](tests/Tests.Integration/README.md)                 |
 
 
 ## MicroK8s Support

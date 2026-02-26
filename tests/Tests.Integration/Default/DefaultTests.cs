@@ -1,4 +1,4 @@
-﻿using MaaldoCom.Services.Api.Endpoints.Default;
+﻿using MaaldoCom.Api.Endpoints.Default;
 
 namespace Tests.Integration.Default;
 

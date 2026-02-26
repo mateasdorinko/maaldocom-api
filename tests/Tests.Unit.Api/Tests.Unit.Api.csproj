@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\MaaldoCom.Services.Api\MaaldoCom.Services.Api.csproj" />
+      <ProjectReference Include="..\..\src\MaaldoCom.Api\MaaldoCom.Api.csproj" />
     </ItemGroup>
 
     <ItemGroup>

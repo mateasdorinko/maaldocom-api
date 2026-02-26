@@ -1,5 +1,5 @@
-﻿using MaaldoCom.Services.Api.Endpoints.Knowledge;
-using MaaldoCom.Services.Application.Queries.Knowledge;
+﻿using MaaldoCom.Api.Endpoints.Knowledge;
+using MaaldoCom.Api.Application.Queries.Knowledge;
 
 namespace Tests.Unit.Api.Endpoints.Knowledge.ListKnowledgeEndpointTests;
 
