@@ -1,6 +1,3 @@
-using MaaldoCom.Api.Endpoints.Knowledge;
-using MaaldoCom.Api.Application.Queries.Knowledge;
-
 namespace Tests.Unit.Api.Endpoints.Knowledge.ListKnowledgeEndpointTests;
 
 public class Configure
@@ -17,7 +14,8 @@ public class Configure
 
         // assert
         endpoint.Definition.Verbs.ShouldHaveSingleItem();
-        endpoint.Definition.Verbs.ShouldContain("GET");
+        endpoint.Definition.Verbs.ShouldContain(HttpMethod.Get.Method);
+        endpoint.Definition.AnonymousVerbs!.ShouldContain(HttpMethod.Get.Method);
         endpoint.Definition.Routes.ShouldHaveSingleItem();
         endpoint.Definition.Routes.ShouldContain(UrlMaker.KnowledgeRoute);
     }

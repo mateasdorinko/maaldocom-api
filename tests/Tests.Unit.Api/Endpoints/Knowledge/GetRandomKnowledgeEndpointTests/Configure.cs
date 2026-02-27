@@ -1,4 +1,4 @@
-﻿namespace Tests.Unit.Api.Endpoints.Default.GetDefaultEndpointTests;
+﻿namespace Tests.Unit.Api.Endpoints.Knowledge.GetRandomKnowledgeEndpointTests;
 
 public class Configure
 {
@@ -6,7 +6,8 @@ public class Configure
     public void Configure_Invoked_SetsUpEndpointCorrectly()
     {
         // arrange
-        var endpoint = Factory.Create<GetDefaultEndpoint>();
+        var handler = A.Fake<IQueryHandler<GetRandomKnowledgeQuery, KnowledgeDto>>();
+        var endpoint = Factory.Create<GetRandomKnowledgeEndpoint>(handler);
 
         // act
         endpoint.Configure();
@@ -16,6 +17,5 @@ public class Configure
         endpoint.Definition.Verbs.ShouldContain(HttpMethod.Get.Method);
         endpoint.Definition.AnonymousVerbs!.ShouldContain(HttpMethod.Get.Method);
         endpoint.Definition.Routes.ShouldHaveSingleItem();
-        endpoint.Definition.Routes.ShouldContain(UrlMaker.DefaultRoute);
     }
 }

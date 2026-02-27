@@ -1,6 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.Default;
-
-namespace Tests.Unit.Api.Endpoints.Default.GetHealthCheckEndpointTests;
+﻿namespace Tests.Unit.Api.Endpoints.Default.GetHealthCheckEndpointTests;
 
 public class Configure
 {
@@ -15,7 +13,8 @@ public class Configure
 
         // assert
         endpoint.Definition.Verbs.ShouldHaveSingleItem();
-        endpoint.Definition.Verbs.ShouldContain("GET");
+        endpoint.Definition.Verbs.ShouldContain(HttpMethod.Get.Method);
+        endpoint.Definition.AnonymousVerbs!.ShouldContain(HttpMethod.Get.Method);
         endpoint.Definition.Routes.ShouldHaveSingleItem();
         endpoint.Definition.Routes.ShouldContain(UrlMaker.GetHealthCheckUrl());
     }

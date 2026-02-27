@@ -1,6 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.Default;
-
-namespace Tests.Unit.Api.Endpoints.Default.GetHealthCheckEndpointTests;
+﻿namespace Tests.Unit.Api.Endpoints.Default.GetHealthCheckEndpointTests;
 
 public class HandleAsync
 {
@@ -17,5 +15,6 @@ public class HandleAsync
         // assert
         endpoint.HttpContext.Response.StatusCode.ShouldBe(200);
         response.ShouldNotBeNull();
+        response.ToString().ShouldBe("{ status = healthy }");
     }
 }

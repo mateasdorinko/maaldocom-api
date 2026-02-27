@@ -2,15 +2,23 @@
 
 public class HandleAsync
 {
-    [Fact(Skip = "Scaffolded, but not implemented yet")]
-    public async Task HandleAsync_CONDITION_EXPECTATION()
+    [Fact]
+    public async Task HandleAsync_Invoked_ReturnsTagList()
     {
         // arrange
+        var handler = A.Fake<IQueryHandler<ListTagsQuery, IEnumerable<TagDto>>>();
+        var endpoint = Factory.Create<ListTagsEndpoint>(handler);
+        var result = new Result<IEnumerable<TagDto>>().WithValue(new List<TagDto>());
+
+        A.CallTo(() => handler.HandleAsync(A<ListTagsQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await Task.CompletedTask;
+        await endpoint.HandleAsync(CancellationToken.None);
+        var response = endpoint.Response;
 
         // assert
-        Assert.True(true);
+        endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.OK);
+        response.ShouldNotBeNull();
+        response.ShouldBeOfType<List<GetTagResponse>>();
     }
 }

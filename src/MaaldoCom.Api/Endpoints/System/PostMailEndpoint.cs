@@ -11,8 +11,6 @@ public class PostMailEndpoint(Application.Messaging.ICommandHandler<SendEmailCom
         Post(UrlMaker.GetMailUrl());
         Description(x => x.WithName("PostMail")
             .WithSummary("Creates a new email."));
-        //AllowAnonymous();
-        //Options(x => x.ExcludeFromDescription());
         Permissions("write:emails");
     }
 

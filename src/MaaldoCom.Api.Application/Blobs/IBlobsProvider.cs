@@ -1,5 +1,3 @@
-using MaaldoCom.Api.Application.Dtos;
-
 namespace MaaldoCom.Api.Application.Blobs;
 
 public interface IBlobsProvider

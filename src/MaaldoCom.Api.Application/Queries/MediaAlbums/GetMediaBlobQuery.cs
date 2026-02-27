@@ -1,8 +1,4 @@
 ﻿using MaaldoCom.Api.Application.Blobs;
-using MaaldoCom.Api.Application.Cache;
-using MaaldoCom.Api.Application.Dtos;
-using MaaldoCom.Api.Application.Errors;
-using MaaldoCom.Api.Application.Messaging;
 using MaaldoCom.Api.Domain.MediaAlbums;
 
 namespace MaaldoCom.Api.Application.Queries.MediaAlbums;

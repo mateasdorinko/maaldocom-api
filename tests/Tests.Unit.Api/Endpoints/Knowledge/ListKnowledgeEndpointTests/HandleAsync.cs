@@ -1,7 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.Knowledge;
-using MaaldoCom.Api.Application.Queries.Knowledge;
-
-namespace Tests.Unit.Api.Endpoints.Knowledge.ListKnowledgeEndpointTests;
+﻿namespace Tests.Unit.Api.Endpoints.Knowledge.ListKnowledgeEndpointTests;
 
 public class HandleAsync
 {
@@ -11,8 +8,7 @@ public class HandleAsync
         // arrange
         var handler = A.Fake<IQueryHandler<ListKnowledgeQuery, IEnumerable<KnowledgeDto>>>();
         var endpoint = Factory.Create<ListKnowledgeEndpoint>(handler);
-        var result = new Result<IEnumerable<KnowledgeDto>>()
-            .WithValue(new List<KnowledgeDto> { new() { Id = Guid.NewGuid(), Title = "Title1", Quote = "Quote1" } });
+        var result = new Result<IEnumerable<KnowledgeDto>>().WithValue(new List<KnowledgeDto>());
 
         A.CallTo(() => handler.HandleAsync(A<ListKnowledgeQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
@@ -21,7 +17,8 @@ public class HandleAsync
         var response = endpoint.Response;
 
         // assert
-        endpoint.HttpContext.Response.StatusCode.ShouldBe(200);
+        endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.OK);
         response.ShouldNotBeNull();
+        response.ShouldBeOfType<List<GetKnowledgeResponse>>();
     }
 }

@@ -16,7 +16,7 @@ public class PostCacheRefreshEndpoint(Application.Messaging.ICommandHandler<Cach
     public override async Task HandleAsync(CancellationToken ct)
     {
         var command = new CacheRefreshCommand();
-        var result = await handler.HandleAsync(command, ct);
+        await handler.HandleAsync(command, ct);
 
         await Send.NoContentAsync(ct);
     }

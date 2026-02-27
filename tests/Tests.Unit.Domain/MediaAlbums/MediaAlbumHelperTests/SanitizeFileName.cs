@@ -1,14 +1,23 @@
-﻿namespace Tests.Unit.Domain.MediaAlbums.MediaAlbumHelperTests;
+namespace Tests.Unit.Domain.MediaAlbums.MediaAlbumHelperTests;
 
-public class SanitizeFileName
+public sealed class SanitizeFileName : IDisposable
 {
-    [Fact(Skip = "Need to figure out how to mock FileInfo")]
+    private readonly DirectoryInfo _dir = Directory.CreateTempSubdirectory();
+
+    public void Dispose() => _dir.Delete(recursive: true);
+
+    private FileInfo CreateFile(string name)
+    {
+        var path = Path.Combine(_dir.FullName, name);
+        File.WriteAllBytes(path, []);
+        return new FileInfo(path);
+    }
+
+    [Fact]
     public void SanitizeFileName_WithUnderScores_ReplacedWithDashes()
     {
         // arrange
-        var fileInfo = A.Fake<FileInfo>();
-        A.CallTo(() => fileInfo.Exists).Returns(true);
-        A.CallTo(() => fileInfo.Name).Returns("test_file_name.jpg");
+        var fileInfo = CreateFile("test_file_name.jpg");
 
         // act
         MediaAlbumHelper.SanitizeFileName(fileInfo);
@@ -17,13 +26,11 @@ public class SanitizeFileName
         fileInfo.Name.ShouldBe("test-file-name.jpg");
     }
 
-    [Fact(Skip = "Need to figure out how to mock FileInfo")]
+    [Fact]
     public void SanitizeFileName_WithSpaces_ReplacedWithDashes()
     {
         // arrange
-        var fileInfo = A.Fake<FileInfo>();
-        A.CallTo(() => fileInfo.Exists).Returns(true);
-        A.CallTo(() => fileInfo.Name).Returns("test file name.jpg");
+        var fileInfo = CreateFile("test file name.jpg");
 
         // act
         MediaAlbumHelper.SanitizeFileName(fileInfo);
@@ -32,13 +39,11 @@ public class SanitizeFileName
         fileInfo.Name.ShouldBe("test-file-name.jpg");
     }
 
-    [Fact(Skip = "Need to figure out how to mock FileInfo")]
+    [Fact]
     public void SanitizeFileName_WithUpperCase_ReplacedWithLowerCase()
     {
         // arrange
-        var fileInfo = A.Fake<FileInfo>();
-        A.CallTo(() => fileInfo.Exists).Returns(true);
-        A.CallTo(() => fileInfo.Name).Returns("TesT_fILe_nAME.JPG");
+        var fileInfo = CreateFile("TesT_fILe_nAME.JPG");
 
         // act
         MediaAlbumHelper.SanitizeFileName(fileInfo);
@@ -47,18 +52,18 @@ public class SanitizeFileName
         fileInfo.Name.ShouldBe("test-file-name.jpg");
     }
 
-    [Fact(Skip = "Need to figure out how to mock FileInfo")]
+    [Fact]
     public void SanitizeFileName_Invoked_MovesFileToNewLocation()
     {
         // arrange
-        var fileInfo = A.Fake<FileInfo>();
-        A.CallTo(() => fileInfo.Exists).Returns(true);
-        A.CallTo(() => fileInfo.Name).Returns("test_file_name.jpg");
+        var fileInfo = CreateFile("test_file_name.jpg");
+        var originalPath = fileInfo.FullName;
 
         // act
         MediaAlbumHelper.SanitizeFileName(fileInfo);
 
         // assert
-        A.CallTo(() => fileInfo.MoveTo(A<string>.That.Contains("test-file-name.jpg"), A<bool>._)).MustHaveHappened();
+        File.Exists(originalPath).ShouldBeFalse();
+        File.Exists(Path.Combine(_dir.FullName, "test-file-name.jpg")).ShouldBeTrue();
     }
 }

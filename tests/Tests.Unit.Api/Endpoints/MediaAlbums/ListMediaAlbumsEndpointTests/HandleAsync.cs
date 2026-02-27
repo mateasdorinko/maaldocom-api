@@ -2,15 +2,23 @@
 
 public class HandleAsync
 {
-    [Fact(Skip = "Scaffolded, but not implemented yet")]
-    public async Task HandleAsync_CONDITION_EXPECTATION()
+    [Fact]
+    public async Task HandleAsync_Invoked_ReturnsMediaAlbumList()
     {
         // arrange
+        var handler = A.Fake<IQueryHandler<ListMediaAlbumsQuery, IEnumerable<MediaAlbumDto>>>();
+        var endpoint = Factory.Create<ListMediaAlbumsEndpoint>(handler);
+        var result = new Result<IEnumerable<MediaAlbumDto>>().WithValue(new List<MediaAlbumDto>());
+
+        A.CallTo(() => handler.HandleAsync(A<ListMediaAlbumsQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await Task.CompletedTask;
+        await endpoint.HandleAsync(CancellationToken.None);
+        var response = endpoint.Response;
 
         // assert
-        Assert.True(true);
+        endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.OK);
+        response.ShouldNotBeNull();
+        response.ShouldBeOfType<List<GetMediaAlbumResponse>>();
     }
 }

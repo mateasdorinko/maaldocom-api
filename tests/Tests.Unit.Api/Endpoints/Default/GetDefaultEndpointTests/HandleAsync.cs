@@ -2,15 +2,18 @@
 
 public class HandleAsync
 {
-    [Fact(Skip = "Scaffolded, but not implemented yet")]
-    public async Task HandleAsync_CONDITION_EXPECTATION()
+    [Fact]
+    public async Task HandleAsync_Invoked_ReturnsHttpRedirectToDocs()
     {
         // arrange
+        var endpoint = Factory.Create<GetDefaultEndpoint>();
 
         // act
-        await Task.CompletedTask;
+        await endpoint.HandleAsync(CancellationToken.None);
+        var response = endpoint.Response;
 
         // assert
-        Assert.True(true);
+        endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.Redirect);
+        endpoint.HttpContext.Response.Headers.Location.ShouldContain("/docs");
     }
 }

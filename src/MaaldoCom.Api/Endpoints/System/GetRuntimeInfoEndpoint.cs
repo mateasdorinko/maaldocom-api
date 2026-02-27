@@ -3,7 +3,7 @@ using MaaldoCom.Api.Domain.Extensions;
 
 namespace MaaldoCom.Api.Endpoints.System;
 
-public class GetRuntimeInfoEndpoint : EndpointWithoutRequest
+public class GetRuntimeInfoEndpoint : EndpointWithoutRequest<GetRuntimeInfoResponse>
 {
     public override void Configure()
     {

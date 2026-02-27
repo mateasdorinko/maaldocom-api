@@ -2,15 +2,23 @@
 
 public class HandleAsync
 {
-    [Fact(Skip = "Scaffolded, but not implemented yet")]
-    public async Task HandleAsync_CONDITION_EXPECTATION()
+    [Fact]
+    public async Task HandleAsync_Invoked_ReturnsRandomKnowledge()
     {
         // arrange
+        var handler = A.Fake<IQueryHandler<GetRandomKnowledgeQuery, KnowledgeDto>>();
+        var endpoint = Factory.Create<GetRandomKnowledgeEndpoint>(handler);
+        var result = new Result<KnowledgeDto>().WithValue(new KnowledgeDto());
+
+        A.CallTo(() => handler.HandleAsync(A<GetRandomKnowledgeQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await Task.CompletedTask;
+        await endpoint.HandleAsync(CancellationToken.None);
+        var response = endpoint.Response;
 
         // assert
-        Assert.True(true);
+        endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.OK);
+        response.ShouldNotBeNull();
+        response.ShouldBeOfType<GetKnowledgeResponse>();
     }
 }
