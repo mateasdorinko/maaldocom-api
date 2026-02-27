@@ -1,14 +1,43 @@
-﻿namespace Tests.Unit.Application.Dtos.KnowledgeDtoTests;
+namespace Tests.Unit.Application.Dtos.KnowledgeDtoTests;
 
 public class ToString
 {
-    [Fact(Skip = "Scaffolded, but not implemented yet")]
-    public void ToString_CONDITION_EXPECTATION()
+    [Fact]
+    public void ToString_WithTitleAndQuote_ReturnsTitleColonQuote()
     {
         // arrange
-
-        // assert
+        var dto = new KnowledgeDto { Title = "Socrates", Quote = "Know thyself" };
 
         // act
+        var result = dto.ToString();
+
+        // assert
+        result.ShouldBe("Socrates:Know thyself");
+    }
+
+    [Fact]
+    public void ToString_WithNullTitle_ReturnsNullColonQuote()
+    {
+        // arrange
+        var dto = new KnowledgeDto { Title = null, Quote = "Know thyself" };
+
+        // act
+        var result = dto.ToString();
+
+        // assert
+        result.ShouldBe(":Know thyself");
+    }
+
+    [Fact]
+    public void ToString_WithNullQuote_ReturnsTitleColonNull()
+    {
+        // arrange
+        var dto = new KnowledgeDto { Title = "Socrates", Quote = null };
+
+        // act
+        var result = dto.ToString();
+
+        // assert
+        result.ShouldBe("Socrates:");
     }
 }

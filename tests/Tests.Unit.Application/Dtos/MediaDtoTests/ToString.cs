@@ -1,14 +1,30 @@
-﻿namespace Tests.Unit.Application.Dtos.MediaDtoTests;
+namespace Tests.Unit.Application.Dtos.MediaDtoTests;
 
 public class ToString
 {
-    [Fact(Skip = "Scaffolded, but not implemented yet")]
-    public void ToString_CONDITION_EXPECTATION()
+    [Fact]
+    public void ToString_WithFileName_ReturnsFileName()
     {
         // arrange
-
-        // assert
+        var dto = new MediaDto { FileName = "photo.jpg" };
 
         // act
+        var result = dto.ToString();
+
+        // assert
+        result.ShouldBe("photo.jpg");
+    }
+
+    [Fact]
+    public void ToString_WithNullFileName_ReturnsNull()
+    {
+        // arrange
+        var dto = new MediaDto { FileName = null };
+
+        // act
+        var result = dto.ToString();
+
+        // assert
+        result.ShouldBeNull();
     }
 }

@@ -27,9 +27,8 @@
       <ProjectReference Include="..\..\src\MaaldoCom.Api.Application\MaaldoCom.Api.Application.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Commands\Knowledge\" />
-      <Folder Include="Commands\Tags\" />
-    </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
 
 </Project>

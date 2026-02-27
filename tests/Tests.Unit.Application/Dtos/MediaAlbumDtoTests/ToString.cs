@@ -1,14 +1,30 @@
-﻿namespace Tests.Unit.Application.Dtos.MediaAlbumDtoTests;
+namespace Tests.Unit.Application.Dtos.MediaAlbumDtoTests;
 
 public class ToString
 {
-    [Fact(Skip = "Scaffolded, but not implemented yet")]
-    public void ToString_CONDITION_EXPECTATION()
+    [Fact]
+    public void ToString_WithName_ReturnsName()
     {
         // arrange
-
-        // assert
+        var dto = new MediaAlbumDto { Name = "Summer Trip 2024" };
 
         // act
+        var result = dto.ToString();
+
+        // assert
+        result.ShouldBe("Summer Trip 2024");
+    }
+
+    [Fact]
+    public void ToString_WithNullName_ReturnsNull()
+    {
+        // arrange
+        var dto = new MediaAlbumDto { Name = null };
+
+        // act
+        var result = dto.ToString();
+
+        // assert
+        result.ShouldBeNull();
     }
 }

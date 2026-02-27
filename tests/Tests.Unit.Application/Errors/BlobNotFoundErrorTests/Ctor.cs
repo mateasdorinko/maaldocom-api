@@ -1,15 +1,21 @@
-﻿namespace Tests.Unit.Application.Errors.BlobNotFoundErrorTests;
+namespace Tests.Unit.Application.Errors.BlobNotFoundErrorTests;
 
 public class Ctor
 {
-    [Fact(Skip = "Scaffolded, but not implemented yet")]
-    public void Ctor_Instantiated_CONDITION_EXPECTATION()
+    [Fact]
+    public void Ctor_Instantiated_ArgsAreMappedCorrectly()
     {
         // arrange
-
-        // assert
+        const string containerName = "media-albums";
+        const string blobName = "album-1/original/photo.jpg";
 
         // act
-        Assert.True(true);
+        var error = new BlobNotFoundError(containerName, blobName);
+
+        // assert
+        error.Message.ShouldBe($"Blob {containerName}/{blobName} was not found.");
+        error.Metadata["ContainerName"].ShouldBe(containerName);
+        error.Metadata["BlobName"].ShouldBe(blobName);
+        error.Reasons.ShouldBeEmpty();
     }
 }
