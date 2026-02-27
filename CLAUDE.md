@@ -63,6 +63,8 @@ xUnit + Shouldly assertions + FakeItEasy mocking. Test projects mirror source pr
 
 **Naming conventions** — Test class name = method under test (e.g. `HandleAsync`, `Configure`, `ToPostModel`). Test method name follows `MethodName_Context_ExpectedResult`. Assertions use `ShouldBe` / `ShouldBeEquivalentTo` (Shouldly); null-guard tests use `Assert.Throws<ArgumentNullException>`.
 
+**CancellationToken** — Always use `TestContext.Current.CancellationToken` instead of `CancellationToken.None`. xUnit v3 integrates cancellation with the test lifecycle (timeouts, runner shutdown), and the xUnit1051 analyzer enforces this. When setting up FakeItEasy for a method the SUT calls without forwarding the test's token (e.g. a default parameter), use `A<CancellationToken>._` instead of the specific token variable to avoid false negatives.
+
 **Endpoint unit tests** — Use `Factory.Create<TEndpoint>(handler)` to instantiate an endpoint with faked constructor dependencies. Two test classes per endpoint: `Configure.cs` (calls `endpoint.Configure()`, asserts verb/route/auth on `endpoint.Definition`) and `HandleAsync.cs` (calls `endpoint.HandleAsync(request, ct)`, asserts status code and `endpoint.Response`).
 
 **`endpoint.Response`** — Only populated when using typed send methods (`Send.OkAsync<TResponse>`, `Send.CreatedAtAsync<TEndpoint>(routeValues, responseBody: TResponse, ...)`). Endpoints must extend `EndpointWithoutRequest<TResponse>` (not the non-generic `EndpointWithoutRequest`) for `endpoint.Response` to be typed.
@@ -70,5 +72,9 @@ xUnit + Shouldly assertions + FakeItEasy mocking. Test projects mirror source pr
 **`endpoint.ValidationFailures`** — Populated by `AddError(message)` in `HandleAsync`. Assert on this collection to verify broken-rules behaviour in failure paths.
 
 **Endpoints using `Send.CreatedAtAsync`** — Requires `LinkGenerator` in the endpoint's service provider. Inject a fake via `Factory.Create<TEndpoint>(ctx => ctx.AddTestServices(s => s.AddSingleton<LinkGenerator>(lg)), handler)`. Fake the abstract `GetPathByAddress<string>(HttpContext, string, RouteValueDictionary, ...)` method — `GetPathByName` is an extension method and cannot be intercepted by FakeItEasy.
+
+**Faking `DbSet<T>` with async LINQ** — Use `DbSetHelper.CreateFakeDbSet<T>(data)` from `tests/Tests.Unit.Application/TestHelpers/EfCoreTestHelpers.cs`. It wires up a fake `DbSet<T>` with a custom `IAsyncQueryProvider` so that LINQ operators like `Where().ToListAsync()` work without EF Core's in-memory provider. Pass `x => x.Implements<IQueryable<T>>()` when calling `A.Fake<DbSet<T>>()` directly — otherwise FakeItEasy cannot intercept `IQueryable<T>`'s explicitly-implemented members on `DbSet<T>`.
+
+**FakeItEasy + internal test types** — Do not use `file`-scoped records as generic type arguments for faked interfaces (e.g. `ICommandHandler<file record>`). The compiler-mangled name is inaccessible to Castle.DynamicProxy and will throw at runtime. Declare shared test types `internal` instead, and ensure `[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]` is present in the test project's `AssemblyInfo.cs`.
 
 **Sealed classes / extension methods** — FakeItEasy cannot fake sealed classes (`WebApplication`, `FileInfo` effectively) or intercept extension methods. For sealed-class dependencies, either test against real instances (e.g. real temp files via `Directory.CreateTempSubdirectory()`) or extract an internal overload that accepts the equivalent interface. Test classes implementing `IDisposable` must be `sealed` (SonarAnalyzer S3881). Use xUnit's `IDisposable` pattern for per-test setup/teardown — xUnit creates a new class instance per test and calls `Dispose` after each.
