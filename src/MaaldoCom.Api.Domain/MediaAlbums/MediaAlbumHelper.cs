@@ -20,7 +20,7 @@ public static class MediaAlbumHelper
             .ToLower();
 
         // replace file
-        file.MoveTo($"{file.DirectoryName}\\{newName}", true);
+        file.MoveTo(Path.Combine(file.DirectoryName!, newName), true);
     }
 
     public static string GetProperNameFromFolder(string folderName)
