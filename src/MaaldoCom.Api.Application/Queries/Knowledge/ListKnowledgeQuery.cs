@@ -1,7 +1,3 @@
-using MaaldoCom.Api.Application.Cache;
-using MaaldoCom.Api.Application.Dtos;
-using MaaldoCom.Api.Application.Messaging;
-
 namespace MaaldoCom.Api.Application.Queries.Knowledge;
 
 public sealed record ListKnowledgeQuery : IQuery<IEnumerable<KnowledgeDto>>;
