@@ -1,5 +1,4 @@
 ﻿using MaaldoCom.Api.Endpoints.MediaAlbums.Models;
-using MaaldoCom.Api.Application.Dtos;
 
 namespace MaaldoCom.Api.Extensions;
 

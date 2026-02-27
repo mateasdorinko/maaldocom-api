@@ -1,8 +1,7 @@
-using MaaldoCom.Api.Endpoints;
+﻿using MaaldoCom.Api.Endpoints;
 using MaaldoCom.Api.Endpoints.Knowledge.Models;
 using MaaldoCom.Api.Endpoints.MediaAlbums.Models;
 using MaaldoCom.Api.Endpoints.Tags.Models;
-using MaaldoCom.Api.Application.Dtos;
 
 namespace MaaldoCom.Api.Extensions;
 
@@ -70,24 +69,6 @@ public static partial class MapperExtensions
 
         model.Title = dto.Title;
         model.Quote = dto.Quote;
-
-        return model;
-    }
-
-    public static PostMediaAlbumResponse ToPostModel(this MediaAlbumDto dto)
-    {
-        ArgumentNullException.ThrowIfNull(dto);
-
-        var model = new PostMediaAlbumResponse().MapToBaseModel(dto);
-
-        model.Name = dto.Name;
-        model.UrlFriendlyName = dto.UrlFriendlyName;
-        model.Created = dto.Created;
-
-        if (dto.Tags != null)
-        {
-            model.Tags = dto.Tags.Select(m => m.Name!).ToList();
-        }
 
         return model;
     }

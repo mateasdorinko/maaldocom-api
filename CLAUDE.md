@@ -60,3 +60,15 @@ Clean Architecture with .NET 10.0. Four source projects, five test projects. Cen
 ### Testing
 
 xUnit + Shouldly assertions + FakeItEasy mocking. Test projects mirror source project structure (`Tests.Unit.Api`, `Tests.Unit.Application`, etc.). Coverage collected via coverlet.
+
+**Naming conventions** — Test class name = method under test (e.g. `HandleAsync`, `Configure`, `ToPostModel`). Test method name follows `MethodName_Context_ExpectedResult`. Assertions use `ShouldBe` / `ShouldBeEquivalentTo` (Shouldly); null-guard tests use `Assert.Throws<ArgumentNullException>`.
+
+**Endpoint unit tests** — Use `Factory.Create<TEndpoint>(handler)` to instantiate an endpoint with faked constructor dependencies. Two test classes per endpoint: `Configure.cs` (calls `endpoint.Configure()`, asserts verb/route/auth on `endpoint.Definition`) and `HandleAsync.cs` (calls `endpoint.HandleAsync(request, ct)`, asserts status code and `endpoint.Response`).
+
+**`endpoint.Response`** — Only populated when using typed send methods (`Send.OkAsync<TResponse>`, `Send.CreatedAtAsync<TEndpoint>(routeValues, responseBody: TResponse, ...)`). Endpoints must extend `EndpointWithoutRequest<TResponse>` (not the non-generic `EndpointWithoutRequest`) for `endpoint.Response` to be typed.
+
+**`endpoint.ValidationFailures`** — Populated by `AddError(message)` in `HandleAsync`. Assert on this collection to verify broken-rules behaviour in failure paths.
+
+**Endpoints using `Send.CreatedAtAsync`** — Requires `LinkGenerator` in the endpoint's service provider. Inject a fake via `Factory.Create<TEndpoint>(ctx => ctx.AddTestServices(s => s.AddSingleton<LinkGenerator>(lg)), handler)`. Fake the abstract `GetPathByAddress<string>(HttpContext, string, RouteValueDictionary, ...)` method — `GetPathByName` is an extension method and cannot be intercepted by FakeItEasy.
+
+**Sealed classes / extension methods** — FakeItEasy cannot fake sealed classes (`WebApplication`, `FileInfo` effectively) or intercept extension methods. For sealed-class dependencies, either test against real instances (e.g. real temp files via `Directory.CreateTempSubdirectory()`) or extract an internal overload that accepts the equivalent interface. Test classes implementing `IDisposable` must be `sealed` (SonarAnalyzer S3881). Use xUnit's `IDisposable` pattern for per-test setup/teardown — xUnit creates a new class instance per test and calls `Dispose` after each.

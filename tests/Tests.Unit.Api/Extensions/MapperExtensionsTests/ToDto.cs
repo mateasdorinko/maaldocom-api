@@ -174,7 +174,89 @@ public class ToDto
     {
         // arrange
         GetKnowledgeResponse? model = null;
-        
+
+        // act & assert
+        Assert.Throws<ArgumentNullException>(() => model!.ToDto());
+    }
+
+    [Fact]
+    public void ToDto_FromPostMediaAlbumRequest_MapsAllPropertiesCorrectly()
+    {
+        // arrange
+        var model = new PostMediaAlbumRequest
+        {
+            Name = "Sample Album",
+            UrlFriendlyName = "sample-album",
+            Created = DateTime.UtcNow,
+            Description = "This is a sample media album.",
+            Tags = new List<string> { "SampleTag" },
+            Media = new List<PostMediaRequest>
+            {
+                new()
+                {
+                    FileName = "sample.jpg",
+                    Description = "This is a sample media file.",
+                    SizeInBytes = 2048,
+                    FileExtension = ".jpg"
+                }
+            }
+        };
+
+        // act
+        var dto = model.ToDto();
+
+        // assert
+        dto.Name.ShouldBeEquivalentTo(model.Name);
+        dto.UrlFriendlyName.ShouldBeEquivalentTo(model.UrlFriendlyName);
+        dto.Created.ShouldBeEquivalentTo(model.Created);
+        dto.Description.ShouldBeEquivalentTo(model.Description);
+        dto.Tags.Count.ShouldBe(1);
+        dto.Tags[0].Name.ShouldBeEquivalentTo("SampleTag");
+        dto.Media.Count.ShouldBe(1);
+        dto.Media[0].FileName.ShouldBeEquivalentTo("sample.jpg");
+    }
+
+    [Fact]
+    public void ToDto_FromNullPostMediaAlbumRequest_ThrowsArgumentNullException()
+    {
+        // arrange
+        PostMediaAlbumRequest? model = null;
+
+        // act & assert
+        Assert.Throws<ArgumentNullException>(() => model!.ToDto());
+    }
+
+    [Fact]
+    public void ToDto_FromPostMediaRequest_MapsAllPropertiesCorrectly()
+    {
+        // arrange
+        var model = new PostMediaRequest
+        {
+            FileName = "sample.jpg",
+            Description = "This is a sample media file.",
+            SizeInBytes = 2048,
+            FileExtension = ".jpg",
+            Tags = new List<string> { "SampleTag" }
+        };
+
+        // act
+        var dto = model.ToDto();
+
+        // assert
+        dto.FileName.ShouldBeEquivalentTo(model.FileName);
+        dto.Description.ShouldBeEquivalentTo(model.Description);
+        dto.SizeInBytes.ShouldBeEquivalentTo(model.SizeInBytes);
+        dto.FileExtension.ShouldBeEquivalentTo(model.FileExtension);
+        dto.Tags.Count.ShouldBe(1);
+        dto.Tags[0].Name.ShouldBeEquivalentTo("SampleTag");
+    }
+
+    [Fact]
+    public void ToDto_FromNullPostMediaRequest_ThrowsArgumentNullException()
+    {
+        // arrange
+        PostMediaRequest? model = null;
+
         // act & assert
         Assert.Throws<ArgumentNullException>(() => model!.ToDto());
     }

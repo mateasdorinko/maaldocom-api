@@ -1,0 +1,3 @@
+﻿### POST Cache Refresh
+POST {{HostAddress}}/system/cache-refreshes
+
