@@ -4,12 +4,11 @@ public static class SecurityExtensions
 {
     extension(ClaimsPrincipal user)
     {
-        public string? GetUserId()
-            => user.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "guest";
-
-        public IEnumerable<string> GetUserClaims()
+        public string GetUserId()
         {
-            return user?.Claims?.Select(c => c.ToString()) ?? new List<string>();
+            var identityClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+
+            return identityClaim?.Value ?? "guest";
         }
     }
 }
