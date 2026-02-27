@@ -1,5 +1,4 @@
 ﻿using MaaldoCom.Api.Application.Email;
-using MaaldoCom.Api.Application.Messaging;
 
 namespace MaaldoCom.Api.Application.Commands.System;
 

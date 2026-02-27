@@ -1,5 +1,3 @@
-using MaaldoCom.Api.Application.Blobs;
-
 namespace MaaldoCom.Api.Application.Dtos;
 
 public class MediaDto : BaseDto

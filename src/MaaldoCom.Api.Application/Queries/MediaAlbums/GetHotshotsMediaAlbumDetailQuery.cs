@@ -1,8 +1,4 @@
-﻿using MaaldoCom.Api.Application.Cache;
-using MaaldoCom.Api.Application.Dtos;
-using MaaldoCom.Api.Application.Messaging;
-
-namespace MaaldoCom.Api.Application.Queries.MediaAlbums;
+﻿namespace MaaldoCom.Api.Application.Queries.MediaAlbums;
 
 public sealed record GetHotshotsMediaAlbumDetailQuery : IQuery<MediaAlbumDto>;
 

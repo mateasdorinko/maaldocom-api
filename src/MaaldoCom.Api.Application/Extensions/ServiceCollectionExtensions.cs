@@ -1,5 +1,4 @@
-﻿using MaaldoCom.Api.Application.Messaging;
-using MaaldoCom.Api.Application.Messaging.Behaviors;
+﻿using MaaldoCom.Api.Application.Messaging.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MaaldoCom.Api.Application.Extensions;

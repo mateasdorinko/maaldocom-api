@@ -1,7 +1,4 @@
-﻿using MaaldoCom.Api.Application.Cache;
-using MaaldoCom.Api.Application.Messaging;
-
-namespace MaaldoCom.Api.Application.Commands.System;
+﻿namespace MaaldoCom.Api.Application.Commands.System;
 
 public sealed record CacheRefreshCommand : ICommand;
 

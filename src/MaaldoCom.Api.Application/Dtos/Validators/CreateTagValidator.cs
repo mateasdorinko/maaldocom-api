@@ -1,5 +1,4 @@
-﻿using MaaldoCom.Api.Application.Database;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace MaaldoCom.Api.Application.Dtos.Validators;
 

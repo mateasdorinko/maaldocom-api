@@ -1,9 +1,4 @@
-﻿using MaaldoCom.Api.Application.Database;
-using MaaldoCom.Api.Application.Dtos;
-using MaaldoCom.Api.Application.Dtos.Validators;
-using MaaldoCom.Api.Application.Messaging;
-
-namespace MaaldoCom.Api.Application.Commands.MediaAlbums;
+﻿namespace MaaldoCom.Api.Application.Commands.MediaAlbums;
 
 public sealed record CreateMediaCommand(ClaimsPrincipal User, MediaDto Media) : ICommand<MediaDto>;
 
