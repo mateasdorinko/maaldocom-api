@@ -13,7 +13,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<CacheRefreshCommand>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(CancellationToken.None);
+        await endpoint.HandleAsync(TestContext.Current.CancellationToken);
 
         // assert
         endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.NoContent);

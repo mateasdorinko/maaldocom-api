@@ -7,7 +7,7 @@ public class HealthCheckTests//(App app) : TestBase<App>
     [Fact(Skip = "Scaffolded, but need to setup integration test foundations.")]
     public async Task Get_HealthCheck_CONDITION_EXPECTATION()
     {
-        await Task.Delay(0, CancellationToken.None);
+        await Task.Delay(0, TestContext.Current.CancellationToken);
         Assert.True(true);
         // arrange
 

@@ -13,7 +13,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<ListTagsQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(CancellationToken.None);
+        await endpoint.HandleAsync(TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert

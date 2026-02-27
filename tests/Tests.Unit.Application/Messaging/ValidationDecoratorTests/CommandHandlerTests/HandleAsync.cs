@@ -12,7 +12,7 @@ public class HandleAsync
     {
         // arrange
         var innerHandler = A.Fake<ICommandHandler<TestCommand, string>>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new TestCommand("data");
         var handler = new ValidationDecorator.CommandHandler<TestCommand, string>(innerHandler, []);
 
@@ -33,11 +33,11 @@ public class HandleAsync
         // arrange
         var innerHandler = A.Fake<ICommandHandler<TestCommand, string>>();
         var validator = A.Fake<IValidator<TestCommand>>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new TestCommand("data");
         var handler = new ValidationDecorator.CommandHandler<TestCommand, string>(innerHandler, [validator]);
 
-        A.CallTo(() => validator.ValidateAsync(A<ValidationContext<TestCommand>>._, ct))
+        A.CallTo(() => validator.ValidateAsync(A<ValidationContext<TestCommand>>._, A<CancellationToken>._))
             .Returns(new ValidationResult());
         A.CallTo(() => innerHandler.HandleAsync(command, ct)).Returns(Result.Ok("success"));
 
@@ -56,12 +56,12 @@ public class HandleAsync
         // arrange
         var innerHandler = A.Fake<ICommandHandler<TestCommand, string>>();
         var validator = A.Fake<IValidator<TestCommand>>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new TestCommand("data");
         var handler = new ValidationDecorator.CommandHandler<TestCommand, string>(innerHandler, [validator]);
 
         var failures = new ValidationResult([new ValidationFailure("Data", "Data is invalid")]);
-        A.CallTo(() => validator.ValidateAsync(A<ValidationContext<TestCommand>>._, ct))
+        A.CallTo(() => validator.ValidateAsync(A<ValidationContext<TestCommand>>._, A<CancellationToken>._))
             .Returns(failures);
 
         // act
@@ -80,13 +80,13 @@ public class HandleAsync
         var innerHandler = A.Fake<ICommandHandler<TestCommand, string>>();
         var validator1 = A.Fake<IValidator<TestCommand>>();
         var validator2 = A.Fake<IValidator<TestCommand>>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new TestCommand("data");
         var handler = new ValidationDecorator.CommandHandler<TestCommand, string>(innerHandler, [validator1, validator2]);
 
-        A.CallTo(() => validator1.ValidateAsync(A<ValidationContext<TestCommand>>._, ct))
+        A.CallTo(() => validator1.ValidateAsync(A<ValidationContext<TestCommand>>._, A<CancellationToken>._))
             .Returns(new ValidationResult([new ValidationFailure("Data", "Error from validator1")]));
-        A.CallTo(() => validator2.ValidateAsync(A<ValidationContext<TestCommand>>._, ct))
+        A.CallTo(() => validator2.ValidateAsync(A<ValidationContext<TestCommand>>._, A<CancellationToken>._))
             .Returns(new ValidationResult([new ValidationFailure("Data", "Error from validator2")]));
 
         // act

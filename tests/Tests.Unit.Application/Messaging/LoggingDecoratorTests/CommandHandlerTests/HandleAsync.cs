@@ -12,7 +12,7 @@ public class HandleAsync
         // arrange
         var innerHandler = A.Fake<ICommandHandler<TestCommand, string>>();
         var logger = NullLogger<LoggingDecorator.CommandHandler<TestCommand, string>>.Instance;
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new TestCommand("data");
         var handler = new LoggingDecorator.CommandHandler<TestCommand, string>(innerHandler, logger);
 
@@ -33,7 +33,7 @@ public class HandleAsync
         // arrange
         var innerHandler = A.Fake<ICommandHandler<TestCommand, string>>();
         var logger = NullLogger<LoggingDecorator.CommandHandler<TestCommand, string>>.Instance;
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new TestCommand("data");
         var handler = new LoggingDecorator.CommandHandler<TestCommand, string>(innerHandler, logger);
 

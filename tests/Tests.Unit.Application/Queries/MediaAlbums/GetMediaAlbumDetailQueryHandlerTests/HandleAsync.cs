@@ -9,7 +9,7 @@ public class HandleAsync
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         var mediaAlbum = new MediaAlbumDto
         {
@@ -35,7 +35,7 @@ public class HandleAsync
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         var query = new GetMediaAlbumDetailQuery(Guid.NewGuid());
         var handler = new GetMediaAlbumDetailQueryHandler(cacheManager);
@@ -56,7 +56,7 @@ public class HandleAsync
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         var mediaAlbum = new MediaAlbumDto
         {
@@ -84,7 +84,7 @@ public class HandleAsync
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         var mediaAlbum = new MediaAlbumDto
         {
@@ -111,7 +111,7 @@ public class HandleAsync
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         var mediaAlbum = new MediaAlbumDto
         {

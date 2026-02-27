@@ -9,7 +9,7 @@ public class HandleAsync
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         var mediaAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Hotshots" };
         var query = new GetHotshotsMediaAlbumDetailQuery();
@@ -30,7 +30,7 @@ public class HandleAsync
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         var query = new GetHotshotsMediaAlbumDetailQuery();
         var handler = new GetHotshotsMediaAlbumDetailQueryHandler(cacheManager);

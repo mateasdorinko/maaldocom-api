@@ -20,7 +20,7 @@ public class HandleAsync
     {
         // arrange
         var (cacheManager, _, handler) = CreateHandler();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var query = new GetMediaBlobQuery(Guid.NewGuid(), Guid.NewGuid(), "original");
 
         A.CallTo(() => cacheManager.GetMediaAlbumDetailAsync(query.MediaAlbumId, ct))
@@ -39,7 +39,7 @@ public class HandleAsync
     {
         // arrange
         var (cacheManager, _, handler) = CreateHandler();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var mediaAlbumId = Guid.NewGuid();
         var query = new GetMediaBlobQuery(mediaAlbumId, Guid.NewGuid(), "original");
 
@@ -65,7 +65,7 @@ public class HandleAsync
     {
         // arrange
         var (cacheManager, blobsProvider, handler) = CreateHandler();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var mediaId = Guid.NewGuid();
         var albumId = Guid.NewGuid();
         var query = new GetMediaBlobQuery(albumId, mediaId, "original");
@@ -91,7 +91,7 @@ public class HandleAsync
     {
         // arrange
         var (cacheManager, blobsProvider, handler) = CreateHandler();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var mediaId = Guid.NewGuid();
         var albumId = Guid.NewGuid();
         var query = new GetMediaBlobQuery(albumId, mediaId, "viewer");
@@ -117,7 +117,7 @@ public class HandleAsync
     {
         // arrange
         var (cacheManager, blobsProvider, handler) = CreateHandler();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var mediaId = Guid.NewGuid();
         var albumId = Guid.NewGuid();
         var query = new GetMediaBlobQuery(albumId, mediaId, "thumb");
@@ -143,7 +143,7 @@ public class HandleAsync
     {
         // arrange
         var (cacheManager, _, handler) = CreateHandler();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var mediaId = Guid.NewGuid();
         var albumId = Guid.NewGuid();
         var query = new GetMediaBlobQuery(albumId, mediaId, "unknown");
@@ -166,7 +166,7 @@ public class HandleAsync
     {
         // arrange
         var (cacheManager, blobsProvider, handler) = CreateHandler();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var mediaId = Guid.NewGuid();
         var albumId = Guid.NewGuid();
         var query = new GetMediaBlobQuery(albumId, mediaId, "original");

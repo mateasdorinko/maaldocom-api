@@ -42,7 +42,7 @@ public class HandleAsync
         // arrange
         var dbContext = CreateDbContext();
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = BuildCommand("Summer 2024", "travel", "sunset");
         var handler = new CreateMediaAlbumCommandHandler(dbContext, cacheManager);
 
@@ -62,7 +62,7 @@ public class HandleAsync
         var existingTags = new List<Tag> { new() { Id = Guid.NewGuid(), Name = "travel" } };
         var dbContext = CreateDbContext(existingTags);
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = BuildCommand("Summer 2024", "travel");
         var handler = new CreateMediaAlbumCommandHandler(dbContext, cacheManager);
 
@@ -80,7 +80,7 @@ public class HandleAsync
         // arrange
         var dbContext = CreateDbContext();
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = BuildCommand("Summer 2024", "newTag");
         var handler = new CreateMediaAlbumCommandHandler(dbContext, cacheManager);
 
@@ -100,7 +100,7 @@ public class HandleAsync
         // arrange
         var dbContext = CreateDbContext();
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = BuildCommand("My Album");
         command.MediaAlbum.Active = false;
         var handler = new CreateMediaAlbumCommandHandler(dbContext, cacheManager);
@@ -118,7 +118,7 @@ public class HandleAsync
         // arrange
         var dbContext = CreateDbContext();
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = BuildCommand("My Album");
         var handler = new CreateMediaAlbumCommandHandler(dbContext, cacheManager);
 

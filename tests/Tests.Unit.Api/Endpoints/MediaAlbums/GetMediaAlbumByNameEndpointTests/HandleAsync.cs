@@ -14,7 +14,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetMediaAlbumDetailQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaAlbumByNameRequest { Name = name }, CancellationToken.None);
+        await endpoint.HandleAsync(new GetMediaAlbumByNameRequest { Name = name }, TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert
@@ -34,7 +34,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetMediaAlbumDetailQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaAlbumByNameRequest(), CancellationToken.None);
+        await endpoint.HandleAsync(new GetMediaAlbumByNameRequest(), TestContext.Current.CancellationToken);
 
         // assert
         endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.NotFound);

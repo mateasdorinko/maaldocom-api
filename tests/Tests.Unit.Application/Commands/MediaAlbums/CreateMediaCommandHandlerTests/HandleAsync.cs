@@ -11,7 +11,7 @@ public class HandleAsync
         // arrange
         var dbContext = A.Fake<IMaaldoComDbContext>();
         var fakeMediaDbSet = A.Fake<DbSet<Media>>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         A.CallTo(() => dbContext.Media).Returns(fakeMediaDbSet);
 
@@ -36,7 +36,7 @@ public class HandleAsync
         // arrange
         var dbContext = A.Fake<IMaaldoComDbContext>();
         var fakeMediaDbSet = A.Fake<DbSet<Media>>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         A.CallTo(() => dbContext.Media).Returns(fakeMediaDbSet);
 

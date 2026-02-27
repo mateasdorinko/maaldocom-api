@@ -22,7 +22,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetMediaBlobQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "original" }, CancellationToken.None);
+        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "original" }, TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert
@@ -55,7 +55,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetMediaBlobQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "original" }, CancellationToken.None);
+        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "original" }, TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert
@@ -79,7 +79,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetMediaBlobQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "original" }, CancellationToken.None);
+        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "original" }, TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert
@@ -108,7 +108,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetMediaBlobQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "viewer" }, CancellationToken.None);
+        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "viewer" }, TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert
@@ -132,7 +132,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetMediaBlobQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "viewer" }, CancellationToken.None);
+        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "viewer" }, TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert
@@ -161,7 +161,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetMediaBlobQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "thumb" }, CancellationToken.None);
+        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "thumb" }, TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert
@@ -185,7 +185,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetMediaBlobQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "thumb" }, CancellationToken.None);
+        await endpoint.HandleAsync(new GetMediaByIdRequest { MediaType = "thumb" }, TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert

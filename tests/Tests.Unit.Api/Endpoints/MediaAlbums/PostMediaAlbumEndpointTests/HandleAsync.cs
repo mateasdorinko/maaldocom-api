@@ -27,7 +27,7 @@ public class HandleAsync
             handler);
 
         // act
-        await endpoint.HandleAsync(new PostMediaAlbumRequest(), CancellationToken.None);
+        await endpoint.HandleAsync(new PostMediaAlbumRequest(), TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert
@@ -48,7 +48,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<CreateMediaAlbumCommand>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new PostMediaAlbumRequest(), CancellationToken.None);
+        await endpoint.HandleAsync(new PostMediaAlbumRequest(), TestContext.Current.CancellationToken);
 
         // assert
         endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.BadRequest);

@@ -12,7 +12,7 @@ public class HandleAsync
     {
         // arrange
         var innerHandler = A.Fake<ICommandHandler<TestBaseCommand>>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new TestBaseCommand();
         var handler = new ValidationDecorator.CommandBaseHandler<TestBaseCommand>(innerHandler, []);
 
@@ -32,11 +32,11 @@ public class HandleAsync
         // arrange
         var innerHandler = A.Fake<ICommandHandler<TestBaseCommand>>();
         var validator = A.Fake<IValidator<TestBaseCommand>>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new TestBaseCommand();
         var handler = new ValidationDecorator.CommandBaseHandler<TestBaseCommand>(innerHandler, [validator]);
 
-        A.CallTo(() => validator.ValidateAsync(A<ValidationContext<TestBaseCommand>>._, ct))
+        A.CallTo(() => validator.ValidateAsync(A<ValidationContext<TestBaseCommand>>._, A<CancellationToken>._))
             .Returns(new ValidationResult());
         A.CallTo(() => innerHandler.HandleAsync(command, ct)).Returns(Result.Ok());
 
@@ -54,12 +54,12 @@ public class HandleAsync
         // arrange
         var innerHandler = A.Fake<ICommandHandler<TestBaseCommand>>();
         var validator = A.Fake<IValidator<TestBaseCommand>>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new TestBaseCommand();
         var handler = new ValidationDecorator.CommandBaseHandler<TestBaseCommand>(innerHandler, [validator]);
 
         var failures = new ValidationResult([new ValidationFailure("Field", "Field is required")]);
-        A.CallTo(() => validator.ValidateAsync(A<ValidationContext<TestBaseCommand>>._, ct))
+        A.CallTo(() => validator.ValidateAsync(A<ValidationContext<TestBaseCommand>>._, A<CancellationToken>._))
             .Returns(failures);
 
         // act

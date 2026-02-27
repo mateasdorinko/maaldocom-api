@@ -14,7 +14,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetTagQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetTagByIdRequest { Id = id }, CancellationToken.None);
+        await endpoint.HandleAsync(new GetTagByIdRequest { Id = id }, TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert
@@ -34,7 +34,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetTagQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetTagByIdRequest(), CancellationToken.None);
+        await endpoint.HandleAsync(new GetTagByIdRequest(), TestContext.Current.CancellationToken);
 
         // assert
         endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.NotFound);

@@ -25,7 +25,7 @@ public class HandleAsync
             handler);
 
         // act
-        await endpoint.HandleAsync(A.Dummy<PostMailRequest>(), CancellationToken.None);
+        await endpoint.HandleAsync(A.Dummy<PostMailRequest>(), TestContext.Current.CancellationToken);
 
         // assert
         endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.Created);
@@ -44,7 +44,7 @@ public class HandleAsync
         var endpoint = Factory.Create<PostMailEndpoint>(handler);
 
         // act
-        await endpoint.HandleAsync(A.Dummy<PostMailRequest>(), CancellationToken.None);
+        await endpoint.HandleAsync(A.Dummy<PostMailRequest>(), TestContext.Current.CancellationToken);
 
         // assert
         endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.BadRequest);

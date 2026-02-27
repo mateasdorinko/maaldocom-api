@@ -9,7 +9,7 @@ public class HandleAsync
         var endpoint = Factory.Create<GetHealthCheckEndpoint>();
 
         // act
-        await endpoint.HandleAsync(CancellationToken.None);
+        await endpoint.HandleAsync(TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert

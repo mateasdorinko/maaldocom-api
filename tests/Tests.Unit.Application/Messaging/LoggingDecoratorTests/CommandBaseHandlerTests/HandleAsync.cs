@@ -12,7 +12,7 @@ public class HandleAsync
         // arrange
         var innerHandler = A.Fake<ICommandHandler<TestBaseCommand>>();
         var logger = NullLogger<LoggingDecorator.CommandBaseHandler<TestBaseCommand>>.Instance;
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new TestBaseCommand();
         var handler = new LoggingDecorator.CommandBaseHandler<TestBaseCommand>(innerHandler, logger);
 
@@ -32,7 +32,7 @@ public class HandleAsync
         // arrange
         var innerHandler = A.Fake<ICommandHandler<TestBaseCommand>>();
         var logger = NullLogger<LoggingDecorator.CommandBaseHandler<TestBaseCommand>>.Instance;
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new TestBaseCommand();
         var handler = new LoggingDecorator.CommandBaseHandler<TestBaseCommand>(innerHandler, logger);
 

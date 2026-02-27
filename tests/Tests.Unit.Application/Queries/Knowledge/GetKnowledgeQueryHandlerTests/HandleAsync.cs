@@ -10,7 +10,7 @@ public class HandleAsync
         // arrange
         var id = Guid.NewGuid();
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         var query = new GetKnowledgeQuery(id);
         var handler = new GetKnowledgeQueryHandler(cacheManager);
@@ -39,7 +39,7 @@ public class HandleAsync
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         var query = new GetKnowledgeQuery(Guid.NewGuid());
         var handler = new GetKnowledgeQueryHandler(cacheManager);

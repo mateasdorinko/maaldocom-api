@@ -9,7 +9,7 @@ public class HandleAsync
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
 
         var mediaAlbums = new List<MediaAlbumDto>
         {

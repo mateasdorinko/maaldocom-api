@@ -10,7 +10,7 @@ public class HandleAsync
     {
         // arrange
         var emailProvider = A.Fake<IEmailProvider>();
-        var ct = CancellationToken.None;
+        var ct = TestContext.Current.CancellationToken;
         var command = new SendEmailCommand("user@example.com", "Hello", "Body text");
         var handler = new SendEmailCommandHandler(emailProvider);
 
