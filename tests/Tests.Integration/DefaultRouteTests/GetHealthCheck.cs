@@ -1,8 +1,8 @@
 ﻿using MaaldoCom.Api.Endpoints.Default;
 
-namespace Tests.Integration.Default;
+namespace Tests.Integration.DefaultRouteTests;
 
-public class HealthCheckTests//(App app) : TestBase<App>
+public class GetHealthCheck//(App app) : TestBase<App>
 {
     [Fact(Skip = "Scaffolded, but need to setup integration test foundations.")]
     public async Task Get_HealthCheck_CONDITION_EXPECTATION()
