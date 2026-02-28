@@ -75,6 +75,32 @@ public class ToEntity
     }
 
     [Fact]
+    public void ToEntity_FromMediaAlbumDtoWithEmptyTags_MediaAlbumTagsIsNull()
+    {
+        // arrange
+        var dto = new MediaAlbumDto(); // Tags defaults to empty list
+
+        // act
+        var entity = dto.ToEntity();
+
+        // assert
+        entity.MediaAlbumTags.ShouldBeNull();
+    }
+
+    [Fact]
+    public void ToEntity_FromMediaAlbumDtoWithEmptyMedia_MediaIsNull()
+    {
+        // arrange
+        var dto = new MediaAlbumDto(); // Media defaults to empty list
+
+        // act
+        var entity = dto.ToEntity();
+
+        // assert
+        entity.Media.ShouldBeNull();
+    }
+
+    [Fact]
     public void ToEntity_FromMediaDto_MapsAllPropertiesCorrectly()
     {
         // arrange
@@ -130,6 +156,19 @@ public class ToEntity
 
         // act & assert
         Assert.Throws<ArgumentNullException>(() => dto!.ToEntity());
+    }
+
+    [Fact]
+    public void ToEntity_FromMediaDtoWithEmptyTags_MediaTagsIsNull()
+    {
+        // arrange
+        var dto = new MediaDto(); // Tags defaults to empty list
+
+        // act
+        var entity = dto.ToEntity();
+
+        // assert
+        entity.MediaTags.ShouldBeNull();
     }
 
     [Fact]

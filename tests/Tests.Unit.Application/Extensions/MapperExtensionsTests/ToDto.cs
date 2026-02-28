@@ -45,10 +45,10 @@ public class ToDto
                 }
             }
         };
-        
+
         // act
         var dto = entity.ToDto();
-        
+
         // assert
         dto.Id.ShouldBeEquivalentTo(entity.Id);
         dto.Name.ShouldBeEquivalentTo(entity.Name);
@@ -70,9 +70,35 @@ public class ToDto
     {
         // arrange
         MediaAlbum? entity = null;
-        
+
         // act & assert
         Assert.Throws<ArgumentNullException>(() => entity!.ToDto());
+    }
+
+    [Fact]
+    public void ToDto_FromMediaAlbumEntityWithNullMedia_DefaultMediaIdIsGuidEmpty()
+    {
+        // arrange
+        var entity = new MediaAlbum(); // Media is null by default
+
+        // act
+        var dto = entity.ToDto();
+
+        // assert
+        dto.DefaultMediaId.ShouldBe(Guid.Empty);
+    }
+
+    [Fact]
+    public void ToDto_FromMediaAlbumEntityWithEmptyMedia_DefaultMediaIdIsGuidEmpty()
+    {
+        // arrange
+        var entity = new MediaAlbum { Media = new List<Media>() };
+
+        // act
+        var dto = entity.ToDto();
+
+        // assert
+        dto.DefaultMediaId.ShouldBe(Guid.Empty);
     }
 
     [Fact]
@@ -104,10 +130,10 @@ public class ToDto
                 }
             }
         };
-        
+
         // act
         var dto = entity.ToDto();
-        
+
         // assert
         dto.Id.ShouldBeEquivalentTo(entity.Id);
         dto.MediaAlbumId.ShouldBeEquivalentTo(entity.MediaAlbumId);
@@ -129,7 +155,7 @@ public class ToDto
     {
         // arrange
         Media? entity = null;
-        
+
         // act & assert
         Assert.Throws<ArgumentNullException>(() => entity!.ToDto());
     }
@@ -143,10 +169,10 @@ public class ToDto
             Id = Guid.NewGuid(),
             Name = "SampleTag"
         };
-        
+
         // act
         var dto = entity.ToDto();
-        
+
         // assert
         dto.Id.ShouldBeEquivalentTo(entity.Id);
         dto.Name.ShouldBeEquivalentTo(entity.Name);
@@ -157,7 +183,7 @@ public class ToDto
     {
         // arrange
         Tag? entity = null;
-        
+
         // act & assert
         Assert.Throws<ArgumentNullException>(() => entity!.ToDto());
     }
@@ -172,10 +198,10 @@ public class ToDto
             Title = "Sample Knowledge",
             Quote = "This is some sample knowledge content."
         };
-        
+
         // act
         var dto = entity.ToDto();
-        
+
         // assert
         dto.Id.ShouldBeEquivalentTo(entity.Id);
         dto.Title.ShouldBeEquivalentTo(entity.Title);
@@ -187,7 +213,7 @@ public class ToDto
     {
         // arrange
         Knowledge? entity = null;
-        
+
         // act & assert
         Assert.Throws<ArgumentNullException>(() => entity!.ToDto());
     }
