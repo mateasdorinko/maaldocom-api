@@ -2,9 +2,9 @@ using Azure.Storage.Blobs;
 
 namespace MaaldoCom.Api.Infrastructure.Blobs;
 
-public class AzureStorageBlobsProvider(string storageAccountConnectionString) : IBlobsProvider
+public class AzureStorageBlobsProvider(BlobServiceClient blobServiceClient) : IBlobsProvider
 {
-    private readonly BlobServiceClient _blobServiceClient = new(storageAccountConnectionString);
+    private readonly BlobServiceClient _blobServiceClient = blobServiceClient;
 
     public async Task<MediaDto?> GetBlobAsync(string containerName, string blobName, CancellationToken ct)
     {

@@ -1,1 +1,15 @@
+global using FakeItEasy;
+global using MaaldoCom.Api.Application.Blobs;
+global using MaaldoCom.Api.Application.Cache;
+global using MaaldoCom.Api.Application.Dtos;
+global using MaaldoCom.Api.Application.Email;
+global using MaaldoCom.Api.Domain.Entities;
+global using MaaldoCom.Api.Infrastructure.Blobs;
+global using MaaldoCom.Api.Infrastructure.Cache;
+global using MaaldoCom.Api.Infrastructure.Database;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Caching.Hybrid;
 global using Shouldly;
+global using System.Security.Claims;
+global using System.Net.Http;
+global using Tests.Unit.Infrastructure.TestHelpers;
