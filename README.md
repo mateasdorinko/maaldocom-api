@@ -110,7 +110,7 @@ volumes:
 
 ## MicroK8s Support
 
-I'm working on adding support for a MicroK8s deployment running on a Raspberry Pi cluster. Will document this as I go.
+I'm working on adding support for a MicroK8s deployment running on a Raspberry Pi cluster. Will document this as I go, more to come.
 
 ### Setup
 
