@@ -45,9 +45,9 @@ _docker-compose.yml_
 
 ```yaml
 services:
-  sqlserver2022:
+  sqlserver-2022:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sqlserver2022
+    container_name: sqlserver-2022
     environment:
       ACCEPT_EULA: Y
       MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
