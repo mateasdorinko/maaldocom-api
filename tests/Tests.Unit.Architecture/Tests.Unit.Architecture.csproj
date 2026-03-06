@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="coverlet.collector">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="FakeItEasy" />
+      <PackageReference Include="JunitXml.TestLogger" />
+      <PackageReference Include="Microsoft.NET.Test.Sdk" />
+      <PackageReference Include="Microsoft.Testing.Platform" />
+      <PackageReference Include="Shouldly" />
+      <PackageReference Include="TngTech.ArchUnitNET.xUnitV3" />
+      <PackageReference Include="xunit.runner.visualstudio" />
+      <PackageReference Include="xunit.v3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit"/>
+    </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MaaldoCom.Api.Application\MaaldoCom.Api.Application.csproj" />
+    <ProjectReference Include="..\..\src\MaaldoCom.Api.Domain\MaaldoCom.Api.Domain.csproj" />
+    <ProjectReference Include="..\..\src\MaaldoCom.Api.Infrastructure\MaaldoCom.Api.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\MaaldoCom.Api\MaaldoCom.Api.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="NamingConventions\" />
+  </ItemGroup>
+
+</Project>
