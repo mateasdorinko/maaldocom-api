@@ -1,6 +1,3 @@
 namespace Tests.Unit.Architecture.NamingConventionTests;
 
-public class Domain : BaseTest
-{
-
-}
+public class Domain : BaseTest { }

@@ -9,6 +9,8 @@ public class Application : BaseTest
     public void Commands_ShouldBeSuffixedWithCommand()
     {
         Classes().That()
+            .Are(ApplicationLayer)
+            .And()
             .ImplementInterface(typeof(ICommand))
             .Should().HaveNameEndingWith("Command")
             .Check(Architecture);
@@ -18,6 +20,8 @@ public class Application : BaseTest
     public void CommandHandlers_ShouldBeSuffixedWithCommandHandler()
     {
         Classes().That()
+            .Are(ApplicationLayer)
+            .And()
             .ImplementInterface(typeof(ICommandHandler<>))
             .Or()
             .ImplementInterface(typeof(ICommandHandler<,>))
@@ -30,6 +34,8 @@ public class Application : BaseTest
     public void Queries_ShouldBeSuffixedWithQuery()
     {
         Classes().That()
+            .Are(ApplicationLayer)
+            .And()
             .ImplementInterface(typeof(IQuery<>))
             .Should().HaveNameEndingWith("Query")
             .Check(Architecture);
@@ -39,19 +45,21 @@ public class Application : BaseTest
     public void QueryHandlers_ShouldBeSuffixedWithQueryHandler()
     {
         Classes().That()
+            .Are(ApplicationLayer)
+            .And()
             .ImplementInterface(typeof(IQueryHandler<,>))
             .And().DoNotResideInNamespace("MaaldoCom.Api.Application.Messaging.Behaviors")
             .Should().HaveNameEndingWith("QueryHandler")
             .Check(Architecture);
     }
 
-    [Fact(Skip = "Need to find how to detect objects that inherit from AbstractValidator")]
+    [Fact]
     public void Validators_ShouldBeSuffixedWithValidator()
     {
         Classes().That()
-            .ImplementInterface(typeof(IValidator<>))
-            .Or()
-            .ImplementInterface(typeof(AbstractValidator<>))
+            .Are(ApplicationLayer)
+            .And()
+            .AreAssignableTo(typeof(AbstractValidator<>))
             .Should().HaveNameEndingWith("Validator")
             .Check(Architecture);
     }

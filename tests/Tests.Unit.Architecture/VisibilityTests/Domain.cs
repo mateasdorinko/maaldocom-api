@@ -1,6 +1,3 @@
 namespace Tests.Unit.Architecture.VisibilityTests;
 
-public class Domain : BaseTest
-{
-
-}
+public class Domain : BaseTest { }

@@ -1,6 +1,3 @@
 namespace Tests.Unit.Architecture.VisibilityTests;
 
-public class Api : BaseTest
-{
-
-}
+public class Api : BaseTest { }
