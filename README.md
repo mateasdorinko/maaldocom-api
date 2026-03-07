@@ -99,7 +99,7 @@ See also: [maaldocom-web](https://github.com/mateasdorinko/maaldocom-web) — th
 ### Prerequisites
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)
-- [Docker](https://docs.docker.com/get-docker/) — for SQL Server and Azurite
+- [Podman](https://podman.io/get-started) or [Docker](https://docs.docker.com/get-docker/) — for SQL Server and Azurite
 - [dotnet-ef](https://learn.microsoft.com/en-us/ef/core/cli/dotnet) — `dotnet tool install --global dotnet-ef`
 
 ### Local Services (Docker Compose)
