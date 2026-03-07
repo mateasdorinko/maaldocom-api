@@ -1,4 +1,4 @@
-namespace Tests.Unit.Architecture.LayerTests;
+namespace Tests.Unit.Architecture.LayerDependencyTests;
 
 public class Domain : BaseTest
 {

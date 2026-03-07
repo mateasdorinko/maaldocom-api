@@ -22,3 +22,7 @@ public class CreateMediaCommandValidator : AbstractValidator<CreateMediaCommand>
         RuleFor(x => x.Media).SetValidator(new CreateMediaValidator());
     }
 }
+
+public class TestClassDeleteMeLater : AbstractValidator<KnowledgeDto>
+{
+}
