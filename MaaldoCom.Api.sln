@@ -57,6 +57,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{E0D37A
 		assets\logo.svg = assets\logo.svg
 		assets\monogram.png = assets\monogram.png
 		assets\monogram.svg = assets\monogram.svg
+		assets\maaldocom-cloud-architecture.png = assets\maaldocom-cloud-architecture.png
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit.Architecture", "tests\Tests.Unit.Architecture\Tests.Unit.Architecture.csproj", "{90FB91CD-2C1F-4BCD-BB6F-78A0433E4EFB}"

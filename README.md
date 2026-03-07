@@ -1,4 +1,4 @@
-<img src="assets/logo.svg" alt="logo" width="100" />
+<img src="/assets/logo.svg" alt="logo" width="100" />
 
 # MaaldoCom Api
 
