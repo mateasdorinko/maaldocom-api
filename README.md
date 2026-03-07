@@ -73,7 +73,7 @@ tests/
 ### Cloud Architecture
 See also:
 - [maaldocom-web](https://github.com/mateasdorinko/maaldocom-web) — the front-end web client that consumes this API.
-- [maaldocom-cle](https://github.com/mateasdorinko/maaldocom-cli) — the front-end cli client that consumes this API.
+- [maaldocom-cli](https://github.com/mateasdorinko/maaldocom-cli) — the front-end cli client that consumes this API.
 
  <img src="/assets/maaldocom-cloud-architecture-no-header.png" alt="logo" width="800" />
 
