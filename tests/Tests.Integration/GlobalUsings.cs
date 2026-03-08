@@ -1,5 +1,10 @@
 global using FastEndpoints;
 global using FastEndpoints.Testing;
+global using MaaldoCom.Api.Endpoints.Default;
+global using MaaldoCom.Api.Endpoints.Default.Models;
+global using MaaldoCom.Api.Endpoints.Knowledge;
+global using MaaldoCom.Api.Endpoints.Knowledge.Models;
+global using MaaldoCom.Api.Infrastructure.Database;
 global using Microsoft.Extensions.DependencyInjection;
 global using Shouldly;
 global using System.Net;

@@ -1,7 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.Default;
-using MaaldoCom.Api.Endpoints.Default.Models;
-
-namespace Tests.Integration.DefaultRouteTests;
+﻿namespace Tests.Integration.DefaultTests;
 
 [Collection("Integration")]
 public class GetHealthCheck(App app) : TestBase<App>

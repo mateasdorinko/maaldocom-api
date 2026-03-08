@@ -4,7 +4,6 @@ using MaaldoCom.Api.Application.Blobs;
 using MaaldoCom.Api.Application.Database;
 using MaaldoCom.Api.Application.Email;
 using MaaldoCom.Api.Infrastructure.Blobs;
-using MaaldoCom.Api.Infrastructure.Database;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;

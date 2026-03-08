@@ -1,6 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.Default;
-
-namespace Tests.Integration.DefaultRouteTests;
+﻿namespace Tests.Integration.DefaultTests;
 
 [Collection("Integration")]
 public class GetDefault(App app) : TestBase<App>
