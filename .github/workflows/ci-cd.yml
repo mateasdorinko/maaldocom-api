@@ -22,8 +22,8 @@ env:
   DOTNET_VERSION: '10.0.x'
 
 jobs:
-  build-solution-and-run-unit-tests:
-    name: Build Solution & Run Unit Tests
+  build-and-unit-test:
+    name: Build & Unit Test
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -116,8 +116,8 @@ jobs:
             src/**/obj/*.csproj.nuget.*
           retention-days: 1
 
-  run-integration-tests:
-    name: Run Integration Tests
+  integration-test:
+    name: Integration Test
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -166,7 +166,7 @@ jobs:
 
   build-and-deploy-dev:
     name: Build Container & Deploy to Dev
-    needs: [build-solution-and-run-unit-tests, run-integration-tests]
+    needs: [build-and-unit-test, integration-test]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 20
