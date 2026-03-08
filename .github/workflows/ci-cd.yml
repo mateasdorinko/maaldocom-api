@@ -22,8 +22,8 @@ env:
   DOTNET_VERSION: '10.0.x'
 
 jobs:
-  build-and-run-unit-tests:
-    name: Build and Run Unit Tests
+  build-solution-and-run-unit-tests:
+    name: Build Solution & Run Unit Tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -58,7 +58,7 @@ jobs:
       - name: Create test summary
         uses: test-summary/action@v2.4
         with:
-          paths: ${{ github.workspace }}/results/*.xml
+          paths: ${{ github.workspace }}/results/Tests.Unit.*-test-results.xml
           output: ${{ github.workspace }}/results/summary.md
           show: "all"
         if: always()
@@ -147,12 +147,12 @@ jobs:
         run: dotnet build --no-restore --configuration Release
 
       - name: Run integration tests
-        run: dotnet test --no-build --configuration Release --filter "FullyQualifiedName~Tests.Integration" --logger:"junit;LogFilePath=${{ github.workspace }}/results/{assembly}-test-results.xml"
+        run: dotnet test tests/Tests.Integration/Tests.Integration.csproj --no-build --configuration Release --logger:"junit;LogFilePath=${{ github.workspace }}/results/{assembly}-test-results.xml"
 
       - name: Create test summary
         uses: test-summary/action@v2.4
         with:
-          paths: ${{ github.workspace }}/results/*.xml
+          paths: ${{ github.workspace }}/results/Tests.Integration-test-results.xml
           output: ${{ github.workspace }}/results/summary.md
           show: "all"
         if: always()
@@ -166,7 +166,7 @@ jobs:
 
   build-and-deploy-dev:
     name: Build Container & Deploy to Dev
-    needs: [build-and-run-unit-tests, run-integration-tests]
+    needs: [build-solution-and-run-unit-tests, run-integration-tests]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 20
