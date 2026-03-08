@@ -7,7 +7,6 @@ public class GetDefault(App app) : TestBase<App>
     public async Task GetDefault_Invoked_RedirectsToDocsAndOk()
     {
         // arrange
-        // app.CreateJwtToken(["role:admin"])
 
         // act
         var (response, _) = await app.Client.GETAsync<GetDefaultEndpoint, object>();

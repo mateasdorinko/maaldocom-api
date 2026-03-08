@@ -2,7 +2,7 @@ using MaaldoCom.Api.Application.Email;
 
 namespace Tests.Integration.TestHelpers;
 
-public class NoOpEmailProvider : IEmailProvider
+public class MockEmailProvider : IEmailProvider
 {
     public Task<EmailResponse> SendEmailAsync(string to, string from, string subject, string body, CancellationToken ct)
         => Task.FromResult(new EmailResponse { IsSuccessStatusCode = true, StatusCode = HttpStatusCode.OK });

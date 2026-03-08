@@ -2,5 +2,5 @@ namespace Tests.Integration.TestHelpers;
 
 internal static class TestConstants
 {
-    internal const string JwtSigningKey = "integration-test-signing-key-32chars!";
+    internal const string JwtSigningKey = "LV3wmgJabtxwgrWfEq2f8fwAizni2QT0";
 }

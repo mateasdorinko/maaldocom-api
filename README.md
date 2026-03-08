@@ -173,6 +173,8 @@ for your OS. This allows TestContainers to manage containers without needing Doc
 ```bash
 cat > ~/.testcontainers.properties << 'EOF'
 docker.host=unix:///run/user/1000/podman/podman.sock
+
+# uncomment this if problems with ryuk container cleanup (will require manual container removal)
 #ryuk.disabled=true
 EOF
 ```

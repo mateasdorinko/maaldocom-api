@@ -9,6 +9,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="FastEndpoints.Security" />
         <PackageReference Include="FastEndpoints.Testing" />
         <PackageReference Include="JunitXml.TestLogger" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />

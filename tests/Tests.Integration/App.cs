@@ -1,4 +1,3 @@
-﻿using System.Text;
 using Azure.Storage.Blobs;
 using MaaldoCom.Api.Application.Blobs;
 using MaaldoCom.Api.Application.Database;
@@ -9,11 +8,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Text;
 using Testcontainers.Azurite;
 using Testcontainers.MsSql;
-using Tests.Integration.TestHelpers;
 
 namespace Tests.Integration;
 
@@ -60,20 +61,20 @@ public class App : AppFixture<Program>
                 _ => new AzureStorageBlobsProvider(new BlobServiceClient(_blobContainer.GetConnectionString())));
 
             services.RemoveAll<IEmailProvider>();
-            services.AddSingleton<IEmailProvider, NoOpEmailProvider>();
+            services.AddSingleton<IEmailProvider, MockEmailProvider>();
 
-            services.RemoveAll<IConfigureOptions<JwtBearerOptions>>();
-            services.AddSingleton<IConfigureOptions<JwtBearerOptions>>(
-                new ConfigureOptions<JwtBearerOptions>(options =>
+            services.PostConfigure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
+            {
+                options.ConfigurationManager = null;
+                options.MapInboundClaims = false;
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(TestConstants.JwtSigningKey)) // FastEndpoints.Testing constant
-                    };
-                }));
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(TestConstants.JwtSigningKey))
+                };
+            });
         });
     }
 
@@ -83,5 +84,21 @@ public class App : AppFixture<Program>
     {
         await _dbContainer.StopAsync();
         await _blobContainer.StopAsync();
+    }
+
+    public HttpClient CreateClientWithPermissions(IEnumerable<string> permissions)
+    {
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(TestConstants.JwtSigningKey));
+        var claims = permissions.Select(p => new Claim("permissions", p));
+
+        var token = new JwtSecurityToken(
+            claims: claims,
+            expires: DateTime.UtcNow.AddHours(1),
+            signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256));
+
+        var client = CreateClient();
+        client.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", new JwtSecurityTokenHandler().WriteToken(token));
+        return client;
     }
 }
