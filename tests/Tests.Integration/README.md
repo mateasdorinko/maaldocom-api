@@ -44,16 +44,21 @@ Verify end-to-end HTTP behavior — routing, authentication, middleware, and han
 ## Dependencies
 
 - `MaaldoCom.Api`
+- `FastEndpoints.Testing` — in-process application host and HTTP test client
+- `Testcontainers.MsSql` — spins up a SQL Server container per test run
+- `Testcontainers.Azurite` — spins up an Azure Storage emulator container per test run
 
 ## Key Entry Points / Important Types
 
 | Type | Purpose |
 |---|---|
 | `AppFixture` (FastEndpoints.Testing) | Boots the full application in-process and provides an HTTP client for test requests |
+| `App` | Concrete `AppFixture<Program>` — starts Testcontainers, overrides infrastructure services, configures JWT for local signing, and runs EF migrations |
+| `NoOpEmailProvider` | Test double for `IEmailProvider` — prevents real email dispatch during integration tests |
 
 ## How Is It Tested
 
-This project is the test suite. Tests are organized by feature folder matching the endpoint structure. Integration tests require a running database and supporting local services (SQL Server, Azurite) — see the [Getting Started](../../README.md#getting-started) section of the solution README for setup.
+This project is the test suite. Tests are organized by feature folder matching the endpoint structure. No local services are required — SQL Server and Azurite are started automatically via Testcontainers when the test run begins and stopped on teardown.
 
 ## Related Documentation
 

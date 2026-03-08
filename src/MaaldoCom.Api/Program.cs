@@ -57,3 +57,8 @@ app.UseScalar(apiDocTitle, auth0ClientId, auth0Audience);
 app.UseDevEnvironmentOnlyMiddleware();
 
 await app.RunAsync();
+
+public partial class Program
+{
+    protected Program() { }
+}

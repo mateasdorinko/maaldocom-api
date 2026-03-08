@@ -225,7 +225,7 @@ Tests are organized into unit, architecture, and integration suites. Each source
 - **Results**: all handler results are wrapped in `FluentResults.Result<T>`. Endpoints use `result.Match(onSuccess, onFailure)` to map to HTTP status codes.
 - **Naming**: types must end with `Command`, `CommandHandler`, `Query`, `QueryHandler`, or `Validator` as appropriate. Enforced by architecture tests.
 - **Endpoints**: override `Configure()` for route and auth, `HandleAsync()` for logic. Response models extend `BaseModel` for HATEOAS `href` support.
-- **Caching**: always use `ICacheManager`; never cache directly. Default TTL is 20 minutes.
+- **CQRS data flow**: commands write directly to SQL Server and invalidate the cache; queries read exclusively from the FusionCache HybridCache (filled from SQL Server on a miss, 20-minute TTL). Always use `ICacheManager`; never interact with the cache directly.
 - **Warnings as errors**: `Directory.Build.props` enables `TreatWarningsAsErrors`, nullable reference types, and SonarAnalyzer on all projects.
 
 ## Related Project Documentation

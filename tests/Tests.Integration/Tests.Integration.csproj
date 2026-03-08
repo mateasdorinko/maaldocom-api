@@ -15,7 +15,6 @@
         <PackageReference Include="Microsoft.Testing.Platform" />
         <PackageReference Include="Shouldly" />
         <PackageReference Include="Testcontainers.Azurite" />
-        <PackageReference Include="Testcontainers.LowkeyVault" />
         <PackageReference Include="Testcontainers.MsSql" />
         <PackageReference Include="xunit.runner.visualstudio" />
         <PackageReference Include="xunit.v3" />

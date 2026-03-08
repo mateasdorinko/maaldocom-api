@@ -68,6 +68,15 @@ Orchestrate application use cases — querying and mutating data — while keepi
 | `IEmailProvider` | Email abstraction |
 | `AddApplicationServices()` | Registers handlers via Scrutor and wires the decorator pipeline |
 
+## CQRS Pattern
+
+Queries and commands are strictly separated in responsibility and data flow:
+
+- **Commands** write directly to SQL Server via `IMaaldoComDbContext` and invalidate the relevant cache entries on success, ensuring the database is always the source of truth.
+- **Queries** read exclusively from the FusionCache HybridCache (`ICacheManager`). Cache misses are filled from SQL Server and stored with a 20-minute TTL. Queries never write to the database.
+
+This means all reads are served from cache after the first request, and all writes are immediately consistent in the database.
+
 ## How Is It Tested
 
 Tested by [`Tests.Unit.Application`](../../tests/Tests.Unit.Application/README.md). Handlers are tested in isolation with all dependencies faked via FakeItEasy. `DbSet<T>` fakes use `DbSetHelper.CreateFakeDbSet<T>` for async LINQ support.

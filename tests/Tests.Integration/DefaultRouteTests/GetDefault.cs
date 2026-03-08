@@ -1,13 +1,20 @@
-﻿using MaaldoCom.Api.Endpoints.Default;
+﻿/*
+using MaaldoCom.Api.Endpoints.Default;
 
 namespace Tests.Integration.DefaultRouteTests;
 
-public class GetDefault//(App app) : TestBase<App>
+public class GetDefault(App app) : TestBase<App>
 {
-    [Fact(Skip = "Scaffolded, but need to setup integration test foundations.")]
+    [Fact]
     public async Task GetDefault_CONDITION_EXPECTATION()
     {
-        await Task.Delay(0, TestContext.Current.CancellationToken);
-        Assert.True(true);
+        // arrange
+
+        // act
+        var (response, _) = await app.Client.GETAsync<GetDefaultEndpoint, object>();
+
+        // assert
+        response.StatusCode.ShouldBe(HttpStatusCode.OK);
     }
 }
+*/
