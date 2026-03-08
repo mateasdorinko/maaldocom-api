@@ -73,7 +73,7 @@ jobs:
 
       - name: Add test results to job summary
         run: |
-          echo "## Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "## Unit Test Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           cat "${{ github.workspace }}/results/summary.md" >> $GITHUB_STEP_SUMMARY
         if: always()
@@ -164,8 +164,8 @@ jobs:
           cat "${{ github.workspace }}/results/summary.md" >> $GITHUB_STEP_SUMMARY
         if: always()
 
-  build-and-deploy-dev:
-    name: Build Container & Deploy to Dev
+  build-and-dev-deploy:
+    name: Build Container & Dev Deploy
     needs: [build-and-unit-test, integration-test]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
