@@ -44,9 +44,6 @@ Verify end-to-end HTTP behavior — routing, authentication, middleware, and han
 ## Dependencies
 
 - `MaaldoCom.Api`
-- `FastEndpoints.Testing` — in-process application host and HTTP test client
-- `Testcontainers.MsSql` — spins up a SQL Server container per test run
-- `Testcontainers.Azurite` — spins up an Azure Storage emulator container per test run
 
 ## Key Entry Points / Important Types
 

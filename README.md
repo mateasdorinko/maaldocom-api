@@ -46,16 +46,18 @@ Each project references only the layer directly inside it. The arrow represents 
 
 ### CQRS
 
-All use cases are modelled as either a query or a command. Commands write directly to SQL Server and invalidate the relevant cache entries on success. Queries read exclusively from the FusionCache HybridCache; cache misses are filled from SQL Server and stored with a 20-minute TTL. Queries never write to the database.
+All use cases are modelled as either a query or a command in the `MaaldoCom.Api.Application` project. Commands write
+directly to SQL Server and invalidate the relevant cache entries on success. Queries read exclusively from the FusionCache
+HybridCache; cache misses are filled from SQL Server and stored with a 20-minute TTL. Queries never write to the database.
 
 ### Solution Structure
 
-| Project | Layer | Role |
-|---|---|---|
-| `MaaldoCom.Api.Domain` | Domain | Entities and base types |
-| `MaaldoCom.Api.Application` | Application | Use cases, interfaces, DTOs, decorators |
-| `MaaldoCom.Api.Infrastructure` | Infrastructure | EF Core, caching, blob storage, email |
-| `MaaldoCom.Api` | Presentation | FastEndpoints, HTTP, API docs |
+| Project | Layer | Role                                         |
+|---|---|----------------------------------------------|
+| `MaaldoCom.Api.Domain` | Domain | Entities and base types                      |
+| `MaaldoCom.Api.Application` | Application | CQRS use cases, interfaces, DTOs, decorators |
+| `MaaldoCom.Api.Infrastructure` | Infrastructure | EF Core, caching, blob storage, email        |
+| `MaaldoCom.Api` | Presentation | FastEndpoints, HTTP, API docs                |
 
 ### Repository Structure
 
