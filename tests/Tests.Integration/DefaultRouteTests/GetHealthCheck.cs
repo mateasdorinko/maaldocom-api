@@ -1,20 +1,21 @@
 ﻿using MaaldoCom.Api.Endpoints.Default;
+using MaaldoCom.Api.Endpoints.Default.Models;
 
 namespace Tests.Integration.DefaultRouteTests;
 
-public class GetHealthCheck//(App app) : TestBase<App>
+[Collection("Integration")]
+public class GetHealthCheck(App app) : TestBase<App>
 {
-    [Fact(Skip = "Scaffolded, but need to setup integration test foundations.")]
-    public async Task GetHealthCheck_CONDITION_EXPECTATION()
+    [Fact]
+    public async Task GetHealthCheck_Invoked_ReturnsHealthyAndOk()
     {
-        await Task.Delay(0, TestContext.Current.CancellationToken);
-        Assert.True(true);
         // arrange
 
         // act
-        //var response = await app.Client.GETAsync<GetHealthCheckEndpoint, object>("/healthcheck");
+        var (response, result) = await app.Client.GETAsync<GetHealthCheckEndpoint, GetHealthCheckResponse>();
 
         // assert
-        //response.StatusCode.ShouldBe(HttpStatusCode.OK);
+        result.Status.ShouldBe("healthy");
+        response.StatusCode.ShouldBe(HttpStatusCode.OK);
     }
 }

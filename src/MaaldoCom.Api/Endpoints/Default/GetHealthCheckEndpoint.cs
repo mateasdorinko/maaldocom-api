@@ -1,6 +1,8 @@
+using MaaldoCom.Api.Endpoints.Default.Models;
+
 namespace MaaldoCom.Api.Endpoints.Default;
 
-public class GetHealthCheckEndpoint : EndpointWithoutRequest
+public class GetHealthCheckEndpoint : EndpointWithoutRequest<GetHealthCheckResponse>
 {
     public override void Configure()
     {
@@ -12,6 +14,7 @@ public class GetHealthCheckEndpoint : EndpointWithoutRequest
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        await Send.OkAsync(new { status = "healthy" }, ct);
+        var result = new GetHealthCheckResponse { Status = "healthy" };
+        await Send.OkAsync(result, ct);
     }
 }

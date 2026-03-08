@@ -53,7 +53,55 @@ jobs:
         run: dotnet build --no-restore --configuration Release
 
       - name: Run tests
-        run: dotnet test --no-build --configuration Release --logger:"junit;LogFilePath=${{ github.workspace }}/results/{assembly}-test-results.xml" --collect:"XPlat Code Coverage"
+        run: dotnet test --no-build --configuration Release --filter "FullyQualifiedName!~Tests.Integration" --logger:"junit;LogFilePath=${{ github.workspace }}/results/{assembly}-test-results.xml" --collect:"XPlat Code Coverage"
+
+  integration-test:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj', 'Directory.Packages.props') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build solution
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run integration tests
+        run: dotnet test --no-build --configuration Release --filter "FullyQualifiedName~Tests.Integration" --logger:"junit;LogFilePath=${{ github.workspace }}/results/{assembly}-test-results.xml"
+
+      - name: Create test summary
+        uses: test-summary/action@v2.4
+        with:
+          paths: ${{ github.workspace }}/results/*.xml
+          output: ${{ github.workspace }}/results/summary.md
+          show: "all"
+        if: always()
+
+      - name: Add test results to job summary
+        run: |
+          echo "## Integration Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          cat "${{ github.workspace }}/results/summary.md" >> $GITHUB_STEP_SUMMARY
+        if: always()
 
       - name: Create test summary
         uses: test-summary/action@v2.4
@@ -118,7 +166,7 @@ jobs:
 
   build-and-deploy-dev:
     name: Build Container & Deploy to Dev
-    needs: build-and-test
+    needs: [build-and-test, integration-test]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 20

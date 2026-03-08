@@ -18,23 +18,26 @@ using Tests.Integration.TestHelpers;
 
 namespace Tests.Integration;
 
+[CollectionDefinition("Integration")]
+public class IntegrationCollection : ICollectionFixture<App> { }
+
 public class App : AppFixture<Program>
 {
-    // private readonly MsSqlContainer _dbContainer
-    //     = new MsSqlBuilder("mcr.microsoft.com/mssql/server:2022-latest").Build();
-    // private readonly AzuriteContainer _blobContainer
-    //     = new AzuriteBuilder("mcr.microsoft.com/azure-storage/azurite:latest").Build();
+    private readonly MsSqlContainer _dbContainer
+        = new MsSqlBuilder("mcr.microsoft.com/mssql/server:2022-latest").Build();
+    private readonly AzuriteContainer _blobContainer
+        = new AzuriteBuilder("mcr.microsoft.com/azure-storage/azurite:latest").Build();
 
-    protected override async ValueTask PreSetupAsync() { }
+    protected override async ValueTask PreSetupAsync()
+    {
+        await Task.WhenAll(_dbContainer.StartAsync(), _blobContainer.StartAsync());
+    }
 
     protected override async ValueTask SetupAsync()
     {
-        // await _dbContainer.StartAsync();
-        // await _blobContainer.StartAsync();
-        //
-        // await using var scope = Services.CreateAsyncScope();
-        // var db = scope.ServiceProvider.GetRequiredService<MaaldoComDbContext>();
-        // await db.Database.MigrateAsync();
+        await using var scope = Services.CreateAsyncScope();
+        var db = scope.ServiceProvider.GetRequiredService<MaaldoComDbContext>();
+        await db.Database.MigrateAsync();
     }
 
     protected override void ConfigureApp(IWebHostBuilder a)
@@ -42,7 +45,6 @@ public class App : AppFixture<Program>
         a.UseSetting("auth0-domain", "test.example.com");
         a.UseSetting("auth0-audience", "test-audience");
 
-        /*
         a.ConfigureTestServices(services =>
         {
             services.RemoveAll<DbContextOptions<MaaldoComDbContext>>();
@@ -74,14 +76,13 @@ public class App : AppFixture<Program>
                     };
                 }));
         });
-        */
     }
 
     protected override void ConfigureServices(IServiceCollection s) { }
 
     protected override async ValueTask TearDownAsync()
     {
-        // await _dbContainer.StopAsync();
-        // await _blobContainer.StopAsync();
+        await _dbContainer.StopAsync();
+        await _blobContainer.StopAsync();
     }
 }

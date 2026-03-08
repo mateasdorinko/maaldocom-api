@@ -44,6 +44,10 @@ Domain (no deps) ← Application ← Infrastructure ← Api
 
 Each project references only the layer directly inside it. The arrow represents a dependency — Application depends on Domain, and so on.
 
+### CQRS
+
+All use cases are modelled as either a query or a command. Commands write directly to SQL Server and invalidate the relevant cache entries on success. Queries read exclusively from the FusionCache HybridCache; cache misses are filled from SQL Server and stored with a 20-minute TTL. Queries never write to the database.
+
 ### Solution Structure
 
 | Project | Layer | Role |
@@ -154,6 +158,27 @@ services:
 
 volumes:
   data:
+```
+
+### TestContainers on Podman
+
+Integration tests use TestContainers to spin up ephemeral containers on demand. If you're using
+Podman, configure TestContainers to connect to the Podman socket by creating the file below with the appropriate content
+for your OS. This allows TestContainers to manage containers without needing Docker.
+
+1. Linux
+
+```bash
+cat > ~/.testcontainers.properties << 'EOF'
+docker.host=unix:///run/user/1000/podman/podman.sock
+ryuk.disabled=true
+EOF
+```
+
+2. Windows (PowerShell)
+
+```powershell
+$env:DOCKER_HOST = "npipe:////./pipe/podman_engine"
 ```
 
 ### Restore

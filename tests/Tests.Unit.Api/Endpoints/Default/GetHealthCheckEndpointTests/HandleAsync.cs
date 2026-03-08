@@ -15,6 +15,6 @@ public class HandleAsync
         // assert
         endpoint.HttpContext.Response.StatusCode.ShouldBe(200);
         response.ShouldNotBeNull();
-        response.ToString().ShouldBe("{ status = healthy }");
+        response.Status.ShouldBe("healthy");
     }
 }

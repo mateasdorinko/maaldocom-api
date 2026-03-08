@@ -20,6 +20,8 @@
 
 Application is the use-case layer. Queries and commands are plain types implementing `IQuery<TResponse>` or `ICommand<TResponse>`, with corresponding handler interfaces. Handlers are registered via Scrutor and decorated with a validation pipeline (commands only) and a logging pipeline (all handlers). Results are wrapped in `FluentResults.Result<T>`. Infrastructure concerns are accessed only through interfaces defined here.
 
+Commands write directly to SQL Server via `IMaaldoComDbContext` and invalidate the relevant cache entries on success. Queries read exclusively from the FusionCache HybridCache via `ICacheManager`; cache misses are filled from SQL Server and stored with a 20-minute TTL. Queries never write to the database.
+
 ## Purpose
 
 Orchestrate application use cases — querying and mutating data — while keeping all infrastructure and HTTP concerns behind interfaces. This layer owns the contract; Infrastructure and Api satisfy it.
@@ -67,15 +69,6 @@ Orchestrate application use cases — querying and mutating data — while keepi
 | `IBlobsProvider` | Blob storage abstraction |
 | `IEmailProvider` | Email abstraction |
 | `AddApplicationServices()` | Registers handlers via Scrutor and wires the decorator pipeline |
-
-## CQRS Pattern
-
-Queries and commands are strictly separated in responsibility and data flow:
-
-- **Commands** write directly to SQL Server via `IMaaldoComDbContext` and invalidate the relevant cache entries on success, ensuring the database is always the source of truth.
-- **Queries** read exclusively from the FusionCache HybridCache (`ICacheManager`). Cache misses are filled from SQL Server and stored with a 20-minute TTL. Queries never write to the database.
-
-This means all reads are served from cache after the first request, and all writes are immediately consistent in the database.
 
 ## How Is It Tested
 
