@@ -1,7 +1,7 @@
 ﻿namespace Tests.Integration.DefaultTests;
 
 [Collection("Integration")]
-public class GetHealthCheck(App app) : TestBase<App>
+public class GetHealthCheck(App app) : BaseIntegrationTest(app)
 {
     [Fact]
     public async Task GetHealthCheck_Invoked_ReturnsHealthyAndOk()
@@ -9,7 +9,7 @@ public class GetHealthCheck(App app) : TestBase<App>
         // arrange
 
         // act
-        var (response, result) = await app.GetUnauthorizedClient()
+        var (response, result) = await App.GetUnauthorizedClient()
             .GETAsync<GetHealthCheckEndpoint, GetHealthCheckResponse>();
 
         // assert

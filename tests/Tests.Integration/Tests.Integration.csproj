@@ -14,6 +14,7 @@
         <PackageReference Include="JunitXml.TestLogger" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
         <PackageReference Include="Microsoft.Testing.Platform" />
+        <PackageReference Include="Respawn" />
         <PackageReference Include="Shouldly" />
         <PackageReference Include="Testcontainers.Azurite" />
         <PackageReference Include="Testcontainers.MsSql" />

@@ -1,20 +1,22 @@
 namespace Tests.Integration.KnowledgeTests;
 
 [Collection("Integration")]
-public class GetKnowledgeById(App app) : TestBase<App>
+public class GetKnowledgeById(App app) : BaseIntegrationTest(app)
 {
+    protected override async ValueTask SetupAsync() => await AddTestKnowledgeAsync();
+
     [Fact]
     public async Task GetKnowledgeById_Invoked_ReturnsKnowledgeByIdAndOk()
     {
         // arrange
-        await using var scope = app.Services.CreateAsyncScope();
+        await using var scope = App.Services.CreateAsyncScope();
         var db = scope.ServiceProvider.GetRequiredService<MaaldoComDbContext>();
+        var knowledge = db.Knowledge.ElementAt(5);
 
-        var knowledge = db.Knowledge.ElementAt(10);
         var request = new GetKnowledgeByIdRequest { Id = knowledge.Id };
 
         // act
-        var (response, result) = await app.GetUnauthorizedClient()
+        var (response, result) = await App.GetUnauthorizedClient()
             .GETAsync<GetKnowledgeByIdEndpoint, GetKnowledgeByIdRequest, GetKnowledgeResponse>(request);
 
         // assert
@@ -30,7 +32,7 @@ public class GetKnowledgeById(App app) : TestBase<App>
         var request = new GetKnowledgeByIdRequest { Id = Guid.NewGuid() };
 
         // act
-        var (response, result) = await app.GetUnauthorizedClient()
+        var (response, result) = await App.GetUnauthorizedClient()
             .GETAsync<GetKnowledgeByIdEndpoint, GetKnowledgeByIdRequest, GetKnowledgeResponse>(request);
 
         // assert

@@ -1,7 +1,7 @@
 ﻿namespace Tests.Integration.DefaultTests;
 
 [Collection("Integration")]
-public class GetDefault(App app) : TestBase<App>
+public class GetDefault(App app) : BaseIntegrationTest(app)
 {
     [Fact]
     public async Task GetDefault_Invoked_RedirectsToDocsAndOk()
@@ -9,7 +9,7 @@ public class GetDefault(App app) : TestBase<App>
         // arrange
 
         // act
-        var (response, _) = await app.GetUnauthorizedClient()
+        var (response, _) = await App.GetUnauthorizedClient()
             .GETAsync<GetDefaultEndpoint, object>();
 
         // assert

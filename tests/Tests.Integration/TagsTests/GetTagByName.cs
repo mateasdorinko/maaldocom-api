@@ -1,20 +1,22 @@
 namespace Tests.Integration.TagsTests;
 
 [Collection("Integration")]
-public class GetTagByName(App app) : TestBase<App>
+public class GetTagByName(App app) : BaseIntegrationTest(app)
 {
+    protected override async ValueTask SetupAsync() => await AddTestTagsAsync();
+
     [Fact]
     public async Task GetTagByName_ValidName_ReturnsTagAndOk()
     {
         // arrange
-        await using var scope = app.Services.CreateAsyncScope();
+        await using var scope = App.Services.CreateAsyncScope();
         var db = scope.ServiceProvider.GetRequiredService<MaaldoComDbContext>();
 
         var tag = db.Tags.ElementAt(3);
         var request = new GetTagByNameRequest { Name = tag.Name! };
 
         // act
-        var (response, result) = await app.GetUnauthorizedClient()
+        var (response, result) = await App.GetUnauthorizedClient()
             .GETAsync<GetTagByNameEndpoint, GetTagByNameRequest, GetTagDetailResponse>(request);
 
         // assert
@@ -31,7 +33,7 @@ public class GetTagByName(App app) : TestBase<App>
         var request = new GetTagByNameRequest { Name = "non-existent-tag" };
 
         // act
-        var (response, result) = await app.GetUnauthorizedClient()
+        var (response, result) = await App.GetUnauthorizedClient()
             .GETAsync<GetTagByNameEndpoint, GetTagByNameRequest, GetTagDetailResponse>(request);
 
         // assert

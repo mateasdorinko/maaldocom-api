@@ -1,7 +1,7 @@
 namespace Tests.Integration.SystemTests;
 
 [Collection("Integration")]
-public class GetRuntimeInfo(App app) : TestBase<App>
+public class GetRuntimeInfo(App app) : BaseIntegrationTest(app)
 {
     [Fact]
     public async Task GetRuntimeInfo_Unauthorized_ReturnsUnauthorized()
@@ -9,7 +9,7 @@ public class GetRuntimeInfo(App app) : TestBase<App>
         // arrange
 
         // act
-        var (response, result) = await app.GetUnauthorizedClient()
+        var (response, result) = await App.GetUnauthorizedClient()
             .GETAsync<GetRuntimeInfoEndpoint, GetRuntimeInfoResponse>();
 
         // assert
@@ -23,7 +23,7 @@ public class GetRuntimeInfo(App app) : TestBase<App>
         // arrange
 
         // act
-        var (response, result) = await app.GetAuthorizedClient(["read:runtime-info"])
+        var (response, result) = await App.GetAuthorizedClient(["read:runtime-info"])
             .GETAsync<GetRuntimeInfoEndpoint, GetRuntimeInfoResponse>();
 
         // assert

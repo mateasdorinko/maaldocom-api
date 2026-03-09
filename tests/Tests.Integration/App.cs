@@ -6,9 +6,12 @@ using MaaldoCom.Api.Infrastructure.Blobs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
+using Respawn;
+using Respawn.Graph;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
 using System.Security.Claims;
@@ -28,6 +31,9 @@ public class App : AppFixture<Program>
     private readonly AzuriteContainer _blobContainer
         = new AzuriteBuilder("mcr.microsoft.com/azure-storage/azurite:latest").Build();
 
+    private Respawner _respawner = default!;
+    private string _connectionString = default!;
+
     protected override async ValueTask PreSetupAsync()
     {
         await Task.WhenAll(_dbContainer.StartAsync(), _blobContainer.StartAsync());
@@ -38,6 +44,23 @@ public class App : AppFixture<Program>
         await using var scope = Services.CreateAsyncScope();
         var db = scope.ServiceProvider.GetRequiredService<MaaldoComDbContext>();
         await db.Database.MigrateAsync();
+
+        _connectionString = db.Database.GetConnectionString()!;
+
+        await using var conn = new SqlConnection(_connectionString);
+        await conn.OpenAsync();
+        _respawner = await Respawner.CreateAsync(conn, new RespawnerOptions
+        {
+            DbAdapter = DbAdapter.SqlServer,
+            TablesToIgnore = [new Table("__EFMigrationsHistory")]
+        });
+    }
+
+    public async Task ResetDatabaseAsync()
+    {
+        await using var conn = new SqlConnection(_connectionString);
+        await conn.OpenAsync();
+        await _respawner.ResetAsync(conn);
     }
 
     protected override void ConfigureApp(IWebHostBuilder a)
