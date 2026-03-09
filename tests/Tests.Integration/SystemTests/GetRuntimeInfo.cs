@@ -9,7 +9,8 @@ public class GetRuntimeInfo(App app) : TestBase<App>
         // arrange
 
         // act
-        var (response, result) = await app.Client.GETAsync<GetRuntimeInfoEndpoint, GetRuntimeInfoResponse>();
+        var (response, result) = await app.GetUnauthorizedClient()
+            .GETAsync<GetRuntimeInfoEndpoint, GetRuntimeInfoResponse>();
 
         // assert
         response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
@@ -20,10 +21,10 @@ public class GetRuntimeInfo(App app) : TestBase<App>
     public async Task GetRuntimeInfo_Authorized_ReturnsRuntimeInfoAndOk()
     {
         // arrange
-        var client = app.CreateClientWithPermissions(["read:runtime-info"]);
 
         // act
-        var (response, result) = await client.GETAsync<GetRuntimeInfoEndpoint, GetRuntimeInfoResponse>();
+        var (response, result) = await app.GetAuthorizedClient(["read:runtime-info"])
+            .GETAsync<GetRuntimeInfoEndpoint, GetRuntimeInfoResponse>();
 
         // assert
         response.StatusCode.ShouldBe(HttpStatusCode.OK);

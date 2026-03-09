@@ -9,7 +9,8 @@ public class GetDefault(App app) : TestBase<App>
         // arrange
 
         // act
-        var (response, _) = await app.Client.GETAsync<GetDefaultEndpoint, object>();
+        var (response, _) = await app.GetUnauthorizedClient()
+            .GETAsync<GetDefaultEndpoint, object>();
 
         // assert
         response.RequestMessage!.RequestUri!.AbsolutePath.ShouldContain("docs");

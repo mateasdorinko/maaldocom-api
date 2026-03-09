@@ -14,7 +14,8 @@ public class GetKnowledgeById(App app) : TestBase<App>
         var request = new GetKnowledgeByIdRequest { Id = knowledge.Id };
 
         // act
-        var (response, result) = await app.Client.GETAsync<GetKnowledgeByIdEndpoint, GetKnowledgeByIdRequest, GetKnowledgeResponse>(request);
+        var (response, result) = await app.GetUnauthorizedClient()
+            .GETAsync<GetKnowledgeByIdEndpoint, GetKnowledgeByIdRequest, GetKnowledgeResponse>(request);
 
         // assert
         result.ShouldNotBeNull();
@@ -29,7 +30,8 @@ public class GetKnowledgeById(App app) : TestBase<App>
         var request = new GetKnowledgeByIdRequest { Id = Guid.NewGuid() };
 
         // act
-        var (response, result) = await app.Client.GETAsync<GetKnowledgeByIdEndpoint, GetKnowledgeByIdRequest, GetKnowledgeResponse>(request);
+        var (response, result) = await app.GetUnauthorizedClient()
+            .GETAsync<GetKnowledgeByIdEndpoint, GetKnowledgeByIdRequest, GetKnowledgeResponse>(request);
 
         // assert
         result.ShouldBeNull();

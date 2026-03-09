@@ -9,7 +9,8 @@ public class GetRandomKnowledge(App app) : TestBase<App>
         // arrange
 
         // act
-        var (response, result) = await app.Client.GETAsync<GetRandomKnowledgeEndpoint, GetKnowledgeResponse>();
+        var (response, result) = await app.GetUnauthorizedClient()
+            .GETAsync<GetRandomKnowledgeEndpoint, GetKnowledgeResponse>();
 
         // assert
         result.ShouldNotBeNull();

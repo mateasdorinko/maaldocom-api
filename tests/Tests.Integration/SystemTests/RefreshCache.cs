@@ -18,7 +18,8 @@ public class RefreshCache(App app) : TestBase<App>
         await db.SaveChangesAsync(TestContext.Current.CancellationToken);
 
         // act
-        var (response, _) = await app.Client.POSTAsync<PostCacheRefreshEndpoint, object>();
+        var (response, _) = await app.GetUnauthorizedClient()
+            .POSTAsync<PostCacheRefreshEndpoint, object>();
 
         // assert
         response.StatusCode.ShouldBe(HttpStatusCode.NoContent);

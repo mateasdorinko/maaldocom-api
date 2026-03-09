@@ -9,7 +9,8 @@ public class GetHealthCheck(App app) : TestBase<App>
         // arrange
 
         // act
-        var (response, result) = await app.Client.GETAsync<GetHealthCheckEndpoint, GetHealthCheckResponse>();
+        var (response, result) = await app.GetUnauthorizedClient()
+            .GETAsync<GetHealthCheckEndpoint, GetHealthCheckResponse>();
 
         // assert
         result.Status.ShouldBe("healthy");

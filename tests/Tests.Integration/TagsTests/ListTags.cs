@@ -1,16 +1,16 @@
-namespace Tests.Integration.KnowledgeTests;
+namespace Tests.Integration.TagsTests;
 
 [Collection("Integration")]
-public class ListKnowledge(App app) : TestBase<App>
+public class ListTags(App app) : TestBase<App>
 {
     [Fact]
-    public async Task ListKnowledge_Invoked_ReturnsKnowledgeListAndOk()
+    public async Task ListTags_Invoked_ReturnsTagListAndOk()
     {
         // arrange
 
         // act
         var (response, result) = await app.GetUnauthorizedClient()
-            .GETAsync<ListKnowledgeEndpoint, IEnumerable<GetKnowledgeResponse>>();
+            .GETAsync<ListTagsEndpoint, IEnumerable<GetTagResponse>>();
 
         // assert
         result.ShouldNotBeEmpty();

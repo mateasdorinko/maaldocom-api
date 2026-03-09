@@ -86,7 +86,9 @@ public class App : AppFixture<Program>
         await _blobContainer.StopAsync();
     }
 
-    public HttpClient CreateClientWithPermissions(IEnumerable<string> permissions)
+    public HttpClient GetUnauthorizedClient() => CreateClient();
+
+    public HttpClient GetAuthorizedClient(IEnumerable<string> permissions)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(TestConstants.JwtSigningKey));
         var claims = permissions.Select(p => new Claim("permissions", p));
