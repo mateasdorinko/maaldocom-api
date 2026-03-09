@@ -25,31 +25,50 @@ public abstract class BaseIntegrationTest(App app) : TestBase<App>, IAsyncLifeti
         await cacheManager.InvalidateCache(cacheToInvalidate, CancellationToken.None);
     }
 
-    protected Task AddTestKnowledgeAsync() => SeedDataAndInvalidateCacheAsync<Knowledge>(
-    [
-        new Knowledge { Title = "title-1", Quote = "quote-1" },
-        new Knowledge { Title = "title-2", Quote = "quote-2" },
-        new Knowledge { Title = "title-3", Quote = "quote-3" },
-        new Knowledge { Title = "title-4", Quote = "quote-4" },
-        new Knowledge { Title = "title-5", Quote = "quote-5" },
-        new Knowledge { Title = "title-6", Quote = "quote-6" },
-        new Knowledge { Title = "title-7", Quote = "quote-7" },
-        new Knowledge { Title = "title-8", Quote = "quote-8" },
-        new Knowledge { Title = "title-9", Quote = "quote-9" },
-        new Knowledge { Title = "title-10", Quote = "quote-10" },
-    ], CacheKeys.KnowledgeList);
+    protected Task AddTestKnowledgeAsync()
+    {
+        return SeedDataAndInvalidateCacheAsync<Knowledge>(
+            [
+                CreateKnowledge("title-1", "quote-1"),
+                CreateKnowledge("title-2", "quote-2"),
+                CreateKnowledge("title-3", "quote-3"),
+                CreateKnowledge("title-4", "quote-4"),
+                CreateKnowledge("title-5", "quote-5")
+            ], CacheKeys.KnowledgeList);
 
-    protected Task AddTestTagsAsync() => SeedDataAndInvalidateCacheAsync<Tag>(
-    [
-        new Tag { Name = "tag-1" },
-        new Tag { Name = "tag-2" },
-        new Tag { Name = "tag-3" },
-        new Tag { Name = "tag-4" },
-        new Tag { Name = "tag-5" },
-        new Tag { Name = "tag-6" },
-        new Tag { Name = "tag-7" },
-        new Tag { Name = "tag-8" },
-        new Tag { Name = "tag-9" },
-        new Tag { Name = "tag-10" },
-    ], CacheKeys.TagList);
+        static Knowledge CreateKnowledge(string title, string quote) => new() { Title = title, Quote = quote };
+    }
+
+    protected Task AddTestTagsAsync()
+    {
+        return SeedDataAndInvalidateCacheAsync<Tag>(
+            [
+                CreateTag("tag-1"),
+                CreateTag("tag-2"),
+                CreateTag("tag-3"),
+                CreateTag("tag-4"),
+                CreateTag("tag-5")
+            ], CacheKeys.TagList);
+
+        static Tag CreateTag(string name) => new() { Name = name };
+    }
+
+    protected Task AddTestMediaAlbumsAsync()
+    {
+        return SeedDataAndInvalidateCacheAsync<MediaAlbum>(
+        [
+            CreateMediaAlbum("Hot Shots", "hotshots", true),
+            CreateMediaAlbum("Media Album 1", "mediaalbum-1", true),
+            CreateMediaAlbum("Media Album 2", "mediaalbum-2", true),
+            CreateMediaAlbum("Media Album 3", "mediaalbum-3", true),
+            CreateMediaAlbum("Media Album 4", "mediaalbum-4", true),
+            CreateMediaAlbum("Media Album 5", "mediaalbum-5", true),
+            CreateMediaAlbum("Inactive Media Album 1", "inactive-mediaalbum-1", false),
+            CreateMediaAlbum("Inactive Media Album 2", "inactive-mediaalbum-2", false),
+            CreateMediaAlbum("Inactive Media Album 3", "inactive-mediaalbum-3", false)
+        ], CacheKeys.MediaAlbumList);
+
+        static MediaAlbum CreateMediaAlbum(string name, string urlFriendlyName, bool active)
+            => new() { Name = name, UrlFriendlyName = urlFriendlyName, CreatedBy = "test-harness", Media = [], Active = active };
+    }
 }

@@ -11,7 +11,7 @@ public class GetKnowledgeById(App app) : BaseIntegrationTest(app)
         // arrange
         await using var scope = App.Services.CreateAsyncScope();
         var db = scope.ServiceProvider.GetRequiredService<MaaldoComDbContext>();
-        var knowledge = db.Knowledge.ElementAt(5);
+        var knowledge = db.Knowledge.ElementAt(2);
 
         var request = new GetKnowledgeByIdRequest { Id = knowledge.Id };
 

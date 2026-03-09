@@ -47,11 +47,11 @@ Verify end-to-end HTTP behavior — routing, authentication, middleware, and han
 
 ## Key Entry Points / Important Types
 
-| Type | Purpose |
-|---|---|
+| Type                                 | Purpose |
+|--------------------------------------|---|
 | `AppFixture` (FastEndpoints.Testing) | Boots the full application in-process and provides an HTTP client for test requests |
-| `App` | Concrete `AppFixture<Program>` — starts Testcontainers, overrides infrastructure services, configures JWT for local signing, and runs EF migrations |
-| `NoOpEmailProvider` | Test double for `IEmailProvider` — prevents real email dispatch during integration tests |
+| `App`                                | Concrete `AppFixture<Program>` — starts Testcontainers, overrides infrastructure services, configures JWT for local signing, and runs EF migrations |
+| `MockEmailProvider`                  | Test double for `IEmailProvider` — prevents real email dispatch during integration tests |
 
 ## How Is It Tested
 

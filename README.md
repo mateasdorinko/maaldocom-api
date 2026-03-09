@@ -85,22 +85,22 @@ See also:
 
 ## Technology Stack
 
-| Concern | Technology |
-|---|---|
-| Framework | ASP.NET Core / FastEndpoints |
-| Language | C# / .NET 10 |
-| Database | SQL Server (EF Core) |
-| Caching | FusionCache (L1 in-memory + L2 distributed) |
-| Storage | Azure Blob Storage / Azurite (local) |
-| Email | Mailgun |
-| Authentication | Auth0 (JWT Bearer / OpenID Connect) |
-| API Docs | Scalar |
-| Telemetry | OpenTelemetry → Grafana Cloud (OTLP) |
-| Testing | xUnit v3, Shouldly, FakeItEasy, ArchUnitNET |
-| Code Quality | SonarCloud, SonarAnalyzer |
-| CI/CD | GitHub Actions |
-| Hosting | Azure App Service |
-| Containerization | Docker (multi-stage) |
+| Concern | Technology                                                           |
+|---|----------------------------------------------------------------------|
+| Framework | ASP.NET Core / FastEndpoints                                         |
+| Language | C# / .NET 10                                                         |
+| Database | SQL Server (EF Core)                                                 |
+| Caching | FusionCache (L1 in-memory + L2 distributed)                          |
+| Storage | Azure Blob Storage / Azurite (local)                                 |
+| Email | Mailgun                                                              |
+| Authentication | Auth0 (JWT Bearer / OpenID Connect)                                  |
+| API Docs | Scalar                                                               |
+| Telemetry | OpenTelemetry → Grafana Cloud (OTLP)                                 |
+| Testing | xUnit v3, Shouldly, FakeItEasy, ArchUnitNET, TestContainers, Respawn |
+| Code Quality | SonarCloud, SonarAnalyzer                                            |
+| CI/CD | GitHub Actions                                                       |
+| Hosting | Azure App Service                                                    |
+| Containerization | Docker (multi-stage)                                                 |
 
 ## Getting Started
 

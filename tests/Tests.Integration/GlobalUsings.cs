@@ -5,6 +5,8 @@ global using MaaldoCom.Api.Endpoints.Default;
 global using MaaldoCom.Api.Endpoints.Default.Models;
 global using MaaldoCom.Api.Endpoints.Knowledge;
 global using MaaldoCom.Api.Endpoints.Knowledge.Models;
+global using MaaldoCom.Api.Endpoints.MediaAlbums;
+global using MaaldoCom.Api.Endpoints.MediaAlbums.Models;
 global using MaaldoCom.Api.Endpoints.System;
 global using MaaldoCom.Api.Endpoints.System.Models;
 global using MaaldoCom.Api.Endpoints.Tags;
