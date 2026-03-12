@@ -64,6 +64,8 @@ public sealed class CacheManager : ICacheManager, IDisposable
                 .Include(ma => ma.Media.OrderBy(m => m.FileName))
                 .ThenInclude(m => m.MediaTags)
                 .ThenInclude(mt => mt.Tag)
+                .Include(ma => ma.MediaAlbumComments.OrderBy(m => m.Comment.Created))
+                .ThenInclude(mac => mac.Comment)
                 .AsSplitQuery()
                 .FirstOrDefaultAsync(ma => ma.Id == id, cancellationToken);
 
@@ -91,6 +93,8 @@ public sealed class CacheManager : ICacheManager, IDisposable
                 .Include(ma => ma.Media.OrderBy(m => m.FileName))
                 .ThenInclude(m => m.MediaTags)
                 .ThenInclude(mt => mt.Tag)
+                .Include(ma => ma.MediaAlbumComments.OrderBy(m => m.Comment.Created))
+                .ThenInclude(mac => mac.Comment)
                 .AsSplitQuery()
                 .FirstOrDefaultAsync(cancellationToken);
 

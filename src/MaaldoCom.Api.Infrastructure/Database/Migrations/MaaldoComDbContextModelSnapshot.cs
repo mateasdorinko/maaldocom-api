@@ -30,6 +30,9 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                         .HasColumnOrder(0)
                         .HasDefaultValueSql("newsequentialid()");
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Author")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -41,6 +44,18 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)")
                         .HasColumnOrder(2);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

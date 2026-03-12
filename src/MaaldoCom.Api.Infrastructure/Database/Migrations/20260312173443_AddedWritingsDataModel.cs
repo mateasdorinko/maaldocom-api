@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MaaldoCom.Api.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class WritingsDataModelAddition : Migration
+    public partial class AddedWritingsDataModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,12 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newsequentialid()"),
                     Author = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Body = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                    Body = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Active = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

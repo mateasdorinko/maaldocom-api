@@ -1,6 +1,6 @@
 namespace MaaldoCom.Api.Domain.Entities;
 
-public class Comment : BaseEntity
+public class Comment : BaseAuditableEntity
 {
     public string? Author { get; set; }
     public string? Body { get; set; }

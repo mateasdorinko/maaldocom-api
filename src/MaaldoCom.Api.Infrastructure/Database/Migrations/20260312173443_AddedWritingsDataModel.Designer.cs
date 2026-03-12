@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaaldoCom.Api.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(MaaldoComDbContext))]
-    [Migration("20260312164658_WritingsDataModelAddition")]
-    partial class WritingsDataModelAddition
+    [Migration("20260312173443_AddedWritingsDataModel")]
+    partial class AddedWritingsDataModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,9 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                         .HasColumnOrder(0)
                         .HasDefaultValueSql("newsequentialid()");
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Author")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -44,6 +47,18 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)")
                         .HasColumnOrder(2);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
