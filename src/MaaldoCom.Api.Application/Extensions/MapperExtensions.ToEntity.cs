@@ -35,7 +35,7 @@ public static partial class MapperExtensions
         var entity = new MediaAlbum().MapToBaseAuditableEntity(dto);
 
         entity.Name = dto.Name;
-        entity.UrlFriendlyName = dto.UrlFriendlyName;
+        entity.Slug = dto.Slug;
         entity.Description = dto.Description;
 
         if (dto.Tags.Any())

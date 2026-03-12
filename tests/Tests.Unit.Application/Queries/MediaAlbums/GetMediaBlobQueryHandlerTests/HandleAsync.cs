@@ -46,7 +46,7 @@ public class HandleAsync
         var album = new MediaAlbumDto
         {
             Id = mediaAlbumId,
-            UrlFriendlyName = "my-album",
+            Slug = "my-album",
             Media = [new MediaDto { Id = Guid.NewGuid(), FileName = "photo.jpg" }]
         };
 
@@ -71,7 +71,7 @@ public class HandleAsync
         var query = new GetMediaBlobQuery(albumId, mediaId, "original");
 
         var media = new MediaDto { Id = mediaId, FileName = "photo.jpg" };
-        var album = new MediaAlbumDto { Id = albumId, UrlFriendlyName = "my-album", Media = [media] };
+        var album = new MediaAlbumDto { Id = albumId, Slug = "my-album", Media = [media] };
         var blobDto = new MediaDto { FileName = "photo.jpg", Stream = Stream.Null };
 
         A.CallTo(() => cacheManager.GetMediaAlbumDetailAsync(albumId, ct)).Returns(album);
@@ -97,7 +97,7 @@ public class HandleAsync
         var query = new GetMediaBlobQuery(albumId, mediaId, "viewer");
 
         var media = new MediaDto { Id = mediaId, FileName = "photo.jpg" };
-        var album = new MediaAlbumDto { Id = albumId, UrlFriendlyName = "my-album", Media = [media] };
+        var album = new MediaAlbumDto { Id = albumId, Slug = "my-album", Media = [media] };
         var blobDto = new MediaDto { FileName = "viewer-photo.jpg", Stream = Stream.Null };
 
         A.CallTo(() => cacheManager.GetMediaAlbumDetailAsync(albumId, ct)).Returns(album);
@@ -123,7 +123,7 @@ public class HandleAsync
         var query = new GetMediaBlobQuery(albumId, mediaId, "thumb");
 
         var media = new MediaDto { Id = mediaId, FileName = "photo.jpg" };
-        var album = new MediaAlbumDto { Id = albumId, UrlFriendlyName = "my-album", Media = [media] };
+        var album = new MediaAlbumDto { Id = albumId, Slug = "my-album", Media = [media] };
         var blobDto = new MediaDto { FileName = "thumb-photo.jpg", Stream = Stream.Null };
 
         A.CallTo(() => cacheManager.GetMediaAlbumDetailAsync(albumId, ct)).Returns(album);
@@ -149,7 +149,7 @@ public class HandleAsync
         var query = new GetMediaBlobQuery(albumId, mediaId, "unknown");
 
         var media = new MediaDto { Id = mediaId, FileName = "photo.jpg" };
-        var album = new MediaAlbumDto { Id = albumId, UrlFriendlyName = "my-album", Media = [media] };
+        var album = new MediaAlbumDto { Id = albumId, Slug = "my-album", Media = [media] };
 
         A.CallTo(() => cacheManager.GetMediaAlbumDetailAsync(albumId, ct)).Returns(album);
 
@@ -172,7 +172,7 @@ public class HandleAsync
         var query = new GetMediaBlobQuery(albumId, mediaId, "original");
 
         var media = new MediaDto { Id = mediaId, FileName = "photo.jpg" };
-        var album = new MediaAlbumDto { Id = albumId, UrlFriendlyName = "my-album", Media = [media] };
+        var album = new MediaAlbumDto { Id = albumId, Slug = "my-album", Media = [media] };
 
         A.CallTo(() => cacheManager.GetMediaAlbumDetailAsync(albumId, ct)).Returns(album);
         A.CallTo(() => blobsProvider.GetBlobAsync(ContainerName, A<string>._, ct))

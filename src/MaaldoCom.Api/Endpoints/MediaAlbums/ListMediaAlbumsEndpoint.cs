@@ -20,7 +20,7 @@ public class ListMediaAlbumsEndpoint(IQueryHandler<ListMediaAlbumsQuery, IEnumer
         var query = new ListMediaAlbumsQuery();
         var result = await handler.HandleAsync(query, ct);
         var response = result.Value
-            .Where(ma => ma.Active && ma.UrlFriendlyName != "hotshots")
+            .Where(ma => ma.Active && ma.Slug != "hotshots")
             .ToGetModels();
 
         await Send.OkAsync(response, ct);

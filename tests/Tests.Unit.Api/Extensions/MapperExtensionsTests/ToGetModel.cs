@@ -10,7 +10,7 @@ public class ToGetModel
         {
             Id = Guid.NewGuid(),
             Name = "Sample Album",
-            UrlFriendlyName = "sample-album",
+            Slug = "sample-album",
             Description = "This is a sample media album.",
             CreatedBy = "tester",
             Created = DateTime.UtcNow,
@@ -49,7 +49,7 @@ public class ToGetModel
         // assert
         model.Id.ShouldBeEquivalentTo(dto.Id);
         model.Name.ShouldBeEquivalentTo(dto.Name);
-        model.UrlFriendlyName.ShouldBeEquivalentTo(dto.UrlFriendlyName);
+        model.Slug.ShouldBeEquivalentTo(dto.Slug);
         model.Created.ShouldBeEquivalentTo(dto.Created);
         model.Tags.Count().ShouldBe(1);
         model.Tags.First().ShouldBeEquivalentTo("SampleTag");

@@ -10,29 +10,29 @@ public class ToDto
         {
             Id = Guid.NewGuid(),
             Name = "Sample Album",
-            UrlFriendlyName = "sample-album",
+            Slug = "sample-album",
             Created = DateTime.UtcNow,
             Tags = new List<string> { "SampleTag" }
         };
-        
+
         // act
         var dto = model.ToDto();
-        
+
         // assert
         dto.Id.ShouldBeEquivalentTo(model.Id);
         dto.Name.ShouldBeEquivalentTo(model.Name);
-        dto.UrlFriendlyName.ShouldBeEquivalentTo(model.UrlFriendlyName);
+        dto.Slug.ShouldBeEquivalentTo(model.Slug);
         dto.Created.ShouldBeEquivalentTo(model.Created);
         dto.Tags.Count.ShouldBe(1);
         dto.Tags[0].Name.ShouldBeEquivalentTo("SampleTag");
     }
-    
+
     [Fact]
     public void ToDto_FromNullGetMediaAlbumResponseModel_ThrowsArgumentNullException()
     {
         // arrange
         GetMediaAlbumResponse? model = null;
-        
+
         // act & assert
         Assert.Throws<ArgumentNullException>(() => model!.ToDto());
     }
@@ -45,7 +45,7 @@ public class ToDto
         {
             Id = Guid.NewGuid(),
             Name = "Sample Album",
-            UrlFriendlyName = "sample-album",
+            Slug = "sample-album",
             Created = DateTime.UtcNow,
             Description = "This is a sample media album.",
             Active = true,
@@ -68,7 +68,7 @@ public class ToDto
         // assert
         dto.Id.ShouldBeEquivalentTo(model.Id);
         dto.Name.ShouldBeEquivalentTo(model.Name);
-        dto.UrlFriendlyName.ShouldBeEquivalentTo(model.UrlFriendlyName);
+        dto.Slug.ShouldBeEquivalentTo(model.Slug);
         dto.Created.ShouldBeEquivalentTo(model.Created);
         dto.Description.ShouldBeEquivalentTo(model.Description);
         dto.Active.ShouldBeEquivalentTo(model.Active);
@@ -99,10 +99,10 @@ public class ToDto
             Description = "This is a sample media file.",
             Tags = new List<string> { "SampleTag" }
         };
-        
+
         // act
         var dto = model.ToDto();
-        
+
         // assert
         dto.Id.ShouldBeEquivalentTo(model.Id);
         dto.FileName.ShouldBeEquivalentTo(model.FileName);
@@ -110,13 +110,13 @@ public class ToDto
         dto.Tags.Count.ShouldBe(1);
         dto.Tags[0].Name.ShouldBeEquivalentTo("SampleTag");
     }
-    
+
     [Fact]
     public void ToDto_FromNullGetMediaResponseModel_ThrowsArgumentNullException()
     {
         // arrange
         GetMediaResponse? model = null;
-        
+
         // act & assert
         Assert.Throws<ArgumentNullException>(() => model!.ToDto());
     }
@@ -130,21 +130,21 @@ public class ToDto
             Id = Guid.NewGuid(),
             Name = "SampleTag"
         };
-        
+
         // act
         var dto = model.ToDto();
-        
+
         // assert
         dto.Id.ShouldBeEquivalentTo(model.Id);
         dto.Name.ShouldBeEquivalentTo(model.Name);
     }
-    
+
     [Fact]
     public void ToDto_FromNullGetTagResponseModel_ThrowsArgumentNullException()
     {
         // arrange
         GetTagResponse? model = null;
-        
+
         // act & assert
         Assert.Throws<ArgumentNullException>(() => model!.ToDto());
     }
@@ -159,16 +159,16 @@ public class ToDto
             Title = "Sample Knowledge",
             Quote = "This is some sample knowledge content."
         };
-        
+
         // act
         var dto = model.ToDto();
-        
+
         // assert
         dto.Id.ShouldBeEquivalentTo(model.Id);
         dto.Title.ShouldBeEquivalentTo(model.Title);
         dto.Quote.ShouldBeEquivalentTo(model.Quote);
     }
-    
+
     [Fact]
     public void ToDto_FromNullGetKnowledgeResponseModel_ThrowsArgumentNullException()
     {
@@ -186,7 +186,7 @@ public class ToDto
         var model = new PostMediaAlbumRequest
         {
             Name = "Sample Album",
-            UrlFriendlyName = "sample-album",
+            Slug = "sample-album",
             Created = DateTime.UtcNow,
             Description = "This is a sample media album.",
             Tags = new List<string> { "SampleTag" },
@@ -207,7 +207,7 @@ public class ToDto
 
         // assert
         dto.Name.ShouldBeEquivalentTo(model.Name);
-        dto.UrlFriendlyName.ShouldBeEquivalentTo(model.UrlFriendlyName);
+        dto.Slug.ShouldBeEquivalentTo(model.Slug);
         dto.Created.ShouldBeEquivalentTo(model.Created);
         dto.Description.ShouldBeEquivalentTo(model.Description);
         dto.Tags.Count.ShouldBe(1);

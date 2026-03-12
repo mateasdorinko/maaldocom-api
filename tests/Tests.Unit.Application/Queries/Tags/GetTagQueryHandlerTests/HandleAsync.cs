@@ -52,7 +52,7 @@ public class HandleAsync
     }
 
     [Fact]
-    public async Task HandleAsync_ByUrlFriendlyNameNotInCachedList_ReturnsNotFound()
+    public async Task HandleAsync_BySlugNotInCachedList_ReturnsNotFound()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -80,7 +80,7 @@ public class HandleAsync
     }
 
     [Fact]
-    public async Task HandleAsync_ByUrlFriendlyNameInCachedListAndInDb_ReturnsTag()
+    public async Task HandleAsync_BySlugInCachedListAndInDb_ReturnsTag()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -107,7 +107,7 @@ public class HandleAsync
     }
 
     [Fact]
-    public async Task HandleAsync_ByUrlFriendlyNameInCachedListButNotInDb_ReturnsNotFound()
+    public async Task HandleAsync_BySlugInCachedListButNotInDb_ReturnsNotFound()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();

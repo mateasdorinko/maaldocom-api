@@ -10,7 +10,7 @@ public class ToDetailModel
         {
             Id = Guid.NewGuid(),
             Name = "Sample Album",
-            UrlFriendlyName = "sample-album",
+            Slug = "sample-album",
             Description = "This is a sample media album.",
             CreatedBy = "tester",
             Created = DateTime.UtcNow,
@@ -50,7 +50,7 @@ public class ToDetailModel
         model.Id.ShouldBeEquivalentTo(dto.Id);
         model.Name.ShouldBeEquivalentTo(dto.Name);
         model.Description.ShouldBeEquivalentTo(dto.Description);
-        model.UrlFriendlyName.ShouldBeEquivalentTo(dto.UrlFriendlyName);
+        model.Slug.ShouldBeEquivalentTo(dto.Slug);
         model.Created.ShouldBeEquivalentTo(dto.Created);
         model.Active.ShouldBeEquivalentTo(dto.Active);
         model.Media.Count().ShouldBe(1);

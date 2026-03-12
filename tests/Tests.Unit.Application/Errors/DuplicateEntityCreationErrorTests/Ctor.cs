@@ -10,7 +10,7 @@ public class Ctor
         {
             Name = "Test Media Album",
             Description = "A media album for testing purposes",
-            UrlFriendlyName = "test-media-album"
+            Slug = "test-media-album"
         };
 
         // assert

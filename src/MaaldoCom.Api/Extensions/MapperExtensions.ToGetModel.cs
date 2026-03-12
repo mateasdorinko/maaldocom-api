@@ -24,7 +24,7 @@ public static partial class MapperExtensions
         var model = new GetMediaAlbumResponse().MapToBaseModel(dto);
 
         model.Name = dto.Name;
-        model.UrlFriendlyName = dto.UrlFriendlyName;
+        model.Slug = dto.Slug;
         model.Created = dto.Created;
         model.Tags = dto.Tags.Select(m => m.Name!).ToList();
         model.DefaultMediaId = dto.DefaultMediaId;

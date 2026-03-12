@@ -6,7 +6,7 @@ public class PostMediaAlbumRequest
     public string? Name { get; set; }
 
     [JsonPropertyOrder(2)]
-    public string? UrlFriendlyName { get; set; }
+    public string? Slug { get; set; }
 
     [JsonPropertyOrder(3)]
     public DateTime Created { get; set; }

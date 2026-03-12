@@ -18,11 +18,11 @@ public class CreateMediaAlbumValidator : AbstractValidator<MediaAlbumDto>
             .WithMessage("Media album name is required")
             .MaximumLength(50)
             .WithMessage("Media album name must be 50 characters or less");
-        RuleFor(dto => dto.UrlFriendlyName)
+        RuleFor(dto => dto.Slug)
             .NotEmpty()
-            .WithMessage("Media album urlFriendlyName is required")
+            .WithMessage("Media album slug is required")
             .MaximumLength(50)
-            .WithMessage("Media album urlFriendlyName must be 50 characters or less");
+            .WithMessage("Media album slug must be 50 characters or less");
         RuleFor(dto => dto.Description)
             .NotEmpty()
             .WithMessage("Media album description is required")
@@ -41,7 +41,7 @@ public class CreateMediaAlbumValidator : AbstractValidator<MediaAlbumDto>
     private bool IsUniqueAsync(MediaAlbumDto dto)
     {
         var results = _maaldoComDbContext.MediaAlbums
-            .Where(ma => ma.Name!.ToLower() == dto.Name!.ToLower() || ma.UrlFriendlyName!.ToLower() == dto.UrlFriendlyName!.ToLower())
+            .Where(ma => ma.Name!.ToLower() == dto.Name!.ToLower() || ma.Slug!.ToLower() == dto.Slug!.ToLower())
             .ToListAsync().Result;
 
         return results.Count == 0;

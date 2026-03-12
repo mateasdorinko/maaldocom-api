@@ -9,7 +9,7 @@ public class GetMediaAlbumTagResponse
     public string? Name { get; set; }
 
     [JsonPropertyOrder(3)]
-    public string? UrlFriendlyName { get; set; }
+    public string? Slug { get; set; }
 
     [JsonPropertyOrder(4)]
     public string? Href { get; set; }

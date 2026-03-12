@@ -17,7 +17,7 @@ public class GetHotshotsMediaAlbum(App app) : BaseIntegrationTest(app)
         // assert
         result.ShouldNotBeNull();
         result!.Name.ShouldBe("Hot Shots");
-        result.UrlFriendlyName.ShouldBe("hotshots");
+        result.Slug.ShouldBe("hotshots");
         result.Id.ShouldNotBe(Guid.Empty);
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
     }

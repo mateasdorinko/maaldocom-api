@@ -68,7 +68,7 @@ public abstract class BaseIntegrationTest(App app) : TestBase<App>, IAsyncLifeti
             CreateMediaAlbum("Inactive Media Album 3", "inactive-mediaalbum-3", false)
         ], CacheKeys.MediaAlbumList);
 
-        static MediaAlbum CreateMediaAlbum(string name, string urlFriendlyName, bool active)
-            => new() { Name = name, UrlFriendlyName = urlFriendlyName, CreatedBy = "test-harness", Media = [], Active = active };
+        static MediaAlbum CreateMediaAlbum(string name, string slug, bool active)
+            => new() { Name = name, Slug = slug, CreatedBy = "test-harness", Media = [], Active = active };
     }
 }

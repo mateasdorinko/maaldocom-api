@@ -10,7 +10,7 @@ public class ToDto
         {
             Id = Guid.NewGuid(),
             Name = "Sample Album",
-            UrlFriendlyName = "sample-album",
+            Slug = "sample-album",
             Description = "This is a sample media album.",
             CreatedBy = "tester",
             Created = DateTime.UtcNow,
@@ -52,7 +52,7 @@ public class ToDto
         // assert
         dto.Id.ShouldBeEquivalentTo(entity.Id);
         dto.Name.ShouldBeEquivalentTo(entity.Name);
-        dto.UrlFriendlyName.ShouldBeEquivalentTo(entity.UrlFriendlyName);
+        dto.Slug.ShouldBeEquivalentTo(entity.Slug);
         dto.Description.ShouldBeEquivalentTo(entity.Description);
         dto.CreatedBy.ShouldBeEquivalentTo(entity.CreatedBy);
         dto.Created.ShouldBeEquivalentTo(entity.Created);

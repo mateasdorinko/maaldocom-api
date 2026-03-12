@@ -10,7 +10,7 @@ public class ToEntity
         {
             Id = Guid.NewGuid(),
             Name = "Sample Album",
-            UrlFriendlyName = "sample-album",
+            Slug = "sample-album",
             Description = "This is a sample media album.",
             CreatedBy = "tester",
             Created = DateTime.UtcNow,
@@ -50,7 +50,7 @@ public class ToEntity
         // assert
         entity.Id.ShouldBeEquivalentTo(dto.Id);
         entity.Name.ShouldBeEquivalentTo(dto.Name);
-        entity.UrlFriendlyName.ShouldBeEquivalentTo(dto.UrlFriendlyName);
+        entity.Slug.ShouldBeEquivalentTo(dto.Slug);
         entity.Description.ShouldBeEquivalentTo(dto.Description);
         entity.Created.ShouldBeEquivalentTo(dto.Created);
         entity.CreatedBy.ShouldBeEquivalentTo(dto.CreatedBy);

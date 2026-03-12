@@ -6,11 +6,11 @@ public class AltHref
     public void AltHref_Invoked_ReturnsDetailUrl()
     {
         // arrange
-        var model = new PostMediaAlbumResponse { UrlFriendlyName = "test-album" };
+        var model = new PostMediaAlbumResponse { Slug = "test-album" };
 
         // act
 
         // assert
-        model.AltHref.ShouldBe(UrlMaker.GetMediaAlbumUrl(model.UrlFriendlyName));
+        model.AltHref.ShouldBe(UrlMaker.GetMediaAlbumUrl(model.Slug));
     }
 }

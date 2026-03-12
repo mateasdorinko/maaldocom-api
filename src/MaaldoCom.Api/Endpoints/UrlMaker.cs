@@ -5,7 +5,7 @@ internal static class UrlMaker
     public const string MediaAlbumsRoute = "/media-albums";
 
     public static string GetMediaAlbumUrl(Guid id) => GetMediaAlbumUrl(id.ToString());
-    public static string GetMediaAlbumUrl(string idOrUrlFriendlyName) => $"{MediaAlbumsRoute}/{idOrUrlFriendlyName}";
+    public static string GetMediaAlbumUrl(string idOrSlug) => $"{MediaAlbumsRoute}/{idOrSlug}";
 
     public static string GetHotShotsMediaAlbumUrl() => GetMediaAlbumUrl("hotshots");
 

@@ -85,7 +85,7 @@ public sealed class CacheManager : ICacheManager, IDisposable
         async Task<MediaAlbumDto> GetFromDbAsync()
         {
             var entity = await MaaldoComDbContext.MediaAlbums
-                .Where(ma => ma.UrlFriendlyName == "hotshots")
+                .Where(ma => ma.Slug == "hotshots")
                 .Include(ma => ma.MediaAlbumTags)
                 .ThenInclude(mat => mat.Tag)
                 .Include(ma => ma.Media.OrderBy(m => m.FileName))

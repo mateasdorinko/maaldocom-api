@@ -9,7 +9,7 @@ public class RefreshCache(App app) : BaseIntegrationTest(app)
         // arrange
         var hotShotsAlbum = new MediaAlbum
         {
-            Name = "HotShots", UrlFriendlyName = "hotshots", CreatedBy = "test-harness", Media = []
+            Name = "HotShots", Slug = "hotshots", CreatedBy = "test-harness", Media = []
         };
         await using var scope = App.Services.CreateAsyncScope();
         var db = scope.ServiceProvider.GetRequiredService<MaaldoComDbContext>();

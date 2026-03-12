@@ -32,7 +32,7 @@ public static partial class MapperExtensions
         var dto = new MediaAlbumDto().MapFromBaseAuditableEntity(entity);
 
         dto.Name = entity.Name;
-        dto.UrlFriendlyName = entity.UrlFriendlyName;
+        dto.Slug = entity.Slug;
         dto.Description = entity.Description;
         dto.Tags = entity.MediaAlbumTags?.Select(t => t.Tag.ToDto()).ToList()!;
         dto.Media = entity.Media?.Select(m => m.ToDto()).ToList()!;
@@ -70,14 +70,14 @@ public static partial class MapperExtensions
         {
             Id = mat.MediaAlbum.Id,
             Name = mat.MediaAlbum.Name,
-            UrlFriendlyName = mat.MediaAlbum.UrlFriendlyName
+            Slug = mat.MediaAlbum.Slug
         }).ToList()!;
         dto.Media = entity.MediaTags?.Where(mt => mt.Media != null).Select(mt => new MediaDto
         {
             Id = mt.Media.Id,
             MediaAlbumName = mt.Media.MediaAlbum!.Name,
             FileName = mt.Media.FileName,
-            MediaAlbumUrlFriendlyName = mt.Media.MediaAlbum!.UrlFriendlyName,
+            MediaAlbumSlug = mt.Media.MediaAlbum!.Slug,
             MediaAlbumId = mt.Media.MediaAlbumId
         }).ToList()!;
 

@@ -13,14 +13,14 @@ public class ToEntities
             {
                 Id = Guid.NewGuid(),
                 Name = "Album 1",
-                UrlFriendlyName = "album-1",
+                Slug = "album-1",
                 Description = "Description for album 1."
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Name = "Album 2",
-                UrlFriendlyName = "album-2",
+                Slug = "album-2",
                 Description = "Description for album 2."
             }
         };
@@ -34,7 +34,7 @@ public class ToEntities
         {
             entities[i].Id.ShouldBeEquivalentTo(dtos[i].Id);
             entities[i].Name.ShouldBeEquivalentTo(dtos[i].Name);
-            entities[i].UrlFriendlyName.ShouldBeEquivalentTo(dtos[i].UrlFriendlyName);
+            entities[i].Slug.ShouldBeEquivalentTo(dtos[i].Slug);
             entities[i].Description.ShouldBeEquivalentTo(dtos[i].Description);
         }
     }

@@ -12,14 +12,14 @@ public class ToGetModels
             {
                 Id = Guid.NewGuid(),
                 Name = "Sample Album 1",
-                UrlFriendlyName = "sample-album-1",
+                Slug = "sample-album-1",
                 Created = DateTime.UtcNow
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Name = "Sample Album 2",
-                UrlFriendlyName = "sample-album-2",
+                Slug = "sample-album-2",
                 Created = DateTime.UtcNow
             }
         };

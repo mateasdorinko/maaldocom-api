@@ -16,7 +16,7 @@ public class Ctor
     private static MediaAlbumDto ValidAlbumDto() => new()
     {
         Name = "My Album",
-        UrlFriendlyName = "my-album",
+        Slug = "my-album",
         Description = "A test album",
         Media = [new MediaDto { FileName = "photo.jpg", FileExtension = ".jpg" }]
     };
@@ -38,7 +38,7 @@ public class Ctor
     public async Task Ctor_WithDuplicateName_FailsValidation()
     {
         // arrange
-        var existing = new List<MediaAlbum> { new() { Name = "My Album", UrlFriendlyName = "other-album" } };
+        var existing = new List<MediaAlbum> { new() { Name = "My Album", Slug = "other-album" } };
         var validator = new CreateMediaAlbumValidator(CreateDbContext(existing));
         var dto = ValidAlbumDto();
         dto.Name = "My Album";
@@ -84,19 +84,19 @@ public class Ctor
     }
 
     [Fact]
-    public async Task Ctor_WithEmptyUrlFriendlyName_FailsValidation()
+    public async Task Ctor_WithEmptySlug_FailsValidation()
     {
         // arrange
         var validator = new CreateMediaAlbumValidator(CreateDbContext());
         var dto = ValidAlbumDto();
-        dto.UrlFriendlyName = string.Empty;
+        dto.Slug = string.Empty;
 
         // act
         var result = await validator.ValidateAsync(dto, TestContext.Current.CancellationToken);
 
         // assert
         result.IsValid.ShouldBe(false);
-        result.Errors.ShouldContain(e => e.ErrorMessage == "Media album urlFriendlyName is required");
+        result.Errors.ShouldContain(e => e.ErrorMessage == "Media album slug is required");
     }
 
     [Fact]

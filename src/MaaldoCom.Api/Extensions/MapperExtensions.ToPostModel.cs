@@ -11,7 +11,7 @@ public static partial class MapperExtensions
         var model = new PostMediaAlbumResponse().MapToBaseModel(dto);
 
         model.Name = dto.Name;
-        model.UrlFriendlyName = dto.UrlFriendlyName;
+        model.Slug = dto.Slug;
         model.Created = dto.Created;
 
         if (dto.Tags != null)

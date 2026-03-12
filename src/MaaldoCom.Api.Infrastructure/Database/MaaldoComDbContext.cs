@@ -8,7 +8,9 @@ public class MaaldoComDbContext(DbContextOptions<MaaldoComDbContext> options) : 
     public DbSet<MediaAlbum> MediaAlbums { get; set; }
     public DbSet<Media> Media { get; set; }
     public DbSet<Knowledge> Knowledge { get; set; }
+    public DbSet<Writing> Writings { get; set; }
     public DbSet<Tag> Tags { get; set; }
+    public DbSet<Comment> Comments { get; set; }
 
     public async Task<int> SaveChangesAsync(ClaimsPrincipal user, CancellationToken cancellationToken = default, bool audit = true)
     {

@@ -9,7 +9,7 @@ public class GetMediaTagResponse
     public string? MediaAlbumName { get; set; }
 
     [JsonPropertyOrder(3)]
-    public string? MediaAlbumUrlFriendlyName { get; set; }
+    public string? MediaAlbumSlug { get; set; }
 
     [JsonPropertyOrder(4)]
     public Guid MediaId { get; set; }

@@ -13,7 +13,7 @@ public static partial class MapperExtensions
         var model = new GetMediaAlbumDetailResponse().MapToBaseModel(dto);
 
         model.Name = dto.Name;
-        model.UrlFriendlyName = dto.UrlFriendlyName;
+        model.Slug = dto.Slug;
         model.Created = dto.Created;
         model.Description = dto.Description;
         model.Active = dto.Active;
@@ -36,7 +36,7 @@ public static partial class MapperExtensions
         {
             Name = ma.Name,
             MediaAlbumId = ma.Id,
-            UrlFriendlyName = ma.UrlFriendlyName,
+            Slug = ma.Slug,
             Href = UrlMaker.GetMediaAlbumUrl(ma.Id)
         });
         model.Media = dto.Media.Select(m => new GetMediaTagResponse
@@ -45,7 +45,7 @@ public static partial class MapperExtensions
             MediaId = m.Id,
             MediaAlbumId = m.MediaAlbumId,
             MediaAlbumName = m.MediaAlbumName,
-            MediaAlbumUrlFriendlyName = m.MediaAlbumUrlFriendlyName,
+            MediaAlbumSlug = m.MediaAlbumSlug,
             Href = UrlMaker.GetMediaUrl(m.MediaAlbumId, m.Id)
         });
 

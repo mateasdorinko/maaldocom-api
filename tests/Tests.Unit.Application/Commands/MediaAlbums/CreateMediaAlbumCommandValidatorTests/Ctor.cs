@@ -18,7 +18,7 @@ public class Ctor
         new MediaAlbumDto
         {
             Name = "My Album",
-            UrlFriendlyName = "my-album",
+            Slug = "my-album",
             Description = "A test album",
             Media = [new MediaDto { FileName = "photo.jpg", FileExtension = ".jpg" }]
         });
@@ -58,7 +58,7 @@ public class Ctor
         var validator = new CreateMediaAlbumCommandValidator(CreateDbContext());
         var command = new CreateMediaAlbumCommand(
             new ClaimsPrincipal(),
-            new MediaAlbumDto { Name = string.Empty, UrlFriendlyName = "slug", Description = "desc", Media = [new MediaDto { FileName = "f.jpg", FileExtension = ".jpg" }] });
+            new MediaAlbumDto { Name = string.Empty, Slug = "slug", Description = "desc", Media = [new MediaDto { FileName = "f.jpg", FileExtension = ".jpg" }] });
 
         // act
         var result = await validator.ValidateAsync(command, TestContext.Current.CancellationToken);
