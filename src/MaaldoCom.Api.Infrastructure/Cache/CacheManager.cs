@@ -193,6 +193,7 @@ public sealed class CacheManager : ICacheManager, IDisposable
                 .Include(w => w.WritingComments)
                 .ThenInclude(wc => wc.Comment)
                 .OrderByDescending(w => w.Created)
+                .AsSplitQuery()
                 .ToListAsync(cancellationToken);
 
             return entities.ToDtos();
