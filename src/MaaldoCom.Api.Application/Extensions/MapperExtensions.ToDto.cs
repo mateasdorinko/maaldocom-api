@@ -67,7 +67,7 @@ public static partial class MapperExtensions
         var dto = new TagDto().MapFromBaseEntity(entity);
 
         dto.Name = entity.Name;
-        dto.Count = (entity.MediaAlbumTags?.Count ?? 0) + (entity.MediaTags?.Count ?? 0);
+        dto.Count = (entity.MediaAlbumTags?.Count ?? 0) + (entity.MediaTags?.Count ?? 0) + (entity.WritingTags?.Count ?? 0);
         dto.MediaAlbums = entity.MediaAlbumTags?.Where(mat => mat.MediaAlbum != null).Select(mat => new MediaAlbumDto
         {
             Id = mat.MediaAlbum.Id,

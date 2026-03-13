@@ -154,6 +154,8 @@ public sealed class CacheManager : ICacheManager, IDisposable
                 .Include(t => t.MediaTags.OrderByDescending(mt => mt.Media.Created))
                 .ThenInclude(mt => mt.Media)
                 .ThenInclude(m => m.MediaAlbum)
+                .Include(t => t.WritingTags.OrderByDescending(wt => wt.Writing.Created))
+                .ThenInclude(wt => wt.Writing)
                 .AsSplitQuery()
                 .FirstOrDefaultAsync(cancellationToken);
 

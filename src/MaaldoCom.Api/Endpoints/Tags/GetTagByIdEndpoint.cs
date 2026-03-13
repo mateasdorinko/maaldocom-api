@@ -1,7 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.Tags.Models;
-using MaaldoCom.Api.Application.Queries.Tags;
-
-namespace MaaldoCom.Api.Endpoints.Tags;
+﻿namespace MaaldoCom.Api.Endpoints.Tags;
 
 public class GetTagByIdEndpoint(IQueryHandler<GetTagQuery, TagDto> handler) : Endpoint<GetTagByIdRequest, GetTagDetailResponse>
 {

@@ -1,7 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.Tags.Models;
-using MaaldoCom.Api.Application.Queries.Tags;
-
-namespace MaaldoCom.Api.Endpoints.Tags;
+﻿namespace MaaldoCom.Api.Endpoints.Tags;
 
 public class ListTagsEndpoint(IQueryHandler<ListTagsQuery, IEnumerable<TagDto>> handler) : EndpointWithoutRequest<IEnumerable<GetTagResponse>>
 {

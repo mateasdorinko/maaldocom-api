@@ -45,6 +45,13 @@ public static partial class MapperExtensions
             MediaAlbumSlug = m.MediaAlbumSlug,
             Href = UrlMaker.GetMediaUrl(m.MediaAlbumId, m.Id)
         });
+        model.Writings = dto.Writings.Select(w => new GetWritingTagResponse
+        {
+            Title = w.Title,
+            WritingId = w.Id,
+            Slug = w.Slug,
+            Href = UrlMaker.GetWritingUrl(w.Id)
+        });
 
         return model;
     }
