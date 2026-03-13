@@ -12,7 +12,8 @@ public class CreateMediaAlbumValidator : AbstractValidator<MediaAlbumDto>
 
         RuleFor(dto => dto)
             .Must(IsUniqueAsync)
-            .WithMessage("Media album already exists");
+            .WithMessage("Media album already exists")
+            .When(dto => !string.IsNullOrEmpty(dto.Name) && !string.IsNullOrEmpty(dto.Slug));
         RuleFor(dto => dto.Name)
             .NotEmpty()
             .WithMessage("Media album name is required")
