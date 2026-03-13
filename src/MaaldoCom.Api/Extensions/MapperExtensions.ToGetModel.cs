@@ -90,7 +90,8 @@ public static partial class MapperExtensions
         var model = new GetCommentResponse
         {
             Author = dto.Author,
-            Body = dto.Body
+            Body = dto.Body,
+            Created = dto.Created
         };
 
         return model;

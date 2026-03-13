@@ -7,4 +7,7 @@ public class GetCommentResponse
 
     [JsonPropertyOrder(2)]
     public string? Body { get; set; }
+
+    [JsonPropertyOrder(3)]
+    public DateTime Created { get; set; }
 }

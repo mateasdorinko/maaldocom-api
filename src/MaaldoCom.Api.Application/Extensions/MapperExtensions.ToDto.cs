@@ -101,6 +101,7 @@ public static partial class MapperExtensions
 
         dto.Author = entity.Author;
         dto.Body = entity.Body;
+        dto.Created = entity.Created;
         dto.MediaAlbums = entity.MediaAlbumComments?.Where(mat => mat.MediaAlbum != null).Select(mac => new MediaAlbumDto
         {
             Id = mac.MediaAlbum.Id,
