@@ -1,5 +1,3 @@
-using MaaldoCom.Api.Application.Queries.Writings;
-
 namespace MaaldoCom.Api.Endpoints.Writings;
 
 public class ListWritingsEndpoint(IQueryHandler<ListWritingsQuery, IEnumerable<WritingDto>> handler) : EndpointWithoutRequest<IEnumerable<GetWritingResponse>>

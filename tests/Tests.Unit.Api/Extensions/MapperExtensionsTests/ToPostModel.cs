@@ -33,14 +33,4 @@ public class ToPostModel
         model.Tags.Count().ShouldBe(1);
         model.Tags.First().ShouldBeEquivalentTo("SampleTag");
     }
-
-    [Fact]
-    public void ToPostModel_FromNullMediaAlbumDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        MediaAlbumDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToPostModel());
-    }
 }

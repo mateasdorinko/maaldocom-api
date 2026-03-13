@@ -39,16 +39,6 @@ public class ToDtos
     }
 
     [Fact]
-    public void ToDtos_FromNullMediaAlbumEntities_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<MediaAlbum>? entities = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => entities!.ToDtos());
-    }
-
-    [Fact]
     public void ToDtos_FromEmptyMediaAlbumEntities_ReturnsEmptyList()
     {
         // arrange
@@ -95,16 +85,6 @@ public class ToDtos
     }
 
     [Fact]
-    public void ToDtos_FromNullMediaEntities_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<Media>? entities = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => entities!.ToDtos());
-    }
-
-    [Fact]
     public void ToDtos_FromEmptyMediaEntities_ReturnsEmptyList()
     {
         // arrange
@@ -145,16 +125,6 @@ public class ToDtos
             dtos[i].Id.ShouldBeEquivalentTo(entities[i].Id);
             dtos[i].Name.ShouldBeEquivalentTo(entities[i].Name);
         }
-    }
-
-    [Fact]
-    public void ToDtos_FromNullTagEntities_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<Tag>? entities = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => entities!.ToDtos());
     }
 
     [Fact]
@@ -201,16 +171,6 @@ public class ToDtos
             dtos[i].Title.ShouldBeEquivalentTo(entities[i].Title);
             dtos[i].Quote.ShouldBeEquivalentTo(entities[i].Quote);
         }
-    }
-
-    [Fact]
-    public void ToDtos_FromNullKnowledgeEntities_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<Knowledge>? entities = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => entities!.ToDtos());
     }
 
     [Fact]

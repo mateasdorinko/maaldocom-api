@@ -78,11 +78,11 @@ public sealed class CacheManager : ICacheManager, IDisposable
 
     public async Task<MediaAlbumDto?> GetHotshotsMediaAlbumDetailAsync(CancellationToken cancellationToken)
     {
-        var mediaAlbums = await HybridCache.GetOrCreateAsync<MediaAlbumDto>(
+        var hotshotsMediaAlbum = await HybridCache.GetOrCreateAsync<MediaAlbumDto>(
             $"{CacheKeys.MediaAlbumList}:hotshots",
             async _ => await GetFromDbAsync(), cancellationToken: cancellationToken);
 
-        return mediaAlbums;
+        return hotshotsMediaAlbum;
 
         async Task<MediaAlbumDto> GetFromDbAsync()
         {

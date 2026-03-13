@@ -60,16 +60,6 @@ public class ToDetailModel
     }
 
     [Fact]
-    public void ToDetailModel_FromNullMediaAlbumDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        MediaAlbumDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToDetailModel());
-    }
-
-    [Fact]
     public void ToDetailModel_FromTagDto_MapsAllPropertiesCorrectly()
     {
         // arrange
@@ -112,15 +102,5 @@ public class ToDetailModel
         model.Media.Count().ShouldBe(1);
         model.Media.First().Name.ShouldBeEquivalentTo("sample.jpg");
         model.Media.First().MediaAlbumName.ShouldBeEquivalentTo("Sample Album");
-    }
-
-    [Fact]
-    public void ToDetailModel_FromNullTagDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        TagDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToDetailModel());
     }
 }

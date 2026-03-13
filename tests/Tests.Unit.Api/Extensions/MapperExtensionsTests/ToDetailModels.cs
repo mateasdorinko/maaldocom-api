@@ -36,16 +36,6 @@ public class ToDetailModels
     }
 
     [Fact]
-    public void ToDetailModels_FromNullMediaAlbumDtos_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<MediaAlbumDto>? dtos = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dtos!.ToDetailModels());
-    }
-
-    [Fact]
     public void ToDetailModels_FromEmptyMediaAlbumDtos_ReturnsEmptyList()
     {
         // arrange

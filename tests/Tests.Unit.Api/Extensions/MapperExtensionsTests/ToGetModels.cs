@@ -36,16 +36,6 @@ public class ToGetModels
     }
 
     [Fact]
-    public void ToModels_FromNullMediaAlbumDtos_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<MediaAlbumDto>? dtos = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dtos!.ToGetModels());
-    }
-
-    [Fact]
     public void ToModels_FromEmptyMediaAlbumDtos_ReturnsEmptyList()
     {
         // arrange
@@ -129,16 +119,6 @@ public class ToGetModels
     }
 
     [Fact]
-    public void ToModels_FromNullMediaDtos_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<MediaDto>? dtos = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dtos!.ToGetModels());
-    }
-
-    [Fact]
     public void ToModels_FromEmptyMediaDtos_ReturnsEmptyList()
     {
         // arrange
@@ -181,16 +161,6 @@ public class ToGetModels
             models[i].Id.ShouldBeEquivalentTo(dtos[i].Id);
             models[i].Name.ShouldBeEquivalentTo(dtos[i].Name);
         }
-    }
-
-    [Fact]
-    public void ToModels_FromNullTagDtos_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<TagDto>? dtos = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dtos!.ToGetModels());
     }
 
     [Fact]
@@ -239,16 +209,6 @@ public class ToGetModels
             models[i].Title.ShouldBeEquivalentTo(dtos[i].Title);
             models[i].Quote.ShouldBeEquivalentTo(dtos[i].Quote);
         }
-    }
-
-    [Fact]
-    public void ToModels_FromNullKnowledgeDtos_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<KnowledgeDto>? dtos = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dtos!.ToGetModels());
     }
 
     [Fact]

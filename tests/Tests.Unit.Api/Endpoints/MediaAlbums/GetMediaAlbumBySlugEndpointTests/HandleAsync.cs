@@ -3,7 +3,7 @@
 public class HandleAsync
 {
     [Fact]
-    public async Task HandleAsync_WithValidName_ReturnsMediaAlbum()
+    public async Task HandleAsync_WithValidSlug_ReturnsMediaAlbum()
     {
         // arrange
         var handler = A.Fake<IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto>>();
@@ -24,7 +24,7 @@ public class HandleAsync
     }
 
     [Fact]
-    public async Task HandleAsync_WithInValidName_ReturnsNotFound()
+    public async Task HandleAsync_WithInValidSlug_ReturnsNotFound()
     {
         // arrange
         var handler = A.Fake<IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto>>();

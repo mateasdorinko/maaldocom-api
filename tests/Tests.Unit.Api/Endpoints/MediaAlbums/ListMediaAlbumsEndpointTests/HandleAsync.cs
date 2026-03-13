@@ -28,8 +28,8 @@ public class HandleAsync
         // arrange
         var handler = A.Fake<IQueryHandler<ListMediaAlbumsQuery, IEnumerable<MediaAlbumDto>>>();
         var endpoint = Factory.Create<ListMediaAlbumsEndpoint>(handler);
-        var activeAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Active Album", Slug = "active", Active = true };
-        var inactiveAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Inactive Album", Slug = "inactive", Active = false };
+        var activeAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Active Album", Slug = "active-media-album", Active = true };
+        var inactiveAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Inactive Album", Slug = "inactive-media-album", Active = false };
         var result = new Result<IEnumerable<MediaAlbumDto>>().WithValue([activeAlbum, inactiveAlbum]);
 
         A.CallTo(() => handler.HandleAsync(A<ListMediaAlbumsQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);

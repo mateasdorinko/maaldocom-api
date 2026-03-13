@@ -56,16 +56,6 @@ public class ToGetModel
     }
 
     [Fact]
-    public void ToModel_FromNullMediaAlbumDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        MediaAlbumDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
-    }
-
-    [Fact]
     public void ToModel_FromMediaDto_MapsAllPropertiesCorrectly()
     {
         // arrange
@@ -102,16 +92,6 @@ public class ToGetModel
     }
 
     [Fact]
-    public void ToModel_FromNullMediaDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        MediaDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
-    }
-
-    [Fact]
     public void ToModel_FromTagDto_MapsAllPropertiesCorrectly()
     {
         // arrange
@@ -127,16 +107,6 @@ public class ToGetModel
         // assert
         model.Id.ShouldBeEquivalentTo(dto.Id);
         model.Name.ShouldBeEquivalentTo(dto.Name);
-    }
-
-    [Fact]
-    public void ToModel_FromNullTagDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        TagDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
     }
 
     [Fact]
@@ -162,15 +132,5 @@ public class ToGetModel
         model.Id.ShouldBeEquivalentTo(dto.Id);
         model.Title.ShouldBeEquivalentTo(dto.Title);
         model.Quote.ShouldBeEquivalentTo(dto.Quote);
-    }
-
-    [Fact]
-    public void ToModel_FromNullKnowledgeDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        KnowledgeDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
     }
 }

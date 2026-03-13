@@ -18,7 +18,7 @@ public sealed class ListKnowledgeAsync : IDisposable
     [Fact]
     public async Task ListKnowledgeAsync_WithCachedData_ReturnsCachedData()
     {
-        IEnumerable<KnowledgeDto> cachedDtos = [new KnowledgeDto { Id = Guid.NewGuid(), Title = "Cached" }];
+        IEnumerable<KnowledgeDto> cachedDtos = [new() { Id = Guid.NewGuid(), Title = "Cached" }];
         _cache.Setup(CacheKeys.KnowledgeList, cachedDtos);
 
         var result = await _sut.ListKnowledgeAsync(TestContext.Current.CancellationToken);
