@@ -1,21 +1,21 @@
 ﻿namespace MaaldoCom.Api.Endpoints.MediaAlbums;
 
-public class GetMediaAlbumByNameEndpoint(IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto> handler) : Endpoint<GetMediaAlbumByNameRequest, GetMediaAlbumDetailResponse>
+public class GetMediaAlbumBySlugEndpoint(IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto> handler) : Endpoint<GetMediaAlbumBySlugRequest, GetMediaAlbumDetailResponse>
 {
     public override void Configure()
     {
-        Get(UrlMaker.GetMediaAlbumUrl("{name}"));
+        Get(UrlMaker.GetMediaAlbumUrl("{slug}"));
         Description(x => x
-            .WithName("GetMediaAlbumByName")
-            .WithSummary("Gets a media album by its name and associated media items."));
+            .WithName("GetMediaAlbumBySlug")
+            .WithSummary("Gets a media album by its slug and associated media items."));
         Description(b => b.Produces(StatusCodes.Status404NotFound));
         AllowAnonymous();
         ResponseCache(1200); // 20 minutes
     }
 
-    public override async Task HandleAsync(GetMediaAlbumByNameRequest req, CancellationToken ct)
+    public override async Task HandleAsync(GetMediaAlbumBySlugRequest req, CancellationToken ct)
     {
-        var query = new GetMediaAlbumDetailQuery(req.Name);
+        var query = new GetMediaAlbumDetailQuery(req.Slug);
         var result = await handler.HandleAsync(query, ct);
 
         await result.Match(

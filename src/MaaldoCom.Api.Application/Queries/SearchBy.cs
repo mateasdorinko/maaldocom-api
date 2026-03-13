@@ -4,5 +4,5 @@ public enum SearchBy
 {
     NotSet,
     Id,
-    Name
+    Slug
 }

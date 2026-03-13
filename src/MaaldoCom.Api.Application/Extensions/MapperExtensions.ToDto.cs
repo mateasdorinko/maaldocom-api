@@ -137,6 +137,7 @@ public static partial class MapperExtensions
         dto.Body = entity.Body;
         dto.Slug = entity.Slug;
         dto.Tags = entity.WritingTags?.Select(t => t.Tag.ToDto()).ToList()!;
+        dto.Comments = entity.WritingComments?.Select(t => t.Comment.ToDto()).ToList()!;
 
         return dto;
     }

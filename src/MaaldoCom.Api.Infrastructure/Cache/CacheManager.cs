@@ -187,7 +187,13 @@ public sealed class CacheManager : ICacheManager, IDisposable
 
         async Task<IEnumerable<WritingDto>> GetFromDbAsync()
         {
-            var entities = await MaaldoComDbContext.Writings.OrderByDescending(w => w.Created).ToListAsync(cancellationToken);
+            var entities = await MaaldoComDbContext.Writings
+                .Include(w => w.WritingTags)
+                .ThenInclude(wt => wt.Tag)
+                .Include(w => w.WritingComments)
+                .ThenInclude(wc => wc.Comment)
+                .OrderByDescending(w => w.Created)
+                .ToListAsync(cancellationToken);
 
             return entities.ToDtos();
         }
@@ -199,6 +205,7 @@ public sealed class CacheManager : ICacheManager, IDisposable
         await ListTagsAsync(cancellationToken);
         await ListKnowledgeAsync(cancellationToken);
         await GetHotshotsMediaAlbumDetailAsync(cancellationToken);
+        await ListWritingsAsync(cancellationToken);
     }
 
     public async Task InvalidateCache(string cacheKey, CancellationToken cancellationToken) => await HybridCache.RemoveAsync(cacheKey, cancellationToken);

@@ -82,4 +82,17 @@ public static partial class MapperExtensions
 
         return model;
     }
+
+    public static GetCommentResponse ToGetModel(this CommentDto dto)
+    {
+        ArgumentNullException.ThrowIfNull(dto);
+
+        var model = new GetCommentResponse
+        {
+            Author = dto.Author,
+            Body = dto.Body
+        };
+
+        return model;
+    }
 }

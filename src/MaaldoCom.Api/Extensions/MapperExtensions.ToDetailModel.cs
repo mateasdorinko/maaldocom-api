@@ -16,6 +16,7 @@ public static partial class MapperExtensions
         model.Media = dto.Media.Select(m => m.ToGetModel()).ToList();
         model.Tags = dto.Tags.Select(m => m.Name!).ToList();
         model.DefaultMediaId = dto.DefaultMediaId;
+        model.Comments = dto.Comments.Select(c => c.ToGetModel()).ToList();
 
         return model;
     }
@@ -44,6 +45,23 @@ public static partial class MapperExtensions
             MediaAlbumSlug = m.MediaAlbumSlug,
             Href = UrlMaker.GetMediaUrl(m.MediaAlbumId, m.Id)
         });
+
+        return model;
+    }
+
+    public static GetWritingDetailResponse ToDetailModel(this WritingDto dto)
+    {
+        ArgumentNullException.ThrowIfNull(dto);
+
+        var model = new GetWritingDetailResponse().MapToBaseModel(dto);
+
+        model.Title = dto.Title;
+        model.Slug = dto.Slug;
+        model.Blurb = dto.Blurb;
+        model.Created = dto.Created;
+        model.Tags = dto.Tags.Select(t => t.Name!).ToList();
+        model.Comments = dto.Comments.Select(c => c.ToGetModel()).ToList();
+        model.Body = dto.Body!;
 
         return model;
     }

@@ -1,4 +1,4 @@
-﻿namespace Tests.Unit.Api.Endpoints.MediaAlbums.GetMediaAlbumByNameEndpointTests;
+﻿namespace Tests.Unit.Api.Endpoints.MediaAlbums.GetMediaAlbumBySlugEndpointTests;
 
 public class HandleAsync
 {
@@ -7,14 +7,14 @@ public class HandleAsync
     {
         // arrange
         var handler = A.Fake<IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto>>();
-        var endpoint = Factory.Create<GetMediaAlbumByNameEndpoint>(handler);
+        var endpoint = Factory.Create<GetMediaAlbumBySlugEndpoint>(handler);
         const string name = "test-album";
         var result = new Result<MediaAlbumDto>().WithValue(new MediaAlbumDto { Name = name });
 
         A.CallTo(() => handler.HandleAsync(A<GetMediaAlbumDetailQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaAlbumByNameRequest { Name = name }, TestContext.Current.CancellationToken);
+        await endpoint.HandleAsync(new GetMediaAlbumBySlugRequest { Slug = name }, TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert
@@ -28,13 +28,13 @@ public class HandleAsync
     {
         // arrange
         var handler = A.Fake<IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto>>();
-        var endpoint = Factory.Create<GetMediaAlbumByNameEndpoint>(handler);
+        var endpoint = Factory.Create<GetMediaAlbumBySlugEndpoint>(handler);
         var result = Result.Fail(A.Dummy<string>());
 
         A.CallTo(() => handler.HandleAsync(A<GetMediaAlbumDetailQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaAlbumByNameRequest(), TestContext.Current.CancellationToken);
+        await endpoint.HandleAsync(new GetMediaAlbumBySlugRequest(), TestContext.Current.CancellationToken);
 
         // assert
         endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.NotFound);
@@ -45,7 +45,7 @@ public class HandleAsync
     {
         // arrange
         var handler = A.Fake<IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto>>();
-        var endpoint = Factory.Create<GetMediaAlbumByNameEndpoint>(handler);
+        var endpoint = Factory.Create<GetMediaAlbumBySlugEndpoint>(handler);
         const string name = "test-album";
         var activeMedia = new MediaDto { Id = Guid.NewGuid(), FileName = "active.jpg", Active = true };
         var inactiveMedia = new MediaDto { Id = Guid.NewGuid(), FileName = "inactive.jpg", Active = false };
@@ -55,7 +55,7 @@ public class HandleAsync
         A.CallTo(() => handler.HandleAsync(A<GetMediaAlbumDetailQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
 
         // act
-        await endpoint.HandleAsync(new GetMediaAlbumByNameRequest { Name = name }, TestContext.Current.CancellationToken);
+        await endpoint.HandleAsync(new GetMediaAlbumBySlugRequest { Slug = name }, TestContext.Current.CancellationToken);
         var response = endpoint.Response;
 
         // assert

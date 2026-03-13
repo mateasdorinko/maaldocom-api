@@ -1,4 +1,4 @@
-﻿### Get Knowledge
+﻿### List Knowledge
 GET {{HostAddress}}/knowledge
 
 ### Get Random Knowledge

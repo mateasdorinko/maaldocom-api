@@ -1,5 +1,6 @@
 global using FastEndpoints;
 global using MaaldoCom.Api.Endpoints;
+global using MaaldoCom.Api.Endpoints.Default.Models;
 global using MaaldoCom.Api.Endpoints.Knowledge.Models;
 global using MaaldoCom.Api.Endpoints.MediaAlbums.Models;
 global using MaaldoCom.Api.Endpoints.System.Models;

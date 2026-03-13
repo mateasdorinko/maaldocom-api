@@ -2,6 +2,12 @@ namespace MaaldoCom.Api.Endpoints.Writings.Models;
 
 public class GetWritingResponse : BaseModel
 {
+    [JsonPropertyOrder(1)]
+    public override string? Href => UrlMaker.GetWritingUrl(Id);
+
+    [JsonPropertyOrder(2)]
+    public string? AltHref => UrlMaker.GetWritingUrl(Slug!);
+
     [JsonPropertyOrder(3)]
     public string? Title { get; set; }
 
@@ -16,10 +22,4 @@ public class GetWritingResponse : BaseModel
 
     [JsonPropertyOrder(7)]
     public IEnumerable<string> Tags { get; set; } = new List<string>();
-
-    [JsonPropertyOrder(1)]
-    public override string? Href => UrlMaker.GetWritingUrl(Id);
-
-    [JsonPropertyOrder(2)]
-    public string? AltHref => UrlMaker.GetWritingUrl(Slug!);
 }

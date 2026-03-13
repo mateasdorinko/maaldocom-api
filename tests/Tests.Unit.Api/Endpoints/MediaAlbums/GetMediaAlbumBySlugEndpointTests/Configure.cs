@@ -1,4 +1,4 @@
-﻿namespace Tests.Unit.Api.Endpoints.MediaAlbums.GetMediaAlbumByNameEndpointTests;
+﻿namespace Tests.Unit.Api.Endpoints.MediaAlbums.GetMediaAlbumBySlugEndpointTests;
 
 public class Configure
 {
@@ -7,7 +7,7 @@ public class Configure
     {
         // arrange
         var handler = A.Fake<IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto>>();
-        var endpoint = Factory.Create<GetMediaAlbumByNameEndpoint>(handler);
+        var endpoint = Factory.Create<GetMediaAlbumBySlugEndpoint>(handler);
 
         // act
         endpoint.Configure();

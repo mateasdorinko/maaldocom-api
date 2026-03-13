@@ -11,6 +11,8 @@ global using MaaldoCom.Api.Endpoints.System;
 global using MaaldoCom.Api.Endpoints.System.Models;
 global using MaaldoCom.Api.Endpoints.Tags;
 global using MaaldoCom.Api.Endpoints.Tags.Models;
+global using MaaldoCom.Api.Endpoints.Writings;
+global using MaaldoCom.Api.Endpoints.Writings.Models;
 global using MaaldoCom.Api.Infrastructure.Database;
 global using Microsoft.Extensions.DependencyInjection;
 global using Shouldly;
