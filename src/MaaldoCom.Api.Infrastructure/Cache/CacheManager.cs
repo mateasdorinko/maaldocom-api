@@ -1,4 +1,4 @@
-﻿using MaaldoCom.Api.Domain.MediaAlbums;
+﻿using MaaldoCom.Api.Domain.Helpers;
 using MaaldoCom.Api.Infrastructure.Database;
 using Microsoft.Extensions.Caching.Hybrid;
 
@@ -172,6 +172,22 @@ public sealed class CacheManager : ICacheManager, IDisposable
         async Task<IEnumerable<KnowledgeDto>> GetFromDbAsync()
         {
             var entities = await MaaldoComDbContext.Knowledge.ToListAsync(cancellationToken);
+
+            return entities.ToDtos();
+        }
+    }
+
+    public async Task<IEnumerable<WritingDto>> ListWritingsAsync(CancellationToken cancellationToken)
+    {
+        var writings = await HybridCache.GetOrCreateAsync(
+            CacheKeys.WritingList,
+            async _ => await GetFromDbAsync(), cancellationToken: cancellationToken);
+
+        return writings;
+
+        async Task<IEnumerable<WritingDto>> GetFromDbAsync()
+        {
+            var entities = await MaaldoComDbContext.Writings.OrderByDescending(w => w.Created).ToListAsync(cancellationToken);
 
             return entities.ToDtos();
         }

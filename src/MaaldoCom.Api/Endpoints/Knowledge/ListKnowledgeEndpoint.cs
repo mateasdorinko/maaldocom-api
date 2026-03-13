@@ -1,7 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.Knowledge.Models;
-using MaaldoCom.Api.Application.Queries.Knowledge;
-
-namespace MaaldoCom.Api.Endpoints.Knowledge;
+﻿namespace MaaldoCom.Api.Endpoints.Knowledge;
 
 public class ListKnowledgeEndpoint(IQueryHandler<ListKnowledgeQuery, IEnumerable<KnowledgeDto>> handler) : EndpointWithoutRequest<IEnumerable<GetKnowledgeResponse>>
 {

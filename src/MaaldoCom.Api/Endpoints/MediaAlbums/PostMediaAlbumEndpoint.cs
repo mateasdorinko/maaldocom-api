@@ -1,7 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.MediaAlbums.Models;
-using MaaldoCom.Api.Application.Commands.MediaAlbums;
-
-namespace MaaldoCom.Api.Endpoints.MediaAlbums;
+﻿namespace MaaldoCom.Api.Endpoints.MediaAlbums;
 
 public class PostMediaAlbumEndpoint(Application.Messaging.ICommandHandler<CreateMediaAlbumCommand, MediaAlbumDto> handler)
     : Endpoint<PostMediaAlbumRequest, PostMediaAlbumResponse>

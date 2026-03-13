@@ -1,7 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.MediaAlbums.Models;
-using MaaldoCom.Api.Application.Queries.MediaAlbums;
-
-namespace MaaldoCom.Api.Endpoints.MediaAlbums;
+﻿namespace MaaldoCom.Api.Endpoints.MediaAlbums;
 
 public class ListMediaAlbumsEndpoint(IQueryHandler<ListMediaAlbumsQuery, IEnumerable<MediaAlbumDto>> handler) : EndpointWithoutRequest<IEnumerable<GetMediaAlbumResponse>>
 {

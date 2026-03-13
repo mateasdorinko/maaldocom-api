@@ -10,6 +10,7 @@ public interface ICacheManager
     Task<IEnumerable<TagDto>> ListTagsAsync(CancellationToken cancellationToken);
     Task<TagDto?> GetTagDetailAsync(Guid id, CancellationToken cancellationToken);
     Task<IEnumerable<KnowledgeDto>> ListKnowledgeAsync(CancellationToken cancellationToken);
+    Task<IEnumerable<WritingDto>> ListWritingsAsync(CancellationToken cancellationToken);
 
     Task RefreshCacheAsync(CancellationToken cancellationToken);
     Task InvalidateCache(string cacheKey, CancellationToken cancellationToken);

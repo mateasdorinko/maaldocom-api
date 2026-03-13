@@ -1,5 +1,3 @@
-using MaaldoCom.Api.Endpoints.MediaAlbums.Models;
-
 namespace MaaldoCom.Api.Extensions;
 
 public static partial class MapperExtensions

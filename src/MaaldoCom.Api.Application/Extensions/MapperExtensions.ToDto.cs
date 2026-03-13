@@ -35,6 +35,7 @@ public static partial class MapperExtensions
         dto.Slug = entity.Slug;
         dto.Description = entity.Description;
         dto.Tags = entity.MediaAlbumTags?.Select(t => t.Tag.ToDto()).ToList()!;
+        dto.Comments = entity.MediaAlbumComments?.Select(t => t.Comment.ToDto()).ToList()!;
         dto.Media = entity.Media?.Select(m => m.ToDto()).ToList()!;
         dto.DefaultMediaId = entity.Media?.FirstOrDefault()?.Id ?? Guid.Empty;
 
@@ -54,6 +55,7 @@ public static partial class MapperExtensions
         dto.SizeInBytes = entity.SizeInBytes;
         dto.FileExtension = entity.FileExtension;
         dto.Tags = entity.MediaTags?.Select(t => t.Tag.ToDto()).ToList()!;
+        dto.Comments = entity.MediaComments?.Select(t => t.Comment.ToDto()).ToList()!;
 
         return dto;
     }
@@ -80,6 +82,61 @@ public static partial class MapperExtensions
             MediaAlbumSlug = mt.Media.MediaAlbum!.Slug,
             MediaAlbumId = mt.Media.MediaAlbumId
         }).ToList()!;
+        dto.Writings = entity.WritingTags?.Where(wt => wt.Writing != null).Select(wt => new WritingDto()
+        {
+            Id = wt.Writing.Id,
+            Title = wt.Writing.Title,
+            Body = wt.Writing.Body,
+            Slug = wt.Writing.Slug
+        }).ToList()!;
+
+        return dto;
+    }
+
+    public static CommentDto ToDto(this Comment entity)
+    {
+        ArgumentNullException.ThrowIfNull(entity);
+
+        var dto = new CommentDto().MapFromBaseAuditableEntity(entity);
+
+        dto.Author = entity.Author;
+        dto.Body = entity.Body;
+        dto.MediaAlbums = entity.MediaAlbumComments?.Where(mat => mat.MediaAlbum != null).Select(mac => new MediaAlbumDto
+        {
+            Id = mac.MediaAlbum.Id,
+            Name = mac.MediaAlbum.Name,
+            Slug = mac.MediaAlbum.Slug
+        }).ToList()!;
+        dto.Media = entity.MediaComments?.Where(mt => mt.Media != null).Select(mc => new MediaDto
+        {
+            Id = mc.Media.Id,
+            MediaAlbumName = mc.Media.MediaAlbum!.Name,
+            FileName = mc.Media.FileName,
+            MediaAlbumSlug = mc.Media.MediaAlbum!.Slug,
+            MediaAlbumId = mc.Media.MediaAlbumId
+        }).ToList()!;
+        dto.Writings = entity.WritingComments?.Where(wt => wt.Writing != null).Select(wc => new WritingDto()
+        {
+            Id = wc.Writing.Id,
+            Title = wc.Writing.Title,
+            Body = wc.Writing.Body,
+            Slug = wc.Writing.Slug
+        }).ToList()!;
+
+        return dto;
+    }
+
+    public static WritingDto ToDto(this Writing entity)
+    {
+        ArgumentNullException.ThrowIfNull(entity);
+
+        var dto = new WritingDto().MapFromBaseAuditableEntity(entity);
+
+        dto.Title = entity.Title;
+        dto.Blurb = entity.Blurb;
+        dto.Body = entity.Body;
+        dto.Slug = entity.Slug;
+        dto.Tags = entity.WritingTags?.Select(t => t.Tag.ToDto()).ToList()!;
 
         return dto;
     }

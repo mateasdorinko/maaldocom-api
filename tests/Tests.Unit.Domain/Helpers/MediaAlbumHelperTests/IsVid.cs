@@ -1,4 +1,4 @@
-﻿namespace Tests.Unit.Domain.MediaAlbums.MediaAlbumHelperTests;
+﻿namespace Tests.Unit.Domain.Helpers.MediaAlbumHelperTests;
 
 public class IsVid
 {

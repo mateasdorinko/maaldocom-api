@@ -29,4 +29,11 @@ public static partial class MapperExtensions
 
         return entities.Select(e => e.ToDto()).ToList();
     }
+
+    public static IEnumerable<WritingDto> ToDtos(this IEnumerable<Writing> entities)
+    {
+        ArgumentNullException.ThrowIfNull(entities);
+
+        return entities.Select(e => e.ToDto()).ToList();
+    }
 }

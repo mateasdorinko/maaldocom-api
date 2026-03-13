@@ -1,6 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.System.Models;
-using MaaldoCom.Api.Application.Commands.System;
-using MaaldoCom.Api.Application.Email;
+﻿using MaaldoCom.Api.Application.Email;
 
 namespace MaaldoCom.Api.Endpoints.System;
 

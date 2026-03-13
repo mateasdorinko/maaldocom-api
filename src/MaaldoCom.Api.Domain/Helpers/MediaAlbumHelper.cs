@@ -1,8 +1,15 @@
-﻿/*
-namespace MaaldoCom.Api.Domain.MediaAlbums;
+namespace MaaldoCom.Api.Domain.Helpers;
 
 public static class MediaAlbumHelper
 {
+    public const string OriginalResolutionFolderName = "original";
+    public const string ViewerFolderName = "viewer";
+    public const string ThumbnailFolderName = "thumb";
+
+    public const int ViewerWidth = 1000;
+    public const int ThumbnailWidth = 200;
+    public const int CalculatedImageHeight = -1;
+
     private static readonly string[] picExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff", ".webp" };
     private static readonly string[] vidExtensions = [".mp4", ".mov", ".avi", ".mkv", ".wmv", ".flv",".webm"];
 
@@ -24,30 +31,17 @@ public static class MediaAlbumHelper
         file.MoveTo(Path.Combine(file.DirectoryName!, newName), true);
     }
 
-    public static string GetProperNameFromFolder(string folderName)
-    {
-        var parts = folderName.Split(['-'], StringSplitOptions.RemoveEmptyEntries);
-
-        var words = parts.Select(p =>
-        {
-            var lower = p.ToLowerInvariant();
-            return char.ToUpperInvariant(lower[0]) + (lower.Length > 1 ? lower.Substring(1) : string.Empty);
-        });
-
-        return string.Join(" ", words);
-    }
-
     public static string GetOriginalMetaFilePath(string mediaAlbumFolder, string originalFileName)
     {
-        return $"{mediaAlbumFolder}/{Constants.OriginalResolutionFolderName}/{originalFileName}";
+        return $"{mediaAlbumFolder}/{OriginalResolutionFolderName}/{originalFileName}";
     }
 
     public static string GetViewerMetaFilePath(string mediaAlbumFolder, string originalFileName)
     {
         var currentExtension = Path.GetExtension(originalFileName);
         var viewerFile = vidExtensions.Contains(currentExtension, StringComparer.OrdinalIgnoreCase)
-            ? $"{mediaAlbumFolder}/{Constants.OriginalResolutionFolderName}/{originalFileName}"                         // vid - viewer file is same as original
-            : $"{mediaAlbumFolder}/{Constants.ViewerFolderName}/{Constants.ViewerFolderName}-{originalFileName}";       // pic - viewer file is in viewer folder
+            ? $"{mediaAlbumFolder}/{OriginalResolutionFolderName}/{originalFileName}"                         // vid - viewer file is same as original
+            : $"{mediaAlbumFolder}/{ViewerFolderName}/{ViewerFolderName}-{originalFileName}";       // pic - viewer file is in viewer folder
 
         return viewerFile;
     }
@@ -58,9 +52,8 @@ public static class MediaAlbumHelper
         var thumbNailFile = vidExtensions.Contains(currentExtension, StringComparer.OrdinalIgnoreCase)
             ? Path.ChangeExtension(originalFileName, ".jpg")                                               // vid - thumbnail is jpg of the video
             : originalFileName;                                                                                         // pic - thumbnail type is same as original
-        var prefixedThumbNailFile = $"{mediaAlbumFolder}/{Constants.ThumbnailFolderName}/{Constants.ThumbnailFolderName}-{thumbNailFile}";
+        var prefixedThumbNailFile = $"{mediaAlbumFolder}/{ThumbnailFolderName}/{ThumbnailFolderName}-{thumbNailFile}";
 
         return prefixedThumbNailFile;
     }
 }
-*/

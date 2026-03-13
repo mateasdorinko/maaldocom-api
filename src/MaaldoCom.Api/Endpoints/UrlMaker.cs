@@ -2,6 +2,10 @@ namespace MaaldoCom.Api.Endpoints;
 
 internal static class UrlMaker
 {
+    public const string DefaultRoute = "/";
+    public static string GetDocsUrl() => $"{DefaultRoute}docs";
+    public static string GetHealthCheckUrl() => $"{DefaultRoute}health";
+
     public const string MediaAlbumsRoute = "/media-albums";
 
     public static string GetMediaAlbumUrl(Guid id) => GetMediaAlbumUrl(id.ToString());
@@ -24,10 +28,6 @@ internal static class UrlMaker
     public static string GetThumbnailMediaUrl(string mediaAlbumId, string mediaId) => $"{GetMediaUrl(mediaAlbumId, mediaId)}/thumb";
     public static string GetThumbnailMediaUrl(Guid mediaAlbumId, Guid mediaId) => $"{GetThumbnailMediaUrl(mediaAlbumId.ToString(), mediaId.ToString())}";
 
-    public const string DefaultRoute = "/";
-    public static string GetDocsUrl() => $"{DefaultRoute}docs";
-    public static string GetHealthCheckUrl() => $"{DefaultRoute}health";
-
     public const string KnowledgeRoute = "/knowledge";
     public static string GetKnowledgeUrl(Guid id) => $"{KnowledgeRoute}/{id}";
     public static string GetKnowledgeUrl(string idRouteParam) => $"{KnowledgeRoute}/{idRouteParam}";
@@ -36,6 +36,10 @@ internal static class UrlMaker
     public const string TagsRoute = "/tags";
     public static string GetTagUrl(Guid id) => GetTagUrl(id.ToString());
     public static string GetTagUrl(string idOrName) => $"{TagsRoute}/{idOrName}";
+
+    public const string WritingsRoute = "/writings";
+    public static string GetWritingUrl(Guid id) => GetWritingUrl(id.ToString());
+    public static string GetWritingUrl(string idOrSlug) => $"{WritingsRoute}/{idOrSlug}";
 
     public const string SystemRoute = "/system";
     public static string GetCacheRefreshUrl() => $"{SystemRoute}/cache-refreshes";

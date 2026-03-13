@@ -1,4 +1,5 @@
-﻿namespace MaaldoCom.Api.Domain.MediaAlbums;
+﻿/*
+namespace MaaldoCom.Api.Domain.MediaAlbums;
 
 public static class Constants
 {
@@ -11,3 +12,4 @@ public static class Constants
 
     public static int CalculatedImageHeight => -1;
 }
+*/

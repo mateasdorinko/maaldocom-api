@@ -13,6 +13,7 @@ public class MediaDto : BaseDto
     public string? ContentType { get; set; }
 
     public IList<TagDto> Tags { get; set; } = new List<TagDto>();
+    public IList<CommentDto> Comments { get; set; } = new List<CommentDto>();
 
     public override string? ToString() => FileName;
 }

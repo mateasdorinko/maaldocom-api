@@ -1,5 +1,5 @@
 ﻿using MaaldoCom.Api.Application.Blobs;
-using MaaldoCom.Api.Domain.MediaAlbums;
+using MaaldoCom.Api.Domain.Helpers;
 
 namespace MaaldoCom.Api.Application.Queries.MediaAlbums;
 

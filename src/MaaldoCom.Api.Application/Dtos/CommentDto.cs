@@ -1,13 +1,13 @@
 namespace MaaldoCom.Api.Application.Dtos;
 
-public class TagDto : BaseDto
+public class CommentDto : BaseDto
 {
-    public string? Name { get; set; }
+    public string? Author { get; set; }
+    public string? Body { get; set; }
 
     public IList<MediaAlbumDto> MediaAlbums { get; set; } = new List<MediaAlbumDto>();
     public IList<MediaDto> Media { get; set; } = new List<MediaDto>();
     public IList<WritingDto> Writings { get; set; } = new List<WritingDto>();
-    public int Count { get; set; }
 
-    public override string ToString() => Name ?? string.Empty;
+    public override string? ToString() => $"{Author}:{Body}";
 }
