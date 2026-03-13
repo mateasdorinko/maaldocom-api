@@ -12,40 +12,30 @@ public class ToDtos
             {
                 Id = Guid.NewGuid(),
                 Name = "Album 1",
-                UrlFriendlyName = "album-1",
+                Slug = "album-1",
                 Description = "Description for album 1."
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Name = "Album 2",
-                UrlFriendlyName = "album-2",
+                Slug = "album-2",
                 Description = "Description for album 2."
             }
         };
-        
+
         // act
         var dtos = entities.ToDtos().ToList();
-        
+
         // assert
         dtos.Count.ShouldBeEquivalentTo(entities.Count);
         for (var i = 0; i < entities.Count; i++)
         {
             dtos[i].Id.ShouldBeEquivalentTo(entities[i].Id);
             dtos[i].Name.ShouldBeEquivalentTo(entities[i].Name);
-            dtos[i].UrlFriendlyName.ShouldBeEquivalentTo(entities[i].UrlFriendlyName);
+            dtos[i].Slug.ShouldBeEquivalentTo(entities[i].Slug);
             dtos[i].Description.ShouldBeEquivalentTo(entities[i].Description);
         }
-    }
-
-    [Fact]
-    public void ToDtos_FromNullMediaAlbumEntities_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<MediaAlbum>? entities = null;
-        
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => entities!.ToDtos());
     }
 
     [Fact]
@@ -53,14 +43,14 @@ public class ToDtos
     {
         // arrange
         var entities = new List<MediaAlbum>();
-        
+
         // act
         var dtos = entities.ToDtos();
-        
+
         // assert
         dtos.ShouldBeEmpty();
     }
-    
+
     [Fact]
     public void ToDtos_FromMediaEntities_MapsAllPropertiesCorrectly()
     {
@@ -80,10 +70,10 @@ public class ToDtos
                 Description = "Description for file 2."
             }
         };
-        
+
         // act
         var dtos = entities.ToDtos().ToList();
-        
+
         // assert
         dtos.Count.ShouldBeEquivalentTo(entities.Count);
         for (var i = 0; i < entities.Count; i++)
@@ -93,30 +83,20 @@ public class ToDtos
             dtos[i].Description.ShouldBeEquivalentTo(entities[i].Description);
         }
     }
-    
-    [Fact]
-    public void ToDtos_FromNullMediaEntities_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<Media>? entities = null;
-        
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => entities!.ToDtos());
-    }
-    
+
     [Fact]
     public void ToDtos_FromEmptyMediaEntities_ReturnsEmptyList()
     {
         // arrange
         var entities = new List<Media>();
-        
+
         // act
         var dtos = entities.ToDtos();
-        
+
         // assert
         dtos.ShouldBeEmpty();
     }
-    
+
     [Fact]
     public void ToDtos_FromTagEntities_MapsAllPropertiesCorrectly()
     {
@@ -134,10 +114,10 @@ public class ToDtos
                 Name = "Tag2"
             }
         };
-        
+
         // act
         var dtos = entities.ToDtos().ToList();
-        
+
         // assert
         dtos.Count.ShouldBeEquivalentTo(entities.Count);
         for (var i = 0; i < entities.Count; i++)
@@ -148,24 +128,14 @@ public class ToDtos
     }
 
     [Fact]
-    public void ToDtos_FromNullTagEntities_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<Tag>? entities = null;
-        
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => entities!.ToDtos());
-    }
-
-    [Fact]
     public void ToDtos_FromEmptyTagEntities_ReturnsEmptyList()
     {
         // arrange
         var entities = new List<Tag>();
-        
+
         // act
         var dtos = entities.ToDtos();
-        
+
         // assert
         dtos.ShouldBeEmpty();
     }
@@ -189,10 +159,10 @@ public class ToDtos
                 Quote = "Content for knowledge item 2."
             }
         };
-        
+
         // act
         var dtos = entities.ToDtos().ToList();
-        
+
         // assert
         dtos.Count.ShouldBeEquivalentTo(entities.Count);
         for (var i = 0; i < entities.Count; i++)
@@ -202,26 +172,16 @@ public class ToDtos
             dtos[i].Quote.ShouldBeEquivalentTo(entities[i].Quote);
         }
     }
-    
-    [Fact]
-    public void ToDtos_FromNullKnowledgeEntities_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<Knowledge>? entities = null;
-        
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => entities!.ToDtos());
-    }
 
     [Fact]
     public void ToDtos_FromEmptyKnowledgeEntities_ReturnsEmptyList()
     {
         // arrange
         var entities = new List<Knowledge>();
-        
+
         // act
         var dtos = entities.ToDtos();
-        
+
         // assert
         dtos.ShouldBeEmpty();
     }

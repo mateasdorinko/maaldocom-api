@@ -20,7 +20,7 @@ public class HandleAsync
         var albumDto = new MediaAlbumDto
         {
             Name = albumName,
-            UrlFriendlyName = albumName.ToLower().Replace(" ", "-"),
+            Slug = albumName.ToLower().Replace(" ", "-"),
             Description = "A test album",
             Tags = tags,
             Media =

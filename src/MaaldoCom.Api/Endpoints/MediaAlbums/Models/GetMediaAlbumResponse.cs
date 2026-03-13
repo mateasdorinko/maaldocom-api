@@ -9,7 +9,7 @@ public class GetMediaAlbumResponse : BaseModel
     public string? Name { get; set; }
 
     [JsonPropertyOrder(5)]
-    public string? UrlFriendlyName { get; set; }
+    public string? Slug { get; set; }
 
     [JsonPropertyOrder(6)]
     public DateTime Created { get; set; }
@@ -21,7 +21,7 @@ public class GetMediaAlbumResponse : BaseModel
     public override string? Href => UrlMaker.GetMediaAlbumUrl(Id);
 
     [JsonPropertyOrder(2)]
-    public string? AltHref => UrlMaker.GetMediaAlbumUrl(UrlFriendlyName!);
+    public string? AltHref => UrlMaker.GetMediaAlbumUrl(Slug!);
 
     [JsonPropertyOrder(3)]
     public string? ThumbHref => UrlMaker.GetThumbnailMediaUrl(Id, DefaultMediaId);

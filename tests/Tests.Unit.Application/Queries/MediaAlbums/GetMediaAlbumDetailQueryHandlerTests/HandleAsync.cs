@@ -52,7 +52,7 @@ public class HandleAsync
     }
 
     [Fact]
-    public async Task HandleAsync_ByUrlFriendlyNameNotInCachedList_ReturnsNotFound()
+    public async Task HandleAsync_BySlugNotInCachedList_ReturnsNotFound()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -61,10 +61,10 @@ public class HandleAsync
         var mediaAlbum = new MediaAlbumDto
         {
             Id = Guid.NewGuid(),
-            UrlFriendlyName = "name1",
+            Slug = "name1",
         };
 
-        var query = new GetMediaAlbumDetailQuery(mediaAlbum.UrlFriendlyName!);
+        var query = new GetMediaAlbumDetailQuery(mediaAlbum.Slug!);
         var handler = new GetMediaAlbumDetailQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListMediaAlbumsAsync(ct)).Returns(new List<MediaAlbumDto> { new(), new() });
@@ -80,7 +80,7 @@ public class HandleAsync
     }
 
     [Fact]
-    public async Task HandleAsync_ByUrlFriendlyNameInCachedListAndInDb_ReturnsMediaAlbum()
+    public async Task HandleAsync_BySlugInCachedListAndInDb_ReturnsMediaAlbum()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -89,10 +89,10 @@ public class HandleAsync
         var mediaAlbum = new MediaAlbumDto
         {
             Id = Guid.NewGuid(),
-            UrlFriendlyName = "name1",
+            Slug = "name1",
         };
 
-        var query = new GetMediaAlbumDetailQuery(mediaAlbum.UrlFriendlyName!);
+        var query = new GetMediaAlbumDetailQuery(mediaAlbum.Slug!);
         var handler = new GetMediaAlbumDetailQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListMediaAlbumsAsync(ct)).Returns(new List<MediaAlbumDto> { new(), mediaAlbum, new() });
@@ -107,7 +107,7 @@ public class HandleAsync
     }
 
     [Fact]
-    public async Task HandleAsync_ByUrlFriendlyNameInCachedListButNotInDb_ReturnsNotFound()
+    public async Task HandleAsync_BySlugInCachedListButNotInDb_ReturnsNotFound()
     {
         // arrange
         var cacheManager = A.Fake<ICacheManager>();
@@ -116,10 +116,10 @@ public class HandleAsync
         var mediaAlbum = new MediaAlbumDto
         {
             Id = Guid.NewGuid(),
-            UrlFriendlyName = "name1",
+            Slug = "name1",
         };
 
-        var query = new GetMediaAlbumDetailQuery(mediaAlbum.UrlFriendlyName!);
+        var query = new GetMediaAlbumDetailQuery(mediaAlbum.Slug!);
         var handler = new GetMediaAlbumDetailQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListMediaAlbumsAsync(ct)).Returns(new List<MediaAlbumDto> { new(), mediaAlbum, new() });

@@ -35,7 +35,7 @@ public static partial class MapperExtensions
         var entity = new MediaAlbum().MapToBaseAuditableEntity(dto);
 
         entity.Name = dto.Name;
-        entity.UrlFriendlyName = dto.UrlFriendlyName;
+        entity.Slug = dto.Slug;
         entity.Description = dto.Description;
 
         if (dto.Tags.Any())
@@ -53,6 +53,14 @@ public static partial class MapperExtensions
             foreach (var mediaDto in dto.Media)
             {
                 entity.Media.Add(mediaDto.ToEntity());
+            }
+        }
+
+        if (dto.Comments.Any())
+        {
+            entity.MediaAlbumComments = new List<MediaAlbumComment>();
+            foreach (var commentDto in dto.Comments)            {
+                entity.MediaAlbumComments.Add(new MediaAlbumComment { Comment = commentDto.ToEntity() });
             }
         }
 
@@ -79,6 +87,58 @@ public static partial class MapperExtensions
                 entity.MediaTags.Add(new MediaTag { Tag = tagDto.ToEntity() });
             }
         }
+
+        if (dto.Comments.Any())
+        {
+            entity.MediaComments = new List<MediaComment>();
+            foreach (var commentDto in dto.Comments)
+            {
+                entity.MediaComments.Add(new MediaComment { Comment = commentDto.ToEntity() });
+            }
+        }
+
+        return entity;
+    }
+
+    public static Writing ToEntity(this WritingDto dto)
+    {
+        ArgumentNullException.ThrowIfNull(dto);
+
+        var entity = new Writing().MapToBaseAuditableEntity(dto);
+
+        entity.Title = dto.Title;
+        entity.Slug = dto.Slug;
+        entity.Blurb = dto.Blurb;
+        entity.Body = dto.Body;
+
+        if (dto.Tags.Any())
+        {
+            entity.WritingTags = new List<WritingTag>();
+            foreach (var tagDto in dto.Tags)
+            {
+                entity.WritingTags.Add(new WritingTag() { Tag = tagDto.ToEntity() });
+            }
+        }
+
+        if (dto.Comments.Any())
+        {
+            entity.WritingComments = new List<WritingComment>();
+            foreach (var commentDto in dto.Comments)            {
+                entity.WritingComments.Add(new WritingComment { Comment = commentDto.ToEntity() });
+            }
+        }
+
+        return entity;
+    }
+
+    public static Comment ToEntity(this CommentDto dto)
+    {
+        ArgumentNullException.ThrowIfNull(dto);
+
+        var entity = new Comment().MapToBaseAuditableEntity(dto);
+
+        entity.Author = dto.Author;
+        entity.Body = dto.Body;
 
         return entity;
     }

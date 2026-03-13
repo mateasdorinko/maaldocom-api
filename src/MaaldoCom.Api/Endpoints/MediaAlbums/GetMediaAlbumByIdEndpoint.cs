@@ -1,6 +1,3 @@
-using MaaldoCom.Api.Endpoints.MediaAlbums.Models;
-using MaaldoCom.Api.Application.Queries.MediaAlbums;
-
 namespace MaaldoCom.Api.Endpoints.MediaAlbums;
 
 public class GetMediaAlbumByIdEndpoint(IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto> handler) : Endpoint<GetMediaAlbumByIdRequest, GetMediaAlbumDetailResponse>

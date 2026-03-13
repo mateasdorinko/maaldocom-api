@@ -1,6 +1,4 @@
-﻿using MaaldoCom.Api.Application.Dtos;
-
-namespace MaaldoCom.Api.Application.Cache;
+﻿namespace MaaldoCom.Api.Application.Cache;
 
 public interface ICacheManager
 {
@@ -10,6 +8,7 @@ public interface ICacheManager
     Task<IEnumerable<TagDto>> ListTagsAsync(CancellationToken cancellationToken);
     Task<TagDto?> GetTagDetailAsync(Guid id, CancellationToken cancellationToken);
     Task<IEnumerable<KnowledgeDto>> ListKnowledgeAsync(CancellationToken cancellationToken);
+    Task<IEnumerable<WritingDto>> ListWritingsAsync(CancellationToken cancellationToken);
 
     Task RefreshCacheAsync(CancellationToken cancellationToken);
     Task InvalidateCache(string cacheKey, CancellationToken cancellationToken);

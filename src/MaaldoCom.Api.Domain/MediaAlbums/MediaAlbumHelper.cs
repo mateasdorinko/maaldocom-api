@@ -1,4 +1,5 @@
-﻿namespace MaaldoCom.Api.Domain.MediaAlbums;
+﻿/*
+namespace MaaldoCom.Api.Domain.MediaAlbums;
 
 public static class MediaAlbumHelper
 {
@@ -62,3 +63,4 @@ public static class MediaAlbumHelper
         return prefixedThumbNailFile;
     }
 }
+*/

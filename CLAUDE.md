@@ -61,7 +61,7 @@ Clean Architecture with .NET 10.0. Four source projects, five test projects. Cen
 
 xUnit + Shouldly assertions + FakeItEasy mocking. Test projects mirror source project structure (`Tests.Unit.Api`, `Tests.Unit.Application`, etc.). Coverage collected via coverlet.
 
-**Naming conventions** — Test class name = method under test (e.g. `HandleAsync`, `Configure`, `ToPostModel`). Test method name follows `MethodName_Context_ExpectedResult`. Assertions use `ShouldBe` / `ShouldBeEquivalentTo` (Shouldly); null-guard tests use `Assert.Throws<ArgumentNullException>`.
+**Naming conventions** — Test class name = method under test (e.g. `HandleAsync`, `Configure`, `ToPostModel`). Test method name follows `MethodName_Context_ExpectedResult`. Assertions use `ShouldBe` / `ShouldBeEquivalentTo` (Shouldly);.
 
 **CancellationToken** — Always use `TestContext.Current.CancellationToken` instead of `CancellationToken.None`. xUnit v3 integrates cancellation with the test lifecycle (timeouts, runner shutdown), and the xUnit1051 analyzer enforces this. When setting up FakeItEasy for a method the SUT calls without forwarding the test's token (e.g. a default parameter), use `A<CancellationToken>._` instead of the specific token variable to avoid false negatives.
 

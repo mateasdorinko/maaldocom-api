@@ -1,8 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints;
-using MaaldoCom.Api.Endpoints.MediaAlbums.Models;
-using MaaldoCom.Api.Endpoints.Tags.Models;
-
-namespace MaaldoCom.Api.Extensions;
+﻿namespace MaaldoCom.Api.Extensions;
 
 public static partial class MapperExtensions
 {
@@ -13,13 +9,14 @@ public static partial class MapperExtensions
         var model = new GetMediaAlbumDetailResponse().MapToBaseModel(dto);
 
         model.Name = dto.Name;
-        model.UrlFriendlyName = dto.UrlFriendlyName;
+        model.Slug = dto.Slug;
         model.Created = dto.Created;
         model.Description = dto.Description;
         model.Active = dto.Active;
         model.Media = dto.Media.Select(m => m.ToGetModel()).ToList();
         model.Tags = dto.Tags.Select(m => m.Name!).ToList();
         model.DefaultMediaId = dto.DefaultMediaId;
+        model.Comments = dto.Comments.Select(c => c.ToGetModel()).ToList();
 
         return model;
     }
@@ -36,7 +33,7 @@ public static partial class MapperExtensions
         {
             Name = ma.Name,
             MediaAlbumId = ma.Id,
-            UrlFriendlyName = ma.UrlFriendlyName,
+            Slug = ma.Slug,
             Href = UrlMaker.GetMediaAlbumUrl(ma.Id)
         });
         model.Media = dto.Media.Select(m => new GetMediaTagResponse
@@ -45,9 +42,26 @@ public static partial class MapperExtensions
             MediaId = m.Id,
             MediaAlbumId = m.MediaAlbumId,
             MediaAlbumName = m.MediaAlbumName,
-            MediaAlbumUrlFriendlyName = m.MediaAlbumUrlFriendlyName,
+            MediaAlbumSlug = m.MediaAlbumSlug,
             Href = UrlMaker.GetMediaUrl(m.MediaAlbumId, m.Id)
         });
+
+        return model;
+    }
+
+    public static GetWritingDetailResponse ToDetailModel(this WritingDto dto)
+    {
+        ArgumentNullException.ThrowIfNull(dto);
+
+        var model = new GetWritingDetailResponse().MapToBaseModel(dto);
+
+        model.Title = dto.Title;
+        model.Slug = dto.Slug;
+        model.Blurb = dto.Blurb;
+        model.Created = dto.Created;
+        model.Tags = dto.Tags.Select(t => t.Name!).ToList();
+        model.Comments = dto.Comments.Select(c => c.ToGetModel()).ToList();
+        model.Body = dto.Body!;
 
         return model;
     }

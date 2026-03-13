@@ -6,6 +6,7 @@ public class TagDto : BaseDto
 
     public IList<MediaAlbumDto> MediaAlbums { get; set; } = new List<MediaAlbumDto>();
     public IList<MediaDto> Media { get; set; } = new List<MediaDto>();
+    public IList<WritingDto> Writings { get; set; } = new List<WritingDto>();
     public int Count { get; set; }
 
     public override string ToString() => Name ?? string.Empty;

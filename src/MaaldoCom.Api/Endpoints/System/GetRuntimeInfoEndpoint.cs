@@ -1,5 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.System.Models;
-using MaaldoCom.Api.Domain.Extensions;
+﻿using MaaldoCom.Api.Domain.Extensions;
 
 namespace MaaldoCom.Api.Endpoints.System;
 

@@ -1,4 +1,4 @@
-﻿### Get Media Albums
+﻿### List Media Albums
 GET {{HostAddress}}/media-albums
 
 ### Get Media Album By Id

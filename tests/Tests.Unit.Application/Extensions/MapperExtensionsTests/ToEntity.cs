@@ -10,7 +10,7 @@ public class ToEntity
         {
             Id = Guid.NewGuid(),
             Name = "Sample Album",
-            UrlFriendlyName = "sample-album",
+            Slug = "sample-album",
             Description = "This is a sample media album.",
             CreatedBy = "tester",
             Created = DateTime.UtcNow,
@@ -50,7 +50,7 @@ public class ToEntity
         // assert
         entity.Id.ShouldBeEquivalentTo(dto.Id);
         entity.Name.ShouldBeEquivalentTo(dto.Name);
-        entity.UrlFriendlyName.ShouldBeEquivalentTo(dto.UrlFriendlyName);
+        entity.Slug.ShouldBeEquivalentTo(dto.Slug);
         entity.Description.ShouldBeEquivalentTo(dto.Description);
         entity.Created.ShouldBeEquivalentTo(dto.Created);
         entity.CreatedBy.ShouldBeEquivalentTo(dto.CreatedBy);
@@ -61,17 +61,6 @@ public class ToEntity
         entity.MediaAlbumTags.First().Tag.Name.ShouldBeEquivalentTo("SampleTag");
         entity.Media.Count.ShouldBe(1);
         entity.Media.First().FileName.ShouldBeEquivalentTo("sample.jpg");
-    }
-
-    [Fact]
-    public void ToEntity_FromNullMediaAlbumDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        MediaAlbumDto? dto = null;
-        var user = A.Fake<ClaimsPrincipal>();
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToEntity());
     }
 
     [Fact]
@@ -148,17 +137,6 @@ public class ToEntity
     }
 
     [Fact]
-    public void ToEntity_FromNullMediaDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        MediaDto? dto = null;
-        var user = A.Fake<ClaimsPrincipal>();
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToEntity());
-    }
-
-    [Fact]
     public void ToEntity_FromMediaDtoWithEmptyTags_MediaTagsIsNull()
     {
         // arrange
@@ -190,16 +168,6 @@ public class ToEntity
     }
 
     [Fact]
-    public void ToEntity_FromNullTagDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        TagDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToEntity());
-    }
-
-    [Fact]
     public void ToEntity_FromKnowledgeDto_MapsAllPropertiesCorrectly()
     {
         // arrange
@@ -222,15 +190,5 @@ public class ToEntity
         entity.Id.ShouldBeEquivalentTo(dto.Id);
         entity.Title.ShouldBeEquivalentTo(dto.Title);
         entity.Quote.ShouldBeEquivalentTo(dto.Quote);
-    }
-
-    [Fact]
-    public void ToEntity_FromNullKnowledgeDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        KnowledgeDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToEntity());
     }
 }

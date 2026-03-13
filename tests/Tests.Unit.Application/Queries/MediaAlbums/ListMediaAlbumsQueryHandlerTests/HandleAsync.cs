@@ -13,10 +13,10 @@ public class HandleAsync
 
         var mediaAlbums = new List<MediaAlbumDto>
         {
-            new() { Id = Guid.NewGuid(), Name = "Album 1", UrlFriendlyName =  "album-1", Active =  true },
-            new() { Id = Guid.NewGuid(), Name = "Album 2", UrlFriendlyName =  "album-2", Active =  false  },
-            new() { Id = Guid.NewGuid(), Name = "Album 3", UrlFriendlyName =  "album-3", Active =  true  },
-            new() { Id = Guid.NewGuid(), Name = "Album 4", UrlFriendlyName =  "album-4", Active =  false  },
+            new() { Id = Guid.NewGuid(), Name = "Album 1", Slug =  "album-1", Active =  true },
+            new() { Id = Guid.NewGuid(), Name = "Album 2", Slug =  "album-2", Active =  false  },
+            new() { Id = Guid.NewGuid(), Name = "Album 3", Slug =  "album-3", Active =  true  },
+            new() { Id = Guid.NewGuid(), Name = "Album 4", Slug =  "album-4", Active =  false  },
         };
 
         var query = new ListMediaAlbumsQuery();

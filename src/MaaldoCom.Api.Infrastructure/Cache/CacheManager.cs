@@ -1,4 +1,4 @@
-﻿using MaaldoCom.Api.Domain.MediaAlbums;
+﻿using MaaldoCom.Api.Domain.Helpers;
 using MaaldoCom.Api.Infrastructure.Database;
 using Microsoft.Extensions.Caching.Hybrid;
 
@@ -64,6 +64,8 @@ public sealed class CacheManager : ICacheManager, IDisposable
                 .Include(ma => ma.Media.OrderBy(m => m.FileName))
                 .ThenInclude(m => m.MediaTags)
                 .ThenInclude(mt => mt.Tag)
+                .Include(ma => ma.MediaAlbumComments.OrderBy(m => m.Comment.Created))
+                .ThenInclude(mac => mac.Comment)
                 .AsSplitQuery()
                 .FirstOrDefaultAsync(ma => ma.Id == id, cancellationToken);
 
@@ -76,21 +78,23 @@ public sealed class CacheManager : ICacheManager, IDisposable
 
     public async Task<MediaAlbumDto?> GetHotshotsMediaAlbumDetailAsync(CancellationToken cancellationToken)
     {
-        var mediaAlbums = await HybridCache.GetOrCreateAsync<MediaAlbumDto>(
+        var hotshotsMediaAlbum = await HybridCache.GetOrCreateAsync<MediaAlbumDto>(
             $"{CacheKeys.MediaAlbumList}:hotshots",
             async _ => await GetFromDbAsync(), cancellationToken: cancellationToken);
 
-        return mediaAlbums;
+        return hotshotsMediaAlbum;
 
         async Task<MediaAlbumDto> GetFromDbAsync()
         {
             var entity = await MaaldoComDbContext.MediaAlbums
-                .Where(ma => ma.UrlFriendlyName == "hotshots")
+                .Where(ma => ma.Slug == "hotshots")
                 .Include(ma => ma.MediaAlbumTags)
                 .ThenInclude(mat => mat.Tag)
                 .Include(ma => ma.Media.OrderBy(m => m.FileName))
                 .ThenInclude(m => m.MediaTags)
                 .ThenInclude(mt => mt.Tag)
+                .Include(ma => ma.MediaAlbumComments.OrderBy(m => m.Comment.Created))
+                .ThenInclude(mac => mac.Comment)
                 .AsSplitQuery()
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -173,12 +177,36 @@ public sealed class CacheManager : ICacheManager, IDisposable
         }
     }
 
+    public async Task<IEnumerable<WritingDto>> ListWritingsAsync(CancellationToken cancellationToken)
+    {
+        var writings = await HybridCache.GetOrCreateAsync(
+            CacheKeys.WritingList,
+            async _ => await GetFromDbAsync(), cancellationToken: cancellationToken);
+
+        return writings;
+
+        async Task<IEnumerable<WritingDto>> GetFromDbAsync()
+        {
+            var entities = await MaaldoComDbContext.Writings
+                .Include(w => w.WritingTags)
+                .ThenInclude(wt => wt.Tag)
+                .Include(w => w.WritingComments)
+                .ThenInclude(wc => wc.Comment)
+                .OrderByDescending(w => w.Created)
+                .AsSplitQuery()
+                .ToListAsync(cancellationToken);
+
+            return entities.ToDtos();
+        }
+    }
+
     public async Task RefreshCacheAsync(CancellationToken cancellationToken)
     {
         await ListMediaAlbumsAsync(cancellationToken);
         await ListTagsAsync(cancellationToken);
         await ListKnowledgeAsync(cancellationToken);
         await GetHotshotsMediaAlbumDetailAsync(cancellationToken);
+        await ListWritingsAsync(cancellationToken);
     }
 
     public async Task InvalidateCache(string cacheKey, CancellationToken cancellationToken) => await HybridCache.RemoveAsync(cacheKey, cancellationToken);

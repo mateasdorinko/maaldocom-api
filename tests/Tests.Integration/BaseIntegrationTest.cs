@@ -1,4 +1,5 @@
 using MaaldoCom.Api.Application.Cache;
+using MaaldoCom.Api.Domain.Helpers;
 
 namespace Tests.Integration;
 
@@ -68,7 +69,25 @@ public abstract class BaseIntegrationTest(App app) : TestBase<App>, IAsyncLifeti
             CreateMediaAlbum("Inactive Media Album 3", "inactive-mediaalbum-3", false)
         ], CacheKeys.MediaAlbumList);
 
-        static MediaAlbum CreateMediaAlbum(string name, string urlFriendlyName, bool active)
-            => new() { Name = name, UrlFriendlyName = urlFriendlyName, CreatedBy = "test-harness", Media = [], Active = active };
+        static MediaAlbum CreateMediaAlbum(string name, string slug, bool active)
+            => new() { Name = name, Slug = slug, CreatedBy = "test-harness", Media = [], Active = active };
+    }
+
+    protected Task AddTestWritingsAsync()
+    {
+        return SeedDataAndInvalidateCacheAsync<Writing>(
+        [
+            CreateWriting("Writing 1", "writing-1", "Blurb for writing 1", "Body for writing 1", true),
+            CreateWriting("Writing 2", "writing-2", "Blurb for writing 2", "Body for writing 2", true),
+            CreateWriting("Writing 3", "writing-3", "Blurb for writing 3", "Body for writing 3", true),
+            CreateWriting("Writing 4", "writing-4", "Blurb for writing 4", "Body for writing 4", true),
+            CreateWriting("Writing 5", "writing-5", "Blurb for writing 5", "Body for writing 5", true),
+            CreateWriting("Inactive Writing 1", "inactive-writing-1", "Blurb for inactive writing 1", "Body for inactive writing 1", false),
+            CreateWriting("Inactive Writing 2", "inactive-writing-2", "Blurb for inactive writing 2", "Body for inactive writing 2", false),
+            CreateWriting("Inactive Writing 3", "inactive-writing-3", "Blurb for inactive writing 3", "Body for inactive writing 3", false)
+        ], CacheKeys.WritingList);
+
+        static Writing CreateWriting(string title, string slug, string blurb, string body, bool active)
+            => new() { Title = title, Slug = slug, Blurb = blurb, Body = body, CreatedBy = "test-harness", Active = active };
     }
 }

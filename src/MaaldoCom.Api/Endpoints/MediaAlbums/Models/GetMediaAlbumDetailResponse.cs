@@ -9,5 +9,8 @@ public class GetMediaAlbumDetailResponse : GetMediaAlbumResponse
     public bool Active { get; set; }
 
     [JsonPropertyOrder(9)]
+    public IEnumerable<GetCommentResponse> Comments { get; set; } =  new List<GetCommentResponse>();
+
+    [JsonPropertyOrder(10)]
     public IEnumerable<GetMediaResponse> Media { get; set; } = new List<GetMediaResponse>();
 }

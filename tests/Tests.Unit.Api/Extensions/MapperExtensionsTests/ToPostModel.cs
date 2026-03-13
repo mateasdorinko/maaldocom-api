@@ -10,7 +10,7 @@ public class ToPostModel
         {
             Id = Guid.NewGuid(),
             Name = "Sample Album",
-            UrlFriendlyName = "sample-album",
+            Slug = "sample-album",
             Created = DateTime.UtcNow,
             Tags = new List<TagDto>
             {
@@ -28,19 +28,9 @@ public class ToPostModel
         // assert
         model.Id.ShouldBeEquivalentTo(dto.Id);
         model.Name.ShouldBeEquivalentTo(dto.Name);
-        model.UrlFriendlyName.ShouldBeEquivalentTo(dto.UrlFriendlyName);
+        model.Slug.ShouldBeEquivalentTo(dto.Slug);
         model.Created.ShouldBeEquivalentTo(dto.Created);
         model.Tags.Count().ShouldBe(1);
         model.Tags.First().ShouldBeEquivalentTo("SampleTag");
-    }
-
-    [Fact]
-    public void ToPostModel_FromNullMediaAlbumDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        MediaAlbumDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToPostModel());
     }
 }

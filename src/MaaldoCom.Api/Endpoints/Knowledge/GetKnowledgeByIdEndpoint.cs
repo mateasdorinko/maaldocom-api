@@ -1,7 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.Knowledge.Models;
-using MaaldoCom.Api.Application.Queries.Knowledge;
-
-namespace MaaldoCom.Api.Endpoints.Knowledge;
+﻿namespace MaaldoCom.Api.Endpoints.Knowledge;
 
 public class GetKnowledgeByIdEndpoint(IQueryHandler<GetKnowledgeQuery, KnowledgeDto> handler) : Endpoint<GetKnowledgeByIdRequest, GetKnowledgeResponse>
 {

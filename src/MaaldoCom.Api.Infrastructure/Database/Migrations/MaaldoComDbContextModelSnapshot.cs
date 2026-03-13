@@ -17,10 +17,50 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.2")
+                .HasAnnotation("ProductVersion", "10.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.Comment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0)
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnOrder(2);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Comments", (string)null);
+                });
 
             modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.Knowledge", b =>
                 {
@@ -151,7 +191,7 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasColumnOrder(6);
 
-                    b.Property<string>("UrlFriendlyName")
+                    b.Property<string>("Slug")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)")
@@ -162,10 +202,25 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.HasIndex("UrlFriendlyName")
+                    b.HasIndex("Slug")
                         .IsUnique();
 
                     b.ToTable("MediaAlbums", (string)null);
+                });
+
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.MediaAlbumComment", b =>
+                {
+                    b.Property<Guid>("MediaAlbumId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CommentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MediaAlbumId", "CommentId");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("MediaAlbumComments", (string)null);
                 });
 
             modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.MediaAlbumTag", b =>
@@ -181,6 +236,21 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                     b.HasIndex("TagId");
 
                     b.ToTable("MediaAlbumTags", (string)null);
+                });
+
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.MediaComment", b =>
+                {
+                    b.Property<Guid>("MediaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CommentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("MediaId", "CommentId");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("MediaComments", (string)null);
                 });
 
             modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.MediaTag", b =>
@@ -220,6 +290,100 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                     b.ToTable("Tags", (string)null);
                 });
 
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.Writing", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0)
+                        .HasDefaultValueSql("newsequentialid()");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit")
+                        .HasColumnOrder(5);
+
+                    b.Property<string>("Blurb")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
+                        .HasColumnOrder(8);
+
+                    b.Property<string>("Body")
+                        .HasColumnType("nvarchar(MAX)")
+                        .HasColumnOrder(9);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(2);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2")
+                        .HasColumnOrder(3);
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(4);
+
+                    b.Property<string>("Slug")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(7);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnOrder(6);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Slug")
+                        .IsUnique();
+
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("Writings", (string)null);
+                });
+
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.WritingComment", b =>
+                {
+                    b.Property<Guid>("WritingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CommentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("WritingId", "CommentId");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("WritingComments", (string)null);
+                });
+
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.WritingTag", b =>
+                {
+                    b.Property<Guid>("WritingId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("WritingId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("WritingTags", (string)null);
+                });
+
             modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.Media", b =>
                 {
                     b.HasOne("MaaldoCom.Api.Domain.Entities.MediaAlbum", "MediaAlbum")
@@ -227,6 +391,25 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                         .HasForeignKey("MediaAlbumId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("MediaAlbum");
+                });
+
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.MediaAlbumComment", b =>
+                {
+                    b.HasOne("MaaldoCom.Api.Domain.Entities.Comment", "Comment")
+                        .WithMany("MediaAlbumComments")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MaaldoCom.Api.Domain.Entities.MediaAlbum", "MediaAlbum")
+                        .WithMany("MediaAlbumComments")
+                        .HasForeignKey("MediaAlbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
 
                     b.Navigation("MediaAlbum");
                 });
@@ -250,6 +433,25 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                     b.Navigation("Tag");
                 });
 
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.MediaComment", b =>
+                {
+                    b.HasOne("MaaldoCom.Api.Domain.Entities.Comment", "Comment")
+                        .WithMany("MediaComments")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MaaldoCom.Api.Domain.Entities.Media", "Media")
+                        .WithMany("MediaComments")
+                        .HasForeignKey("MediaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("Media");
+                });
+
             modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.MediaTag", b =>
                 {
                     b.HasOne("MaaldoCom.Api.Domain.Entities.Media", "Media")
@@ -269,14 +471,65 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                     b.Navigation("Tag");
                 });
 
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.WritingComment", b =>
+                {
+                    b.HasOne("MaaldoCom.Api.Domain.Entities.Comment", "Comment")
+                        .WithMany("WritingComments")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MaaldoCom.Api.Domain.Entities.Writing", "Writing")
+                        .WithMany("WritingComments")
+                        .HasForeignKey("WritingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("Writing");
+                });
+
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.WritingTag", b =>
+                {
+                    b.HasOne("MaaldoCom.Api.Domain.Entities.Tag", "Tag")
+                        .WithMany("WritingTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MaaldoCom.Api.Domain.Entities.Writing", "Writing")
+                        .WithMany("WritingTags")
+                        .HasForeignKey("WritingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tag");
+
+                    b.Navigation("Writing");
+                });
+
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.Comment", b =>
+                {
+                    b.Navigation("MediaAlbumComments");
+
+                    b.Navigation("MediaComments");
+
+                    b.Navigation("WritingComments");
+                });
+
             modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.Media", b =>
                 {
+                    b.Navigation("MediaComments");
+
                     b.Navigation("MediaTags");
                 });
 
             modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.MediaAlbum", b =>
                 {
                     b.Navigation("Media");
+
+                    b.Navigation("MediaAlbumComments");
 
                     b.Navigation("MediaAlbumTags");
                 });
@@ -286,6 +539,15 @@ namespace MaaldoCom.Api.Infrastructure.Database.Migrations
                     b.Navigation("MediaAlbumTags");
 
                     b.Navigation("MediaTags");
+
+                    b.Navigation("WritingTags");
+                });
+
+            modelBuilder.Entity("MaaldoCom.Api.Domain.Entities.Writing", b =>
+                {
+                    b.Navigation("WritingComments");
+
+                    b.Navigation("WritingTags");
                 });
 #pragma warning restore 612, 618
         }

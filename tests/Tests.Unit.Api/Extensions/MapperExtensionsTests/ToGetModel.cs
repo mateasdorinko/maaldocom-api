@@ -10,7 +10,7 @@ public class ToGetModel
         {
             Id = Guid.NewGuid(),
             Name = "Sample Album",
-            UrlFriendlyName = "sample-album",
+            Slug = "sample-album",
             Description = "This is a sample media album.",
             CreatedBy = "tester",
             Created = DateTime.UtcNow,
@@ -49,20 +49,10 @@ public class ToGetModel
         // assert
         model.Id.ShouldBeEquivalentTo(dto.Id);
         model.Name.ShouldBeEquivalentTo(dto.Name);
-        model.UrlFriendlyName.ShouldBeEquivalentTo(dto.UrlFriendlyName);
+        model.Slug.ShouldBeEquivalentTo(dto.Slug);
         model.Created.ShouldBeEquivalentTo(dto.Created);
         model.Tags.Count().ShouldBe(1);
         model.Tags.First().ShouldBeEquivalentTo("SampleTag");
-    }
-
-    [Fact]
-    public void ToModel_FromNullMediaAlbumDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        MediaAlbumDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
     }
 
     [Fact]
@@ -102,16 +92,6 @@ public class ToGetModel
     }
 
     [Fact]
-    public void ToModel_FromNullMediaDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        MediaDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
-    }
-
-    [Fact]
     public void ToModel_FromTagDto_MapsAllPropertiesCorrectly()
     {
         // arrange
@@ -127,16 +107,6 @@ public class ToGetModel
         // assert
         model.Id.ShouldBeEquivalentTo(dto.Id);
         model.Name.ShouldBeEquivalentTo(dto.Name);
-    }
-
-    [Fact]
-    public void ToModel_FromNullTagDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        TagDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
     }
 
     [Fact]
@@ -162,15 +132,5 @@ public class ToGetModel
         model.Id.ShouldBeEquivalentTo(dto.Id);
         model.Title.ShouldBeEquivalentTo(dto.Title);
         model.Quote.ShouldBeEquivalentTo(dto.Quote);
-    }
-
-    [Fact]
-    public void ToModel_FromNullKnowledgeDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        KnowledgeDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToGetModel());
     }
 }

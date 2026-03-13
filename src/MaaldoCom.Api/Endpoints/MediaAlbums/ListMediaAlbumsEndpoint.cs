@@ -1,7 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints.MediaAlbums.Models;
-using MaaldoCom.Api.Application.Queries.MediaAlbums;
-
-namespace MaaldoCom.Api.Endpoints.MediaAlbums;
+﻿namespace MaaldoCom.Api.Endpoints.MediaAlbums;
 
 public class ListMediaAlbumsEndpoint(IQueryHandler<ListMediaAlbumsQuery, IEnumerable<MediaAlbumDto>> handler) : EndpointWithoutRequest<IEnumerable<GetMediaAlbumResponse>>
 {
@@ -20,7 +17,7 @@ public class ListMediaAlbumsEndpoint(IQueryHandler<ListMediaAlbumsQuery, IEnumer
         var query = new ListMediaAlbumsQuery();
         var result = await handler.HandleAsync(query, ct);
         var response = result.Value
-            .Where(ma => ma.Active && ma.UrlFriendlyName != "hotshots")
+            .Where(ma => ma.Active && ma.Slug != "hotshots")
             .ToGetModels();
 
         await Send.OkAsync(response, ct);

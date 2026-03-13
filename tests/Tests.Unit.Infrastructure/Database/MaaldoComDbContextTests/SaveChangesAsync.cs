@@ -16,7 +16,7 @@ public sealed class SaveChangesAsync : IDisposable
     [Fact]
     public async Task SaveChangesAsync_AddedEntity_SetsAuditFields()
     {
-        var album = new MediaAlbum { Name = "Test", UrlFriendlyName = "test" };
+        var album = new MediaAlbum { Name = "Test", Slug = "test" };
         _sut.MediaAlbums.Add(album);
 
         await _sut.SaveChangesAsync(_user, TestContext.Current.CancellationToken);
@@ -31,7 +31,7 @@ public sealed class SaveChangesAsync : IDisposable
     public async Task SaveChangesAsync_AddedEntityWithPresetCreated_PreservesCreatedDate()
     {
         var presetDate = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        var album = new MediaAlbum { Name = "Test", UrlFriendlyName = "test", Created = presetDate };
+        var album = new MediaAlbum { Name = "Test", Slug = "test", Created = presetDate };
         _sut.MediaAlbums.Add(album);
 
         await _sut.SaveChangesAsync(_user, TestContext.Current.CancellationToken);
@@ -42,7 +42,7 @@ public sealed class SaveChangesAsync : IDisposable
     [Fact]
     public async Task SaveChangesAsync_ModifiedEntityWithAudit_UpdatesLastModified()
     {
-        var album = new MediaAlbum { Name = "Test", UrlFriendlyName = "test" };
+        var album = new MediaAlbum { Name = "Test", Slug = "test" };
         _sut.MediaAlbums.Add(album);
         await _sut.SaveChangesAsync(_user, TestContext.Current.CancellationToken);
 
@@ -56,7 +56,7 @@ public sealed class SaveChangesAsync : IDisposable
     [Fact]
     public async Task SaveChangesAsync_ModifiedEntityWithoutAudit_SkipsLastModifiedUpdate()
     {
-        var album = new MediaAlbum { Name = "Test", UrlFriendlyName = "test" };
+        var album = new MediaAlbum { Name = "Test", Slug = "test" };
         _sut.MediaAlbums.Add(album);
         await _sut.SaveChangesAsync(_user, TestContext.Current.CancellationToken);
 
@@ -70,7 +70,7 @@ public sealed class SaveChangesAsync : IDisposable
     [Fact]
     public async Task SaveChangesAsync_DeletedEntity_SoftDeletesEntity()
     {
-        var album = new MediaAlbum { Name = "Test", UrlFriendlyName = "test" };
+        var album = new MediaAlbum { Name = "Test", Slug = "test" };
         _sut.MediaAlbums.Add(album);
         await _sut.SaveChangesAsync(_user, TestContext.Current.CancellationToken);
 

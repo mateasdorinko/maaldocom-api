@@ -28,8 +28,8 @@ public class HandleAsync
         // arrange
         var handler = A.Fake<IQueryHandler<ListMediaAlbumsQuery, IEnumerable<MediaAlbumDto>>>();
         var endpoint = Factory.Create<ListMediaAlbumsEndpoint>(handler);
-        var activeAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Active Album", UrlFriendlyName = "active", Active = true };
-        var inactiveAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Inactive Album", UrlFriendlyName = "inactive", Active = false };
+        var activeAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Active Album", Slug = "active-media-album", Active = true };
+        var inactiveAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Inactive Album", Slug = "inactive-media-album", Active = false };
         var result = new Result<IEnumerable<MediaAlbumDto>>().WithValue([activeAlbum, inactiveAlbum]);
 
         A.CallTo(() => handler.HandleAsync(A<ListMediaAlbumsQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);
@@ -50,8 +50,8 @@ public class HandleAsync
         // arrange
         var handler = A.Fake<IQueryHandler<ListMediaAlbumsQuery, IEnumerable<MediaAlbumDto>>>();
         var endpoint = Factory.Create<ListMediaAlbumsEndpoint>(handler);
-        var regularAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Regular Album", UrlFriendlyName = "regular", Active = true };
-        var hotshotsAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Hotshots", UrlFriendlyName = "hotshots", Active = true };
+        var regularAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Regular Album", Slug = "regular", Active = true };
+        var hotshotsAlbum = new MediaAlbumDto { Id = Guid.NewGuid(), Name = "Hotshots", Slug = "hotshots", Active = true };
         var result = new Result<IEnumerable<MediaAlbumDto>>().WithValue([regularAlbum, hotshotsAlbum]);
 
         A.CallTo(() => handler.HandleAsync(A<ListMediaAlbumsQuery>.Ignored, A<CancellationToken>.Ignored)).Returns(result);

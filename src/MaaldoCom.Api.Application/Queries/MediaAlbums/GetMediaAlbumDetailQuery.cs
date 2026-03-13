@@ -2,11 +2,11 @@
 
 public sealed record GetMediaAlbumDetailQuery : IQuery<MediaAlbumDto>
 {
-    public GetMediaAlbumDetailQuery(string name)
+    public GetMediaAlbumDetailQuery(string slug)
     {
-        Name = name;
-        SearchBy = SearchBy.Name;
-        SearchValue = name;
+        Slug = slug;
+        SearchBy = SearchBy.Slug;
+        SearchValue = slug;
     }
 
     public GetMediaAlbumDetailQuery(Guid id)
@@ -17,14 +17,13 @@ public sealed record GetMediaAlbumDetailQuery : IQuery<MediaAlbumDto>
     }
 
     public Guid? Id { get; }
-    public string? Name { get; }
+    public string? Slug { get; }
 
     public readonly SearchBy SearchBy;
     public readonly object SearchValue;
 }
 
-internal sealed class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager)
-    : IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto>
+internal sealed class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager) : IQueryHandler<GetMediaAlbumDetailQuery, MediaAlbumDto>
 {
     public async Task<Result<MediaAlbumDto>> HandleAsync(GetMediaAlbumDetailQuery query, CancellationToken ct)
     {
@@ -38,9 +37,9 @@ internal sealed class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager
                 return dto != null ?
                     Result.Ok(dto)! :
                     Result.Fail<MediaAlbumDto>(new EntityNotFoundError(nameof(MediaAlbum), query.SearchBy, query.SearchValue));
-            case SearchBy.Name:
+            case SearchBy.Slug:
                 var cachedMediaAlbumByName = (await cacheManager.ListMediaAlbumsAsync(ct))
-                    .FirstOrDefault(x => x.UrlFriendlyName == query.SearchValue.ToString());
+                    .FirstOrDefault(x => x.Slug == query.SearchValue.ToString());
 
                 if (cachedMediaAlbumByName == null)
                 {

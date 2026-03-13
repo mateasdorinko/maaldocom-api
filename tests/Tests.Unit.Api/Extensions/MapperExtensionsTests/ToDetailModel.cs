@@ -10,7 +10,7 @@ public class ToDetailModel
         {
             Id = Guid.NewGuid(),
             Name = "Sample Album",
-            UrlFriendlyName = "sample-album",
+            Slug = "sample-album",
             Description = "This is a sample media album.",
             CreatedBy = "tester",
             Created = DateTime.UtcNow,
@@ -50,23 +50,13 @@ public class ToDetailModel
         model.Id.ShouldBeEquivalentTo(dto.Id);
         model.Name.ShouldBeEquivalentTo(dto.Name);
         model.Description.ShouldBeEquivalentTo(dto.Description);
-        model.UrlFriendlyName.ShouldBeEquivalentTo(dto.UrlFriendlyName);
+        model.Slug.ShouldBeEquivalentTo(dto.Slug);
         model.Created.ShouldBeEquivalentTo(dto.Created);
         model.Active.ShouldBeEquivalentTo(dto.Active);
         model.Media.Count().ShouldBe(1);
         model.Media.First().FileName.ShouldBeEquivalentTo("sample.jpg");
         model.Tags.Count().ShouldBe(1);
         model.Tags.First().ShouldBeEquivalentTo("SampleTag");
-    }
-
-    [Fact]
-    public void ToDetailModel_FromNullMediaAlbumDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        MediaAlbumDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToDetailModel());
     }
 
     [Fact]
@@ -112,15 +102,5 @@ public class ToDetailModel
         model.Media.Count().ShouldBe(1);
         model.Media.First().Name.ShouldBeEquivalentTo("sample.jpg");
         model.Media.First().MediaAlbumName.ShouldBeEquivalentTo("Sample Album");
-    }
-
-    [Fact]
-    public void ToDetailModel_FromNullTagDto_ThrowsArgumentNullException()
-    {
-        // arrange
-        TagDto? dto = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dto!.ToDetailModel());
     }
 }

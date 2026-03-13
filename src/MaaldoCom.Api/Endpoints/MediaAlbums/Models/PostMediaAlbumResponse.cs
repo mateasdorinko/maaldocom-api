@@ -6,7 +6,7 @@ public class PostMediaAlbumResponse : BaseModel
     public string? Name { get; set; }
 
     [JsonPropertyOrder(4)]
-    public string? UrlFriendlyName { get; set; }
+    public string? Slug { get; set; }
 
     [JsonPropertyOrder(5)]
     public DateTime Created { get; set; }
@@ -18,5 +18,5 @@ public class PostMediaAlbumResponse : BaseModel
     public override string? Href => UrlMaker.GetMediaAlbumUrl(Id);
 
     [JsonPropertyOrder(2)]
-    public string? AltHref => UrlMaker.GetMediaAlbumUrl(UrlFriendlyName!);
+    public string? AltHref => UrlMaker.GetMediaAlbumUrl(Slug!);
 }

@@ -5,7 +5,7 @@ public sealed record GetTagQuery : IQuery<TagDto>
     public GetTagQuery(string name)
     {
         Name = name;
-        SearchBy = SearchBy.Name;
+        SearchBy = SearchBy.Slug;
         SearchValue = name;
     }
 
@@ -37,7 +37,7 @@ internal sealed class GetTagQueryHandler(ICacheManager cacheManager) : IQueryHan
                 return dto != null ?
                     Result.Ok(dto)! :
                     Result.Fail<TagDto>(new EntityNotFoundError("Tag", query.SearchBy, query.SearchValue));
-            case SearchBy.Name:
+            case SearchBy.Slug:
                 var cachedTagByName = (await cacheManager.ListTagsAsync(ct))
                     .FirstOrDefault(x => x.Name == query.SearchValue.ToString());
 

@@ -4,7 +4,7 @@ public class MediaDto : BaseDto
 {
     public Guid MediaAlbumId { get; set; }
     public string? MediaAlbumName { get; set; }
-    public string? MediaAlbumUrlFriendlyName { get; set; }
+    public string? MediaAlbumSlug { get; set; }
     public string? FileName { get; set; }
     public string? Description { get; set; }
     public long SizeInBytes { get; set; }
@@ -13,6 +13,7 @@ public class MediaDto : BaseDto
     public string? ContentType { get; set; }
 
     public IList<TagDto> Tags { get; set; } = new List<TagDto>();
+    public IList<CommentDto> Comments { get; set; } = new List<CommentDto>();
 
     public override string? ToString() => FileName;
 }

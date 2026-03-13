@@ -1,9 +1,4 @@
-﻿using MaaldoCom.Api.Endpoints;
-using MaaldoCom.Api.Endpoints.Knowledge.Models;
-using MaaldoCom.Api.Endpoints.MediaAlbums.Models;
-using MaaldoCom.Api.Endpoints.Tags.Models;
-
-namespace MaaldoCom.Api.Extensions;
+﻿namespace MaaldoCom.Api.Extensions;
 
 public static partial class MapperExtensions
 {
@@ -24,9 +19,9 @@ public static partial class MapperExtensions
         var model = new GetMediaAlbumResponse().MapToBaseModel(dto);
 
         model.Name = dto.Name;
-        model.UrlFriendlyName = dto.UrlFriendlyName;
+        model.Slug = dto.Slug;
         model.Created = dto.Created;
-        model.Tags = dto.Tags.Select(m => m.Name!).ToList();
+        model.Tags = dto.Tags.Select(t => t.Name!).ToList();
         model.DefaultMediaId = dto.DefaultMediaId;
 
         return model;
@@ -42,7 +37,7 @@ public static partial class MapperExtensions
         model.Description = dto.Description;
         model.SizeInBytes = dto.SizeInBytes;
         model.ContentType = dto.ContentType;
-        model.Tags = dto.Tags?.Select(m => m.Name!).ToList()!;
+        model.Tags = dto.Tags?.Select(t => t.Name!).ToList()!;
 
         model.MediaAlbumId = dto.MediaAlbumId;
 
@@ -69,6 +64,34 @@ public static partial class MapperExtensions
 
         model.Title = dto.Title;
         model.Quote = dto.Quote;
+
+        return model;
+    }
+
+    public static GetWritingResponse ToGetModel(this WritingDto dto)
+    {
+        ArgumentNullException.ThrowIfNull(dto);
+
+        var model = new GetWritingResponse().MapToBaseModel(dto);
+
+        model.Title = dto.Title;
+        model.Slug = dto.Slug;
+        model.Blurb = dto.Blurb;
+        model.Created = dto.Created;
+        model.Tags = dto.Tags.Select(t => t.Name!).ToList();
+
+        return model;
+    }
+
+    public static GetCommentResponse ToGetModel(this CommentDto dto)
+    {
+        ArgumentNullException.ThrowIfNull(dto);
+
+        var model = new GetCommentResponse
+        {
+            Author = dto.Author,
+            Body = dto.Body
+        };
 
         return model;
     }

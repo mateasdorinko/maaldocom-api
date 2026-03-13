@@ -1,5 +1,5 @@
 ﻿using MaaldoCom.Api.Application.Blobs;
-using MaaldoCom.Api.Domain.MediaAlbums;
+using MaaldoCom.Api.Domain.Helpers;
 
 namespace MaaldoCom.Api.Application.Queries.MediaAlbums;
 
@@ -23,13 +23,13 @@ internal sealed class GetMediaBlobQueryHandler(ICacheManager cacheManager, IBlob
         switch (query.MediaType)
         {
             case "original":
-                blobName = $"{MediaAlbumHelper.GetOriginalMetaFilePath(mediaAlbum?.UrlFriendlyName!, media.FileName!)}";
+                blobName = $"{MediaAlbumHelper.GetOriginalMetaFilePath(mediaAlbum?.Slug!, media.FileName!)}";
                 break;
             case "viewer":
-                blobName = $"{MediaAlbumHelper.GetViewerMetaFilePath(mediaAlbum?.UrlFriendlyName!, media.FileName!)}";
+                blobName = $"{MediaAlbumHelper.GetViewerMetaFilePath(mediaAlbum?.Slug!, media.FileName!)}";
                 break;
             case "thumb":
-                blobName = $"{MediaAlbumHelper.GetThumbnailMetaFilePath(mediaAlbum?.UrlFriendlyName!, media.FileName!)}";
+                blobName = $"{MediaAlbumHelper.GetThumbnailMetaFilePath(mediaAlbum?.Slug!, media.FileName!)}";
                 break;
             default:
                 return notFoundResult;

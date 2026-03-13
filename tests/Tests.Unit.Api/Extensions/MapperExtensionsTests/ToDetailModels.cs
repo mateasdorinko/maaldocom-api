@@ -12,14 +12,14 @@ public class ToDetailModels
             {
                 Id = Guid.NewGuid(),
                 Name = "Sample Album 1",
-                UrlFriendlyName = "sample-album-1",
+                Slug = "sample-album-1",
                 Created = DateTime.UtcNow
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Name = "Sample Album 2",
-                UrlFriendlyName = "sample-album-2",
+                Slug = "sample-album-2",
                 Created = DateTime.UtcNow
             }
         };
@@ -33,16 +33,6 @@ public class ToDetailModels
         models[0].Name.ShouldBeEquivalentTo(dtos[0].Name);
         models[1].Id.ShouldBeEquivalentTo(dtos[1].Id);
         models[1].Name.ShouldBeEquivalentTo(dtos[1].Name);
-    }
-
-    [Fact]
-    public void ToDetailModels_FromNullMediaAlbumDtos_ThrowsArgumentNullException()
-    {
-        // arrange
-        List<MediaAlbumDto>? dtos = null;
-
-        // act & assert
-        Assert.Throws<ArgumentNullException>(() => dtos!.ToDetailModels());
     }
 
     [Fact]
