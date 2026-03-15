@@ -125,6 +125,7 @@ public sealed class CacheManager : ICacheManager, IDisposable
             var entities = await MaaldoComDbContext.Tags
                 .Include(t => t.MediaAlbumTags)
                 .Include(t => t.MediaTags)
+                .Include(t => t.WritingTags)
                 .AsSplitQuery()
                 .ToListAsync(cancellationToken);
 
