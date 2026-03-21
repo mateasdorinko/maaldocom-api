@@ -1,7 +1,49 @@
 namespace MaaldoCom.Api.Application.Extensions;
 
-public static partial class MapperExtensions
+public static class EntityMapperExtensions
 {
+    public static IEnumerable<MediaAlbum> ToEntities(this IEnumerable<MediaAlbumDto> dtos, ClaimsPrincipal user)
+    {
+        ArgumentNullException.ThrowIfNull(dtos);
+
+        return dtos.Select(e => e.ToEntity()).ToList();
+    }
+
+    public static IEnumerable<Media> ToEntities(this IEnumerable<MediaDto> dtos, ClaimsPrincipal user)
+    {
+        ArgumentNullException.ThrowIfNull(dtos);
+
+        return dtos.Select(e => e.ToEntity()).ToList();
+    }
+
+    public static IEnumerable<Writing> ToEntities(this IEnumerable<WritingDto> dtos, ClaimsPrincipal user)
+    {
+        ArgumentNullException.ThrowIfNull(dtos);
+
+        return dtos.Select(e => e.ToEntity()).ToList();
+    }
+
+    public static IEnumerable<Tag> ToEntities(this IEnumerable<TagDto> dtos)
+    {
+        ArgumentNullException.ThrowIfNull(dtos);
+
+        return dtos.Select(e => e.ToEntity()).ToList();
+    }
+
+    public static IEnumerable<Comment> ToEntities(this IEnumerable<CommentDto> dtos)
+    {
+        ArgumentNullException.ThrowIfNull(dtos);
+
+        return dtos.Select(e => e.ToEntity()).ToList();
+    }
+
+    public static IEnumerable<Knowledge> ToEntities(this IEnumerable<KnowledgeDto> dtos)
+    {
+        ArgumentNullException.ThrowIfNull(dtos);
+
+        return dtos.Select(e => e.ToEntity()).ToList();
+    }
+
     extension<TEntity>(TEntity entity) where TEntity : BaseEntity
     {
         private TEntity MapToBaseEntity<TDto>(TDto dto) where TDto : BaseDto
@@ -131,6 +173,17 @@ public static partial class MapperExtensions
         return entity;
     }
 
+    public static Tag ToEntity(this TagDto dto)
+    {
+        ArgumentNullException.ThrowIfNull(dto);
+
+        var entity = new Tag().MapToBaseEntity(dto);
+
+        entity.Name = dto.Name;
+
+        return entity;
+    }
+
     public static Comment ToEntity(this CommentDto dto)
     {
         ArgumentNullException.ThrowIfNull(dto);
@@ -139,17 +192,6 @@ public static partial class MapperExtensions
 
         entity.Author = dto.Author;
         entity.Body = dto.Body;
-
-        return entity;
-    }
-
-    public static Tag ToEntity(this TagDto dto)
-    {
-        ArgumentNullException.ThrowIfNull(dto);
-
-        var entity = new Tag().MapToBaseEntity(dto);
-
-        entity.Name = dto.Name;
 
         return entity;
     }

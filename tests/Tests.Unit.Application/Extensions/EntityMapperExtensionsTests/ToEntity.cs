@@ -1,4 +1,4 @@
-﻿namespace Tests.Unit.Application.Extensions.MapperExtensionsTests;
+﻿namespace Tests.Unit.Application.Extensions.EntityMapperExtensionsTests;
 
 public class ToEntity
 {

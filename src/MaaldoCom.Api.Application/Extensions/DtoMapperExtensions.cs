@@ -1,7 +1,49 @@
 namespace MaaldoCom.Api.Application.Extensions;
 
-public static partial class MapperExtensions
+public static class DtoMapperExtensions
 {
+    public static IEnumerable<MediaAlbumDto> ToDtos(this IEnumerable<MediaAlbum> entities)
+    {
+        ArgumentNullException.ThrowIfNull(entities);
+
+        return entities.Select(e => e.ToDto()).ToList();
+    }
+
+    public static IEnumerable<MediaDto> ToDtos(this IEnumerable<Media> entities)
+    {
+        ArgumentNullException.ThrowIfNull(entities);
+
+        return entities.Select(e => e.ToDto()).ToList();
+    }
+
+    public static IEnumerable<WritingDto> ToDtos(this IEnumerable<Writing> entities)
+    {
+        ArgumentNullException.ThrowIfNull(entities);
+
+        return entities.Select(e => e.ToDto()).ToList();
+    }
+
+    public static IEnumerable<TagDto> ToDtos(this IEnumerable<Tag> entities)
+    {
+        ArgumentNullException.ThrowIfNull(entities);
+
+        return entities.Select(e => e.ToDto()).ToList();
+    }
+
+    public static IEnumerable<CommentDto> ToDtos(this IEnumerable<Comment> entities)
+    {
+        ArgumentNullException.ThrowIfNull(entities);
+
+        return entities.Select(e => e.ToDto()).ToList();
+    }
+
+    public static IEnumerable<KnowledgeDto> ToDtos(this IEnumerable<Knowledge> entities)
+    {
+        ArgumentNullException.ThrowIfNull(entities);
+
+        return entities.Select(e => e.ToDto()).ToList();
+    }
+
     extension<TDto>(TDto dto) where TDto : BaseDto
     {
         private TDto MapFromBaseEntity<TEntity>(TEntity entity) where TEntity : BaseEntity
@@ -56,6 +98,22 @@ public static partial class MapperExtensions
         dto.FileExtension = entity.FileExtension;
         dto.Tags = entity.MediaTags?.Select(t => t.Tag.ToDto()).ToList()!;
         dto.Comments = entity.MediaComments?.Select(t => t.Comment.ToDto()).ToList()!;
+
+        return dto;
+    }
+
+    public static WritingDto ToDto(this Writing entity)
+    {
+        ArgumentNullException.ThrowIfNull(entity);
+
+        var dto = new WritingDto().MapFromBaseAuditableEntity(entity);
+
+        dto.Title = entity.Title;
+        dto.Blurb = entity.Blurb;
+        dto.Body = entity.Body;
+        dto.Slug = entity.Slug;
+        dto.Tags = entity.WritingTags?.Select(t => t.Tag.ToDto()).ToList()!;
+        dto.Comments = entity.WritingComments?.Select(t => t.Comment.ToDto()).ToList()!;
 
         return dto;
     }
@@ -123,22 +181,6 @@ public static partial class MapperExtensions
             Body = wc.Writing.Body,
             Slug = wc.Writing.Slug
         }).ToList()!;
-
-        return dto;
-    }
-
-    public static WritingDto ToDto(this Writing entity)
-    {
-        ArgumentNullException.ThrowIfNull(entity);
-
-        var dto = new WritingDto().MapFromBaseAuditableEntity(entity);
-
-        dto.Title = entity.Title;
-        dto.Blurb = entity.Blurb;
-        dto.Body = entity.Body;
-        dto.Slug = entity.Slug;
-        dto.Tags = entity.WritingTags?.Select(t => t.Tag.ToDto()).ToList()!;
-        dto.Comments = entity.WritingComments?.Select(t => t.Comment.ToDto()).ToList()!;
 
         return dto;
     }

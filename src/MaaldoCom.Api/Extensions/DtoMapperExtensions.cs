@@ -1,8 +1,8 @@
 namespace MaaldoCom.Api.Extensions;
 
-public static partial class MapperExtensions
+public static class DtoMapperExtensions
 {
-    extension<TDto>(TDto dto) where TDto : BaseDto
+extension<TDto>(TDto dto) where TDto : BaseDto
     {
         private TDto MapFromBaseModel<TEntity>(TEntity model) where TEntity : BaseModel
         {

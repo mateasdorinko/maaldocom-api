@@ -1,4 +1,4 @@
-﻿namespace Tests.Unit.Application.Extensions.MapperExtensionsTests;
+﻿namespace Tests.Unit.Application.Extensions.DtoMapperExtensionsTests;
 
 public class ToDto
 {
@@ -141,6 +141,40 @@ public class ToDto
     }
 
     [Fact]
+    public void ToDto_FromWritingEntity_MapsAllPropertiesCorrectly()
+    {
+        // arrange
+        var entity = new Writing
+        {
+            Id = Guid.NewGuid(),
+            Blurb = "This is a sample blurb.",
+            Body = "This is the body of the writing.",
+            Title = "Sample Writing",
+            Slug = "sample-writing",
+            CreatedBy = "tester",
+            Created = DateTime.UtcNow,
+            LastModifiedBy = "tester",
+            LastModified = DateTime.UtcNow,
+            Active = true
+        };
+
+        // act
+        var dto = entity.ToDto();
+
+        // assert
+        dto.Id.ShouldBeEquivalentTo(entity.Id);
+        dto.Blurb.ShouldBeEquivalentTo(entity.Blurb);
+        dto.Body.ShouldBeEquivalentTo(entity.Body);
+        dto.Title.ShouldBeEquivalentTo(entity.Title);
+        dto.Slug.ShouldBeEquivalentTo(entity.Slug);
+        dto.CreatedBy.ShouldBeEquivalentTo(entity.CreatedBy);
+        dto.Created.ShouldBeEquivalentTo(entity.Created);
+        dto.LastModifiedBy.ShouldBeEquivalentTo(entity.LastModifiedBy);
+        dto.LastModified.ShouldBeEquivalentTo(entity.LastModified);
+        dto.Active.ShouldBeEquivalentTo(entity.Active);
+    }
+
+    [Fact]
     public void ToDto_FromTagEntity_MapsAllPropertiesCorrectly()
     {
         // arrange
@@ -156,6 +190,32 @@ public class ToDto
         // assert
         dto.Id.ShouldBeEquivalentTo(entity.Id);
         dto.Name.ShouldBeEquivalentTo(entity.Name);
+    }
+
+    [Fact]
+    public void ToDto_FromCommentEntity_MapsAllPropertiesCorrectly()
+    {
+        // arrange
+        var entity = new Comment
+        {
+            Id = Guid.NewGuid(),
+            Author = "Commenter",
+            Body = "This is a sample comment.",
+            Created = DateTime.UtcNow
+        };
+
+        // act
+        var dto = entity.ToDto();
+
+        // assert
+        dto.Id.ShouldBeEquivalentTo(entity.Id);
+        dto.Author.ShouldBeEquivalentTo(entity.Author);
+        dto.Body.ShouldBeEquivalentTo(entity.Body);
+        dto.CreatedBy.ShouldBeEquivalentTo(entity.CreatedBy);
+        dto.Created.ShouldBeEquivalentTo(entity.Created);
+        dto.LastModifiedBy.ShouldBeEquivalentTo(entity.LastModifiedBy);
+        dto.LastModified.ShouldBeEquivalentTo(entity.LastModified);
+        dto.Active.ShouldBeEquivalentTo(entity.Active);
     }
 
     [Fact]
