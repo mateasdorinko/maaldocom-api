@@ -48,17 +48,18 @@ jobs:
       - name: Verify image exists
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IMAGE_TAG: ${{ inputs.image-tag }}
         run: |
-          echo "Verifying image exists: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image-tag }}"
+          echo "Verifying image exists: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$IMAGE_TAG"
 
           # Login to GHCR
           echo "$GH_TOKEN" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
 
           # Check if image exists
-          if docker manifest inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image-tag }} > /dev/null 2>&1; then
+          if docker manifest inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$IMAGE_TAG > /dev/null 2>&1; then
             echo "✅ Image found"
           else
-            echo "❌ Image not found: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image-tag }}"
+            echo "❌ Image not found: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$IMAGE_TAG"
             exit 1
           fi
 
@@ -104,13 +105,15 @@ jobs:
         run: sleep 30
 
       - name: Health check
+        env:
+          IMAGE_TAG: ${{ inputs.image-tag }}
         run: |
           echo "Performing health check on ${{ steps.deploy.outputs.webapp-url }}"
           response=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 ${{ steps.deploy.outputs.webapp-url }}/health || echo "000")
 
           if [ "$response" = "200" ]; then
             echo "✅ Health check passed - HTTP $response"
-            echo "✅ Rollback to ${{ inputs.image-tag }} completed successfully!"
+            echo "✅ Rollback to $IMAGE_TAG completed successfully!"
           elif [ "$response" = "000" ]; then
             echo "⚠️  Health check endpoint not reachable - deployment may still be warming up"
             exit 0
