@@ -135,9 +135,9 @@ public static class DtoMapperExtensions
         dto.Media = entity.MediaTags?.Where(mt => mt.Media != null).Select(mt => new MediaDto
         {
             Id = mt.Media.Id,
-            MediaAlbumName = mt.Media.MediaAlbum!.Name,
+            MediaAlbumName = mt.Media.MediaAlbum.Name,
             FileName = mt.Media.FileName,
-            MediaAlbumSlug = mt.Media.MediaAlbum!.Slug,
+            MediaAlbumSlug = mt.Media.MediaAlbum.Slug,
             MediaAlbumId = mt.Media.MediaAlbumId
         }).ToList()!;
         dto.Writings = entity.WritingTags?.Where(wt => wt.Writing != null).Select(wt => new WritingDto()
@@ -169,9 +169,9 @@ public static class DtoMapperExtensions
         dto.Media = entity.MediaComments?.Where(mt => mt.Media != null).Select(mc => new MediaDto
         {
             Id = mc.Media.Id,
-            MediaAlbumName = mc.Media.MediaAlbum!.Name,
+            MediaAlbumName = mc.Media.MediaAlbum.Name,
             FileName = mc.Media.FileName,
-            MediaAlbumSlug = mc.Media.MediaAlbum!.Slug,
+            MediaAlbumSlug = mc.Media.MediaAlbum.Slug,
             MediaAlbumId = mc.Media.MediaAlbumId
         }).ToList()!;
         dto.Writings = entity.WritingComments?.Where(wt => wt.Writing != null).Select(wc => new WritingDto()

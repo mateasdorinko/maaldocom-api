@@ -46,7 +46,7 @@ internal sealed class GetTagQueryHandler(ICacheManager cacheManager) : IQueryHan
                     return Result.Fail<TagDto>(new EntityNotFoundError("Tag", query.SearchBy, query.SearchValue));
                 }
 
-                dto = await cacheManager.GetTagDetailAsync(cachedTagByName!.Id, ct);
+                dto = await cacheManager.GetTagDetailAsync(cachedTagByName.Id, ct);
 
                 return dto != null ?
                     Result.Ok(dto)! :

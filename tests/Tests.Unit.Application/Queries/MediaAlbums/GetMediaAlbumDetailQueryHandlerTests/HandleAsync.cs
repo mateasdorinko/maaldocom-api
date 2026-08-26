@@ -64,7 +64,7 @@ public class HandleAsync
             Slug = "name1",
         };
 
-        var query = new GetMediaAlbumDetailQuery(mediaAlbum.Slug!);
+        var query = new GetMediaAlbumDetailQuery(mediaAlbum.Slug);
         var handler = new GetMediaAlbumDetailQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListMediaAlbumsAsync(ct)).Returns(new List<MediaAlbumDto> { new(), new() });
@@ -92,7 +92,7 @@ public class HandleAsync
             Slug = "name1",
         };
 
-        var query = new GetMediaAlbumDetailQuery(mediaAlbum.Slug!);
+        var query = new GetMediaAlbumDetailQuery(mediaAlbum.Slug);
         var handler = new GetMediaAlbumDetailQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListMediaAlbumsAsync(ct)).Returns(new List<MediaAlbumDto> { new(), mediaAlbum, new() });
@@ -119,7 +119,7 @@ public class HandleAsync
             Slug = "name1",
         };
 
-        var query = new GetMediaAlbumDetailQuery(mediaAlbum.Slug!);
+        var query = new GetMediaAlbumDetailQuery(mediaAlbum.Slug);
         var handler = new GetMediaAlbumDetailQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListMediaAlbumsAsync(ct)).Returns(new List<MediaAlbumDto> { new(), mediaAlbum, new() });

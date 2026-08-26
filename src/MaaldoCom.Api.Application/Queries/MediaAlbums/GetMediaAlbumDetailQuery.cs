@@ -46,7 +46,7 @@ internal sealed class GetMediaAlbumDetailQueryHandler(ICacheManager cacheManager
                     return Result.Fail<MediaAlbumDto>(new EntityNotFoundError(nameof(MediaAlbum), query.SearchBy, query.SearchValue));
                 }
 
-                dto = await cacheManager.GetMediaAlbumDetailAsync(cachedMediaAlbumByName!.Id, ct);
+                dto = await cacheManager.GetMediaAlbumDetailAsync(cachedMediaAlbumByName.Id, ct);
 
                 return dto != null ?
                     Result.Ok(dto)! :

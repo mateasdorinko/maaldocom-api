@@ -64,7 +64,7 @@ public class HandleAsync
             Name = "name1",
         };
 
-        var query = new GetTagQuery(tag.Name!);
+        var query = new GetTagQuery(tag.Name);
         var handler = new GetTagQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListTagsAsync(ct)).Returns(new List<TagDto> { new(), new() });
@@ -92,7 +92,7 @@ public class HandleAsync
             Name = "name1",
         };
 
-        var query = new GetTagQuery(tag.Name!);
+        var query = new GetTagQuery(tag.Name);
         var handler = new GetTagQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListTagsAsync(ct)).Returns(new List<TagDto> { new(), tag, new() });
@@ -119,7 +119,7 @@ public class HandleAsync
             Name = "name1",
         };
 
-        var query = new GetTagQuery(tag.Name!);
+        var query = new GetTagQuery(tag.Name);
         var handler = new GetTagQueryHandler(cacheManager);
 
         A.CallTo(() => cacheManager.ListTagsAsync(ct)).Returns(new List<TagDto> { new(), tag, new() });

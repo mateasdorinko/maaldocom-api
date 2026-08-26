@@ -13,7 +13,7 @@ public class GetWritingBySlug(App app) : BaseIntegrationTest(app)
         var db = scope.ServiceProvider.GetRequiredService<MaaldoComDbContext>();
 
         var writing = db.Writings.Where(ma => ma.Active).ElementAt(3);
-        var request = new GetWritingBySlugRequest { Slug = writing!.Slug! };
+        var request = new GetWritingBySlugRequest { Slug = writing.Slug! };
 
         // act
         var (response, result) = await App.GetUnauthorizedClient()

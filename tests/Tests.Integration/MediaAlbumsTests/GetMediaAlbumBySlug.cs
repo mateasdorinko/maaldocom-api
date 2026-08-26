@@ -13,7 +13,7 @@ public class GetMediaAlbumBySlug(App app) : BaseIntegrationTest(app)
         var db = scope.ServiceProvider.GetRequiredService<MaaldoComDbContext>();
 
         var mediaAlbum = db.MediaAlbums.Where(ma => ma.Active).ElementAt(3);
-        var request = new GetMediaAlbumBySlugRequest { Slug = mediaAlbum!.Slug! };
+        var request = new GetMediaAlbumBySlugRequest { Slug = mediaAlbum.Slug! };
 
         // act
         var (response, result) = await App.GetUnauthorizedClient()

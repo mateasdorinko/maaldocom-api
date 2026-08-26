@@ -60,7 +60,7 @@ public class HandleAsync
 
         // assert
         endpoint.HttpContext.Response.StatusCode.ShouldBe((int)HttpStatusCode.OK);
-        response!.Media.Count().ShouldBe(1);
+        response.Media.Count().ShouldBe(1);
         response.Media.First().FileName.ShouldBe(activeMedia.FileName);
     }
 }

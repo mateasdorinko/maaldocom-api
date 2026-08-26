@@ -2,19 +2,19 @@
 
     <PropertyGroup>
         <IsPackable>false</IsPackable>
+        <TestingPlatformCommandLineArguments>--report-xunit-junit --report-xunit-junit-filename $(MSBuildProjectName)-test-results.xml</TestingPlatformCommandLineArguments>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="coverlet.collector">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
+        <PackageReference Include="coverlet.MTP" />
         <PackageReference Include="FakeItEasy" />
-        <PackageReference Include="JunitXml.TestLogger" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
         <PackageReference Include="Microsoft.Testing.Platform" />
         <PackageReference Include="Shouldly" />
-        <PackageReference Include="xunit.runner.visualstudio" />
+        <PackageReference Include="xunit.runner.visualstudio">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
       <PackageReference Include="xunit.v3" />
     </ItemGroup>
 

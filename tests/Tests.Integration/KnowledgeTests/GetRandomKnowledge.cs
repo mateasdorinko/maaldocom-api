@@ -16,7 +16,7 @@ public class GetRandomKnowledge(App app) : BaseIntegrationTest(app)
 
         // assert
         result.ShouldNotBeNull();
-        result!.Title.ShouldNotBeNull();
+        result.Title.ShouldNotBeNull();
         result.Quote.ShouldNotBeNull();
         result.Id.ShouldNotBe(Guid.Empty);
         response.StatusCode.ShouldBe(HttpStatusCode.OK);
