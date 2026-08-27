@@ -15,6 +15,7 @@ public static class WebApplicationExtensions
                 options.OperationTitleSource = OperationTitleSource.Path;
                 options.ShowOperationId();
                 options.WithOpenApiRoutePattern("/swagger/v1/swagger.json");
+                options.WithDirectDocumentDownload();
                 options.AddPreferredSecuritySchemes("OAuth2");
                 options.AddAuthorizationCodeFlow("OAuth2", flow =>
                 {
