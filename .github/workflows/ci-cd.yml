@@ -53,7 +53,7 @@ jobs:
         run: dotnet build --no-restore --configuration Release
 
       - name: Run tests
-        run: dotnet test --no-build --configuration Release --filter "FullyQualifiedName!~Tests.Integration" --coverlet --coverlet-output-format cobertura --results-directory "${{ github.workspace }}/results" --ignore-exit-code 8
+        run: dotnet test --test-modules "tests/Tests.Unit.*/bin/Release/net10.0/Tests.Unit.*.dll" --no-build --coverlet --coverlet-output-format cobertura --coverlet-include "[MaaldoCom.*]*" --results-directory "${{ github.workspace }}/results" --ignore-exit-code 8
 
       - name: Create test summary
         uses: test-summary/action@v2.6
