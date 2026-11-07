@@ -22,7 +22,12 @@
       "Bash(dotnet test:*)",
       "Bash(gh run list:*)",
       "Bash(gh.exe run list --repo maaldocom/maaldocom-services --limit 5)",
-      "Bash(gh run view:*)"
+      "Bash(gh run view:*)",
+      "Bash(dotnet list *)",
+      "Bash(dotnet nuget *)",
+      "Bash(dotnet restore *)",
+      "Bash(sort -u -k2,2)",
+      "Bash(curl *)"
     ]
   }
 }
